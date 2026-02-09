@@ -5,6 +5,10 @@ VisualStudioVersion = 17.14.36623.8 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryFlow", "StoryFlow.csproj", "{6B86AE65-5FDE-448F-9F64-B80730D65AE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryFlow_Database", "..\StoryFlow_Database\StoryFlow_Database.csproj", "{0D75701C-34B6-400A-9518-41BB9531B764}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryFlow_UnitTests", "..\StoryFlow_UnitTests\StoryFlow_UnitTests.csproj", "{505E6BF2-EA65-436A-BBE4-BA6E2AD3EFC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{6B86AE65-5FDE-448F-9F64-B80730D65AE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B86AE65-5FDE-448F-9F64-B80730D65AE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B86AE65-5FDE-448F-9F64-B80730D65AE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D75701C-34B6-400A-9518-41BB9531B764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D75701C-34B6-400A-9518-41BB9531B764}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D75701C-34B6-400A-9518-41BB9531B764}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D75701C-34B6-400A-9518-41BB9531B764}.Release|Any CPU.Build.0 = Release|Any CPU
+		{505E6BF2-EA65-436A-BBE4-BA6E2AD3EFC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{505E6BF2-EA65-436A-BBE4-BA6E2AD3EFC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{505E6BF2-EA65-436A-BBE4-BA6E2AD3EFC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{505E6BF2-EA65-436A-BBE4-BA6E2AD3EFC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
