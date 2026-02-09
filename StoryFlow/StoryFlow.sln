@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryFlow_Database", "..\St
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryFlow_UnitTests", "..\StoryFlow_UnitTests\StoryFlow_UnitTests.csproj", "{505E6BF2-EA65-436A-BBE4-BA6E2AD3EFC7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryFlow_Shared", "..\StoryFlow_Shared\StoryFlow_Shared.csproj", "{6DF799A5-4E5D-469C-A655-C1AAFDC073B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{505E6BF2-EA65-436A-BBE4-BA6E2AD3EFC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{505E6BF2-EA65-436A-BBE4-BA6E2AD3EFC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{505E6BF2-EA65-436A-BBE4-BA6E2AD3EFC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DF799A5-4E5D-469C-A655-C1AAFDC073B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DF799A5-4E5D-469C-A655-C1AAFDC073B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DF799A5-4E5D-469C-A655-C1AAFDC073B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DF799A5-4E5D-469C-A655-C1AAFDC073B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
