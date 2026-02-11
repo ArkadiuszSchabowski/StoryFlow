@@ -1,11 +1,28 @@
 using Microsoft.EntityFrameworkCore;
+using StoryFlow.Helpers;
+using StoryFlow.Repositories;
+using StoryFlow.Services;
+using StoryFlow.Validators;
 using StoryFlow_Database;
+using StoryFlow_Database.Entities;
+using StoryFlow_Shared.Interfaces;
+using StoryFlow_Shared.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddDbContext<MyDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("MyDbConnectionString")));
+
+builder.Services.AddScoped<IService, StoryService>();
+builder.Services.AddScoped<IAdd<AddStoryDto>, StoryService>();
+builder.Services.AddScoped<IGet<GetStoryDto>, StoryService>();
+builder.Services.AddScoped<IRemove, StoryService>();
+builder.Services.AddScoped<IRepository<Story>, StoryRepository>();
+builder.Services.AddScoped<ITextConverter, TextConverter>();
+builder.Services.AddScoped<ITextCounter, TextCounter>();
+builder.Services.AddScoped<IValidator<AddStoryDto>, StoryValidator>();
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 var app = builder.Build();
 
