@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using NLog.Web;
 using StoryFlow.Helpers;
+using StoryFlow.Middleware;
 using StoryFlow.Repositories;
 using StoryFlow.Services;
 using StoryFlow.Validators;
@@ -9,6 +11,8 @@ using StoryFlow_Shared.Interfaces;
 using StoryFlow_Shared.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseNLog();
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
@@ -23,8 +27,11 @@ builder.Services.AddScoped<ITextConverter, TextConverter>();
 builder.Services.AddScoped<ITextCounter, TextCounter>();
 builder.Services.AddScoped<IValidator<AddStoryDto>, StoryValidator>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddScoped<ErrorHandlingMiddleware>();
 
 var app = builder.Build();
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
