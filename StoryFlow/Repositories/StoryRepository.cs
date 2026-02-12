@@ -1,4 +1,5 @@
-﻿using StoryFlow_Database;
+﻿using Microsoft.EntityFrameworkCore;
+using StoryFlow_Database;
 using StoryFlow_Database.Entities;
 using StoryFlow_Shared.Interfaces;
 
@@ -18,14 +19,14 @@ namespace StoryFlow.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public Story Get(int id)
+        public async Task<Story> Get(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Stories.FirstOrDefaultAsync(s => s.Id == id);
         }
 
-        public ICollection<Story> GetAll()
+        public async Task<ICollection<Story>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _context.Stories.Include(s => s.Sentences).ToListAsync();
         }
 
         public void Remove()

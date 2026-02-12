@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
+using StoryFlow.Aggregates;
 using StoryFlow.Helpers;
+using StoryFlow.Interfaces;
 using StoryFlow.Middleware;
 using StoryFlow.Repositories;
 using StoryFlow.Services;
@@ -25,7 +27,9 @@ builder.Services.AddScoped<IRemove, StoryService>();
 builder.Services.AddScoped<IRepository<Story>, StoryRepository>();
 builder.Services.AddScoped<ITextConverter, TextConverter>();
 builder.Services.AddScoped<ITextCounter, TextCounter>();
+builder.Services.AddScoped<IAggregateServiceValidator, AggregateServiceValidator>();
 builder.Services.AddScoped<IValidator<AddStoryDto>, StoryValidator>();
+builder.Services.AddScoped<IValidatorId, ValidatorId>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 

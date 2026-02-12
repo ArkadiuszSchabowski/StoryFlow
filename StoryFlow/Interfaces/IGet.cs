@@ -1,7 +1,10 @@
-﻿namespace StoryFlow_Shared.Interfaces
+﻿using System.Collections.ObjectModel;
+
+namespace StoryFlow_Shared.Interfaces
 {
     public interface IGet<T> where T : class
     {
-        void Get(ICollection<T> collection);
+        Task<ICollection<T>> GetAll();
+        Task<T> Get(int id);
     }
 }
