@@ -27,7 +27,6 @@ namespace StoryFlow.Aggregates
         {
             _storyValidator.Validate(item);
         }
-        
 
         public void ValidateId(int? id)
         {

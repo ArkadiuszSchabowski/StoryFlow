@@ -67,6 +67,26 @@ namespace StoryFlow_Tests.UnitTests.Services
             var result = await storyService.Get(id);
 
             result.Should().BeOfType<GetStoryDto>();
-        } 
+        }
+
+        [Fact]
+        public async Task Remove_WhenStoryExists_ShouldCallRepositoryRemoveOnce()
+        {
+            var storyService = new StoryService(_mockRepository.Object, _mocServiceValidator.Object, _mockTextConverter.Object, _mockTextCounter.Object, _mockMapper.Object);
+
+            int id = 1;
+
+            var story = new Story
+            {
+                Id = 1,
+                Title = "First Story"
+            };
+
+            _mockRepository.Setup(x => x.Get(1)).ReturnsAsync(story);
+
+            await storyService.Remove(id);
+
+            _mockRepository.Verify(x => x.Remove(story), Times.Once);
+        }
     }
 }
