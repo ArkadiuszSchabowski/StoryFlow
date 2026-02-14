@@ -5,5 +5,6 @@ namespace StoryFlow.Interfaces
 {
     public interface IAggregateServiceValidator : IValidator<AddStoryDto>, IValidatorId
     {
+
     }
 }

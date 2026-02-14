@@ -34,5 +34,12 @@ namespace StoryFlow.Controllers
             await _service.Add(dto);
             return Ok();
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> Remove(int id)
+        {
+            _service.Remove(id);
+            return NoContent();
+        }
     }
 }

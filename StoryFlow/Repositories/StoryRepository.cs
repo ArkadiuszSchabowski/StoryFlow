@@ -19,7 +19,7 @@ namespace StoryFlow.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Story> Get(int id)
+        public async Task<Story?> Get(int id)
         {
             return await _context.Stories.FirstOrDefaultAsync(s => s.Id == id);
         }
@@ -29,7 +29,7 @@ namespace StoryFlow.Repositories
             return await _context.Stories.Include(s => s.Sentences).ToListAsync();
         }
 
-        public void Remove()
+        public void Remove(Story story)
         {
             throw new NotImplementedException();
         }

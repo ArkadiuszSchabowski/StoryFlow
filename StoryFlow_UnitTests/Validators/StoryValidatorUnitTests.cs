@@ -202,5 +202,29 @@ namespace StoryFlow_UnitTests.Validators
 
             action.Should().NotThrow();
         }
+
+        [Theory]
+        [InlineData(0,0)]
+        [InlineData(1, 1)]
+        [InlineData(2, 2)]
+        public void ValidateSentencesCount_WhenEqualAreTheSame_NotThrowsException(int firstSentenceCount, int secondSentenceCount)
+        {
+            var act = () => _storyValidator.ValidateSentencesCount(firstSentenceCount, secondSentenceCount);
+
+            act.Should().NotThrow();
+        }
+
+        [Theory]
+        [InlineData(0,1)]
+        [InlineData(1, 0)]
+        [InlineData(2, 1)]
+        [InlineData(9, 10)]
+
+        public void ValidateSentencesCount_WhenEqualIsDifferent_ThrowsException(int firstSentenceCount, int secondSentenceCount)
+        {
+            var act = () => _storyValidator.ValidateSentencesCount(firstSentenceCount, secondSentenceCount);
+
+            act.Should().Throw<BadRequestException>().WithMessage("Polish sentences are not equal to english sentences.");
+        }
     }
 }

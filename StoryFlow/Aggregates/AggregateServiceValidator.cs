@@ -18,10 +18,16 @@ namespace StoryFlow.Aggregates
         {
             _storyValidator.Validate(item);
         }
+        
 
         public void ValidateId(int? id)
         {
             _validatorId.ValidateId(id);
+        }
+
+        public void ValidateSentencesCount(int polishSentencesCount, int englishSentencesCount)
+        {
+            _storyValidator.ValidateSentencesCount(polishSentencesCount, englishSentencesCount);
         }
     }
 }

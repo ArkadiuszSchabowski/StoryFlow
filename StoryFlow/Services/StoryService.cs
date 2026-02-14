@@ -34,15 +34,12 @@ namespace StoryFlow.Services
             var englishSentences = _textConverter.GetSentencesFromText(item.EnglishStory!);
             var polishSentences = _textConverter.GetSentencesFromText(item.PolishStory!);
 
-            var englishSentencesLength = englishSentences.Count();
-            var polishSentencesLength = polishSentences.Count();
+            var englishSentencesCount = englishSentences.Count();
+            var polishSentencesCount = polishSentences.Count();
 
-            if(polishSentencesLength != englishSentencesLength)
-            {
-                throw new BadRequestException("Polish sentences are not equal to english sentences");
-            }
+            _serviceValidator.ValidateSentencesCount(polishSentencesCount, englishSentencesCount);
 
-            for(var i = 0; i < englishSentencesLength; i++)
+            for(var i = 0; i < englishSentencesCount; i++)
             {
                 var sentence = new Sentence()
                 {
@@ -61,12 +58,14 @@ namespace StoryFlow.Services
             _serviceValidator.ValidateId(id);
             
             var result = await _storyRepository.Get(id);
-            var story = _mapper.Map<GetStoryDto>(result);
 
-            if(story is null)
+            if(result is null)
             {
                 throw new NotFoundException("Story not found.");
             }
+
+            var story = _mapper.Map<GetStoryDto>(result);
+
 
             return story;
         }
@@ -79,9 +78,18 @@ namespace StoryFlow.Services
             return stories;
         }
 
-        public void Remove()
+        public async Task Remove(int id)
         {
-            throw new NotImplementedException();
+            _serviceValidator.ValidateId(id);
+
+            var result = await _storyRepository.Get(id);
+
+            if (result is null)
+            {
+                throw new NotFoundException("Story not found.");
+            }
+
+            _storyRepository.Remove(result);
         }
     }
 }
