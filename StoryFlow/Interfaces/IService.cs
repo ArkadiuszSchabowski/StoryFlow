@@ -1,4 +1,5 @@
-﻿using StoryFlow_Shared.Models;
+﻿using StoryFlow_Database.Entities;
+using StoryFlow_Shared.Models;
 
 namespace StoryFlow_Shared.Interfaces
 {

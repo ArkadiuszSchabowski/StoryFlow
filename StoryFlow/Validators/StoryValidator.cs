@@ -32,5 +32,12 @@ namespace StoryFlow.Validators
                 throw new BadRequestException("Story must be between 150 and 1000 characters long.");
             }
         }
+        public void ValidateSentencesCount(int polishSentencesCount, int englishSentencesCount)
+        {
+            if (polishSentencesCount != englishSentencesCount)
+            {
+                throw new BadRequestException("Polish sentences are not equal to english sentences.");
+            }
+        }
     }
 }

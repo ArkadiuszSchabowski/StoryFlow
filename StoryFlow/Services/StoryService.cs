@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using StoryFlow.Exceptions;
+using StoryFlow.Interfaces;
 using StoryFlow_Database.Entities;
 using StoryFlow_Shared.Interfaces;
 using StoryFlow_Shared.Models;
@@ -8,23 +8,23 @@ namespace StoryFlow.Services
 {
     public class StoryService : IService
     {
+        private readonly IAggregateServiceValidator _serviceValidator;
         private readonly IRepository<Story> _storyRepository;
-        private readonly IValidator<AddStoryDto> _storyValidator;
         private readonly ITextConverter _textConverter;
         private readonly ITextCounter _textCounter;
         private readonly IMapper _mapper;
 
-        public StoryService(IRepository<Story> storyRepository, IValidator<AddStoryDto> storyValidator, ITextConverter textConverter, ITextCounter textCounter, IMapper mapper)
+        public StoryService(IRepository<Story> storyRepository, IAggregateServiceValidator serviceValidator, ITextConverter textConverter, ITextCounter textCounter, IMapper mapper)
         {
             _storyRepository = storyRepository;
-            _storyValidator = storyValidator;
+            _serviceValidator = serviceValidator;
             _textConverter = textConverter;
             _textCounter = textCounter;
             _mapper = mapper;
         }
         public async Task Add(AddStoryDto item)
         {
-            _storyValidator.Validate(item);
+            _serviceValidator.Validate(item);
 
             var story = _mapper.Map<Story>(item);
 
@@ -33,15 +33,12 @@ namespace StoryFlow.Services
             var englishSentences = _textConverter.GetSentencesFromText(item.EnglishStory!);
             var polishSentences = _textConverter.GetSentencesFromText(item.PolishStory!);
 
-            var englishSentencesLength = englishSentences.Count();
-            var polishSentencesLength = polishSentences.Count();
+            var englishSentencesCount = englishSentences.Count();
+            var polishSentencesCount = polishSentences.Count();
 
-            if(polishSentencesLength != englishSentencesLength)
-            {
-                throw new BadRequestException("Polish sentences are not equal to english sentences");
-            }
+            _serviceValidator.ValidateSentencesCount(polishSentencesCount, englishSentencesCount);
 
-            for(var i = 0; i < englishSentencesLength; i++)
+            for(var i = 0; i < englishSentencesCount; i++)
             {
                 var sentence = new Sentence()
                 {
@@ -55,14 +52,36 @@ namespace StoryFlow.Services
             await _storyRepository.Add(story);
         }
 
-        public void Get(ICollection<GetStoryDto> collection)
+        public async Task<GetStoryDto> Get(int id)
         {
-            throw new NotImplementedException();
+            _serviceValidator.ValidateId(id);
+            
+            var result = await _storyRepository.Get(id);
+
+            _serviceValidator.ThrowIsNull(result);
+
+            var storyDto = _mapper.Map<GetStoryDto>(result);
+
+            return storyDto;
         }
 
-        public void Remove()
+        public async Task<ICollection<GetStoryDto>> GetAll()
         {
-            throw new NotImplementedException();
+            var results = await _storyRepository.GetAll();
+            var stories = _mapper.Map<List<GetStoryDto>>(results);
+
+            return stories;
+        }
+
+        public async Task Remove(int id)
+        {
+            _serviceValidator.ValidateId(id);
+
+            var result = await _storyRepository.Get(id);
+
+            _serviceValidator.ThrowIsNull(result);
+
+            _storyRepository.Remove(result!);
         }
     }
 }
