@@ -7,7 +7,7 @@ namespace StoryFlow.Validators
     {
         public void ValidateId(int? id)
         {
-            if(id == null)
+            if(id is null)
             {
                 throw new BadRequestException("Id is required.");
             }

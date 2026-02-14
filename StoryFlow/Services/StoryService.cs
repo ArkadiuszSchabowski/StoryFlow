@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using StoryFlow.Exceptions;
 using StoryFlow.Interfaces;
 using StoryFlow_Database.Entities;
 using StoryFlow_Shared.Interfaces;
@@ -59,15 +58,11 @@ namespace StoryFlow.Services
             
             var result = await _storyRepository.Get(id);
 
-            if(result is null)
-            {
-                throw new NotFoundException("Story not found.");
-            }
+            _serviceValidator.ThrowIsNull(result);
 
-            var story = _mapper.Map<GetStoryDto>(result);
+            var storyDto = _mapper.Map<GetStoryDto>(result);
 
-
-            return story;
+            return storyDto;
         }
 
         public async Task<ICollection<GetStoryDto>> GetAll()
@@ -84,12 +79,9 @@ namespace StoryFlow.Services
 
             var result = await _storyRepository.Get(id);
 
-            if (result is null)
-            {
-                throw new NotFoundException("Story not found.");
-            }
+            _serviceValidator.ThrowIsNull(result);
 
-            _storyRepository.Remove(result);
+            _storyRepository.Remove(result!);
         }
     }
 }

@@ -42,5 +42,31 @@ namespace StoryFlow_UnitTests.Services
 
             result.Should().BeEquivalentTo(resultsDto);
         }
+        [Fact]
+        public async Task Get_WithCorrectId_ReturnsTypeOfGetStoryDto()
+        {
+            var storyService = new StoryService(_mockRepository.Object, _mocServiceValidator.Object, _mockTextConverter.Object, _mockTextCounter.Object, _mockMapper.Object);
+
+            int id = 1;
+
+            var story = new Story
+            {
+                Id = 1,
+                Title = "First Story"
+            };
+
+            var getStoryDto = new GetStoryDto
+            {
+                Id = 1,
+                Title = "First Story"
+            };
+
+            _mockRepository.Setup(x => x.Get(1)).ReturnsAsync(story);
+            _mockMapper.Setup(x => x.Map<GetStoryDto>(story)).Returns(getStoryDto);
+
+            var result = await storyService.Get(id);
+
+            result.Should().BeOfType<GetStoryDto>();
+        } 
     }
 }

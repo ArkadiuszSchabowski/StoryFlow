@@ -30,6 +30,7 @@ builder.Services.AddScoped<ITextCounter, TextCounter>();
 builder.Services.AddScoped<IAggregateServiceValidator, AggregateServiceValidator>();
 builder.Services.AddScoped<IValidator<AddStoryDto>, StoryValidator>();
 builder.Services.AddScoped<IValidatorId, ValidatorId>();
+builder.Services.AddScoped<IEntityValidator<Story>, StoryEntityValidator>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 
