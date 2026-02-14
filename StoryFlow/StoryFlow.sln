@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36623.8 d17.14
+VisualStudioVersion = 17.14.36623.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryFlow", "StoryFlow.csproj", "{6B86AE65-5FDE-448F-9F64-B80730D65AE1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryFlow_Database", "..\StoryFlow_Database\StoryFlow_Database.csproj", "{0D75701C-34B6-400A-9518-41BB9531B764}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryFlow_UnitTests", "..\StoryFlow_UnitTests\StoryFlow_UnitTests.csproj", "{505E6BF2-EA65-436A-BBE4-BA6E2AD3EFC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryFlow_Tests", "..\StoryFlow_UnitTests\StoryFlow_Tests.csproj", "{505E6BF2-EA65-436A-BBE4-BA6E2AD3EFC7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryFlow_Shared", "..\StoryFlow_Shared\StoryFlow_Shared.csproj", "{6DF799A5-4E5D-469C-A655-C1AAFDC073B4}"
 EndProject

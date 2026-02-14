@@ -2,7 +2,7 @@
 using StoryFlow.Exceptions;
 using StoryFlow.Validators;
 
-namespace StoryFlow_UnitTests.Validators
+namespace StoryFlow_Tests.UnitTests.Validators
 {
     public class ValidatorIdUnitTests
     {

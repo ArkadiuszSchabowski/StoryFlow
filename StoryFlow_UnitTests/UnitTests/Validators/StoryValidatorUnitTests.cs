@@ -3,7 +3,7 @@ using StoryFlow.Exceptions;
 using StoryFlow.Validators;
 using StoryFlow_Shared.Models;
 
-namespace StoryFlow_UnitTests.Validators
+namespace StoryFlow_Tests.UnitTests.Validators
 {
     
     public class StoryValidatorUnitTests

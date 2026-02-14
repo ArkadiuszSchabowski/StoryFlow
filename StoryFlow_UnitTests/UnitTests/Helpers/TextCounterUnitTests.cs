@@ -2,7 +2,7 @@
 using StoryFlow.Helpers;
 using StoryFlow_Shared.Enums;
 
-namespace StoryFlow_UnitTests.Helpers
+namespace StoryFlow_Tests.UnitTests.Helpers
 {
     public class TextCounterUnitTests
     {

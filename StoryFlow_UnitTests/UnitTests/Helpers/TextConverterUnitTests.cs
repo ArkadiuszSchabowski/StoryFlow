@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using StoryFlow.Helpers;
 
-namespace StoryFlow_UnitTests.Helpers
+namespace StoryFlow_Tests.UnitTests.Helpers
 {
     public class TextConverterUnitTests
     {
