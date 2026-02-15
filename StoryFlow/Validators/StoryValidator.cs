@@ -8,7 +8,7 @@ namespace StoryFlow.Validators
     {
         public void Validate(AddStoryDto? dto)
         {
-            if(dto == null)
+            if(dto is null)
             {
                 throw new BadRequestException("Dto is required.");
             }
@@ -24,7 +24,12 @@ namespace StoryFlow.Validators
 
             if (string.IsNullOrWhiteSpace(dto.EnglishStory))
             {
-                throw new BadRequestException("Story is required.");
+                throw new BadRequestException("English story is required.");
+            }
+
+            if (string.IsNullOrWhiteSpace(dto.PolishStory))
+            {
+                throw new BadRequestException("Polish story is required.");
             }
 
             if (dto.EnglishStory.Length < 150 || dto.EnglishStory.Length > 1000)
