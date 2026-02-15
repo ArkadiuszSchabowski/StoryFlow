@@ -14,10 +14,12 @@ namespace StoryFlow_Tests.UnitTests.Validators
         private readonly string _validTitle = new string('A', 50);
         private readonly string _tooLongTitle = new string('A', 51);
 
-        private readonly string _tooShortStory = new string('A', 149);
-        private readonly string _validShortStory = new string('A', 150);
-        private readonly string _validLongStory = new string('A', 1000);
-        private readonly string _tooLongStory = new string('A', 1001);
+        private readonly string _tooShortEnglishStory = new string('A', 149);
+        private readonly string _validShortEnglishStory = new string('A', 150);
+        private readonly string _validLongEnglishStory = new string('A', 1000);
+        private readonly string _tooLongEnglishStory = new string('A', 1001);
+
+        private readonly string _validTranslatedPolishStory = "valid translated story";
 
         public StoryValidatorUnitTests()
         {
@@ -29,7 +31,8 @@ namespace StoryFlow_Tests.UnitTests.Validators
             var dto = new AddStoryDto
             {
                 Title = null,
-                EnglishStory = _validShortStory
+                EnglishStory = _validShortEnglishStory,
+                PolishStory = _validTranslatedPolishStory
             };
 
             var action = () => _storyValidator.Validate(dto);
@@ -45,7 +48,8 @@ namespace StoryFlow_Tests.UnitTests.Validators
             var dto = new AddStoryDto
             {
                 Title = "   ",
-                EnglishStory = _validShortStory
+                EnglishStory = _validShortEnglishStory,
+                PolishStory = _validTranslatedPolishStory
             };
 
             var action = () => _storyValidator.Validate(dto);
@@ -56,35 +60,71 @@ namespace StoryFlow_Tests.UnitTests.Validators
         }
 
         [Fact]
-        public void Validate_WhenStoryIsNull_ThrowsBadRequestException()
+        public void Validate_WhenEnglishStoryIsNull_ThrowsBadRequestException()
         {
             var dto = new AddStoryDto
             {
                 Title = _validTitle,
-                EnglishStory = null
+                EnglishStory = null,
+                PolishStory = "valid polish story"
             };
 
             var action = () => _storyValidator.Validate(dto);
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("Story is required.");
+                .WithMessage("English story is required.");
         }
 
         [Fact]
-        public void Validate_WhenStoryIsWhiteSpace_ThrowsBadRequestException()
+        public void Validate_WhenPolishStoryIsNull_ThrowsBadRequestException()
         {
             var dto = new AddStoryDto
             {
                 Title = _validTitle,
-                EnglishStory = "   "
+                EnglishStory = _validShortEnglishStory,
+                PolishStory = null
             };
 
             var action = () => _storyValidator.Validate(dto);
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("Story is required.");
+                .WithMessage("Polish story is required.");
+        }
+
+        [Fact]
+        public void Validate_WhenEnglishStoryIsWhiteSpace_ThrowsBadRequestException()
+        {
+            var dto = new AddStoryDto
+            {
+                Title = _validTitle,
+                EnglishStory = "   ",
+                PolishStory = "valid polish story"
+            };
+
+            var action = () => _storyValidator.Validate(dto);
+
+            action.Should()
+                .Throw<BadRequestException>()
+                .WithMessage("English story is required.");
+        }
+
+        [Fact]
+        public void Validate_WhenPolishStoryIsWhiteSpace_ThrowsBadRequestException()
+        {
+            var dto = new AddStoryDto
+            {
+                Title = _validTitle,
+                EnglishStory = _validShortEnglishStory,
+                PolishStory = "   "
+            };
+
+            var action = () => _storyValidator.Validate(dto);
+
+            action.Should()
+                .Throw<BadRequestException>()
+                .WithMessage("Polish story is required.");
         }
 
         [Fact]
@@ -103,7 +143,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
             var dto = new AddStoryDto
             {
                 Title = _tooShortTitle,
-                EnglishStory = _validShortStory
+                EnglishStory = _validShortEnglishStory
             };
 
             var action = () => _storyValidator.Validate(dto);
@@ -119,7 +159,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
             var dto = new AddStoryDto
             {
                 Title = _tooLongTitle,
-                EnglishStory = _validShortStory
+                EnglishStory = _validShortEnglishStory
             };
 
             var action = () => _storyValidator.Validate(dto);
@@ -135,7 +175,8 @@ namespace StoryFlow_Tests.UnitTests.Validators
             var dto = new AddStoryDto
             {
                 Title = _validTitle,
-                EnglishStory = _validShortStory
+                EnglishStory = _validShortEnglishStory,
+                PolishStory = _validTranslatedPolishStory
             };
 
             var action = () => _storyValidator.Validate(dto);
@@ -149,7 +190,8 @@ namespace StoryFlow_Tests.UnitTests.Validators
             var dto = new AddStoryDto
             {
                 Title = _validTitle,
-                EnglishStory = _tooShortStory
+                EnglishStory = _tooShortEnglishStory,
+                PolishStory = _validTranslatedPolishStory
             };
 
             var action = () => _storyValidator.Validate(dto);
@@ -165,7 +207,8 @@ namespace StoryFlow_Tests.UnitTests.Validators
             var dto = new AddStoryDto
             {
                 Title = _validTitle,
-                EnglishStory = _tooLongStory
+                EnglishStory = _tooLongEnglishStory,
+                PolishStory = _validTranslatedPolishStory
             };
 
             var action = () => _storyValidator.Validate(dto);
@@ -181,7 +224,8 @@ namespace StoryFlow_Tests.UnitTests.Validators
             var dto = new AddStoryDto
             {
                 Title = _validTitle,
-                EnglishStory = _validShortStory
+                EnglishStory = _validShortEnglishStory,
+                PolishStory = _validTranslatedPolishStory
             };
 
             var action = () => _storyValidator.Validate(dto);
@@ -195,7 +239,8 @@ namespace StoryFlow_Tests.UnitTests.Validators
             var dto = new AddStoryDto
             {
                 Title = _validTitle,
-                EnglishStory = _validLongStory
+                EnglishStory = _validLongEnglishStory,
+                PolishStory = _validTranslatedPolishStory
             };
 
             var action = () => _storyValidator.Validate(dto);

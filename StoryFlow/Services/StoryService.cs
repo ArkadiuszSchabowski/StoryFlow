@@ -8,16 +8,18 @@ namespace StoryFlow.Services
 {
     public class StoryService : IService
     {
-        private readonly IAggregateServiceValidator _serviceValidator;
         private readonly IRepository<Story> _storyRepository;
+        private readonly IAggregateServiceValidator _serviceValidator;
+        private readonly ISentenceBuilder _sentenceBuilder;
         private readonly ITextConverter _textConverter;
         private readonly ITextCounter _textCounter;
         private readonly IMapper _mapper;
 
-        public StoryService(IRepository<Story> storyRepository, IAggregateServiceValidator serviceValidator, ITextConverter textConverter, ITextCounter textCounter, IMapper mapper)
+        public StoryService(IRepository<Story> storyRepository, IAggregateServiceValidator serviceValidator, ISentenceBuilder sentenceBuilder, ITextConverter textConverter, ITextCounter textCounter, IMapper mapper)
         {
             _storyRepository = storyRepository;
             _serviceValidator = serviceValidator;
+            _sentenceBuilder = sentenceBuilder;
             _textConverter = textConverter;
             _textCounter = textCounter;
             _mapper = mapper;
@@ -33,22 +35,10 @@ namespace StoryFlow.Services
             var englishSentences = _textConverter.GetSentencesFromText(item.EnglishStory!);
             var polishSentences = _textConverter.GetSentencesFromText(item.PolishStory!);
 
-            var englishSentencesCount = englishSentences.Count();
-            var polishSentencesCount = polishSentences.Count();
+            _serviceValidator.ValidateSentencesCount(polishSentences.Count, englishSentences.Count);
 
-            _serviceValidator.ValidateSentencesCount(polishSentencesCount, englishSentencesCount);
+            _sentenceBuilder.AddSentencesToStory(story, polishSentences, englishSentences);
 
-            for(var i = 0; i < englishSentencesCount; i++)
-            {
-                var sentence = new Sentence()
-                {
-                    PolishMeaning = polishSentences[i],
-                    EnglishMeaning = englishSentences[i],
-                    Order = i
-                };
-
-                story.Sentences.Add(sentence);
-            }
             await _storyRepository.Add(story);
         }
 

@@ -38,7 +38,7 @@ namespace StoryFlow.Controllers
         [HttpDelete]
         public async Task<IActionResult> Remove(int id)
         {
-            _service.Remove(id);
+            await _service.Remove(id);
             return NoContent();
         }
     }
