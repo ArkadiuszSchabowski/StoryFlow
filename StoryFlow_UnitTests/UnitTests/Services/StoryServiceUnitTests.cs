@@ -54,7 +54,8 @@ namespace StoryFlow_Tests.UnitTests.Services
         {
             var storyDto = new AddStoryDto
             {
-                Title = "Animal Story",
+                PolishTitle = "Zwierzęca historia",
+                EnglishTitle = "Animal Story",
                 StoryCategory = StoryCategory.Animals,
                 LanguageLevel = LanguageLevel.A1,
                 PolishStory = _polishStory,
@@ -64,7 +65,8 @@ namespace StoryFlow_Tests.UnitTests.Services
             var story = new Story
             {
                 Id = 1,
-                Title = "Animal Story",
+                PolishTitle = "Zwierzęca historia",
+                EnglishTitle = "Animal Story",
                 StoryCategory = StoryCategory.Animals,
                 LanguageLevel = LanguageLevel.A1
             };
@@ -101,13 +103,15 @@ namespace StoryFlow_Tests.UnitTests.Services
             var story = new Story
             {
                 Id = 1,
-                Title = "First Story"
+                PolishTitle = "Zwierzęca historia",
+                EnglishTitle = "Animal Story",
             };
 
             var getStoryDto = new GetStoryDto
             {
                 Id = 1,
-                Title = "First Story"
+                PolishTitle = "Zwierzęca historia",
+                EnglishTitle = "Animal Story",
             };
 
             _mockRepository.Setup(x => x.Get(1)).ReturnsAsync(story);
@@ -126,7 +130,8 @@ namespace StoryFlow_Tests.UnitTests.Services
             var story = new Story
             {
                 Id = 1,
-                Title = "First Story"
+                PolishTitle = "Zwierzęca historia",
+                EnglishTitle = "Animal Story",
             };
 
             _mockRepository.Setup(x => x.Get(1)).ReturnsAsync(story);

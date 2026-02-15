@@ -12,14 +12,24 @@ namespace StoryFlow.Validators
             {
                 throw new BadRequestException("Dto is required.");
             }
-            if (string.IsNullOrWhiteSpace(dto.Title))
+            if (string.IsNullOrWhiteSpace(dto.PolishTitle))
             {
-                throw new BadRequestException("Title is required.");
+                throw new BadRequestException("Polish title is required.");
             }
 
-            if (dto.Title.Length < 5 || dto.Title.Length > 50)
+            if (string.IsNullOrWhiteSpace(dto.EnglishTitle))
             {
-                throw new BadRequestException("Title must be between 5 and 50 characters long.");
+                throw new BadRequestException("English title is required.");
+            }
+
+            if (string.IsNullOrWhiteSpace(dto.PolishDescription))
+            {
+                throw new BadRequestException("Polish description is required.");
+            }
+
+            if (string.IsNullOrWhiteSpace(dto.EnglishDescription))
+            {
+                throw new BadRequestException("English description is required.");
             }
 
             if (string.IsNullOrWhiteSpace(dto.EnglishStory))
@@ -32,9 +42,19 @@ namespace StoryFlow.Validators
                 throw new BadRequestException("Polish story is required.");
             }
 
+            if (dto.EnglishTitle.Length < 5 || dto.EnglishTitle.Length > 50)
+            {
+                throw new BadRequestException("English title must be between 5 and 50 characters long.");
+            }
+
+            if (dto.EnglishDescription.Length < 10 || dto.EnglishDescription.Length > 100)
+            {
+                throw new BadRequestException("English description must be between 10 and 100 characters long.");
+            }
+
             if (dto.EnglishStory.Length < 150 || dto.EnglishStory.Length > 1000)
             {
-                throw new BadRequestException("Story must be between 150 and 1000 characters long.");
+                throw new BadRequestException("English story must be between 150 and 1000 characters long.");
             }
         }
         public void ValidateSentencesCount(int polishSentencesCount, int englishSentencesCount)

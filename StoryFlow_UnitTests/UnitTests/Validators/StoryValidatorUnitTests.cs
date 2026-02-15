@@ -10,27 +10,32 @@ namespace StoryFlow_Tests.UnitTests.Validators
     {
         private readonly StoryValidator _storyValidator;
 
-        private const string _tooShortTitle = "Dogs";
-        private readonly string _validTitle = new string('A', 50);
-        private readonly string _tooLongTitle = new string('A', 51);
+        private readonly string _validEnglishTitle = new string('A', 50);
+        private readonly string _validPolishTitle = "Zwierzęca historia";
+        private const string _tooShortEnglishTitle = "Dogs";
+        private readonly string _tooLongEnglishTitle = new string('A', 51);
 
-        private readonly string _tooShortEnglishStory = new string('A', 149);
+        private readonly string _validPolishDescription = "Poprawny opis";
+        private readonly string _validEnglishDescription = "Valid English Description";
+
         private readonly string _validShortEnglishStory = new string('A', 150);
         private readonly string _validLongEnglishStory = new string('A', 1000);
+        private readonly string _tooShortEnglishStory = new string('A', 149);
         private readonly string _tooLongEnglishStory = new string('A', 1001);
 
-        private readonly string _validTranslatedPolishStory = "valid translated story";
+        private readonly string _validTranslatedPolishStory = "Valid translated story";
 
         public StoryValidatorUnitTests()
         {
             _storyValidator = new StoryValidator();
         }
         [Fact]
-        public void Validate_WhenTitleIsNull_ThrowsBadRequestException()
+        public void Validate_WhenPolishTitleIsNull_ThrowsBadRequestException()
         {
             var dto = new AddStoryDto
             {
-                Title = null,
+                PolishTitle = null,
+                EnglishTitle = _validEnglishTitle,
                 EnglishStory = _validShortEnglishStory,
                 PolishStory = _validTranslatedPolishStory
             };
@@ -39,15 +44,16 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("Title is required.");
+                .WithMessage("Polish title is required.");
         }
 
         [Fact]
-        public void Validate_WhenTitleIsWhiteSpace_ThrowsBadRequestException()
+        public void Validate_WhenEnglishTitleIsNull_ThrowsBadRequestException()
         {
             var dto = new AddStoryDto
             {
-                Title = "   ",
+                PolishTitle = _validPolishTitle,
+                EnglishTitle = null,
                 EnglishStory = _validShortEnglishStory,
                 PolishStory = _validTranslatedPolishStory
             };
@@ -56,7 +62,43 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("Title is required.");
+                .WithMessage("English title is required.");
+        }
+
+        [Fact]
+        public void Validate_WhenPolishTitleIsWhiteSpace_ThrowsBadRequestException()
+        {
+            var dto = new AddStoryDto
+            {
+                PolishTitle = "    ",
+                EnglishTitle = _validEnglishTitle,
+                EnglishStory = _validShortEnglishStory,
+                PolishStory = _validTranslatedPolishStory
+            };
+
+            var action = () => _storyValidator.Validate(dto);
+
+            action.Should()
+                .Throw<BadRequestException>()
+                .WithMessage("Polish title is required.");
+        }
+
+        [Fact]
+        public void Validate_WhenEnglishTitleIsWhiteSpace_ThrowsBadRequestException()
+        {
+            var dto = new AddStoryDto
+            {
+                PolishTitle = _validPolishTitle,
+                EnglishTitle = "   ",
+                EnglishStory = _validShortEnglishStory,
+                PolishStory = _validTranslatedPolishStory
+            };
+
+            var action = () => _storyValidator.Validate(dto);
+
+            action.Should()
+                .Throw<BadRequestException>()
+                .WithMessage("English title is required.");
         }
 
         [Fact]
@@ -64,9 +106,12 @@ namespace StoryFlow_Tests.UnitTests.Validators
         {
             var dto = new AddStoryDto
             {
-                Title = _validTitle,
+                PolishTitle = _validPolishTitle,
+                EnglishTitle = _validEnglishTitle,
                 EnglishStory = null,
-                PolishStory = "valid polish story"
+                PolishStory = _validTranslatedPolishStory,
+                PolishDescription = _validPolishDescription,
+                EnglishDescription = _validEnglishDescription
             };
 
             var action = () => _storyValidator.Validate(dto);
@@ -81,9 +126,12 @@ namespace StoryFlow_Tests.UnitTests.Validators
         {
             var dto = new AddStoryDto
             {
-                Title = _validTitle,
-                EnglishStory = _validShortEnglishStory,
-                PolishStory = null
+                PolishTitle = _validPolishTitle,
+                EnglishTitle = _validEnglishTitle,
+                EnglishStory = _validLongEnglishStory,
+                PolishStory = null,
+                PolishDescription = _validPolishDescription,
+                EnglishDescription = _validEnglishDescription
             };
 
             var action = () => _storyValidator.Validate(dto);
@@ -98,9 +146,12 @@ namespace StoryFlow_Tests.UnitTests.Validators
         {
             var dto = new AddStoryDto
             {
-                Title = _validTitle,
+                PolishTitle = _validPolishTitle,
+                EnglishTitle = _validEnglishTitle,
                 EnglishStory = "   ",
-                PolishStory = "valid polish story"
+                PolishStory = _validTranslatedPolishStory,
+                PolishDescription = _validPolishDescription,
+                EnglishDescription= _validEnglishDescription
             };
 
             var action = () => _storyValidator.Validate(dto);
@@ -115,9 +166,12 @@ namespace StoryFlow_Tests.UnitTests.Validators
         {
             var dto = new AddStoryDto
             {
-                Title = _validTitle,
+                PolishTitle = _validPolishTitle,
+                EnglishTitle = _validEnglishTitle,
                 EnglishStory = _validShortEnglishStory,
-                PolishStory = "   "
+                PolishStory = "   ",
+                PolishDescription = _validPolishDescription,
+                EnglishDescription = _validEnglishDescription
             };
 
             var action = () => _storyValidator.Validate(dto);
@@ -138,11 +192,15 @@ namespace StoryFlow_Tests.UnitTests.Validators
         }
 
         [Fact]
-        public void Validate_WhenTitleTooShort_ThrowsBadRequestException()
+        public void Validate_WhenTooShortEnglishTitle_ThrowsBadRequestException()
         {
             var dto = new AddStoryDto
             {
-                Title = _tooShortTitle,
+                PolishTitle = _validPolishTitle,
+                EnglishTitle = _tooShortEnglishTitle,
+                PolishDescription = _validPolishDescription,
+                EnglishDescription = _validEnglishDescription,
+                PolishStory = _validTranslatedPolishStory,
                 EnglishStory = _validShortEnglishStory
             };
 
@@ -150,31 +208,38 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("Title must be between 5 and 50 characters long.");
+                .WithMessage("English title must be between 5 and 50 characters long.");
         }
 
         [Fact]
-        public void Validate_WhenTitleTooLong_ThrowsBadRequestException()
+        public void Validate_WhenEnglishTitleTooLong_ThrowsBadRequestException()
         {
             var dto = new AddStoryDto
             {
-                Title = _tooLongTitle,
-                EnglishStory = _validShortEnglishStory
+                PolishTitle = _validPolishTitle,
+                EnglishTitle = _tooLongEnglishTitle,
+                PolishStory = _validTranslatedPolishStory,
+                EnglishStory = _validShortEnglishStory,
+                PolishDescription = _validPolishDescription,
+                EnglishDescription = _validEnglishDescription,
             };
 
             var action = () => _storyValidator.Validate(dto);
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("Title must be between 5 and 50 characters long.");
+                .WithMessage("English title must be between 5 and 50 characters long.");
         }
 
         [Fact]
-        public void Validate_WhenValidTitle_DontThrowsException()
+        public void Validate_WhenValidTitles_DoesNotThrowException()
         {
             var dto = new AddStoryDto
             {
-                Title = _validTitle,
+                PolishTitle = _validPolishTitle,
+                EnglishTitle = _validEnglishTitle,
+                PolishDescription = _validPolishDescription,
+                EnglishDescription = _validEnglishDescription,
                 EnglishStory = _validShortEnglishStory,
                 PolishStory = _validTranslatedPolishStory
             };
@@ -185,11 +250,14 @@ namespace StoryFlow_Tests.UnitTests.Validators
         }
 
         [Fact]
-        public void Validate_WhenStoryTooShort_ThrowsBadRequestException()
+        public void Validate_WhenTooShortEnglishStory_ThrowsBadRequestException()
         {
             var dto = new AddStoryDto
             {
-                Title = _validTitle,
+                PolishTitle = _validPolishTitle,
+                EnglishTitle = _validEnglishTitle,
+                PolishDescription = _validPolishDescription,
+                EnglishDescription = _validEnglishDescription,
                 EnglishStory = _tooShortEnglishStory,
                 PolishStory = _validTranslatedPolishStory
             };
@@ -198,48 +266,39 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("Story must be between 150 and 1000 characters long.");
+                .WithMessage("English story must be between 150 and 1000 characters long.");
         }
 
         [Fact]
-        public void Validate_WhenStoryTooLong_ThrowsBadRequestException()
+        public void Validate_WhenEnglishStoryTooLong_ThrowsBadRequestException()
         {
             var dto = new AddStoryDto
             {
-                Title = _validTitle,
+                PolishTitle = _validPolishTitle,
+                EnglishTitle = _validEnglishTitle,
                 EnglishStory = _tooLongEnglishStory,
-                PolishStory = _validTranslatedPolishStory
+                PolishStory = _validTranslatedPolishStory,
+                PolishDescription = _validPolishDescription,
+                EnglishDescription = _validEnglishDescription,
             };
 
             var action = () => _storyValidator.Validate(dto);
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("Story must be between 150 and 1000 characters long.");
+                .WithMessage("English story must be between 150 and 1000 characters long.");
         }
 
         [Fact]
-        public void Validate_WhenValidShortStory_DontThrowsException()
+        public void Validate_WhenValidStory_DoesNotThrowException()
         {
             var dto = new AddStoryDto
             {
-                Title = _validTitle,
+                PolishTitle = _validPolishTitle,
+                EnglishTitle = _validEnglishTitle,
+                PolishDescription = _validPolishDescription,
+                EnglishDescription = _validEnglishDescription,
                 EnglishStory = _validShortEnglishStory,
-                PolishStory = _validTranslatedPolishStory
-            };
-
-            var action = () => _storyValidator.Validate(dto);
-
-            action.Should().NotThrow();
-        }
-
-        [Fact]
-        public void Validate_WhenValidLongStory_DontThrowsException()
-        {
-            var dto = new AddStoryDto
-            {
-                Title = _validTitle,
-                EnglishStory = _validLongEnglishStory,
                 PolishStory = _validTranslatedPolishStory
             };
 
@@ -252,7 +311,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
         [InlineData(0,0)]
         [InlineData(1, 1)]
         [InlineData(2, 2)]
-        public void ValidateSentencesCount_WhenEqualAreTheSame_NotThrowsException(int firstSentenceCount, int secondSentenceCount)
+        public void ValidateSentencesCount_WhenEqualAreTheSame_DoesNotThrowException(int firstSentenceCount, int secondSentenceCount)
         {
             var act = () => _storyValidator.ValidateSentencesCount(firstSentenceCount, secondSentenceCount);
 
@@ -271,5 +330,144 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             act.Should().Throw<BadRequestException>().WithMessage("Polish sentences are not equal to english sentences.");
         }
+
+        [Fact]
+        public void Validate_WhenEnglishDescriptionIsNull_ThrowsBadRequestException()
+        {
+            var dto = new AddStoryDto
+            {
+                PolishTitle = _validPolishTitle,
+                EnglishTitle = _validEnglishTitle,
+                EnglishDescription = null,
+                PolishDescription = _validPolishDescription,
+                EnglishStory = _validShortEnglishStory,
+                PolishStory = _validTranslatedPolishStory
+            };
+
+            var action = () => _storyValidator.Validate(dto);
+
+            action.Should()
+                .Throw<BadRequestException>()
+                .WithMessage("English description is required.");
+        }
+
+        [Fact]
+        public void Validate_WhenEnglishDescriptionIsWhiteSpace_ThrowsBadRequestException()
+        {
+            var dto = new AddStoryDto
+            {
+                PolishTitle = _validPolishTitle,
+                EnglishTitle = _validEnglishTitle,
+                EnglishDescription = "   ",
+                PolishDescription = _validPolishDescription,
+                EnglishStory = _validShortEnglishStory,
+                PolishStory = _validTranslatedPolishStory
+            };
+
+            var action = () => _storyValidator.Validate(dto);
+
+            action.Should()
+                .Throw<BadRequestException>()
+                .WithMessage("English description is required.");
+        }
+
+        [Fact]
+        public void Validate_WhenTooShortEnglishDescription_ThrowsBadRequestException()
+        {
+            var dto = new AddStoryDto
+            {
+                PolishTitle = _validPolishTitle,
+                EnglishTitle = _validEnglishTitle,
+                EnglishDescription = new string('A', 9),
+                PolishDescription = _validPolishDescription,
+                EnglishStory = _validShortEnglishStory,
+                PolishStory = _validTranslatedPolishStory
+            };
+
+            var action = () => _storyValidator.Validate(dto);
+
+            action.Should()
+                .Throw<BadRequestException>()
+                .WithMessage("English description must be between 10 and 100 characters long.");
+        }
+
+        [Fact]
+        public void Validate_WhenTooLongEnglishDescription_ThrowsBadRequestException()
+        {
+            var dto = new AddStoryDto
+            {
+                PolishTitle = _validPolishTitle,
+                EnglishTitle = _validEnglishTitle,
+                EnglishDescription = new string('A', 101),
+                PolishDescription = _validPolishDescription,
+                EnglishStory = _validShortEnglishStory,
+                PolishStory = _validTranslatedPolishStory
+            };
+
+            var action = () => _storyValidator.Validate(dto);
+
+            action.Should()
+                .Throw<BadRequestException>()
+                .WithMessage("English description must be between 10 and 100 characters long.");
+        }
+
+        [Fact]
+        public void Validate_WhenValidEnglishDescription_DoesNotThrowException()
+        {
+            var dto = new AddStoryDto
+            {
+                PolishTitle = _validPolishTitle,
+                EnglishTitle = _validEnglishTitle,
+                EnglishDescription = _validEnglishDescription,
+                PolishDescription = _validPolishDescription,
+                EnglishStory = _validShortEnglishStory,
+                PolishStory = _validTranslatedPolishStory
+            };
+
+            var action = () => _storyValidator.Validate(dto);
+
+            action.Should().NotThrow();
+        }
+
+        [Fact]
+        public void Validate_WhenPolishDescriptionIsNull_ThrowsBadRequestException()
+        {
+            var dto = new AddStoryDto
+            {
+                PolishTitle = _validPolishTitle,
+                EnglishTitle = _validEnglishTitle,
+                PolishDescription = null,
+                EnglishDescription = _validEnglishDescription,
+                EnglishStory = _validShortEnglishStory,
+                PolishStory = _validTranslatedPolishStory
+            };
+
+            var action = () => _storyValidator.Validate(dto);
+
+            action.Should()
+                .Throw<BadRequestException>()
+                .WithMessage("Polish description is required.");
+        }
+
+        [Fact]
+        public void Validate_WhenPolishDescriptionIsWhiteSpace_ThrowsBadRequestException()
+        {
+            var dto = new AddStoryDto
+            {
+                PolishTitle = _validPolishTitle,
+                EnglishTitle = _validEnglishTitle,
+                PolishDescription = "    ",
+                EnglishDescription = _validEnglishDescription,
+                EnglishStory = _validShortEnglishStory,
+                PolishStory = _validTranslatedPolishStory
+            };
+
+            var action = () => _storyValidator.Validate(dto);
+
+            action.Should()
+                .Throw<BadRequestException>()
+                .WithMessage("Polish description is required.");
+        }
+
     }
 }
