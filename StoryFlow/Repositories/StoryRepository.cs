@@ -21,7 +21,7 @@ namespace StoryFlow.Repositories
 
         public async Task<Story?> Get(int id)
         {
-            return await _context.Stories.FirstOrDefaultAsync(s => s.Id == id);
+            return await _context.Stories.Include(s => s.Sentences).FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<ICollection<Story>> GetAll()

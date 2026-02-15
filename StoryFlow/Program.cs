@@ -35,10 +35,20 @@ builder.Services.AddScoped<IEntityValidator<Story>, StoryEntityValidator>();
 builder.Services.AddScoped<ISentenceBuilder, SentenceBuilder>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("StoryFlowPolicy", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
+app.UseCors("StoryFlowPolicy");
 
 if (app.Environment.IsDevelopment())
 {
