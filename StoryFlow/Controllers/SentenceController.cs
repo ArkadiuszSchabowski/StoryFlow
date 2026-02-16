@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StoryFlow.Interfaces;
 using StoryFlow_Shared.Interfaces;
 using StoryFlow_Shared.Models;
 
@@ -6,30 +7,30 @@ namespace StoryFlow.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StoryController : ControllerBase
+    public class SentenceController : ControllerBase
     {
-        private readonly IStoryService _service;
+        private readonly ISentenceService _service;
 
-        public StoryController(IStoryService service)
+        public SentenceController(ISentenceService service)
         {
             _service = service;
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetStoryDto>> Get(int id) 
+        public async Task<ActionResult<GetSentenceDto>> Get(int id)
         {
-            var story = await _service.Get(id);
-            return Ok(story);
+            var sentence = await _service.Get(id);
+            return Ok(sentence);
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<GetStoryDto>>> GetAll()
+        public async Task<ActionResult<List<GetSentenceDto>>> GetAll()
         {
-            var stories = await _service.GetAll();
-            return Ok(stories);
+            var sentences = await _service.GetAll();
+            return Ok(sentences);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add(AddStoryDto dto)
+        public async Task<ActionResult> Add(AddSentenceDto dto)
         {
             await _service.Add(dto);
             return Ok();

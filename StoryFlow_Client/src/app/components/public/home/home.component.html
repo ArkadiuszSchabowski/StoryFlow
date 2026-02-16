@@ -1,1 +1,15 @@
-<p>home works!</p>
+<div id="center" *ngIf="story">
+  <h2>{{ story.polishTitle }} / {{ story.englishTitle }}</h2>
+  <p>{{ story.polishDescription }}</p>
+  <p>{{ story.englishDescription }}</p>
+  <p>
+    Category: {{ story.storyCategory }}, Size: {{ story.storySize }}, Level:
+    {{ story.languageLevel }}
+  </p>
+
+  <div *ngFor="let sentence of story.sentences">
+    <button (click)="translateSentence(sentence)">
+      {{ sentence.translated }}
+    </button>
+  </div>
+</div>

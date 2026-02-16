@@ -21,7 +21,8 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddDbContext<MyDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("MyDbConnectionString")));
 
-builder.Services.AddScoped<IService, StoryService>();
+builder.Services.AddScoped<IStoryService, StoryService>();
+builder.Services.AddScoped<ISentenceService, SentenceService>();
 builder.Services.AddScoped<IAdd<AddStoryDto>, StoryService>();
 builder.Services.AddScoped<IGet<GetStoryDto>, StoryService>();
 builder.Services.AddScoped<IRemove, StoryService>();

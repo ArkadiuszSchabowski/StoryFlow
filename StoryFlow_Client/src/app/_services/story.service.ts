@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
+import { GetStoryDto } from '../models/get-story-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,9 @@ export class StoryService {
     
    }
 
-   GetAll(){
-    return this.http.get(this.apiUrl + 'story')
-   }
-
-   Get(id: number){
+   get(id: number){
     return this.http.get(this.apiUrl + `story/${id}`)
    }
+
+
 }
