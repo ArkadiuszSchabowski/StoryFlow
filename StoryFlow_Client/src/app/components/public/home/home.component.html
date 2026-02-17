@@ -8,8 +8,6 @@
   </p>
 
   <div *ngFor="let sentence of story.sentences">
-    <button (click)="translateSentence(sentence)">
-      {{ sentence.translated }}
-    </button>
+    <button (click)="changeSentenceLanguage(sentence)">{{sentence.visibleMeaning}}</button>
   </div>
 </div>

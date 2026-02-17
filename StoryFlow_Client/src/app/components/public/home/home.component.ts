@@ -16,21 +16,13 @@ export class HomeComponent {
     this.storyService.get(id).subscribe({
       next: (response) => {
         this.story = response;
-
-        this.story.sentences.forEach((s: any) => {
-          s.isEnglish = true;
-          s.translated = s.englishMeaning;
-        });
+        console.log(this.story);
       },
       error: (error) => console.log(error),
     });
   }
 
-  translateSentence(sentence: any) {
-    sentence.isEnglish = !sentence.isEnglish;
-
-    sentence.translated = sentence.isEnglish
-      ? sentence.englishMeaning
-      : sentence.polishMeaning;
+  changeSentenceLanguage(sentence: any) {
+    sentence.isEnglishVisibleMeaning = !sentence.isEnglishVisibleMeaning;
   }
 }
