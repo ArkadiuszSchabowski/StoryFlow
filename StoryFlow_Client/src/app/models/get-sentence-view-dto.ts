@@ -7,9 +7,9 @@ export class GetSentenceViewDto {
     polishMeaning: string = '';
     englishMeaning: string = '';
     userSentences: GetUserSentenceDto[] = [];
-    isEnglishVisibleMeaning: boolean = true;
+    isSentenceEnglish: boolean = true;
     
-    get visibleMeaning(): string {
-        return this.isEnglishVisibleMeaning ? this.englishMeaning : this.polishMeaning;
+    get visibleSentenceMeaning(): string {
+        return this.isSentenceEnglish ? this.englishMeaning : this.polishMeaning;
     }
 }
