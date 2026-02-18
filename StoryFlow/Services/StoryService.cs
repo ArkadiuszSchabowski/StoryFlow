@@ -6,7 +6,7 @@ using StoryFlow_Shared.Models;
 
 namespace StoryFlow.Services
 {
-    public class StoryService : IService
+    public class StoryService : IStoryService
     {
         private readonly IRepository<Story> _storyRepository;
         private readonly IAggregateServiceValidator _serviceValidator;
