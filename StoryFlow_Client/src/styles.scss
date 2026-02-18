@@ -20,7 +20,17 @@ $StoryFlow_Client-theme: mat.define-light-theme((
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.button-sentence{
-  background-color: aqua;
-  border: none;
+button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.align{
+  align-items: center;
 }
