@@ -1,1 +1,31 @@
-<div id="container">navbar works!</div>
+<mat-toolbar id="container">
+  <div id="desktop-navbar-logo"></div>
+  <a mat-button [matMenuTriggerFor]="menu" id="mobile-menu-button">
+    <mat-icon>menu</mat-icon>
+  </a>
+
+  <mat-menu #menu="matMenu">
+    <a mat-menu-item routerLink="/">HOME</a>
+    <a mat-menu-item routerLink="/login">LOGIN</a>
+    <a mat-menu-item routerLink="/register">REGISTER</a>
+    <a mat-menu-item routerLink="/text-selection">CHOOSE A TEXT</a>
+    <a mat-menu-item routerLink="/profile">PROFILE</a>
+  </mat-menu>
+  <div class="mobile-space-menu-logo"></div>
+  <div id="mobile-navbar-logo"></div>
+  <div class="mobile-space-menu-logo"></div>
+  <div class="desktop-space-menu-logo"></div>
+  <div id="desktop-navbar">
+    <a mat-button routerLink="/" class="navbar-desktop-button">HOME</a>
+    <a mat-button routerLink="/login" class="navbar-desktop-button"> LOGIN </a>
+    <a mat-button routerLink="/register" class="navbar-desktop-button">
+      REGISTER
+    </a>
+    <a mat-button routerLink="/text-selection" class="navbar-desktop-button">
+      CHOOSE A TEXT
+    </a>
+    <a mat-button routerLink="/profile" class="navbar-desktop-button">
+      PROFILE
+    </a>
+  </div>
+</mat-toolbar>

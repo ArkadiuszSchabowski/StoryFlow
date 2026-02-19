@@ -11,7 +11,13 @@ import { GetSentenceViewDto } from '../models/get-sentence-view-dto';
 export class StoryService {
   apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+
+  }
+
+  getAll(){
+    return this.http.get(this.apiUrl + `story`);
+  }
 
   get(id: number) {
     return this.http.get<GetStoryViewDto>(this.apiUrl + `story/${id}`).pipe(

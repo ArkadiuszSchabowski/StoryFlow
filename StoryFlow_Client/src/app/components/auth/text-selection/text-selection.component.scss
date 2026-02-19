@@ -1,0 +1,34 @@
+#container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100% - 64px);
+}
+
+#filter-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 140px;
+    padding-top: 10px;
+    border-top: 2px solid white;
+    background-color: orangered;
+}
+#select-container{
+    display: flex;
+    flex-direction: row;
+}
+
+#story-container{
+    padding-top: 20px;
+}
+
+.filter-button{
+    margin-left: 20px;
+}
+
+.mat-form-field{
+    padding: 0 20px;
+}

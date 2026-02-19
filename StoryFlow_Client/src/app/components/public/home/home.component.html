@@ -1,32 +1,12 @@
-<div id="container" *ngIf="story">
-  <p>
-    Category: {{ story.storyCategory }}, Size: {{ story.storySize }}, Level:
-    {{ story.languageLevel }}
-  </p>
-  <div id="title-container" class="row-container">
-    <div>
-      <button mat-raised-button (click)="changeTitleLanguage(story)">
-        <div><mat-icon>repeat</mat-icon></div>
-      </button>
-    </div>
-    <h2>{{ story.visibleTitleMeaning }}</h2>
-  </div>
-  <div id="description-container" class="row-container">
-    <div>
-      <button mat-raised-button (click)="changeDescriptionLanguage(story)">
-        <div><mat-icon>repeat</mat-icon></div>
-      </button>
-    </div>
-    <h3>{{ story.visibleDescriptionMeaning }}</h3>
-  </div>
-  <div id="sentence-container">
-    <div *ngFor="let sentence of story.sentences" class="row-container align">
-      <div>
-        <button mat-raised-button (click)="changeSentenceLanguage(sentence)">
-          <div><mat-icon>repeat</mat-icon></div>
-        </button>
-      </div>
-      <div>{{ sentence.visibleSentenceMeaning }}</div>
-    </div>
-  </div>
+<div id="container">
+  <h1>Learn English Through Stories</h1>
+  <h2>
+    Read short stories adjusted to your level. Improve vocabulary,
+    comprehension, and confidence.
+  </h2>
+  <h2>
+    Translate sentences instantly without switching apps. No distractions. Just
+    learning.
+  </h2>
+  <h2></h2>
 </div>

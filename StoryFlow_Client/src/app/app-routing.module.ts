@@ -1,10 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './components/public/home/home.component';
+import { TextSelectionComponent } from './components/auth/text-selection/text-selection.component';
+import { ProfileComponent } from './components/auth/profile/profile.component';
+import { LoginComponent } from './components/public/login/login.component';
+import { RegisterComponent } from './components/public/register/register.component';
+import { TextDisplayComponent } from './components/auth/text-display/text-display.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'text-selection', component: TextSelectionComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'text', component: TextDisplayComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
