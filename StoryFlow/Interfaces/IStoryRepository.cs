@@ -7,7 +7,7 @@ namespace StoryFlow_Shared.Interfaces
     {
         Task Add(Story entity);
         Task<Story?> Get(int id);
-        Task<ICollection<Story>> Get(StoryFilter? filter);
+        IQueryable<Story> Get();
         Task Remove(Story entity);
         Task Update();
     }

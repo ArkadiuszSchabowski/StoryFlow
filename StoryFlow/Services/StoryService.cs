@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
 using StoryFlow_Database.Entities;
 using StoryFlow_Shared.Interfaces;
 using StoryFlow_Shared.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace StoryFlow.Services
 {
@@ -45,7 +47,21 @@ namespace StoryFlow.Services
 
         public async Task<ICollection<GetStoryDto>> Get(StoryFilter? filter)
         {
-            var results = await _storyRepository.Get(filter!);
+            var query = _storyRepository.Get();
+
+            if (filter != null)
+            {
+                if (filter.LanguageLevel.HasValue)
+                    query = query.Where(x => x.LanguageLevel == filter.LanguageLevel.Value);
+
+                if (filter.Category.HasValue)
+                    query = query.Where(x => x.StoryCategory == filter.Category.Value);
+
+                if (filter.Size.HasValue)
+                    query = query.Where(x => x.StorySize == filter.Size.Value);
+            }
+
+            var results = await query.ToListAsync();
 
             var stories = _mapper.Map<List<GetStoryDto>>(results);
 
@@ -55,7 +71,7 @@ namespace StoryFlow.Services
         public async Task<GetStoryDto> Get(int id)
         {
             _serviceValidator.ValidateId(id);
-            
+
             var result = await _storyRepository.Get(id);
 
             _serviceValidator.ThrowIsNull(result);
