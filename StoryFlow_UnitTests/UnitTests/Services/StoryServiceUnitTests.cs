@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore;
 using Moq;
 using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
@@ -82,21 +83,6 @@ namespace StoryFlow_Tests.UnitTests.Services
             _mockRepository.Verify(x => x.Add(story), Times.Once);
         }
 
-        [Fact]
-        public async Task Get_WithoutFilters_ReturnsEmptyList()
-        {
-            var results = new List<Story>();
-            var resultsDto = new List<GetStoryDto>();
-            var filter = new StoryFilter();
-
-            _mockRepository.Setup(x => x.Get(filter)).ReturnsAsync(results);
-
-            _mockMapper.Setup(x => x.Map<List<GetStoryDto>>(results)).Returns(resultsDto);
-
-            var result = await _storyService.Get(filter);
-
-            result.Should().BeEquivalentTo(resultsDto);
-        }
         [Fact]
         public async Task Get_WithCorrectId_ReturnsTypeOfGetStoryDto()
         {

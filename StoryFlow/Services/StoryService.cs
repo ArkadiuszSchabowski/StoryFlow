@@ -5,7 +5,6 @@ using StoryFlow.Interfaces.Aggregates;
 using StoryFlow_Database.Entities;
 using StoryFlow_Shared.Interfaces;
 using StoryFlow_Shared.Models;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace StoryFlow.Services
 {
