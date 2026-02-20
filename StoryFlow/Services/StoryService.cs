@@ -2,7 +2,6 @@
 using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
 using StoryFlow_Database.Entities;
-using StoryFlow_Shared.Enums;
 using StoryFlow_Shared.Interfaces;
 using StoryFlow_Shared.Models;
 
@@ -10,14 +9,14 @@ namespace StoryFlow.Services
 {
     public class StoryService : IStoryService
     {
-        private readonly IRepository<Story> _storyRepository;
+        private readonly IStoryRepository _storyRepository;
         private readonly IAggregateServiceValidator _serviceValidator;
         private readonly ISentenceBuilder _sentenceBuilder;
         private readonly ITextConverter _textConverter;
         private readonly ITextCounter _textCounter;
         private readonly IMapper _mapper;
 
-        public StoryService(IRepository<Story> storyRepository, IAggregateServiceValidator serviceValidator, ISentenceBuilder sentenceBuilder, ITextConverter textConverter, ITextCounter textCounter, IMapper mapper)
+        public StoryService(IStoryRepository storyRepository, IAggregateServiceValidator serviceValidator, ISentenceBuilder sentenceBuilder, ITextConverter textConverter, ITextCounter textCounter, IMapper mapper)
         {
             _storyRepository = storyRepository;
             _serviceValidator = serviceValidator;
@@ -44,6 +43,15 @@ namespace StoryFlow.Services
             await _storyRepository.Add(story);
         }
 
+        public async Task<ICollection<GetStoryDto>> Get(StoryFilter filter)
+        {
+            var results = await _storyRepository.Get(filter);
+
+            var stories = _mapper.Map<List<GetStoryDto>>(results);
+
+            return stories;
+        }
+
         public async Task<GetStoryDto> Get(int id)
         {
             _serviceValidator.ValidateId(id);
@@ -57,24 +65,6 @@ namespace StoryFlow.Services
             return storyDto;
         }
 
-        public async Task<ICollection<GetStoryDto>> GetAll()
-        {
-            var results = await _storyRepository.GetAll();
-
-            var stories = _mapper.Map<List<GetStoryDto>>(results);
-
-            return stories;
-        }
-
-        public async Task<List<GetStoryDto>> Get(LanguageLevel? languageLevel, StoryCategory? category, StorySize? size)
-        {
-            var results = await _storyRepository.Get(languageLevel, category, size);
-
-            var stories = _mapper.Map<List<GetStoryDto>>(results);
-
-            return stories;
-        }
-
         public async Task Remove(int id)
         {
             _serviceValidator.ValidateId(id);
@@ -83,7 +73,7 @@ namespace StoryFlow.Services
 
             _serviceValidator.ThrowIsNull(result);
 
-            _storyRepository.Remove(result!);
+            await _storyRepository.Remove(result!);
         }
     }
 }

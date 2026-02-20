@@ -13,7 +13,7 @@ namespace StoryFlow_Tests.UnitTests.Services
 {
     public class StoryServiceUnitTests
     {
-        private readonly Mock<IRepository<Story>> _mockRepository;
+        private readonly Mock<IStoryRepository> _mockRepository;
         private readonly Mock<IAggregateServiceValidator> _mocServiceValidator;
         private readonly Mock<ISentenceBuilder> _mockSentenceBuilder;
         private readonly Mock<ITextConverter> _mockTextConverter;
@@ -41,7 +41,7 @@ namespace StoryFlow_Tests.UnitTests.Services
 
         public StoryServiceUnitTests()
         {
-            _mockRepository = new Mock<IRepository<Story>>();
+            _mockRepository = new Mock<IStoryRepository>();
             _mocServiceValidator = new Mock<IAggregateServiceValidator>();
             _mockSentenceBuilder = new Mock<ISentenceBuilder>();
             _mockTextConverter = new Mock<ITextConverter>();
@@ -83,16 +83,17 @@ namespace StoryFlow_Tests.UnitTests.Services
         }
 
         [Fact]
-        public async Task GetAll_WithoutResults_ReturnsEmptyList()
+        public async Task Get_WithoutFilters_ReturnsEmptyList()
         {
             var results = new List<Story>();
             var resultsDto = new List<GetStoryDto>();
+            var filter = new StoryFilter();
 
-            _mockRepository.Setup(x => x.GetAll()).ReturnsAsync(results);
+            _mockRepository.Setup(x => x.Get(filter)).ReturnsAsync(results);
 
             _mockMapper.Setup(x => x.Map<List<GetStoryDto>>(results)).Returns(resultsDto);
 
-            var result = await _storyService.GetAll();
+            var result = await _storyService.Get(filter);
 
             result.Should().BeEquivalentTo(resultsDto);
         }

@@ -23,11 +23,10 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<MyDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("MyDbConnectionString")));
 
 builder.Services.AddScoped<IStoryService, StoryService>();
-builder.Services.AddScoped<ISentenceService, SentenceService>();
 builder.Services.AddScoped<IAdd<AddStoryDto>, StoryService>();
-builder.Services.AddScoped<IGet<GetStoryDto>, StoryService>();
+builder.Services.AddScoped<IGetStory, StoryService>();
 builder.Services.AddScoped<IRemove, StoryService>();
-builder.Services.AddScoped<IRepository<Story>, StoryRepository>();
+builder.Services.AddScoped<IStoryRepository, StoryRepository>();
 builder.Services.AddScoped<ITextConverter, TextConverter>();
 builder.Services.AddScoped<ITextCounter, TextCounter>();
 builder.Services.AddScoped<IAggregateServiceValidator, AggregateServiceValidator>();

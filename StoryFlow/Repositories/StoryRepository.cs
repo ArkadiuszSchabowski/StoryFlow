@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StoryFlow_Database;
 using StoryFlow_Database.Entities;
-using StoryFlow_Shared.Enums;
 using StoryFlow_Shared.Interfaces;
+using StoryFlow_Shared.Models;
 
 namespace StoryFlow.Repositories
 {
-    public class StoryRepository : IRepository<Story>
+    public class StoryRepository : IStoryRepository
     {
         private readonly MyDbContext _context;
 
@@ -30,29 +30,29 @@ namespace StoryFlow.Repositories
             return await _context.Stories.Include(s => s.Sentences).ToListAsync();
         }
 
-        public async Task<ICollection<Story>> Get(LanguageLevel? languageLevel, StoryCategory? category, StorySize? size)
+        public async Task<ICollection<Story>> Get(StoryFilter filter)
         {
             var query = _context.Stories.Include(s => s.Sentences).AsQueryable();
 
-            if (languageLevel.HasValue)
-                query = query.Where(x => x.LanguageLevel == languageLevel.Value);
+            if (filter.LanguageLevel.HasValue)
+                query = query.Where(x => x.LanguageLevel == filter.LanguageLevel.Value);
 
-            if (category.HasValue)
-                query = query.Where(x => x.StoryCategory == category.Value);
+            if (filter.Category.HasValue)
+                query = query.Where(x => x.StoryCategory == filter.Category.Value);
 
-            if (size.HasValue)
-                query = query.Where(x => x.StorySize == size.Value);
+            if (filter.Size.HasValue)
+                query = query.Where(x => x.StorySize == filter.Size.Value);
 
             return await query.ToListAsync();
         }
 
 
-        public void Remove(Story story)
+        public Task Remove(Story story)
         {
             throw new NotImplementedException();
         }
 
-        public void Update()
+        public Task Update()
         {
             throw new NotImplementedException();
         }
