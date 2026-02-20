@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StoryFlow_Database;
 using StoryFlow_Database.Entities;
+using StoryFlow_Shared.Enums;
 using StoryFlow_Shared.Interfaces;
 
 namespace StoryFlow.Repositories
@@ -28,6 +29,23 @@ namespace StoryFlow.Repositories
         {
             return await _context.Stories.Include(s => s.Sentences).ToListAsync();
         }
+
+        public async Task<ICollection<Story>> Get(LanguageLevel? languageLevel, StoryCategory? category, StorySize? size)
+        {
+            var query = _context.Stories.Include(s => s.Sentences).AsQueryable();
+
+            if (languageLevel.HasValue)
+                query = query.Where(x => x.LanguageLevel == languageLevel.Value);
+
+            if (category.HasValue)
+                query = query.Where(x => x.StoryCategory == category.Value);
+
+            if (size.HasValue)
+                query = query.Where(x => x.StorySize == size.Value);
+
+            return await query.ToListAsync();
+        }
+
 
         public void Remove(Story story)
         {

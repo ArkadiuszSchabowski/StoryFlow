@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Moq;
 using StoryFlow.Interfaces;
+using StoryFlow.Interfaces.Aggregates;
 using StoryFlow.Services;
 using StoryFlow_Database.Entities;
 using StoryFlow_Shared.Enums;

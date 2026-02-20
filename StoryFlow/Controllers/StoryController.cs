@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StoryFlow_Shared.Enums;
 using StoryFlow_Shared.Interfaces;
 using StoryFlow_Shared.Models;
 
@@ -21,10 +22,18 @@ namespace StoryFlow.Controllers
             return Ok(story);
         }
 
+
         [HttpGet]
         public async Task<ActionResult<List<GetStoryDto>>> GetAll()
         {
             var stories = await _service.GetAll();
+            return Ok(stories);
+        }
+        [HttpGet("filtered")]
+        public async Task<ActionResult<GetStoryDto>> Get(LanguageLevel? languageLevel, StoryCategory? category, StorySize? size)
+        {
+            var stories = await _service.Get(languageLevel, category, size);
+
             return Ok(stories);
         }
 

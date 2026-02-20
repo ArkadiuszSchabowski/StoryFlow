@@ -1,8 +1,9 @@
-﻿using StoryFlow_Shared.Models;
+﻿using StoryFlow.Interfaces;
+using StoryFlow_Shared.Models;
 
 namespace StoryFlow_Shared.Interfaces
 {
-    public interface IStoryService : IAdd<AddStoryDto>, IGet<GetStoryDto>, IRemove
+    public interface IStoryService : IAdd<AddStoryDto>, IGet<GetStoryDto>, IRemove, IGetFilteredStories
     {
 
     }

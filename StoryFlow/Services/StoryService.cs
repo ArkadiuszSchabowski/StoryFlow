@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using StoryFlow.Interfaces;
+using StoryFlow.Interfaces.Aggregates;
 using StoryFlow_Database.Entities;
+using StoryFlow_Shared.Enums;
 using StoryFlow_Shared.Interfaces;
 using StoryFlow_Shared.Models;
 
@@ -58,6 +60,16 @@ namespace StoryFlow.Services
         public async Task<ICollection<GetStoryDto>> GetAll()
         {
             var results = await _storyRepository.GetAll();
+
+            var stories = _mapper.Map<List<GetStoryDto>>(results);
+
+            return stories;
+        }
+
+        public async Task<List<GetStoryDto>> Get(LanguageLevel? languageLevel, StoryCategory? category, StorySize? size)
+        {
+            var results = await _storyRepository.Get(languageLevel, category, size);
+
             var stories = _mapper.Map<List<GetStoryDto>>(results);
 
             return stories;

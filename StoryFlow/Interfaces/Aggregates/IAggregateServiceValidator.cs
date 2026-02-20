@@ -2,7 +2,7 @@
 using StoryFlow_Shared.Interfaces;
 using StoryFlow_Shared.Models;
 
-namespace StoryFlow.Interfaces
+namespace StoryFlow.Interfaces.Aggregates
 {
     public interface IAggregateServiceValidator : IValidator<AddStoryDto>, IValidatorId, IEntityValidator<Story>
     {

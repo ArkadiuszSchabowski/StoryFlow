@@ -4,6 +4,7 @@ using StoryFlow.Aggregates;
 using StoryFlow.Builders;
 using StoryFlow.Helpers;
 using StoryFlow.Interfaces;
+using StoryFlow.Interfaces.Aggregates;
 using StoryFlow.Middleware;
 using StoryFlow.Repositories;
 using StoryFlow.Services;

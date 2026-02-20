@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace StoryFlow_Shared.Interfaces
+﻿namespace StoryFlow_Shared.Interfaces
 {
     public interface IGet<T> where T : class
     {
