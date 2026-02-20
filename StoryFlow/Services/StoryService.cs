@@ -43,9 +43,9 @@ namespace StoryFlow.Services
             await _storyRepository.Add(story);
         }
 
-        public async Task<ICollection<GetStoryDto>> Get(StoryFilter filter)
+        public async Task<ICollection<GetStoryDto>> Get(StoryFilter? filter)
         {
-            var results = await _storyRepository.Get(filter);
+            var results = await _storyRepository.Get(filter!);
 
             var stories = _mapper.Map<List<GetStoryDto>>(results);
 

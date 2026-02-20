@@ -30,9 +30,14 @@ namespace StoryFlow.Repositories
             return await _context.Stories.Include(s => s.Sentences).ToListAsync();
         }
 
-        public async Task<ICollection<Story>> Get(StoryFilter filter)
+        public async Task<ICollection<Story>> Get(StoryFilter? filter)
         {
             var query = _context.Stories.Include(s => s.Sentences).AsQueryable();
+
+            if(filter == null)
+            {
+                return await query.ToListAsync();
+            }
 
             if (filter.LanguageLevel.HasValue)
                 query = query.Where(x => x.LanguageLevel == filter.LanguageLevel.Value);
