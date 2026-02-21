@@ -14,7 +14,7 @@ namespace StoryFlow_Tests.UnitTests.Services
 {
     public class StoryServiceUnitTests
     {
-        private readonly Mock<IStoryRepository> _mockRepository;
+        private readonly Mock<IAggregateStoryRepository> _mockRepository;
         private readonly Mock<IAggregateServiceValidator> _mocServiceValidator;
         private readonly Mock<ISentenceBuilder> _mockSentenceBuilder;
         private readonly Mock<ITextConverter> _mockTextConverter;
@@ -42,7 +42,7 @@ namespace StoryFlow_Tests.UnitTests.Services
 
         public StoryServiceUnitTests()
         {
-            _mockRepository = new Mock<IStoryRepository>();
+            _mockRepository = new Mock<IAggregateStoryRepository>();
             _mocServiceValidator = new Mock<IAggregateServiceValidator>();
             _mockSentenceBuilder = new Mock<ISentenceBuilder>();
             _mockTextConverter = new Mock<ITextConverter>();

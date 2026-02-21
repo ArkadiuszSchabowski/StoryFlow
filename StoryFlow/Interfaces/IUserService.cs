@@ -1,0 +1,9 @@
+﻿using StoryFlow_Shared.Interfaces;
+using StoryFlow_Shared.Models;
+
+namespace StoryFlow.Interfaces
+{
+    public interface IUserService : IAdd<AddUserDto>, IGet<GetUserDto>, IRemove
+    {
+    }
+}

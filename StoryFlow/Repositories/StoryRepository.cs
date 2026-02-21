@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StoryFlow.Interfaces.Aggregates;
 using StoryFlow_Database;
 using StoryFlow_Database.Entities;
-using StoryFlow_Shared.Interfaces;
 
 namespace StoryFlow.Repositories
 {
-    public class StoryRepository : IStoryRepository
+    public class StoryRepository : IAggregateStoryRepository
     {
         private readonly MyDbContext _context;
 
