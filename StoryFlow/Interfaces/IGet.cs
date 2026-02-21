@@ -1,6 +1,4 @@
-﻿using StoryFlow_Shared.Models;
-
-namespace StoryFlow.Interfaces
+﻿namespace StoryFlow.Interfaces
 {
     public interface IGet<T> where T : class
     {

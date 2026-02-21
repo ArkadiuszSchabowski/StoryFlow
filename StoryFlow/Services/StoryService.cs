@@ -11,13 +11,13 @@ namespace StoryFlow.Services
     public class StoryService : IStoryService
     {
         private readonly IAggregateStoryRepository _storyRepository;
-        private readonly IAggregateServiceValidator _serviceValidator;
+        private readonly IAggregateStoryValidator _serviceValidator;
         private readonly ISentenceBuilder _sentenceBuilder;
         private readonly ITextConverter _textConverter;
         private readonly ITextCounter _textCounter;
         private readonly IMapper _mapper;
 
-        public StoryService(IAggregateStoryRepository storyRepository, IAggregateServiceValidator serviceValidator, ISentenceBuilder sentenceBuilder, ITextConverter textConverter, ITextCounter textCounter, IMapper mapper)
+        public StoryService(IAggregateStoryRepository storyRepository, IAggregateStoryValidator serviceValidator, ISentenceBuilder sentenceBuilder, ITextConverter textConverter, ITextCounter textCounter, IMapper mapper)
         {
             _storyRepository = storyRepository;
             _serviceValidator = serviceValidator;

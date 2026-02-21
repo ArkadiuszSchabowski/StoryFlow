@@ -1,33 +1,59 @@
-﻿using StoryFlow.Interfaces;
+﻿using AutoMapper;
+using StoryFlow.Interfaces;
+using StoryFlow.Interfaces.Aggregates;
 using StoryFlow_Shared.Models;
 
 namespace StoryFlow.Services
 {
     public class UserService : IUserService
     {
+        private readonly IAggregateUserValidator _userValidator;
+        private readonly IAggregateUserRepository _userRepository;
+        private readonly IMapper _mapper;
+
+
+        public UserService(IAggregateUserValidator userValidator, IAggregateUserRepository userRepository, IMapper mapper)
+        {
+            _userValidator = userValidator;
+            _userRepository = userRepository;
+            _mapper = mapper;
+        }
         public Task Add(AddUserDto item)
         {
             throw new NotImplementedException();
         }
 
-        public GetUserDto Get(int id)
+        public async Task<GetUserDto?> Get(int id)
         {
-            throw new NotImplementedException();
+            _userValidator.ValidateId(id);
+
+            var entity = await _userRepository.Get(id);
+
+            _userValidator.ThrowIsNull(entity);
+
+            var dto = _mapper.Map<GetUserDto>(entity);
+
+            return dto;
         }
 
-        public Task<ICollection<GetUserDto>> Get()
+        public async Task<ICollection<GetUserDto>> Get()
         {
-            throw new NotImplementedException();
+            var results = await _userRepository.Get();
+
+            var listDto = _mapper.Map<List<GetUserDto>>(results);
+
+            return listDto;
         }
 
-        public Task Remove(int id)
+        public async Task Remove(int id)
         {
-            throw new NotImplementedException();
-        }
+            _userValidator.ValidateId(id);
 
-        Task<GetUserDto?> IGet<GetUserDto>.Get(int id)
-        {
-            throw new NotImplementedException();
+            var entity = await _userRepository.Get(id);
+
+            _userValidator.ThrowIsNull(entity);
+
+            await _userRepository.Remove(entity!);
         }
     }
 }

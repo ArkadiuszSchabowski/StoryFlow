@@ -2,7 +2,7 @@
 
 namespace StoryFlow.Interfaces
 {
-    public interface IStoryRepository
+    public interface IGetStoryRepository
     {
         IQueryable<Story> Get();
     }

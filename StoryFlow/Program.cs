@@ -23,18 +23,25 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<MyDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("MyDbConnectionString")));
 
 
-builder.Services.AddScoped<IAggregateServiceValidator, AggregateServiceValidator>();
+builder.Services.AddScoped<IAggregateStoryValidator, AggregateStoryValidator>();
 builder.Services.AddScoped<IAggregateStoryRepository, AggregateStoryRepository>();
 builder.Services.AddScoped<IStoryService, StoryService>();
 builder.Services.AddScoped<IRepository<Story>, StoryRepository>();
-builder.Services.AddScoped<IStoryRepository, StoryRepository>();
+builder.Services.AddScoped<IGetStoryRepository, StoryRepository>();
 builder.Services.AddScoped<IAdd<AddStoryDto>, StoryService>();
 builder.Services.AddScoped<IGetStory, StoryService>();
-builder.Services.AddScoped<IRemove, StoryService>();
+
+builder.Services.AddScoped<IRemove, StoryService>(); //refactor
+
 builder.Services.AddScoped<IValidator<AddStoryDto>, StoryValidator>();
 builder.Services.AddScoped<IEntityValidator<Story>, StoryEntityValidator>();
 
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAggregateUserValidator, AggregateUserValidator>();
+builder.Services.AddScoped<IAggregateUserRepository, AggregateUserRepository>();
+builder.Services.AddScoped<IRepository<User>, UserRepository>();
+builder.Services.AddScoped<IEntityValidator<User>, UserEntityValidator>();
+builder.Services.AddScoped<IGetAllRepository<User>, UserRepository>();
 
 builder.Services.AddScoped<IValidatorId, ValidatorId>();
 builder.Services.AddScoped<ISentenceBuilder, SentenceBuilder>();

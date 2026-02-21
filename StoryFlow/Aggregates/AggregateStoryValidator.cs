@@ -6,13 +6,13 @@ using StoryFlow_Shared.Models;
 
 namespace StoryFlow.Aggregates
 {
-    public class AggregateServiceValidator : IAggregateServiceValidator
+    public class AggregateStoryValidator : IAggregateStoryValidator
     {
         private readonly IValidator<AddStoryDto> _storyValidator;
         private readonly IValidatorId _validatorId;
         private readonly IEntityValidator<Story> _entityValidator;
 
-        public AggregateServiceValidator(IValidator<AddStoryDto> storyValidator, IValidatorId validatorId, IEntityValidator<Story> entityValidator)
+        public AggregateStoryValidator(IValidator<AddStoryDto> storyValidator, IValidatorId validatorId, IEntityValidator<Story> entityValidator)
         {
             _storyValidator = storyValidator;
             _validatorId = validatorId;

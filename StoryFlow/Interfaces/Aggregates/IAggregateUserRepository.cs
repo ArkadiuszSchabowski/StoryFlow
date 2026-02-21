@@ -3,7 +3,8 @@ using StoryFlow_Shared.Interfaces;
 
 namespace StoryFlow.Interfaces.Aggregates
 {
-    public interface IAggregateStoryRepository : IRepository<Story>, IGetStoryRepository
+    public interface IAggregateUserRepository : IRepository<User>, IGetAllRepository<User>
     {
+
     }
 }
