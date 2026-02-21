@@ -52,9 +52,9 @@ namespace StoryFlow.Validators
                 throw new BadRequestException("English description must be between 10 and 100 characters long.");
             }
 
-            if (dto.EnglishStory.Length < 150 || dto.EnglishStory.Length > 1000)
+            if (dto.EnglishStory.Length < 400 || dto.EnglishStory.Length > 1500)
             {
-                throw new BadRequestException("English story must be between 150 and 1000 characters long.");
+                throw new BadRequestException("English story must be between 400 and 1500 characters long.");
             }
         }
         public void ValidateSentencesCount(int polishSentencesCount, int englishSentencesCount)

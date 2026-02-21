@@ -1,46 +1,33 @@
 <div id="container">
   <div id="filter-container">
     <div id="select-container">
-      <mat-form-field class="mat-form-field">
-        <mat-label>Category:</mat-label>
-        <mat-select [(value)]="selected">
-          <mat-option>-</mat-option>
-          <mat-option value="0">Animals</mat-option>
-          <mat-option value="1">Health</mat-option>
-          <mat-option value="2">Technology</mat-option>
-          <mat-option value="3">Sport</mat-option>
-          <mat-option value="4">Art</mat-option>
-          <mat-option value="5">History</mat-option>
-          <mat-option value="6">Music</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field class="mat-form-field">
-        <mat-label>Language level:</mat-label>
-        <mat-select [(value)]="selected">
-          <mat-option>-</mat-option>
-          <mat-option value="0">A1 - Begginer</mat-option>
-          <mat-option value="1">A2 - Elementary</mat-option>
-          <mat-option value="2">B1 - Intermediate</mat-option>
-          <mat-option value="3">B2 - Upper-Intermediate</mat-option>
-          <mat-option value="4">C1 - Advanced</mat-option>
-          <mat-option value="5">C2 - Proficiency</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field class="mat-form-field">
-        <mat-label>Story size:</mat-label>
-        <mat-select [(value)]="selected">
-          <mat-option>-</mat-option>
-          <mat-option value="0">Short</mat-option>
-          <mat-option value="1">Medium</mat-option>
-          <mat-option value="2">Long</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <form [formGroup]="form" (ngSubmit)="get()">
+        <mat-form-field class="mat-form-field">
+          <mat-label>Category:</mat-label>
+          <mat-select id="category" formControlName="category">
+            <mat-option *ngFor="let category of categories" [value]="category.value">{{category.viewValue}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="mat-form-field">
+          <mat-label>Language level:</mat-label>
+          <mat-select id="languageLevel" formControlName="languageLevel">
+            <mat-option *ngFor="let level of languageLevels" [value]="level.value">{{level.viewValue}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="mat-form-field">
+          <mat-label>Story size:</mat-label>
+          <mat-select id="size" formControlName="size">
+            <mat-option *ngFor="let size of sizes" [value]="size.value">{{size.viewValue}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button class="filter-button" type="submit">Search</button>
+      </form>
+      </div>
     </div>
-    <button mat-raised-button class="filter-button">Search</button>
-  </div>
-  <div>Select a story:</div>
+
+    <div>Select a story:</div>
   <div *ngFor="let story of stories" id="story-container">
-    <button mat-raised-button (click)="get(story.id)">
+    <button mat-raised-button (click)="getById(story.id)">
       <div><mat-icon>check</mat-icon></div>
     </button>
     {{ story.englishTitle }} - {{ story.languageLevel }} -

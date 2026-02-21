@@ -14,14 +14,14 @@ namespace StoryFlow_Tests.UnitTests.Helpers
 
         [Theory]
         [InlineData(0, null)]
-        [InlineData(149, null)]
-        [InlineData(150, StorySize.Short)]
-        [InlineData(299, StorySize.Short)]
-        [InlineData(300, StorySize.Medium)]
-        [InlineData(599, StorySize.Medium)]
-        [InlineData(600, StorySize.Long)]
+        [InlineData(399, null)]
+        [InlineData(400, StorySize.Short)]
+        [InlineData(699, StorySize.Short)]
+        [InlineData(700, StorySize.Medium)]
+        [InlineData(999, StorySize.Medium)]
         [InlineData(1000, StorySize.Long)]
-        [InlineData(1001, null)]
+        [InlineData(1500, StorySize.Long)]
+        [InlineData(1501, null)]
         public void SetTextSize_WhenCalled_ReturnsCorrectTextSize(int length, StorySize? expectedResult)
         {
             var text = new string('A', length);

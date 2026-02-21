@@ -18,10 +18,10 @@ namespace StoryFlow_Tests.UnitTests.Validators
         private readonly string _validPolishDescription = "Poprawny opis";
         private readonly string _validEnglishDescription = "Valid English Description";
 
-        private readonly string _validShortEnglishStory = new string('A', 150);
-        private readonly string _validLongEnglishStory = new string('A', 1000);
-        private readonly string _tooShortEnglishStory = new string('A', 149);
-        private readonly string _tooLongEnglishStory = new string('A', 1001);
+        private readonly string _validShortEnglishStory = new string('A', 400);
+        private readonly string _validLongEnglishStory = new string('A', 1500);
+        private readonly string _tooShortEnglishStory = new string('A', 399);
+        private readonly string _tooLongEnglishStory = new string('A', 1501);
 
         private readonly string _validTranslatedPolishStory = "Valid translated story";
 
@@ -266,7 +266,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("English story must be between 150 and 1000 characters long.");
+                .WithMessage("English story must be between 400 and 1500 characters long.");
         }
 
         [Fact]
@@ -286,7 +286,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("English story must be between 150 and 1000 characters long.");
+                .WithMessage("English story must be between 400 and 1500 characters long.");
         }
 
         [Fact]

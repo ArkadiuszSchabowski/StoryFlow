@@ -1,37 +1,83 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StoryService } from 'src/app/_services/story.service';
 import { TextService } from 'src/app/_services/text.service';
+import { StoryFilter } from 'src/app/models/story-filter-dto';
 
 @Component({
   selector: 'app-text-selection',
   templateUrl: './text-selection.component.html',
   styleUrls: ['./text-selection.component.scss'],
 })
-export class TextSelectionComponent {
-
+export class TextSelectionComponent implements OnInit {
   stories: any;
   selected = 'option2';
 
+  form: any = this.fb.group({
+    languageLevel: [],
+    category: [],
+    size: [],
+  });
+
+  categories = [
+    { value: null, viewValue: 'Category:' },
+    { value: '0', viewValue: 'Animals' },
+    { value: '1', viewValue: 'Health' },
+    { value: '2', viewValue: 'Technology' },
+    { value: '3', viewValue: 'Sport' },
+    { value: '4', viewValue: 'Art' },
+    { value: '5', viewValue: 'History' },
+    { value: '6', viewValue: 'Music' },
+  ];
+
+  languageLevels = [
+    { value: null, viewValue: 'Language level:' },
+    { value: '0', viewValue: 'A1 - Begginer' },
+    { value: '1', viewValue: 'A2 - Elementary' },
+    { value: '2', viewValue: 'B1 - Intermediate' },
+    { value: '3', viewValue: 'B2 - Upper-Intermediate' },
+    { value: '4', viewValue: 'C1 - Advanced' },
+    { value: '5', viewValue: 'C2 - Proficiency' },
+  ];
+
+  sizes = [
+    { value: null, viewValue: 'Story size:' },
+    { value: '0', viewValue: 'Short' },
+    { value: '1', viewValue: 'Medium' },
+    { value: '2', viewValue: 'Long' },
+  ];
+
+  dto: StoryFilter | null = null;
+
   constructor(
+    private fb: FormBuilder,
     private storyService: StoryService,
     private textService: TextService,
-    private router: Router
-  ) {
-    this.getAll();
+    private router: Router,
+  ) {}
+
+  ngOnInit(): void {
+    this.get();
   }
 
-  getAll() {
-    this.storyService.getAll().subscribe({
-      next: (response) => {
-        ((this.stories = response), console.log(this.stories));
-      },
+  get() {
+    this.dto = {
+      languageLevel: this.form.value.languageLevel,
+      category: this.form.value.category,
+      size: this.form.value.size,
+    };
 
+    this.storyService.getAll(this.dto).subscribe({
+      next: (response) => {
+        this.stories = response;
+        console.log(this.stories);
+      },
       error: (error) => console.log(error),
     });
   }
 
-  get(id: number) {
+  getById(id: number) {
     this.textService.storyIdSubject.next(id);
     this.router.navigateByUrl('text');
   }
