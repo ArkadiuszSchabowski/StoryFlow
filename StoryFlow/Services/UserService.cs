@@ -26,7 +26,7 @@ namespace StoryFlow.Services
         }
         public async Task Add(AddUserDto dto)
         {
-            _userValidator.Validate(dto);
+            _userValidator.ValidateDto(dto);
 
             User? existedUser = await _userRepository.GetByEmail(dto.Email);
 

@@ -20,9 +20,9 @@ namespace StoryFlow.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public Task<User?> Get(int id)
+        public async Task<User?> Get(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<ICollection<User>> Get()
@@ -30,14 +30,15 @@ namespace StoryFlow.Repositories
             return await _context.Users.ToListAsync();
         }
 
-        public Task<User?> GetByEmail(string email)
+        public async Task<User?> GetByEmail(string email)
         {
-            throw new NotImplementedException();
+            return await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
         }
 
-        public Task Remove(User entity)
+        public async Task Remove(User entity)
         {
-            throw new NotImplementedException();
+            _context.Users.Remove(entity);
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -34,8 +34,6 @@ builder.Services.AddScoped<IGetStoryRepository, StoryRepository>();
 builder.Services.AddScoped<IAdd<AddStoryDto>, StoryService>();
 builder.Services.AddScoped<IGetStory, StoryService>();
 
-builder.Services.AddScoped<IRemove, StoryService>(); //refactor
-
 builder.Services.AddScoped<IValidator<AddStoryDto>, StoryValidator>();
 builder.Services.AddScoped<IEntityValidator<Story>, StoryEntityValidator>();
 
