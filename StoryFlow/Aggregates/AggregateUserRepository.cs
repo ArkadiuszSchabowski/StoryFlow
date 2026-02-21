@@ -9,11 +9,13 @@ namespace StoryFlow.Aggregates
     {
         private readonly IRepository<User> _repository;
         private readonly IGetAllRepository<User> _getAllRepository;
+        private readonly IGetByEmailRepository _getByEmailRepository;
 
-        public AggregateUserRepository(IRepository<User> repository, IGetAllRepository<User> getAllRepository)
+        public AggregateUserRepository(IRepository<User> repository, IGetAllRepository<User> getAllRepository, IGetByEmailRepository getByEmailRepository)
         {
             _repository = repository;
             _getAllRepository = getAllRepository;
+            _getByEmailRepository = getByEmailRepository;
         }
         public async Task Add(User entity)
         {
@@ -28,6 +30,11 @@ namespace StoryFlow.Aggregates
         public async Task<ICollection<User>> Get()
         {
             return await _getAllRepository.Get();
+        }
+
+        public Task<User?> GetByEmail(string email)
+        {
+            return _getByEmailRepository.GetByEmail(email);
         }
 
         public async Task Remove(User entity)

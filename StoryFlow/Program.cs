@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
 using StoryFlow.Aggregates;
@@ -22,6 +23,7 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddDbContext<MyDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("MyDbConnectionString")));
 
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
 builder.Services.AddScoped<IAggregateStoryValidator, AggregateStoryValidator>();
 builder.Services.AddScoped<IAggregateStoryRepository, AggregateStoryRepository>();
@@ -42,6 +44,8 @@ builder.Services.AddScoped<IAggregateUserRepository, AggregateUserRepository>();
 builder.Services.AddScoped<IRepository<User>, UserRepository>();
 builder.Services.AddScoped<IEntityValidator<User>, UserEntityValidator>();
 builder.Services.AddScoped<IGetAllRepository<User>, UserRepository>();
+builder.Services.AddScoped<IGetByEmailRepository, UserRepository>();
+builder.Services.AddScoped<IUserValidator, UserValidator>();
 
 builder.Services.AddScoped<IValidatorId, ValidatorId>();
 builder.Services.AddScoped<ISentenceBuilder, SentenceBuilder>();

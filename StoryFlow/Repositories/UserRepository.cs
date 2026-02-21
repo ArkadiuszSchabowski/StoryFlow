@@ -6,7 +6,7 @@ using StoryFlow_Shared.Interfaces;
 
 namespace StoryFlow.Repositories
 {
-    public class UserRepository : IRepository<User>, IGetAllRepository<User>
+    public class UserRepository : IRepository<User>, IGetAllRepository<User>, IGetByEmailRepository
     {
         private readonly MyDbContext _context;
 
@@ -28,6 +28,11 @@ namespace StoryFlow.Repositories
         public async Task<ICollection<User>> Get()
         {
             return await _context.Users.ToListAsync();
+        }
+
+        public Task<User?> GetByEmail(string email)
+        {
+            throw new NotImplementedException();
         }
 
         public Task Remove(User entity)

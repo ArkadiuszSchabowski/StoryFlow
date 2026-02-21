@@ -2,7 +2,7 @@
 
 namespace StoryFlow.Interfaces.Aggregates
 {
-    public interface IAggregateUserValidator : IValidatorId, IEntityValidator<User>
+    public interface IAggregateUserValidator : IUserValidator, IValidatorId, IEntityValidator<User>
     {
     }
 }
