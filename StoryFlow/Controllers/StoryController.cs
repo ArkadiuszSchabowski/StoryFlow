@@ -16,9 +16,9 @@ namespace StoryFlow.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<GetStoryDto>> Get(StoryFilter? filter)
+        public async Task<ActionResult<GetStoryDto>> Get([FromQuery] StoryFilter? dto)
         {
-            var stories = await _service.Get(filter!);
+            var stories = await _service.Get(dto!);
 
             return Ok(stories);
         }
