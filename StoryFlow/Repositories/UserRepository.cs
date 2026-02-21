@@ -39,10 +39,5 @@ namespace StoryFlow.Repositories
         {
             throw new NotImplementedException();
         }
-
-        public Task Update()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

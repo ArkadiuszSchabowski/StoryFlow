@@ -30,14 +30,10 @@ namespace StoryFlow.Repositories
         }
 
 
-        public Task Remove(Story story)
+        public async Task Remove(Story story)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task Update()
-        {
-            throw new NotImplementedException();
+            _context.Stories.Remove(story);
+            await _context.SaveChangesAsync();
         }
     }
 }

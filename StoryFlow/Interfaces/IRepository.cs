@@ -5,6 +5,5 @@
         Task Add(T entity);
         Task<T?> Get(int id);
         Task Remove(T entity);
-        Task Update();
     }
 }

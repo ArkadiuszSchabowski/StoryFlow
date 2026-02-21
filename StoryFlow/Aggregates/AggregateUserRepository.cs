@@ -41,10 +41,5 @@ namespace StoryFlow.Aggregates
         {
             await _repository.Remove(entity);
         }
-
-        public async Task Update()
-        {
-            await _repository.Update();
-        }
     }
 }
