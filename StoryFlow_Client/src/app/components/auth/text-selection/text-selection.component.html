@@ -4,23 +4,22 @@
       <form [formGroup]="form" (ngSubmit)="get()">
         <mat-form-field class="mat-form-field">
           <mat-label>Category:</mat-label>
-          <mat-select id="category" formControlName="category">
+          <mat-select id="category" formControlName="category" (selectionChange)="get()">
             <mat-option *ngFor="let category of categories" [value]="category.value">{{category.viewValue}}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="mat-form-field">
           <mat-label>Language level:</mat-label>
-          <mat-select id="languageLevel" formControlName="languageLevel">
+          <mat-select id="languageLevel" formControlName="languageLevel" (selectionChange)="get()">
             <mat-option *ngFor="let level of languageLevels" [value]="level.value">{{level.viewValue}}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="mat-form-field">
           <mat-label>Story size:</mat-label>
-          <mat-select id="size" formControlName="size">
+          <mat-select id="size" formControlName="size" (selectionChange)="get()">
             <mat-option *ngFor="let size of sizes" [value]="size.value">{{size.viewValue}}</mat-option>
           </mat-select>
         </mat-form-field>
-        <button mat-raised-button class="filter-button" type="submit">Search</button>
       </form>
       </div>
     </div>
