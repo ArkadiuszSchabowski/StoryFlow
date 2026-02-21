@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
 using StoryFlow.Aggregates;
 using StoryFlow.Builders;
 using StoryFlow.Helpers;
 using StoryFlow.Interfaces;
+using StoryFlow.Interfaces.Aggregates;
 using StoryFlow.Middleware;
 using StoryFlow.Repositories;
 using StoryFlow.Services;
@@ -18,22 +20,37 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseNLog();
 
 builder.Services.AddControllers();
-builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<MyDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("MyDbConnectionString")));
 
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+
+builder.Services.AddScoped<IAggregateStoryValidator, AggregateStoryValidator>();
+builder.Services.AddScoped<IAggregateStoryRepository, AggregateStoryRepository>();
 builder.Services.AddScoped<IStoryService, StoryService>();
-builder.Services.AddScoped<ISentenceService, SentenceService>();
-builder.Services.AddScoped<IAdd<AddStoryDto>, StoryService>();
-builder.Services.AddScoped<IGet<GetStoryDto>, StoryService>();
-builder.Services.AddScoped<IRemove, StoryService>();
 builder.Services.AddScoped<IRepository<Story>, StoryRepository>();
+builder.Services.AddScoped<IGetStoryRepository, StoryRepository>();
+builder.Services.AddScoped<IAdd<AddStoryDto>, StoryService>();
+builder.Services.AddScoped<IGetStory, StoryService>();
+
+builder.Services.AddScoped<IValidator<AddStoryDto>, StoryValidator>();
+builder.Services.AddScoped<IEntityValidator<Story>, StoryEntityValidator>();
+
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAggregateUserValidator, AggregateUserValidator>();
+builder.Services.AddScoped<IAggregateUserRepository, AggregateUserRepository>();
+builder.Services.AddScoped<IRepository<User>, UserRepository>();
+builder.Services.AddScoped<IEntityValidator<User>, UserEntityValidator>();
+builder.Services.AddScoped<IGetAllRepository<User>, UserRepository>();
+builder.Services.AddScoped<IGetByEmailRepository, UserRepository>();
+builder.Services.AddScoped<IUserValidator, UserValidator>();
+
+builder.Services.AddScoped<IValidatorId, ValidatorId>();
+builder.Services.AddScoped<ISentenceBuilder, SentenceBuilder>();
 builder.Services.AddScoped<ITextConverter, TextConverter>();
 builder.Services.AddScoped<ITextCounter, TextCounter>();
-builder.Services.AddScoped<IAggregateServiceValidator, AggregateServiceValidator>();
-builder.Services.AddScoped<IValidator<AddStoryDto>, StoryValidator>();
-builder.Services.AddScoped<IValidatorId, ValidatorId>();
-builder.Services.AddScoped<IEntityValidator<Story>, StoryEntityValidator>();
-builder.Services.AddScoped<ISentenceBuilder, SentenceBuilder>();
+
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddCors(options =>
@@ -53,7 +70,12 @@ app.UseCors("StoryFlowPolicy");
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "StoryFlow API V1");
+        c.RoutePrefix = string.Empty; // <-- dziêki temu Swagger bêdzie na /
+    });
 }
 
 app.UseHttpsRedirection();

@@ -7,17 +7,17 @@ namespace StoryFlow.Helpers
     {
         public StorySize? SetTextSize(string text)
         {            
-            if(text.Length >= 150 && text.Length < 300)
+            if(text.Length >= 400 && text.Length < 700)
             {
                 return StorySize.Short;
             }
 
-            if (text.Length >= 300 && text.Length < 600)
+            if (text.Length >= 700 && text.Length < 1000)
             {
                 return StorySize.Medium;
             }
 
-            if (text.Length >= 600 && text.Length <= 1000)
+            if (text.Length >= 1000 && text.Length <= 1500)
             {
                 return StorySize.Long;
             }

@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StoryFlow.Interfaces.Aggregates;
 using StoryFlow_Database;
 using StoryFlow_Database.Entities;
-using StoryFlow_Shared.Interfaces;
 
 namespace StoryFlow.Repositories
 {
-    public class StoryRepository : IRepository<Story>
+    public class StoryRepository : IAggregateStoryRepository
     {
         private readonly MyDbContext _context;
 
@@ -24,19 +24,16 @@ namespace StoryFlow.Repositories
             return await _context.Stories.Include(s => s.Sentences).FirstOrDefaultAsync(s => s.Id == id);
         }
 
-        public async Task<ICollection<Story>> GetAll()
+        public IQueryable<Story> Get()
         {
-            return await _context.Stories.Include(s => s.Sentences).ToListAsync();
+            return _context.Stories.Include(s => s.Sentences).AsQueryable();
         }
 
-        public void Remove(Story story)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void Update()
+        public async Task Remove(Story story)
         {
-            throw new NotImplementedException();
+            _context.Stories.Remove(story);
+            await _context.SaveChangesAsync();
         }
     }
 }

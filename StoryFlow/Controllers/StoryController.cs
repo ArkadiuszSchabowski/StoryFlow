@@ -14,6 +14,15 @@ namespace StoryFlow.Controllers
         {
             _service = service;
         }
+
+        [HttpGet]
+        public async Task<ActionResult<GetStoryDto>> Get([FromQuery] StoryFilter? dto)
+        {
+            var stories = await _service.Get(dto!);
+
+            return Ok(stories);
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<GetStoryDto>> Get(int id) 
         {
@@ -21,12 +30,6 @@ namespace StoryFlow.Controllers
             return Ok(story);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<GetStoryDto>>> GetAll()
-        {
-            var stories = await _service.GetAll();
-            return Ok(stories);
-        }
 
         [HttpPost]
         public async Task<ActionResult> Add(AddStoryDto dto)

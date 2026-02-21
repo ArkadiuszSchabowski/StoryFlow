@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { map } from 'rxjs';
 import { GetStoryViewDto } from '../models/get-story-view-dto';
 import { GetSentenceViewDto } from '../models/get-sentence-view-dto';
+import { StoryFilter } from '../models/story-filter-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,16 @@ export class StoryService {
   apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
+
+getAll(dto: StoryFilter | null) {
+  let params = new HttpParams();
+
+  if (dto?.languageLevel) params = params.set('languageLevel', dto.languageLevel);
+  if (dto?.category) params = params.set('category', dto.category);
+  if (dto?.size) params = params.set('size', dto.size);
+
+  return this.http.get(this.apiUrl + 'story', { params });
+}
 
   get(id: number) {
     return this.http.get<GetStoryViewDto>(this.apiUrl + `story/${id}`).pipe(

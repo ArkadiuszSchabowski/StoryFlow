@@ -11,7 +11,6 @@ namespace StoryFlow_Shared.Models
         public string? PolishDescription { get; set; }
         public string? EnglishDescription { get; set; }
         public StoryCategory? StoryCategory { get; set; }
-        public StorySize? StorySize { get; set; }
         public LanguageLevel? LanguageLevel { get; set; }
     }
 }

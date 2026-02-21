@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Moq;
 using StoryFlow.Interfaces;
+using StoryFlow.Interfaces.Aggregates;
 using StoryFlow.Services;
 using StoryFlow_Database.Entities;
 using StoryFlow_Shared.Enums;
@@ -12,8 +13,8 @@ namespace StoryFlow_Tests.UnitTests.Services
 {
     public class StoryServiceUnitTests
     {
-        private readonly Mock<IRepository<Story>> _mockRepository;
-        private readonly Mock<IAggregateServiceValidator> _mocServiceValidator;
+        private readonly Mock<IAggregateStoryRepository> _mockRepository;
+        private readonly Mock<IAggregateStoryValidator> _mocServiceValidator;
         private readonly Mock<ISentenceBuilder> _mockSentenceBuilder;
         private readonly Mock<ITextConverter> _mockTextConverter;
         private readonly Mock<ITextCounter> _mockTextCounter;
@@ -40,8 +41,8 @@ namespace StoryFlow_Tests.UnitTests.Services
 
         public StoryServiceUnitTests()
         {
-            _mockRepository = new Mock<IRepository<Story>>();
-            _mocServiceValidator = new Mock<IAggregateServiceValidator>();
+            _mockRepository = new Mock<IAggregateStoryRepository>();
+            _mocServiceValidator = new Mock<IAggregateStoryValidator>();
             _mockSentenceBuilder = new Mock<ISentenceBuilder>();
             _mockTextConverter = new Mock<ITextConverter>();
             _mockTextCounter = new Mock<ITextCounter>();
@@ -81,20 +82,6 @@ namespace StoryFlow_Tests.UnitTests.Services
             _mockRepository.Verify(x => x.Add(story), Times.Once);
         }
 
-        [Fact]
-        public async Task GetAll_WithoutResults_ReturnsEmptyList()
-        {
-            var results = new List<Story>();
-            var resultsDto = new List<GetStoryDto>();
-
-            _mockRepository.Setup(x => x.GetAll()).ReturnsAsync(results);
-
-            _mockMapper.Setup(x => x.Map<List<GetStoryDto>>(results)).Returns(resultsDto);
-
-            var result = await _storyService.GetAll();
-
-            result.Should().BeEquivalentTo(resultsDto);
-        }
         [Fact]
         public async Task Get_WithCorrectId_ReturnsTypeOfGetStoryDto()
         {

@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using StoryFlow.Interfaces;
+using StoryFlow.Interfaces.Aggregates;
 using StoryFlow_Database.Entities;
 using StoryFlow_Shared.Interfaces;
 using StoryFlow_Shared.Models;
@@ -8,14 +10,14 @@ namespace StoryFlow.Services
 {
     public class StoryService : IStoryService
     {
-        private readonly IRepository<Story> _storyRepository;
-        private readonly IAggregateServiceValidator _serviceValidator;
+        private readonly IAggregateStoryRepository _storyRepository;
+        private readonly IAggregateStoryValidator _serviceValidator;
         private readonly ISentenceBuilder _sentenceBuilder;
         private readonly ITextConverter _textConverter;
         private readonly ITextCounter _textCounter;
         private readonly IMapper _mapper;
 
-        public StoryService(IRepository<Story> storyRepository, IAggregateServiceValidator serviceValidator, ISentenceBuilder sentenceBuilder, ITextConverter textConverter, ITextCounter textCounter, IMapper mapper)
+        public StoryService(IAggregateStoryRepository storyRepository, IAggregateStoryValidator serviceValidator, ISentenceBuilder sentenceBuilder, ITextConverter textConverter, ITextCounter textCounter, IMapper mapper)
         {
             _storyRepository = storyRepository;
             _serviceValidator = serviceValidator;
@@ -42,10 +44,33 @@ namespace StoryFlow.Services
             await _storyRepository.Add(story);
         }
 
+        public async Task<ICollection<GetStoryDto>> Get(StoryFilter? filter)
+        {
+            var query = _storyRepository.Get();
+
+            if (filter != null)
+            {
+                if (filter.LanguageLevel.HasValue)
+                    query = query.Where(x => x.LanguageLevel == filter.LanguageLevel.Value);
+
+                if (filter.Category.HasValue)
+                    query = query.Where(x => x.StoryCategory == filter.Category.Value);
+
+                if (filter.Size.HasValue)
+                    query = query.Where(x => x.StorySize == filter.Size.Value);
+            }
+
+            var results = await query.ToListAsync();
+
+            var stories = _mapper.Map<List<GetStoryDto>>(results);
+
+            return stories;
+        }
+
         public async Task<GetStoryDto> Get(int id)
         {
             _serviceValidator.ValidateId(id);
-            
+
             var result = await _storyRepository.Get(id);
 
             _serviceValidator.ThrowIsNull(result);
@@ -53,14 +78,6 @@ namespace StoryFlow.Services
             var storyDto = _mapper.Map<GetStoryDto>(result);
 
             return storyDto;
-        }
-
-        public async Task<ICollection<GetStoryDto>> GetAll()
-        {
-            var results = await _storyRepository.GetAll();
-            var stories = _mapper.Map<List<GetStoryDto>>(results);
-
-            return stories;
         }
 
         public async Task Remove(int id)
@@ -71,7 +88,7 @@ namespace StoryFlow.Services
 
             _serviceValidator.ThrowIsNull(result);
 
-            _storyRepository.Remove(result!);
+            await _storyRepository.Remove(result!);
         }
     }
 }

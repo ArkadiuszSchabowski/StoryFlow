@@ -2,7 +2,7 @@
 
 namespace StoryFlow_Shared.Interfaces
 {
-    public interface IStoryService : IAdd<AddStoryDto>, IGet<GetStoryDto>, IRemove
+    public interface IStoryService : IAdd<AddStoryDto>, IGetStory, IRemove
     {
 
     }

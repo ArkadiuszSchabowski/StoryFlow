@@ -3,7 +3,7 @@ using StoryFlow_Shared.Models;
 
 namespace StoryFlow.Interfaces
 {
-    public interface ISentenceService : IAdd<AddSentenceDto>, IGet<GetSentenceDto>, IRemove
+    public interface IUserService : IAdd<AddUserDto>, IGet<GetUserDto>, IRemove
     {
     }
 }
