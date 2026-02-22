@@ -8,7 +8,4 @@ import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  constructor(private storyService: StoryService) {
-
-  }
 }
