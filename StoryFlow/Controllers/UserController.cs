@@ -38,6 +38,13 @@ namespace StoryFlow.Controllers
             return Ok();
         }
 
+        [HttpPost("login")]
+        public async Task<ActionResult<TokenDto>> Login([FromBody] LoginDto dto)
+        {
+            var token = await _service.Login(dto);
+            return Ok(token);
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> Remove(int id)
         {
