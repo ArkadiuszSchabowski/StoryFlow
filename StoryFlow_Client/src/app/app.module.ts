@@ -18,6 +18,9 @@ import {MatMenuModule} from '@angular/material/menu';
 import { TextDisplayComponent } from './components/auth/text-display/text-display.component';
 import {MatSelectModule} from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatCardModule} from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatToolbarModule,
     MatMenuModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

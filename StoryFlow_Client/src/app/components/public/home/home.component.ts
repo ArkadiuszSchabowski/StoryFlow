@@ -8,28 +8,4 @@ import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  story: GetStoryViewDto = new GetStoryViewDto();
-
-  constructor(private storyService: StoryService) {
-    this.get(1);
-  }
-
-  get(id: number) {
-    this.storyService.get(id).subscribe({
-      next: (response) => {
-        this.story = response;
-      },
-      error: (error) => console.log(error),
-    });
-  }
-
-  changeDescriptionLanguage(story: GetStoryViewDto) {
-    story.isDescriptionEnglish = !story.isDescriptionEnglish;
-  }
-  changeSentenceLanguage(sentence: GetSentenceViewDto) {
-    sentence.isSentenceEnglish = !sentence.isSentenceEnglish;
-  }
-  changeTitleLanguage(story: GetStoryViewDto) {
-    story.isTitleEnglish = !story.isTitleEnglish;
-  }
 }

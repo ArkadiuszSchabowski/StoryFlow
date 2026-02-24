@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using NLog.Web;
+using StoryFlow;
 using StoryFlow.Aggregates;
 using StoryFlow.Builders;
 using StoryFlow.Helpers;
@@ -14,6 +16,7 @@ using StoryFlow_Database;
 using StoryFlow_Database.Entities;
 using StoryFlow_Shared.Interfaces;
 using StoryFlow_Shared.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,6 +66,27 @@ builder.Services.AddCors(options =>
     });
 });
 
+var authenticationSettings = new AuthenticationSettings();
+
+builder.Services.AddSingleton(authenticationSettings);
+builder.Configuration.GetSection("Authentication").Bind(authenticationSettings);
+builder.Services.AddAuthentication(option =>
+{
+    option.DefaultAuthenticateScheme = "Bearer";
+    option.DefaultScheme = "Bearer";
+    option.DefaultChallengeScheme = "Bearer";
+}).AddJwtBearer(cfg =>
+{
+    cfg.RequireHttpsMetadata = false;
+    cfg.SaveToken = true;
+    cfg.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidIssuer = authenticationSettings.JwtIssuer,
+        ValidAudience = authenticationSettings.JwtIssuer,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey)),
+    };
+});
+
 var app = builder.Build();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
@@ -74,7 +98,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "StoryFlow API V1");
-        c.RoutePrefix = string.Empty; // <-- dziêki temu Swagger bêdzie na /
+        c.RoutePrefix = string.Empty;
     });
 }
 

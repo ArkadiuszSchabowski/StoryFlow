@@ -5,5 +5,6 @@ namespace StoryFlow.Interfaces
 {
     public interface IUserService : IAdd<AddUserDto>, IGet<GetUserDto>, IRemove
     {
+        Task<TokenDto> Login(LoginDto dto);
     }
 }
