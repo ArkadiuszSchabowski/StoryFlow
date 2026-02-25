@@ -1,15 +1,9 @@
+@use "@angular/material" as mat;
+@use "src/styles" as theme;
+
 #container {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: calc(100% - 64px);
-}
-
-#form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 #filter-container {
@@ -17,27 +11,43 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: auto;
-  padding: 10px 0;
-  border-top: 2px solid white;
-  background-color: orangered;
-}
-.story-item{
-  padding: 10px 0;
+  width: 100%;
+  padding-top: 20px;
+  background-color: mat.get-color-from-palette(theme.$primary);
 }
 
-.mat-form-field {
-  padding: 0 10px;
+#story-container {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  padding: 0 20px;
+}
+.story-item {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding-bottom: 10px;
+}
+
+.story-button {
+  margin-right: 10px;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
-  #form {
+  #filter-container {
     flex-direction: row;
+  }
+  .filter-field{
+    padding: 0 20px;
   }
 }
 
 @media screen and (min-width: 1200px) {
-  #form {
+  #filter-container {
     flex-direction: row;
+  }
+    .filter-field{
+    padding: 0 20px;
   }
 }

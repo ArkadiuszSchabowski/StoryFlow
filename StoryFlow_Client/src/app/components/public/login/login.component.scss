@@ -1,9 +1,20 @@
-#container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: calc(100% - 64px);
-    border-top: 2px solid white;
-    background-color: orangered;
+mat-card.login-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(90vw - 20px);
+  height: 100%;
+  padding: 80px 30px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  mat-card.login-card {
+    width: calc(60vw - 20px);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  mat-card.login-card {
+    width: calc(40vw - 20px);
+  }
 }

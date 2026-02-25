@@ -1,9 +1,9 @@
-<div id="container">
+<div id="container" class="container">
   <form [formGroup]="form" (ngSubmit)="login()">
-    <mat-card>
+    <mat-card class="login-card">
       <mat-card-content>
         <mat-card-title class="title">Login</mat-card-title>
-        <mat-form-field>
+        <mat-form-field class="card-input">
           <mat-label>E-mail</mat-label>
           <input class="input" matInput name="email" formControlName="email" />
           <mat-error
@@ -18,7 +18,7 @@
             Please enter a valid email address.
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="mt-5">
+        <mat-form-field class="mt-5 card-input">
           <mat-label>Password</mat-label>
           <input
             class="input"
@@ -45,7 +45,7 @@
           </mat-error>
         </mat-form-field>
         <div id="submit-button-container">
-          <button mat-raised-button type="submit" class="mt-5">Login</button>
+          <button mat-raised-button color="primary" type="submit" class="mt-5">Login</button>
         </div>
       </mat-card-content>
     </mat-card>

@@ -18,15 +18,9 @@ $StoryFlow_Client-theme: mat.define-light-theme(
 
 @include mat.all-component-themes($StoryFlow_Client-theme);
 
-button.password-button{
-  margin-right: 10px;
-}
-mat-card{
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  width: 100vw !important;
-  height: 100% !important;
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
 }
 
 mat-card-content {
@@ -38,7 +32,7 @@ mat-card-content {
   background-color: white !important;
 }
 
-mat-form-field {
+mat-form-field.card-input {
   display: flex;
   width: 300px;
 }
@@ -50,7 +44,6 @@ mat-card-title.title {
   padding: 10px 0;
   color: black;
 }
-
 
 html,
 body {
@@ -69,8 +62,11 @@ button {
   justify-content: center;
   align-items: center;
 }
-.container {
-  padding: 20px;
+
+.password-button {
+  margin-right: 10px;
+  background-color: mat.get-color-from-palette($primary);
+  color: white;
 }
 
 .row-container {
@@ -82,6 +78,28 @@ button {
   align-items: center;
 }
 
-.mt-5{
+.mt-5 {
   margin-top: 5px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100% - 56px);
+  background-color: mat.get-color-from-palette($primary);
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .container {
+    height: calc(100% - 64px);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .container {
+    height: calc(100% - 64px);
+  }
 }

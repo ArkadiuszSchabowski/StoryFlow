@@ -1,9 +1,13 @@
+@use "@angular/material" as mat;
+@use "src/styles" as theme;
+
 #container {
   display: grid;
   grid-template-columns: 1fr 1fr 2fr 1fr;
   justify-content: center;
   align-items: center;
-  background-color: orangered;
+  background-color: mat.get-color-from-palette(theme.$primary) !important;
+  border-bottom: 2px solid white;
 }
 
 .navbar-desktop-button {
@@ -45,7 +49,7 @@
   #desktop-navbar-logo {
     display: flex;
     width: 200px;
-    height: 70px;
+    height: 50px;
     background-size: contain;
     background-image: url(../../../../assets/shared/logo.png);
     background-position: center;
@@ -80,7 +84,7 @@
   #desktop-navbar-logo {
     display: flex;
     width: 200px;
-    height: 70px;
+    height: 50px;
     background-size: contain;
     background-image: url(../../../../assets/shared/logo.png);
     background-position: center;

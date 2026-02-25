@@ -5,7 +5,7 @@
   </p>
   <div id="title-container" class="row-container">
     <div>
-      <button mat-raised-button (click)="changeTitleLanguage(story)">
+      <button mat-raised-button color="primary" (click)="changeTitleLanguage(story)">
         <div><mat-icon>repeat</mat-icon></div>
       </button>
     </div>
@@ -13,7 +13,7 @@
   </div>
   <div id="description-container" class="row-container">
     <div>
-      <button mat-raised-button (click)="changeDescriptionLanguage(story)">
+      <button mat-raised-button color="primary" (click)="changeDescriptionLanguage(story)">
         <div><mat-icon>repeat</mat-icon></div>
       </button>
     </div>
@@ -22,7 +22,7 @@
   <div id="sentence-container">
     <div *ngFor="let sentence of story.sentences" class="row-container align">
       <div>
-        <button mat-raised-button (click)="changeSentenceLanguage(sentence)">
+        <button mat-raised-button color="primary" (click)="changeSentenceLanguage(sentence)">
           <div><mat-icon>repeat</mat-icon></div>
         </button>
       </div>
