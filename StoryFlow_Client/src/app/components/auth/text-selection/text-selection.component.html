@@ -1,6 +1,6 @@
-<div id="container">
+<div id="text-selection-container">
   <div>
-    <form id="filter-container" [formGroup]="form" (ngSubmit)="get()">
+    <form id="filter-container" color="accent" [formGroup]="form" (ngSubmit)="get()">
       <mat-form-field class="filter-field">
         <mat-label>Category:</mat-label>
         <mat-select
@@ -41,12 +41,12 @@
   </div>
 
   <div id="story-container">
-    <h1>Select a story:</h1>
+    <div id="title-selector" class="title">Select a story:</div>
     <div *ngFor="let story of stories" class="story-item">
       <button
         mat-raised-button
         class="story-button"
-        color="primary"
+        color="accent"
         (click)="getById(story.id)"
       >
         <div><mat-icon>check</mat-icon></div>

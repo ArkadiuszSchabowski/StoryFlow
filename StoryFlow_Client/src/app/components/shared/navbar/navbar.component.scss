@@ -1,26 +1,35 @@
 @use "@angular/material" as mat;
 @use "src/styles" as theme;
 
-#container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 2fr 1fr;
+#toolbar-container {
+  display: flex;
   justify-content: center;
   align-items: center;
-  background-color: mat.get-color-from-palette(theme.$primary) !important;
+  color: white;
+  background-color: mat.get-color-from-palette(theme.$accent) !important;
   border-bottom: 2px solid white;
 }
 
-.navbar-desktop-button {
-  font-weight: bold;
-}
-
 #desktop-navbar,
-#desktop-navbar-logo,
-.desktop-space-menu-logo {
+#desktop-navbar-logo {
   display: none;
 }
 
-#mobile-navbar-logo {
+#desktop-navbar {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+}
+
+.navbar-desktop-button {
+  display: flex;
+  height: 62px !important;
+  font-weight: bold;
+}
+
+.logo {
   display: flex;
   width: 200px;
   height: 50px;
@@ -28,69 +37,35 @@
   background-image: url(../../../../assets/shared/logo.png);
   background-position: center;
   background-repeat: no-repeat;
-  padding-top: 15px;
+  padding: 0 30px;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
-  #container {
-    display: grid;
-    grid-template-columns: 2fr 1fr 3fr;
-    padding-right: 60px;
-  }
   #mobile-menu-button,
   #mobile-navbar-logo {
     display: none;
   }
-  #desktop-navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  #desktop-navbar,
   #desktop-navbar-logo {
     display: flex;
-    width: 200px;
-    height: 50px;
-    background-size: contain;
-    background-image: url(../../../../assets/shared/logo.png);
-    background-position: center;
-    background-repeat: no-repeat;
   }
-  .desktop-space-menu-logo {
-    display: flex;
-  }
-  .mobile-space-menu-logo {
-    display: none;
+  .navbar-desktop-button {
+    width: 105px;
+    font-size: 13px;
   }
 }
 
 @media screen and (min-width: 1200px) {
-  #container {
-    display: grid;
-    grid-template-columns: 4fr 1fr 8fr;
-    padding-right: 100px;
-  }
   #mobile-menu-button,
   #mobile-navbar-logo {
     display: none;
   }
-  #desktop-navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .desktop-space-menu-logo {
-    display: flex;
-  }
+  #desktop-navbar,
   #desktop-navbar-logo {
     display: flex;
-    width: 200px;
-    height: 50px;
-    background-size: contain;
-    background-image: url(../../../../assets/shared/logo.png);
-    background-position: center;
-    background-repeat: no-repeat;
   }
-  .mobile-space-menu-logo {
-    display: none;
+  .navbar-desktop-button {
+    width: 200px;
+    font-size: 15px;
   }
 }

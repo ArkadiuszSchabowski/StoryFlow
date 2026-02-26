@@ -1,28 +1,44 @@
-<div id="container" *ngIf="story">
-  <p>
-    Category: {{ story.storyCategory }}, Size: {{ story.storySize }}, Level:
-    {{ story.languageLevel }}
-  </p>
-  <div id="title-container" class="row-container">
+<div class="container" id="text-display-container">
+  <div id="story-information">Category: {{ story.storyCategory }}, Size: {{ story.storySize }}, Level:{{ story.languageLevel }}
+  </div>
+
+  <div id="title-container">
     <div>
-      <button mat-raised-button color="primary" (click)="changeTitleLanguage(story)">
+      <button
+        mat-raised-button
+        color="accent"
+        class="action-button"
+        (click)="changeTitleLanguage(story)"
+      >
         <div><mat-icon>repeat</mat-icon></div>
       </button>
     </div>
     <h2>{{ story.visibleTitleMeaning }}</h2>
   </div>
-  <div id="description-container" class="row-container">
+
+  <div id="description-container">
     <div>
-      <button mat-raised-button color="primary" (click)="changeDescriptionLanguage(story)">
+      <button
+        mat-raised-button
+        color="accent"
+        class="action-button"
+        (click)="changeDescriptionLanguage(story)"
+      >
         <div><mat-icon>repeat</mat-icon></div>
       </button>
     </div>
     <h3>{{ story.visibleDescriptionMeaning }}</h3>
   </div>
+
   <div id="sentence-container">
-    <div *ngFor="let sentence of story.sentences" class="row-container align">
+    <div class="sentence-item" *ngFor="let sentence of story.sentences">
       <div>
-        <button mat-raised-button color="primary" (click)="changeSentenceLanguage(sentence)">
+        <button
+          mat-raised-button
+          color="accent"
+          class="action-button"
+          (click)="changeSentenceLanguage(sentence)"
+        >
           <div><mat-icon>repeat</mat-icon></div>
         </button>
       </div>

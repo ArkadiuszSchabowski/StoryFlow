@@ -1,33 +1,33 @@
 @use "@angular/material" as mat;
 @use "src/styles" as theme;
 
-#container {
-  display: flex;
-  flex-direction: column;
-}
-
 #filter-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
   padding-top: 20px;
-  background-color: mat.get-color-from-palette(theme.$primary);
+  background-color: mat.get-color-from-palette(theme.$accent);
 }
 
 #story-container {
   display: flex;
   flex-direction: column;
-  width: auto;
-  height: auto;
-  padding: 0 20px;
+  width: 100%;
+  height: 100%;
+  background-color: mat.get-color-from-palette(theme.$primary) !important;
+  padding: 10px;
+}
+
+#title-selector {
+  color: white;
 }
 .story-item {
   display: flex;
   align-items: center;
   flex-direction: row;
   padding-bottom: 10px;
+  color: white;
 }
 
 .story-button {
@@ -38,7 +38,7 @@
   #filter-container {
     flex-direction: row;
   }
-  .filter-field{
+  .filter-field {
     padding: 0 20px;
   }
 }
@@ -47,7 +47,7 @@
   #filter-container {
     flex-direction: row;
   }
-    .filter-field{
+  .filter-field {
     padding: 0 20px;
   }
 }

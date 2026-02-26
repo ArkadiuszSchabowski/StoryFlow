@@ -1,20 +1,44 @@
-#container {
+#text-display-container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px;
-}
-button {
-  font-size: 20px;
-  margin: 10px;
+  height: auto;
+  padding: 50px;
 }
 
 #title-container,
 #description-container,
-#sentence-container {
+.sentence-item {
   align-items: center;
+  color: white;
+}
+
+#title-container,
+#description-container,
+.sentence-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.sentence-item {
+  padding: 10px;
+}
+
+#title-container,
+#description-container {
+  padding-bottom: 15px;
+}
+
+#story-information {
+  padding-bottom: 10px;
+}
+
+#story-information {
+  color: white;
 }
 
 #sentence-container {
-  padding-top: 20px;
+  padding-top: 10px;
+}
+
+.action-button {
+  margin-right: 10px;
 }
