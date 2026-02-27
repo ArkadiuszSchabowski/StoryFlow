@@ -1,7 +1,7 @@
 <div id="container" class="container">
-  <form [formGroup]="form" (ngSubmit)="login()">
+  <form [formGroup]="form" (ngSubmit)="login()" autocomplete="off">
     <mat-card class="login-card">
-      <mat-card-title id="card-title">Ready to continue? Sign in</mat-card-title>
+      <mat-card-title id="card-title">Ready to continue? Sign in.</mat-card-title>
       <mat-card-content>
         <mat-form-field class="card-input">
           <mat-label>E-mail</mat-label>
@@ -23,20 +23,20 @@
           <input
             class="input"
             matInput
-            [type]="hide() ? 'password' : 'text'"
+            [type]="hidePassword() ? 'password' : 'text'"
             name="password"
             formControlName="password"
           />
           <button
             type="button"
             class="password-button"
-            matIconButton
+            mat-icon-button
             matSuffix
             (click)="changePasswordVisibility($event)"
             [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide()"
+            [attr.aria-pressed]="hidePassword()"
           >
-            <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+            <mat-icon>{{ hidePassword() ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
           <mat-error
             *ngIf="form.get('password')?.hasError('required') && form.get('password')?.touched"

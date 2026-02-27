@@ -7,7 +7,7 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  hide = signal(true);
+  hidePassword = signal(true);
   form: any = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
@@ -15,7 +15,7 @@ export class LoginComponent {
 
   constructor(private fb: FormBuilder) {}
   changePasswordVisibility(event: MouseEvent) {
-    this.hide.set(!this.hide());
+    this.hidePassword.set(!this.hidePassword());
     event.stopPropagation();
   }
   login() {
