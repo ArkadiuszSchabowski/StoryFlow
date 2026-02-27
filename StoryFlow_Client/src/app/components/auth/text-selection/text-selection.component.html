@@ -1,6 +1,6 @@
 <div id="text-selection-container">
   <div>
-    <form id="filter-container" color="accent" [formGroup]="form" (ngSubmit)="get()">
+    <form id="filter-container" [formGroup]="form" (ngSubmit)="get()">
       <mat-form-field class="filter-field">
         <mat-label>Category:</mat-label>
         <mat-select
@@ -41,13 +41,15 @@
   </div>
 
   <div id="story-container">
-    <div id="title-selector" class="title">Select a story:</div>
+    <div id="no-story-information" class="subtitle" *ngIf="stories.length === 0">
+      No stories match your selected filters. Please try different filters.
+    </div>
     <div *ngFor="let story of stories" class="story-item">
       <button
         mat-raised-button
         class="story-button"
         color="accent"
-        (click)="getById(story.id)"
+        (click)="NavigateToTextDisplay(story.id)"
       >
         <div><mat-icon>check</mat-icon></div>
       </button>

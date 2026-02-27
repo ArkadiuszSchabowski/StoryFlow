@@ -2,7 +2,7 @@
 
 @include mat.core();
 
-$primary: mat.define-palette(mat.$indigo-palette);
+$primary: mat.define-palette(mat.$indigo-palette, 300);
 $accent: mat.define-palette(mat.$red-palette);
 $warn: mat.define-palette(mat.$red-palette);
 
@@ -27,6 +27,7 @@ $StoryFlow_Client-theme: mat.define-light-theme(
 html,
 body {
   height: 100%;
+  background-color: mat.get-color-from-palette($primary);
 }
 body {
   margin: 0;

@@ -21,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ErrorPageComponent } from './components/system/error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MatInputModule } from '@angular/material/input';
     RegisterComponent,
     ProfileComponent,
     TextSelectionComponent,
-    TextDisplayComponent
+    TextDisplayComponent,
+    ErrorPageComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   color: white;
-  background-color: mat.get-color-from-palette(theme.$accent) !important;
+  background-color: mat.get-color-from-palette(theme.$accent);
   border-bottom: 2px solid white;
 }
 

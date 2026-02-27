@@ -1,13 +1,13 @@
 #text-display-container {
   display: flex;
+  align-items: baseline;
   height: auto;
-  padding: 50px;
+  padding: 20px 20px;
 }
 
 #title-container,
 #description-container,
 .sentence-item {
-  align-items: center;
   color: white;
 }
 
@@ -18,17 +18,14 @@
   flex-direction: row;
 }
 
+#story-information,
 .sentence-item {
-  padding: 10px;
+  padding-bottom: 10px;
 }
 
 #title-container,
 #description-container {
   padding-bottom: 15px;
-}
-
-#story-information {
-  padding-bottom: 10px;
 }
 
 #story-information {
@@ -41,4 +38,16 @@
 
 .action-button {
   margin-right: 10px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  #text-display-container {
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #text-display-container {
+    align-items: center;
+  }
 }
