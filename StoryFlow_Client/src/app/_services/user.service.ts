@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { TokenDto } from '../models/token-dto';
 import { AuthService } from './auth.service';
-import { map } from 'rxjs';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,11 +18,10 @@ export class UserService {
 
   login(dto: LoginDto) {
 
-    return this.http.post<TokenDto>(this.apiUrl + 'user/login', dto).pipe(map((response) => {
+    return this.http.post<TokenDto>(this.apiUrl + 'user/login', dto).pipe(tap((response) => {
       if(response.token){
         this.authService.setUser(response.token);
       }
-      return response;
     }))
   }
 }

@@ -33,7 +33,7 @@ export class TextDisplayComponent implements OnInit {
         next: (response) => {
           ((this.story = response), console.log(response));
         },
-        error: (error) => this.router.navigateByUrl((`error-page`)),
+        error: () => this.router.navigateByUrl((`error-page`)),
       });
     }
   }

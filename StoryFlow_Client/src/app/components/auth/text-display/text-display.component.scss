@@ -20,7 +20,7 @@
 
 #story-information,
 .sentence-item {
-  padding-bottom: 10px;
+  padding-bottom: 15px;
 }
 
 #title-container,
@@ -44,10 +44,20 @@
   #text-display-container {
     align-items: center;
   }
+  #title-container,
+  #description-container,
+  .sentence-item {
+    align-items: center;
+  }
 }
 
 @media screen and (min-width: 1200px) {
   #text-display-container {
+    align-items: center;
+  }
+  #title-container,
+  #description-container,
+  .sentence-item {
     align-items: center;
   }
 }
