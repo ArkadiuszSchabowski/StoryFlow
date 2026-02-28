@@ -5,22 +5,22 @@
   </a>
   <mat-menu #menu="matMenu">
     <a mat-menu-item routerLink="/">HOME</a>
-    <a mat-menu-item routerLink="/login">LOGIN</a>
-    <a mat-menu-item routerLink="/register">REGISTER</a>
-    <a mat-menu-item routerLink="/text-selection">CHOOSE A TEXT</a>
-    <a mat-menu-item routerLink="/profile">PROFILE</a>
+    <a mat-menu-item routerLink="/login" *ngIf="!(authService.currentUserSource$ | async)">LOGIN</a>
+    <a mat-menu-item routerLink="/register" *ngIf="!(authService.currentUserSource$ | async)">REGISTER</a>
+    <a mat-menu-item routerLink="/text-selection" *ngIf="(authService.currentUserSource$ | async)">CHOOSE A TEXT</a>
+    <a mat-menu-item routerLink="/profile" *ngIf="(authService.currentUserSource$ | async)">PROFILE</a>
   </mat-menu>
   <div id="mobile-navbar-logo" class="logo"></div>
   <div id="desktop-navbar">
     <a mat-button routerLink="/" class="navbar-desktop-button">HOME</a>
-    <a mat-button routerLink="/login" class="navbar-desktop-button"> LOGIN </a>
-    <a mat-button routerLink="/register" class="navbar-desktop-button">
+    <a mat-button routerLink="/login" class="navbar-desktop-button" *ngIf="!(authService.currentUserSource$ | async)"> LOGIN </a>
+    <a mat-button routerLink="/register" class="navbar-desktop-button" *ngIf="!(authService.currentUserSource$ | async)">
       REGISTER
     </a>
-    <a mat-button routerLink="/text-selection" class="navbar-desktop-button">
+    <a mat-button routerLink="/text-selection" class="navbar-desktop-button" *ngIf="(authService.currentUserSource$ | async)">
       CHOOSE A TEXT
     </a>
-    <a mat-button routerLink="/profile" class="navbar-desktop-button">
+    <a mat-button routerLink="/profile" class="navbar-desktop-button" *ngIf="(authService.currentUserSource$ | async)">
       PROFILE
     </a>
   </div>

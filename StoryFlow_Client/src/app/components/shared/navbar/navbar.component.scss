@@ -20,7 +20,6 @@
   height: 100%;
   align-items: center;
   justify-content: space-between;
-  padding: 0 5px;
 }
 
 .navbar-desktop-button {
@@ -49,6 +48,10 @@
   #desktop-navbar-logo {
     display: flex;
   }
+  #desktop-navbar {
+    padding: 0 100px;
+  }
+
   .navbar-desktop-button {
     width: 105px;
     font-size: 13px;
@@ -63,6 +66,9 @@
   #desktop-navbar,
   #desktop-navbar-logo {
     display: flex;
+  }
+  #desktop-navbar {
+    padding: 0 160px;
   }
   .navbar-desktop-button {
     width: 200px;

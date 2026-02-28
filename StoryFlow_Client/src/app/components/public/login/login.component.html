@@ -1,19 +1,26 @@
-<div id="container" class="container">
+<div id="login-container" class="container">
   <form [formGroup]="form" (ngSubmit)="login()" autocomplete="off">
     <mat-card class="login-card">
-      <mat-card-title id="card-title">Ready to continue? Sign in.</mat-card-title>
+      <mat-card-title id="card-title"
+        >Ready to continue? Sign in.</mat-card-title
+      >
       <mat-card-content>
         <mat-form-field class="card-input">
           <mat-label>E-mail</mat-label>
           <input class="input" matInput name="email" formControlName="email" />
           <mat-error
-            *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched"
+            *ngIf="
+              form.get('email')?.hasError('required') &&
+              form.get('email')?.touched
+            "
           >
             Email is required.
           </mat-error>
 
           <mat-error
-            *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched"
+            *ngIf="
+              form.get('email')?.hasError('email') && form.get('email')?.touched
+            "
           >
             Please enter a valid email address.
           </mat-error>
@@ -36,16 +43,28 @@
             [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="hidePassword()"
           >
-            <mat-icon>{{ hidePassword() ? "visibility_off" : "visibility" }}</mat-icon>
+            <mat-icon>{{
+              hidePassword() ? "visibility_off" : "visibility"
+            }}</mat-icon>
           </button>
           <mat-error
-            *ngIf="form.get('password')?.hasError('required') && form.get('password')?.touched"
+            *ngIf="
+              form.get('password')?.hasError('required') &&
+              form.get('password')?.touched
+            "
           >
             Password is required.
           </mat-error>
         </mat-form-field>
         <div id="submit-button-container">
-          <button mat-raised-button color="accent" type="submit" class="mt-5">Login</button>
+          <button
+            mat-raised-button
+            id="submit-button"
+            color="accent"
+            type="submit"
+          >
+            Login
+          </button>
         </div>
       </mat-card-content>
     </mat-card>
