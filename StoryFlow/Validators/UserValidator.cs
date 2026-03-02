@@ -7,7 +7,7 @@ namespace StoryFlow.Validators
 {
     public class UserValidator : IUserValidator
     {
-        public void ValidateDto(AddUserDto dto)
+        public void ValidateDto(RegisterUserDto dto)
         {
             if (string.IsNullOrWhiteSpace(dto.Email))
                 throw new BadRequestException("Email address cannot be empty.");
@@ -35,9 +35,19 @@ namespace StoryFlow.Validators
                 throw new BadRequestException("Password must be between 5 and 25 characters.");
             }
 
+            if(dto.DateOfBirth == null)
+            {
+                throw new BadRequestException("Date of birth is required.");
+            }
+
             if (dto.DateOfBirth < DateOnly.Parse("1900-01-01") || dto.DateOfBirth > DateOnly.FromDateTime(DateTime.Now))
             {
                 throw new BadRequestException("Incorrect date of birth.");
+            }
+
+            if (dto.Gender == null)
+            {
+                throw new BadRequestException("Gender is required.");
             }
         }
     }

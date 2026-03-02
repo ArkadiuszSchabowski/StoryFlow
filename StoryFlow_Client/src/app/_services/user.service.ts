@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { TokenDto } from '../models/token-dto';
 import { AuthService } from './auth.service';
 import { tap } from 'rxjs';
+import { RegisterUserDto } from '../models/register-user-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -23,5 +24,9 @@ export class UserService {
         this.authService.setUser(response.token);
       }
     }))
+  }
+
+  register(dto: RegisterUserDto){
+    return this.http.post(this.apiUrl + 'user/register', dto)
   }
 }
