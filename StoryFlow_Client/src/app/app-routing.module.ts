@@ -6,6 +6,7 @@ import { ProfileComponent } from './components/auth/profile/profile.component';
 import { LoginComponent } from './components/public/login/login.component';
 import { RegisterComponent } from './components/public/register/register.component';
 import { TextDisplayComponent } from './components/auth/text-display/text-display.component';
+import { ErrorPageComponent } from './components/system/error-page/error-page.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'text-selection', component: TextSelectionComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'text', component: TextDisplayComponent },
+  { path: 'text/:id', component: TextDisplayComponent },
+  {path: 'error-page', component: ErrorPageComponent},
 ];
 
 @NgModule({

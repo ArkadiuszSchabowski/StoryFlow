@@ -22,7 +22,7 @@ namespace StoryFlow.Aggregates
             _entityValidator.ThrowIsNull(entity);
         }
 
-        public void ValidateDto(AddUserDto dto)
+        public void ValidateDto(RegisterUserDto dto)
         {
             _userValidator.ValidateDto(dto);
         }

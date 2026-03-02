@@ -30,19 +30,18 @@ namespace StoryFlow.Controllers
             return Ok(user);
         }
 
-
-        [HttpPost]
-        public async Task<ActionResult> Add(AddUserDto dto)
-        {
-            await _service.Add(dto);
-            return Ok();
-        }
-
         [HttpPost("login")]
         public async Task<ActionResult<TokenDto>> Login([FromBody] LoginDto dto)
         {
             var token = await _service.Login(dto);
             return Ok(token);
+        }
+
+        [HttpPost("register")]
+        public async Task<ActionResult> Add(RegisterUserDto dto)
+        {
+            await _service.Add(dto);
+            return Ok();
         }
 
         [HttpDelete("{id}")]

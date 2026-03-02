@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StoryService } from 'src/app/_services/story.service';
-import { TextService } from 'src/app/_services/text.service';
+import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
 import { StoryFilter } from 'src/app/models/story-filter-dto';
 
 @Component({
@@ -11,7 +11,7 @@ import { StoryFilter } from 'src/app/models/story-filter-dto';
   styleUrls: ['./text-selection.component.scss'],
 })
 export class TextSelectionComponent implements OnInit {
-  stories: any;
+  stories: GetStoryViewDto[] = [];
   selected = 'option2';
 
   form: any = this.fb.group({
@@ -53,7 +53,6 @@ export class TextSelectionComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private storyService: StoryService,
-    private textService: TextService,
     private router: Router,
   ) {}
 
@@ -77,8 +76,7 @@ export class TextSelectionComponent implements OnInit {
     });
   }
 
-  getById(id: number) {
-    this.textService.storyIdSubject.next(id);
-    this.router.navigateByUrl('text');
+  NavigateToTextDisplay(id: number) {
+    this.router.navigateByUrl(`text/${id}`);
   }
 }

@@ -1,9 +1,51 @@
-#container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: calc(100% - 64px);
-    border-top: 2px solid white;
-    background-color: orangered;
+@use "@angular/material" as mat;
+@use "src/styles" as theme;
+
+#login-container{
+  display: flex;
+  min-height: 500px;
+  padding: 10px 0;
+}
+
+mat-card.login-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(90vw);
+  height: 100%;
+  min-width: 450px;
+  padding: 40px 0;
+}
+
+#card-title {
+  display: flex;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  justify-content: center;
+  padding: 10px;
+  margin-bottom: 30px;
+  font-size: 18px;
+  color: white;
+  background-color: mat.get-color-from-palette(theme.$accent);
+}
+
+#submit-button{
+  margin-top: 20px;
+}
+
+.card-input{
+  padding-bottom: 10px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  mat-card.login-card {
+    width: calc(60vw - 20px);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  mat-card.login-card {
+    width: calc(40vw - 20px);
+  }
 }

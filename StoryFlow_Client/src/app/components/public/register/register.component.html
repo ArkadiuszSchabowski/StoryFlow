@@ -1,1 +1,212 @@
-<p>register works!</p>
+<div id="register-container" class="container">
+  <form [formGroup]="form" (ngSubmit)="register()" autocomplete="off">
+    <mat-card class="register-card">
+      <mat-card-title id="card-title">
+        Join us and create your account.
+      </mat-card-title>
+
+      <mat-card-content>
+        <mat-form-field class="card-input" appearance="outline">
+          <mat-label>First name</mat-label>
+          <input matInput formControlName="firstName" />
+
+          <mat-error
+            *ngIf="
+              form.get('firstName')?.hasError('required') &&
+              form.get('firstName')?.touched
+            "
+          >
+            First name is required.
+          </mat-error>
+          <mat-error
+            *ngIf="
+              (form.get('firstName')?.hasError('minlength') &&
+                form.get('firstName')?.touched) ||
+              (form.get('firstName')?.hasError('maxlength') &&
+                form.get('firstName')?.touched)
+            "
+          >
+            First name must be between 3 and 25 characters.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="card-input" appearance="outline">
+          <mat-label>Last name</mat-label>
+          <input matInput formControlName="lastName" />
+
+          <mat-error
+            *ngIf="
+              form.get('lastName')?.hasError('required') &&
+              form.get('lastName')?.touched
+            "
+          >
+            Last name is required.
+          </mat-error>
+
+          <mat-error
+            *ngIf="
+              (form.get('lastName')?.hasError('minlength') &&
+                form.get('lastName')?.touched) ||
+              (form.get('lastName')?.hasError('maxlength') &&
+                form.get('lastName')?.touched)
+            "
+          >
+            Last name must be between 3 and 25 characters.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="card-input" appearance="outline">
+          <mat-label>Gender</mat-label>
+          <mat-select name="gender" formControlName="gender">
+            <mat-option *ngFor="let gender of genders" [value]="gender.value">{{
+              gender.viewValue
+            }}</mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="
+              form.get('gender')?.hasError('required') &&
+              form.get('gender')?.touched
+            "
+          >
+            Gender is required.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="card-input" appearance="outline">
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker" name="dateOfBirth" formControlName="dateOfBirth"/>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error
+            *ngIf="
+              form.get('dateOfBirth')?.hasError('required') &&
+              form.get('dateOfBirth')?.touched
+            "
+          >
+            Date of birth is required.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="card-input" appearance="outline">
+          <mat-label>E-mail</mat-label>
+          <input matInput formControlName="email" />
+
+          <mat-error
+            *ngIf="
+              form.get('email')?.hasError('required') &&
+              form.get('email')?.touched
+            "
+          >
+            Email is required.
+          </mat-error>
+
+          <mat-error
+            *ngIf="
+              form.get('email')?.hasError('email') && form.get('email')?.touched
+            "
+          >
+            Please enter a valid email address.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="card-input" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            [type]="hidePassword() ? 'password' : 'text'"
+            formControlName="password"
+          />
+
+          <button
+            type="button"
+            class="password-button"
+            mat-icon-button
+            matSuffix
+            (click)="changePasswordVisibility($event)"
+            [attr.aria-label]="'Toggle password visibility'"
+          >
+            <mat-icon>
+              {{ hidePassword() ? "visibility_off" : "visibility" }}
+            </mat-icon>
+          </button>
+
+          <mat-error
+            *ngIf="
+              form.get('password')?.hasError('required') &&
+              form.get('password')?.touched
+            "
+          >
+            Password is required.
+          </mat-error>
+
+          <mat-error
+            *ngIf="
+              (form.get('password')?.hasError('minlength') &&
+                form.get('password')?.touched) ||
+              (form.get('password')?.hasError('maxlength') &&
+                form.get('password')?.touched)
+            "
+          >
+            Password must be between 5 and 25 characters.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="card-input" appearance="outline">
+          <mat-label>Repeat password</mat-label>
+          <input
+            matInput
+            [type]="hideRepeatPassword() ? 'password' : 'text'"
+            formControlName="repeatPassword"
+          />
+
+          <button
+            type="button"
+            class="password-button"
+            mat-icon-button
+            matSuffix
+            (click)="changeRepeatPasswordVisibility($event)"
+            [attr.aria-label]="'Toggle repeat password visibility'"
+          >
+            <mat-icon>
+              {{ hideRepeatPassword() ? "visibility_off" : "visibility" }}
+            </mat-icon>
+          </button>
+
+          <mat-error
+            *ngIf="
+              form.get('repeatPassword')?.hasError('required') &&
+              form.get('repeatPassword')?.touched
+            "
+          >
+            Repeat password is required.
+          </mat-error>
+
+          <mat-error
+            *ngIf="
+              (form.get('repeatPassword')?.hasError('minlength') &&
+                form.get('repeatPassword')?.touched) ||
+              (form.get('repeatPassword')?.hasError('maxlength') &&
+                form.get('repeatPassword')?.touched)
+            "
+          >
+            Repeat password must be between 5 and 25 characters.
+          </mat-error>
+        </mat-form-field>
+
+        <div id="submit-button-container">
+          <button
+            id="submit-button"
+            mat-raised-button
+            color="accent"
+            type="submit"
+          >
+            Register
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>

@@ -28,7 +28,7 @@ namespace StoryFlow.Services
             _mapper = mapper;
             _authenticationSettings = authenticationSettings;
         }
-        public async Task Add(AddUserDto dto)
+        public async Task Add(RegisterUserDto dto)
         {
             _userValidator.ValidateDto(dto);
 

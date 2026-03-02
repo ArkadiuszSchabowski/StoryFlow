@@ -4,6 +4,6 @@ namespace StoryFlow.Interfaces
 {
     public interface IUserValidator
     {
-        void ValidateDto(AddUserDto dto);
+        void ValidateDto(RegisterUserDto dto);
     }
 }

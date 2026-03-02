@@ -14,15 +14,16 @@ export class StoryService {
 
   constructor(private http: HttpClient) {}
 
-getAll(dto: StoryFilter | null) {
-  let params = new HttpParams();
+  getAll(dto: StoryFilter | null) {
+    let params = new HttpParams();
 
-  if (dto?.languageLevel) params = params.set('languageLevel', dto.languageLevel);
-  if (dto?.category) params = params.set('category', dto.category);
-  if (dto?.size) params = params.set('size', dto.size);
+    if (dto?.languageLevel)
+      params = params.set('languageLevel', dto.languageLevel);
+    if (dto?.category) params = params.set('category', dto.category);
+    if (dto?.size) params = params.set('size', dto.size);
 
-  return this.http.get(this.apiUrl + 'story', { params });
-}
+    return this.http.get<GetStoryViewDto[]>(this.apiUrl + 'story', { params });
+  }
 
   get(id: number) {
     return this.http.get<GetStoryViewDto>(this.apiUrl + `story/${id}`).pipe(
