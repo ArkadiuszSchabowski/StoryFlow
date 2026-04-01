@@ -71,7 +71,7 @@ export class RegisterComponent {
       firstName: this.form.get('firstName').value,
       lastName: this.form.get('lastName').value,
       gender: this.form.get('gender').value,
-      dateOfBirth: this.form.get('dateOfBirth').value,
+      dateOfBirth: this.form.get('dateOfBirth').value.toISOString().split('T')[0]
     };
 
     this.userService.register(dto).subscribe({
