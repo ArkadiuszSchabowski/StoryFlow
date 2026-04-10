@@ -18,6 +18,7 @@ namespace StoryFlow
             CreateMap<UserSentence, GetUserSentenceDto>();
             CreateMap<RegisterUserDto, User>();
             CreateMap<User, GetUserDto>();
+            CreateMap<Hobby, GetHobbyDto>();
         }
     }
 }

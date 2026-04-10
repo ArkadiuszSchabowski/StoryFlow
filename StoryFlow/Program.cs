@@ -49,10 +49,14 @@ builder.Services.AddScoped<IGetAllRepository<User>, UserRepository>();
 builder.Services.AddScoped<IGetByEmailRepository, UserRepository>();
 builder.Services.AddScoped<IUserValidator, UserValidator>();
 
+builder.Services.AddScoped<IAIStoryService, AIStoryService>();
+
 builder.Services.AddScoped<IValidatorId, ValidatorId>();
 builder.Services.AddScoped<ISentenceBuilder, SentenceBuilder>();
 builder.Services.AddScoped<ITextConverter, TextConverter>();
 builder.Services.AddScoped<ITextCounter, TextCounter>();
+
+builder.Services.AddScoped<HttpClient>();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<ErrorHandlingMiddleware>();

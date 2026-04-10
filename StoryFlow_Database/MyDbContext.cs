@@ -10,6 +10,7 @@ namespace StoryFlow_Database
         public DbSet<User> Users { get; set; }
         public DbSet<UserSentence> UserSentences { get; set; }
         public DbSet<UserStory> UserStories { get; set; }
+        public DbSet<Hobby> Hobbies { get; set; }
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
         {
 
@@ -32,6 +33,10 @@ namespace StoryFlow_Database
             modelBuilder.Entity<Story>().HasMany(s => s.UserStories)
                 .WithOne(s => s.Story)
                 .HasForeignKey(s => s.StoryId);
+
+            modelBuilder.Entity<User>().HasMany(u => u.Hobbies)
+                .WithOne(h => h.User)
+                .HasForeignKey(h => h.UserId);
         }
     }
 }
