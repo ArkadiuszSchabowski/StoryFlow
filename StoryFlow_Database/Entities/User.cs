@@ -11,6 +11,7 @@ namespace StoryFlow_Database.Entities
         public string? LastName { get; set; }
         public Gender? Gender { get; set; }
         public DateOnly? DateOfBirth { get; set; }
+        public ICollection<Hobby> Hobbies { get; set; } = new List<Hobby>();
         public ICollection<UserSentence> UserSentences { get; set; } = new List<UserSentence>();
         public ICollection<UserStory> UserStories { get; set; } = new List<UserStory>();
         public int PremiumAccountDays { get; set; } = 0;
