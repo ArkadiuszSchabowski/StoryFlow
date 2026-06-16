@@ -15,6 +15,7 @@ namespace StoryFlow.Controllers
             _service = service;
         }
 
+        //admin
         [HttpGet]
         public async Task<ActionResult<GetUserDto>> Get()
         {
@@ -23,6 +24,7 @@ namespace StoryFlow.Controllers
             return Ok(users);
         }
 
+        //admin
         [HttpGet("{id}")]
         public async Task<ActionResult<GetUserDto>> Get(int id)
         {
@@ -44,6 +46,7 @@ namespace StoryFlow.Controllers
             return Ok();
         }
 
+        //admin
         [HttpDelete("{id}")]
         public async Task<ActionResult> Remove(int id)
         {

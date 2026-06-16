@@ -30,7 +30,7 @@ namespace StoryFlow.Controllers
             return Ok(story);
         }
 
-
+        //admin
         [HttpPost]
         public async Task<ActionResult> Add(AddStoryDto dto)
         {
@@ -38,6 +38,7 @@ namespace StoryFlow.Controllers
             return Ok();
         }
 
+        //admin
         [HttpDelete("{id}")]
         public async Task<ActionResult> Remove(int id)
         {
