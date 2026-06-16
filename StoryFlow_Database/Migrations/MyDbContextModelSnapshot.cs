@@ -34,12 +34,7 @@ namespace StoryFlow_Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Hobbies");
                 });
@@ -56,7 +51,7 @@ namespace StoryFlow_Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Order")
+                    b.Property<int>("Order")
                         .HasColumnType("int");
 
                     b.Property<string>("PolishMeaning")
@@ -144,9 +139,35 @@ namespace StoryFlow_Database.Migrations
                     b.Property<int>("PremiumAccountDays")
                         .HasColumnType("int");
 
+                    b.Property<int>("UserPoints")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("StoryFlow_Database.Entities.UserHobby", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("HobbyId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HobbyId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserHobbies");
                 });
 
             modelBuilder.Entity("StoryFlow_Database.Entities.UserSentence", b =>
@@ -180,6 +201,9 @@ namespace StoryFlow_Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("BestResult")
+                        .HasColumnType("int");
+
                     b.Property<int>("StoryId")
                         .HasColumnType("int");
 
@@ -195,17 +219,6 @@ namespace StoryFlow_Database.Migrations
                     b.ToTable("UserStories");
                 });
 
-            modelBuilder.Entity("StoryFlow_Database.Entities.Hobby", b =>
-                {
-                    b.HasOne("StoryFlow_Database.Entities.User", "User")
-                        .WithMany("Hobbies")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("StoryFlow_Database.Entities.Sentence", b =>
                 {
                     b.HasOne("StoryFlow_Database.Entities.Story", "Story")
@@ -217,10 +230,29 @@ namespace StoryFlow_Database.Migrations
                     b.Navigation("Story");
                 });
 
+            modelBuilder.Entity("StoryFlow_Database.Entities.UserHobby", b =>
+                {
+                    b.HasOne("StoryFlow_Database.Entities.Hobby", "Hobby")
+                        .WithMany("UserHobbies")
+                        .HasForeignKey("HobbyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("StoryFlow_Database.Entities.User", "User")
+                        .WithMany("UserHobbies")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hobby");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("StoryFlow_Database.Entities.UserSentence", b =>
                 {
                     b.HasOne("StoryFlow_Database.Entities.Sentence", "Sentence")
-                        .WithMany("UserSentences")
+                        .WithMany("UserSavedSentences")
                         .HasForeignKey("SentenceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -255,9 +287,14 @@ namespace StoryFlow_Database.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("StoryFlow_Database.Entities.Hobby", b =>
+                {
+                    b.Navigation("UserHobbies");
+                });
+
             modelBuilder.Entity("StoryFlow_Database.Entities.Sentence", b =>
                 {
-                    b.Navigation("UserSentences");
+                    b.Navigation("UserSavedSentences");
                 });
 
             modelBuilder.Entity("StoryFlow_Database.Entities.Story", b =>
@@ -269,7 +306,7 @@ namespace StoryFlow_Database.Migrations
 
             modelBuilder.Entity("StoryFlow_Database.Entities.User", b =>
                 {
-                    b.Navigation("Hobbies");
+                    b.Navigation("UserHobbies");
 
                     b.Navigation("UserSentences");
 

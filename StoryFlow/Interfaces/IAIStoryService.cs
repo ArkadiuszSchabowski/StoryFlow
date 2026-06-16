@@ -4,6 +4,6 @@ namespace StoryFlow.Interfaces
 {
     public interface IAIStoryService
     {
-        public Task<string?> GenerateStoryByUserHobby(int userId);
+        public Task<string?> GenerateStory(int userId, string hobby);
     }
 }

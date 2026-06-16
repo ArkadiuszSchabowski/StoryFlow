@@ -7,5 +7,6 @@
         public User? User { get; set; }
         public int StoryId { get; set; }
         public Story? Story { get; set; }
+        public int BestResult { get; set; } = 0;
     }
 }
