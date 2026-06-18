@@ -1,10 +1,15 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using StoryFlow.Helpers;
 using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
 using StoryFlow_Database.Entities;
+using StoryFlow_Shared.Enums;
 using StoryFlow_Shared.Interfaces;
 using StoryFlow_Shared.Models;
+using System.Text;
+using System.Text.Json;
 
 namespace StoryFlow.Services
 {
@@ -16,8 +21,10 @@ namespace StoryFlow.Services
         private readonly ITextConverter _textConverter;
         private readonly ITextCounter _textCounter;
         private readonly IMapper _mapper;
+        private readonly GeminiSchemaGenerator _geminiSchemaGenerator;
+        private readonly GeminiSettings _geminiSettings;
 
-        public StoryService(IAggregateStoryRepository storyRepository, IAggregateStoryValidator serviceValidator, ISentenceBuilder sentenceBuilder, ITextConverter textConverter, ITextCounter textCounter, IMapper mapper)
+        public StoryService(IAggregateStoryRepository storyRepository, IAggregateStoryValidator serviceValidator, ISentenceBuilder sentenceBuilder, ITextConverter textConverter, ITextCounter textCounter, IMapper mapper, IOptions<GeminiSettings> geminiSettings, GeminiSchemaGenerator geminiSchemaGenerator)
         {
             _storyRepository = storyRepository;
             _serviceValidator = serviceValidator;
@@ -25,6 +32,8 @@ namespace StoryFlow.Services
             _textConverter = textConverter;
             _textCounter = textCounter;
             _mapper = mapper;
+            _geminiSchemaGenerator = geminiSchemaGenerator;
+            _geminiSettings = geminiSettings.Value;
         }
         public async Task Add(AddStoryDto item)
         {
@@ -42,6 +51,84 @@ namespace StoryFlow.Services
             _sentenceBuilder.AddSentencesToStory(story, polishSentences, englishSentences);
 
             await _storyRepository.Add(story);
+        }
+
+        public async Task<string> Generate(GenerateStoryDto dto)
+        {
+            string storyLengthMin = "";
+            string storyLengthMax = "";
+
+            object schema = _geminiSchemaGenerator.GenerateSchema();
+
+            if (dto.StorySize == StorySize.Short)
+            {
+                storyLengthMin = "400";
+                storyLengthMax = "699";
+            }
+
+            if (dto.StorySize == StorySize.Medium)
+            {
+                storyLengthMin = "700";
+                storyLengthMax = "999";
+            }
+
+            if (dto.StorySize == StorySize.Long)
+            {
+                storyLengthMin = "1000";
+                storyLengthMax = "1500";
+            }
+
+            using var client = new HttpClient
+            {
+                BaseAddress = new Uri(_geminiSettings.BaseUrl)
+            };
+
+
+            var requestBody = new
+            {
+                contents = new[]
+                {
+        new
+        {
+            parts = new[]
+            {
+                new
+                {
+text = $"""
+Napisz historię w języku polskim i angielskim.
+
+Wymagania:
+- Kategoria: {dto.StoryCategory}
+- Poziom językowy: {dto.LanguageLevel}
+- Długość: od {storyLengthMin} do {storyLengthMax} znaków
+
+Zasady:
+- Sprawdź długość przed zakończeniem
+- Nie przekraczaj limitu znaków
+- Styl dopasowany do poziomu językowego
+
+Zwróć WYŁĄCZNIE JSON zgodny z responseSchema.
+"""
+                }
+            }
+        }
+                },
+                generationConfig = new
+                {
+                    responseMimeType = "application/json",
+                    responseSchema = schema
+                }
+            };
+
+
+            var json = JsonSerializer.Serialize(requestBody);
+
+            var response = await client.PostAsync(
+                $"/v1beta/models/{_geminiSettings.ModelName}:generateContent?key={_geminiSettings.ApiKey}",
+                new StringContent(json, Encoding.UTF8, "application/json"));
+
+            var geminiResponse = await response.Content.ReadAsStringAsync();
+            return geminiResponse;
         }
 
         public async Task<ICollection<GetStoryDto>> Get(StoryFilter? filter)
