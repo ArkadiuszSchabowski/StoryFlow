@@ -38,6 +38,12 @@ namespace StoryFlow.Controllers
             return Ok();
         }
 
+        [HttpPost("generate")]
+        public async Task<ActionResult> Generate(GenerateStoryDto dto)
+        {
+            return Ok(await _service.Generate(dto));
+        }
+
         //admin
         [HttpDelete("{id}")]
         public async Task<ActionResult> Remove(int id)
