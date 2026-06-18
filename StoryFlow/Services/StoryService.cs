@@ -94,22 +94,22 @@ namespace StoryFlow.Services
             {
                 new
                 {
-text = $"""
-Napisz historię w języku polskim i angielskim.
-
-Wymagania:
-- Kategoria: {dto.StoryCategory}
-- Poziom językowy: {dto.LanguageLevel}
-- Długość: od {storyLengthMin} do {storyLengthMax} znaków
-
-Zasady:
-- Sprawdź długość przed zakończeniem
-- Nie przekraczaj limitu znaków
-- Styl dopasowany do poziomu językowego
-
-Zwróć WYŁĄCZNIE JSON zgodny z responseSchema.
+                    text = $"""
+                    Write a story in English and Polish.
+                    
+                    Requirements:
+                    - Category: {dto.StoryCategory}
+                    - Language level: {dto.LanguageLevel}
+                    - Length: from {storyLengthMin} to {storyLengthMax} characters
+                    
+                    Rules:
+                    - Check the length before finishing the story
+                    - Do not exceed the character limit
+                    - Adapt the writing style to the language level
+                    
+                    Return ONLY JSON that matches the responseSchema.
 """
-                }
+        }
             }
         }
                 },
