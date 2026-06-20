@@ -1,39 +1,68 @@
 <mat-toolbar id="toolbar-container" class="toolbar">
   <div id="mobile-navbar">
-    <div id="mobile-navbar-button">
-      <a mat-button [matMenuTriggerFor]="menu" id="mobile-menu-button">
-        <mat-icon>menu</mat-icon>
+    <div id="mobile-navbar-buttons">
+      <a mat-button routerLink="/" class="desktop-button">
+        <mat-icon>home</mat-icon></a
+      >
+      <a
+        mat-button
+        routerLink="/login"
+        class="mobile-button"
+        *ngIf="!(authService.currentUserSource$ | async)"
+      >
+        <mat-icon>key</mat-icon>
       </a>
-      <mat-menu #menu="matMenu">
-        <a mat-menu-item routerLink="/">HOME</a>
+      <a
+        mat-button
+        routerLink="/register"
+        class="mobile-button"
+        *ngIf="!(authService.currentUserSource$ | async)"
+      >
+        <mat-icon>person_add</mat-icon>
+      </a>
+      <a
+        mat-button
+        routerLink="/text-selection"
+        class="mobile-button"
+        *ngIf="authService.currentUserSource$ | async"
+      >
+        <mat-icon>school</mat-icon>
+      </a>
+      <div class="mobile-button" *ngIf="authService.isModerator$ | async">
         <a
-          mat-menu-item
-          routerLink="/login"
-          *ngIf="!(authService.currentUserSource$ | async)"
-          >LOGIN</a
+          mat-button
+          [matMenuTriggerFor]="moderatorMenu"
+          #moderatorTrigger="matMenuTrigger"
         >
+          <mat-icon>security</mat-icon>
+          <mat-icon>arrow_drop_down</mat-icon>
+        </a>
+      </div>
+      <div class="mobile-button" *ngIf="authService.isAdmin$ | async">
         <a
-          mat-menu-item
-          routerLink="/register"
-          *ngIf="!(authService.currentUserSource$ | async)"
-          >REGISTER</a
+          mat-button
+          [matMenuTriggerFor]="administratorMenu"
+          #administratorTrigger="matMenuTrigger"
         >
+          <mat-icon>security</mat-icon>
+          <mat-icon>arrow_drop_down</mat-icon>
+        </a>
+      </div>
+      <div
+        class="mobile-button"
+        *ngIf="authService.currentUserSource$ | async"
+      >
         <a
-          mat-menu-item
-          routerLink="/text-selection"
-          *ngIf="authService.currentUserSource$ | async"
-          >CHOOSE A TEXT</a
+          mat-button
+        class="mobile-button"
+          [matMenuTriggerFor]="profileMenu"
+          #profileTrigger="matMenuTrigger"
         >
-        <a
-          mat-menu-item
-          routerLink="/profile"
-          *ngIf="authService.currentUserSource$ | async"
-          >PROFILE</a
-        >
-        <a mat-menu-item routerLink="/create-story">CREATE STORY</a>
-      </mat-menu>
+          <mat-icon>account_circle</mat-icon>
+          <mat-icon>arrow_drop_down</mat-icon>
+        </a>
+      </div>
     </div>
-    <div id="mobile-navbar-logo" class="logo"></div>
   </div>
   <div id="desktop-navbar">
     <div id="desktop-navbar-logo" class="logo"></div>

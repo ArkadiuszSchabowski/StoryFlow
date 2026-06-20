@@ -16,9 +16,9 @@ export class StoryCreateComponent {
   ) {}
 
   generateForm: any = this.fb.group({
-    languageLevel: [''],
-    storyCategory: [''],
-    storySize: [''],
+    languageLevel: [0],
+    storyCategory: [0],
+    storySize: [0],
   });
 
   addForm: any = this.fb.group({

@@ -12,7 +12,10 @@
   background-color: mat.get-color-from-palette(theme.$accent);
 }
 
-#submit-button-container{
+#submit-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding-bottom: 20px;
 }
 
@@ -32,7 +35,7 @@
   margin-right: 10px;
 }
 
-#create-story-container{
+#create-story-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,7 +44,7 @@
   height: auto;
 }
 
-#add-form{
+#add-form {
   display: flex;
   flex-direction: column;
   width: 90vw;
@@ -49,7 +52,12 @@
   margin-top: 20px;
 }
 
-textarea.textarea{
+#submit-button-generate {
+  color: mat.get-color-from-palette(theme.$accent);
+  background-color: white;
+}
+
+textarea.textarea {
   background-color: white;
 }
 

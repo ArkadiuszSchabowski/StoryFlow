@@ -1,6 +1,10 @@
 <div id="create-story-container">
   <div>
-    <form id="generate-story-container" [formGroup]="generateForm" (ngSubmit)="generate()">
+    <form
+      id="generate-story-container"
+      [formGroup]="generateForm"
+      (ngSubmit)="generate()"
+    >
       <mat-form-field class="filter-field">
         <mat-label>Category:</mat-label>
         <mat-select id="storyCategory" formControlName="storyCategory">
@@ -30,47 +34,95 @@
         </mat-select>
       </mat-form-field>
       <div id="submit-button-container">
-        <button mat-raised-button id="submit-button" type="submit">
-          Generate story
+        <button mat-raised-button class="submit-button" id="submit-button-generate" type="submit">
+          Generate
         </button>
       </div>
     </form>
   </div>
   <form [formGroup]="addForm" id="add-form" (ngSubmit)="add()">
-
     <mat-form-field>
       <mat-label>Polish title</mat-label>
-      <input matInput id="polishTitle" formControlName="polishTitle" />
+      <textarea
+        class="textarea"
+        matInput
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="20"
+        id="polishTitle"
+        formControlName="polishTitle"
+      ></textarea>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>English title</mat-label>
-      <input matInput id="englishTitle" formControlName="englishTitle" />
+      <textarea
+        class="textarea"
+        matInput
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="20"
+        id="englishTitle"
+        formControlName="englishTitle"
+      ></textarea>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Polish description</mat-label>
-      <input matInput id="polishDescription" formControlName="polishDescription" />
+      <textarea
+        class="textarea"
+        matInput
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="20"
+        id="polishDescription"
+        formControlName="polishDescription"
+      ></textarea>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>English description</mat-label>
-      <input matInput id="englishDescription" formControlName="englishDescription" />
+      <textarea
+        class="textarea"
+        matInput
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="20"
+        id="englishDescription"
+        formControlName="englishDescription"
+      ></textarea>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field>
       <mat-label>Polish story</mat-label>
-      <textarea class="textarea"matInput rows="6" id="polishStory" formControlName="polishStory"></textarea>
+      <textarea
+        class="textarea"
+        matInput
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="20"
+        id="polishStory"
+        formControlName="polishStory"
+      ></textarea>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field>
       <mat-label>English story</mat-label>
-      <textarea class="textarea" matInput rows="6" id="englishStory" formControlName="englishStory"></textarea>
+      <textarea
+        class="textarea"
+        matInput
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="20"
+        id="englishStory"
+        formControlName="englishStory"
+      ></textarea>
     </mat-form-field>
-          <div id="submit-button-container">
-        <button mat-raised-button id="submit-button" type="submit">
-          Add story
-        </button>
-      </div>
+
+    <div id="submit-button-container">
+      <button mat-raised-button class="submit-button" id="submit-button-create" type="submit">
+        Add
+      </button>
+    </div>
   </form>
 </div>

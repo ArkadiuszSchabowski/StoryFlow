@@ -57,7 +57,6 @@ import { StoryCreateComponent } from './components/auth/moderator/story-create/s
     MatDatepickerModule,
     MatNativeDateModule,
     ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right',
     }),
   ],
   providers: [],
