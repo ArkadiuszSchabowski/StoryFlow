@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StoryFlow.Interfaces;
 using StoryFlow_Shared.Models;
 
@@ -15,7 +16,7 @@ namespace StoryFlow.Controllers
             _service = service;
         }
 
-        //admin
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public async Task<ActionResult<GetUserDto>> Get()
         {
@@ -24,7 +25,7 @@ namespace StoryFlow.Controllers
             return Ok(users);
         }
 
-        //admin
+        [Authorize(Roles = "Administrator")]
         [HttpGet("{id}")]
         public async Task<ActionResult<GetUserDto>> Get(int id)
         {
@@ -40,13 +41,13 @@ namespace StoryFlow.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult> Add(RegisterUserDto dto)
+        public async Task<ActionResult> Add([FromBody] RegisterUserDto dto)
         {
             await _service.Add(dto);
             return Ok();
         }
 
-        //admin
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Remove(int id)
         {

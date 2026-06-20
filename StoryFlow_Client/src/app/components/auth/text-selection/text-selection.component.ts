@@ -60,6 +60,25 @@ export class TextSelectionComponent implements OnInit {
     this.get();
   }
 
+  showLanguageLevel(level: any) {
+    switch (level) {
+      case 0:
+        return 'A1 - Beginner';
+      case 1:
+        return 'A2 - Elementary';
+      case 2:
+        return 'B1 - Intermediate';
+      case 3:
+        return 'B2 - Upper-Intermediate';
+      case 4:
+        return 'C1 - Advanced';
+      case 5:
+        return 'C2 - Proficiency';
+      default:
+        return 'Unknown';
+    }
+  }
+
   get() {
     this.dto = {
       languageLevel: this.form.value.languageLevel,
@@ -70,13 +89,12 @@ export class TextSelectionComponent implements OnInit {
     this.storyService.getAll(this.dto).subscribe({
       next: (response) => {
         this.stories = response;
-        console.log(this.stories);
       },
       error: (error) => console.log(error),
     });
   }
 
-  NavigateToTextDisplay(id: number) {
+  NavigateToTextDisplay(id: number | null) {
     this.router.navigateByUrl(`text/${id}`);
   }
 }

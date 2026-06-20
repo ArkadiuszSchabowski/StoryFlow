@@ -40,8 +40,7 @@ export class LoginComponent {
     };
 
     this.userService.login(dto).subscribe({
-      next: (response) => {
-        console.log(response);
+      next: () => {
         this.toastr.success("Logged in successfully.");
         this.router.navigateByUrl('text-selection');
       },

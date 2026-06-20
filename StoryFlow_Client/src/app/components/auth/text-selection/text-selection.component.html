@@ -39,21 +39,30 @@
       </mat-form-field>
     </form>
   </div>
-
-  <div id="story-container">
-    <div id="no-story-information" class="subtitle" *ngIf="stories.length === 0">
-      No stories match your selected filters. Please try different filters.
-    </div>
-    <div *ngFor="let story of stories" class="story-item">
-      <button
-        mat-raised-button
-        class="story-button"
-        color="accent"
-        (click)="NavigateToTextDisplay(story.id)"
-      >
-        <div><mat-icon>check</mat-icon></div>
-      </button>
-      <div>{{ story.englishTitle }}</div>
+</div>
+<div id="story-container">
+  <div id="no-story-information" class="subtitle" *ngIf="stories.length === 0">
+    No stories match your selected filters. Please try different filters.
+  </div>
+  <div *ngFor="let story of stories" class="story-item">
+    <div class="story-card">
+      <div class="story-card-title">{{ story.englishTitle }}</div>
+      <div class="story-card-description">{{ story.englishDescription }}</div>
+            <div class="story-card-language-level">
+             {{ showLanguageLevel(story.languageLevel) }}
+            </div>
+      <div class="story-card-button-container">
+        <button
+          mat-raised-button
+          class="story-card-button"
+          (click)="NavigateToTextDisplay(story.id)"
+        >
+          <div><mat-icon>auto_awesome</mat-icon></div>
+        </button>
+      </div>
+      <div class="score">
+        0 <mat-icon>star</mat-icon> / 120<mat-icon>star</mat-icon>
+      </div>
     </div>
   </div>
 </div>

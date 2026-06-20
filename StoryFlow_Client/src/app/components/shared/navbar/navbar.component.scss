@@ -2,7 +2,34 @@
 @use "src/styles" as theme;
 
 #toolbar-container {
+  position: relative;
   display: flex;
+  width: 100%;
+}
+
+#mobile-navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+#desktop-navbar {
+  display: none;
+  width: 0%;
+}
+
+#mobile-navbar-button {
+  display: flex;
+  width: 100%;
+}
+
+#mobile-navbar-logo {
+  display: flex;
+}
+
+.toolbar {
   color: white;
   background-color: mat.get-color-from-palette(theme.$accent);
   border-bottom: 2px solid white;
@@ -17,59 +44,98 @@
   width: 100%;
   height: 100%;
   align-items: center;
+}
+
+#mobile-navbar-buttons{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+#desktop-navbar-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 95%;
+  height: auto;
+  align-items: center;
   justify-content: space-between;
 }
 
-.navbar-desktop-button {
-  display: flex;
-  height: 62px !important;
-  font-weight: bold;
+.desktop-button {
+  display: none;
 }
 
 .logo {
   display: flex;
-  width: 200px;
-  height: 50px;
+  width: 150px;
+  height: 150px;
   background-size: contain;
   background-image: url(../../../../assets/shared/logo.png);
   background-position: center;
   background-repeat: no-repeat;
-  padding: 0 30px;
+}
+
+#toolbar-subcontainer {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  z-index: 10;
+}
+
+.desktop-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobile-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100%;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
-  #mobile-menu-button,
-  #mobile-navbar-logo {
+  #mobile-navbar {
     display: none;
+  }
+  #desktop-navbar-buttons {
+    padding: 100px;
   }
   #desktop-navbar,
   #desktop-navbar-logo {
     display: flex;
   }
-  #desktop-navbar {
-    padding: 0 100px;
-  }
 
-  .navbar-desktop-button {
-    width: 105px;
-    font-size: 13px;
+  .navbar-desktop-button:hover {
+    color: black;
+  }
+  .logo {
+    width: 200px;
+    height: 50px;
   }
 }
 
 @media screen and (min-width: 1200px) {
-  #mobile-menu-button,
-  #mobile-navbar-logo {
+  #mobile-navbar {
     display: none;
+  }
+  #desktop-navbar-buttons {
+    padding: 100px;
   }
   #desktop-navbar,
   #desktop-navbar-logo {
     display: flex;
   }
-  #desktop-navbar {
-    padding: 0 160px;
-  }
-  .navbar-desktop-button {
+  .logo {
     width: 200px;
-    font-size: 15px;
+    height: 50px;
+  }
+  .desktop-button:hover {
+    color: black;
   }
 }

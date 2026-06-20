@@ -1,0 +1,80 @@
+@use "@angular/material" as mat;
+@use "src/styles" as theme;
+
+#generate-story-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: auto;
+  padding-top: 20px;
+  background-color: mat.get-color-from-palette(theme.$accent);
+}
+
+#submit-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+#no-story-information {
+  padding: 20px 0;
+  color: white;
+}
+.story-item {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding-bottom: 10px;
+  color: white;
+}
+
+.story-button {
+  margin-right: 10px;
+}
+
+#create-story-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+#add-form {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  height: auto;
+  margin-top: 20px;
+}
+
+#submit-button-generate {
+  color: mat.get-color-from-palette(theme.$accent);
+  background-color: white;
+}
+
+textarea.textarea {
+  background-color: white;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  #generate-story-container {
+    flex-direction: row;
+  }
+  .filter-field {
+    padding: 0 20px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #generate-story-container {
+    flex-direction: row;
+  }
+  .filter-field {
+    padding: 0 20px;
+  }
+}

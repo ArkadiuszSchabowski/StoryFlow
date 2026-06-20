@@ -2,8 +2,8 @@
 
 @include mat.core();
 
-$primary: mat.define-palette(mat.$indigo-palette, 300);
-$accent: mat.define-palette(mat.$red-palette);
+$primary: mat.define-palette(mat.$blue-palette, 900);
+$accent: mat.define-palette(mat.$purple-palette);
 $warn: mat.define-palette(mat.$red-palette);
 
 $StoryFlow_Client-theme: mat.define-light-theme(
@@ -27,7 +27,8 @@ $StoryFlow_Client-theme: mat.define-light-theme(
 html,
 body {
   height: 100%;
-  background-color: mat.get-color-from-palette($primary);
+  color: white;
+  background-color: #0f0f14;
 }
 body {
   margin: 0;
@@ -93,7 +94,17 @@ mat-form-field.card-input {
   min-width: 450px;
   height: calc(100% - 56px);
   min-height: 400px;
-  background-color: mat.get-color-from-palette($primary);
+  background-color: #0a192f;
+}
+
+.submit-button {
+  width: 120px;
+  height: 70px;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 20px;
+  color: white;
+  background-color: mat.get-color-from-palette($accent);
 }
 
 @media (min-width: 600px) {

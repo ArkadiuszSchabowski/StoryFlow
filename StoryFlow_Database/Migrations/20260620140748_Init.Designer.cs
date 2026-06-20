@@ -12,8 +12,8 @@ using StoryFlow_Database;
 namespace StoryFlow_Database.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20260616172753_ImproveModel")]
-    partial class ImproveModel
+    [Migration("20260620140748_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,6 +40,23 @@ namespace StoryFlow_Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Hobbies");
+                });
+
+            modelBuilder.Entity("StoryFlow_Database.Entities.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("StoryFlow_Database.Entities.Sentence", b =>
@@ -142,10 +159,15 @@ namespace StoryFlow_Database.Migrations
                     b.Property<int>("PremiumAccountDays")
                         .HasColumnType("int");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserPoints")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Users");
                 });
@@ -233,6 +255,17 @@ namespace StoryFlow_Database.Migrations
                     b.Navigation("Story");
                 });
 
+            modelBuilder.Entity("StoryFlow_Database.Entities.User", b =>
+                {
+                    b.HasOne("StoryFlow_Database.Entities.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
             modelBuilder.Entity("StoryFlow_Database.Entities.UserHobby", b =>
                 {
                     b.HasOne("StoryFlow_Database.Entities.Hobby", "Hobby")
@@ -293,6 +326,11 @@ namespace StoryFlow_Database.Migrations
             modelBuilder.Entity("StoryFlow_Database.Entities.Hobby", b =>
                 {
                     b.Navigation("UserHobbies");
+                });
+
+            modelBuilder.Entity("StoryFlow_Database.Entities.Role", b =>
+                {
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("StoryFlow_Database.Entities.Sentence", b =>

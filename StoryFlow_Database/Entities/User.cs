@@ -15,6 +15,8 @@ namespace StoryFlow_Database.Entities
         public ICollection<UserSentence> UserSentences { get; set; } = new List<UserSentence>();
         public ICollection<UserStory> UserStories { get; set; } = new List<UserStory>();
         public int UserPoints { get; set; } = 0;
+        public int RoleId { get; set; }
+        public Role? Role { get; set; }
         public int PremiumAccountDays { get; set; } = 0;
     }
 }
