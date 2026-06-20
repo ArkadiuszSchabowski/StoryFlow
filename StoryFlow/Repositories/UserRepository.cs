@@ -32,7 +32,7 @@ namespace StoryFlow.Repositories
 
         public async Task<User?> GetByEmail(string email)
         {
-            return await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
+            return await _context.Users.Include(u => u.Role).FirstOrDefaultAsync(x => x.Email == email);
         }
 
         public async Task Remove(User entity)

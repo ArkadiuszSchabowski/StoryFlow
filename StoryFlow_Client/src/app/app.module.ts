@@ -25,6 +25,7 @@ import { ErrorPageComponent } from './components/system/error-page/error-page.co
 import { ToastrModule } from 'ngx-toastr';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import { StoryCreateComponent } from './components/auth/moderator/story-create/story-create.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {MatNativeDateModule} from '@angular/material/core';
     TextSelectionComponent,
     TextDisplayComponent,
     ErrorPageComponent,
+    StoryCreateComponent,
   ],
   imports: [
     BrowserModule,

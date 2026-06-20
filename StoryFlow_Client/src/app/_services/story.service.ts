@@ -5,6 +5,10 @@ import { map } from 'rxjs';
 import { GetStoryViewDto } from '../models/get-story-view-dto';
 import { GetSentenceViewDto } from '../models/get-sentence-view-dto';
 import { StoryFilter } from '../models/story-filter-dto';
+import { GenerateStoryDto } from '../models/generate-story-dto';
+import { GeminiResponse } from '../models/gemini-response';
+import { AddStoryDto } from '../models/add-story-dto';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +16,44 @@ import { StoryFilter } from '../models/story-filter-dto';
 export class StoryService {
   apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private authService: AuthService,
+    private http: HttpClient,
+  ) {}
+
+  add(dto: AddStoryDto) {
+    const token: string | null = this.authService.getToken();
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return this.http.post(this.apiUrl + 'story', dto, {headers});
+  }
+
+  generate(dto: GenerateStoryDto) {
+    const token: string | null = this.authService.getToken();
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return this.http
+      .post<GeminiResponse>(this.apiUrl + 'story/generate', dto, {
+        headers,
+      })
+      .pipe(
+        map((response) => {
+          const text = response?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+          if (!text) {
+            throw new Error('Invalid Gemini response structure');
+          }
+
+          return JSON.parse(text);
+        }),
+      );
+  }
 
   getAll(dto: StoryFilter | null) {
     let params = new HttpParams();

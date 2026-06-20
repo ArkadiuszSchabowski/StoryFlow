@@ -11,5 +11,6 @@ namespace StoryFlow_Shared.Models
         public string? LastName { get; set; }
         public Gender? Gender { get; set; }
         public DateOnly? DateOfBirth {  get; set; }
+        public int RoleId { get; set; }
     }
 }

@@ -1,0 +1,76 @@
+<div id="create-story-container">
+  <div>
+    <form id="generate-story-container" [formGroup]="generateForm" (ngSubmit)="generate()">
+      <mat-form-field class="filter-field">
+        <mat-label>Category:</mat-label>
+        <mat-select id="storyCategory" formControlName="storyCategory">
+          <mat-option
+            *ngFor="let category of categories"
+            [value]="category.value"
+            >{{ category.viewValue }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="filter-field">
+        <mat-label>Language level:</mat-label>
+        <mat-select id="languageLevel" formControlName="languageLevel">
+          <mat-option
+            *ngFor="let level of languageLevels"
+            [value]="level.value"
+            >{{ level.viewValue }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="filter-field">
+        <mat-label>Story size:</mat-label>
+        <mat-select id="storySize" formControlName="storySize">
+          <mat-option *ngFor="let size of sizes" [value]="size.value">{{
+            size.viewValue
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div id="submit-button-container">
+        <button mat-raised-button id="submit-button" type="submit">
+          Generate story
+        </button>
+      </div>
+    </form>
+  </div>
+  <form [formGroup]="addForm" id="add-form" (ngSubmit)="add()">
+
+    <mat-form-field>
+      <mat-label>Polish title</mat-label>
+      <input matInput id="polishTitle" formControlName="polishTitle" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>English title</mat-label>
+      <input matInput id="englishTitle" formControlName="englishTitle" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Polish description</mat-label>
+      <input matInput id="polishDescription" formControlName="polishDescription" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>English description</mat-label>
+      <input matInput id="englishDescription" formControlName="englishDescription" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Polish story</mat-label>
+      <textarea class="textarea"matInput rows="6" id="polishStory" formControlName="polishStory"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>English story</mat-label>
+      <textarea class="textarea" matInput rows="6" id="englishStory" formControlName="englishStory"></textarea>
+    </mat-form-field>
+          <div id="submit-button-container">
+        <button mat-raised-button id="submit-button" type="submit">
+          Add story
+        </button>
+      </div>
+  </form>
+</div>

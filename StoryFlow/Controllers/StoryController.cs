@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StoryFlow_Shared.Interfaces;
 using StoryFlow_Shared.Models;
 
@@ -30,21 +31,23 @@ namespace StoryFlow.Controllers
             return Ok(story);
         }
 
-        //admin
+        [Authorize(Roles = "Moderator,Administrator")]
         [HttpPost]
-        public async Task<ActionResult> Add(AddStoryDto dto)
+        public async Task<ActionResult> Add([FromBody] AddStoryDto dto)
         {
             await _service.Add(dto);
             return Ok();
         }
 
+        [Authorize(Roles = "Moderator,Administrator")]
         [HttpPost("generate")]
-        public async Task<ActionResult> Generate(GenerateStoryDto dto)
+
+        public async Task<ActionResult> Generate([FromBody] GenerateStoryDto dto)
         {
             return Ok(await _service.Generate(dto));
         }
 
-        //admin
+        [Authorize(Roles = "Moderator,Administrator")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Remove(int id)
         {

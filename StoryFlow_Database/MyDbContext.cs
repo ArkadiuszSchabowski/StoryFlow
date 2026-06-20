@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StoryFlow_Database.Entities;
+using StoryFlow_Shared.Enums;
 
 namespace StoryFlow_Database
 {
@@ -13,6 +14,7 @@ namespace StoryFlow_Database
         public DbSet<UserHobby> UserHobbies { get; set; }
         public DbSet<UserSentence> UserSentences { get; set; }
         public DbSet<UserStory> UserStories { get; set; }
+        public DbSet<Role> Roles { get; set; }
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
         {
 
@@ -31,6 +33,11 @@ namespace StoryFlow_Database
             modelBuilder.Entity<User>().HasMany(u => u.UserStories)
                 .WithOne(us => us.User)
                 .HasForeignKey(us => us.UserId);
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Role)
+                .WithMany(r => r.Users)
+                .HasForeignKey(u => u.RoleId);
 
             modelBuilder.Entity<Story>().HasMany(s => s.Sentences)
                 .WithOne(se => se.Story)

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using FluentAssertions;
+using Microsoft.Extensions.Options;
 using Moq;
+using StoryFlow.Helpers;
 using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
 using StoryFlow.Services;
@@ -19,6 +21,8 @@ namespace StoryFlow_Tests.UnitTests.Services
         private readonly Mock<ITextConverter> _mockTextConverter;
         private readonly Mock<ITextCounter> _mockTextCounter;
         private readonly Mock<IMapper> _mockMapper;
+        private readonly Mock<IOptions<GeminiSettings>> _mockGeminiSettings;
+        private readonly Mock<GeminiSchemaGenerator> _mockGeminiSchemaGenerator;
 
         private readonly StoryService _storyService;
 
@@ -47,8 +51,10 @@ namespace StoryFlow_Tests.UnitTests.Services
             _mockTextConverter = new Mock<ITextConverter>();
             _mockTextCounter = new Mock<ITextCounter>();
             _mockMapper = new Mock<IMapper>();
+            _mockGeminiSettings = new Mock<IOptions<GeminiSettings>>();
+            _mockGeminiSchemaGenerator = new Mock<GeminiSchemaGenerator>();
 
-            _storyService = new StoryService( _mockRepository.Object,  _mocServiceValidator.Object, _mockSentenceBuilder.Object,_mockTextConverter.Object, _mockTextCounter.Object,_mockMapper.Object);
+            _storyService = new StoryService( _mockRepository.Object,  _mocServiceValidator.Object, _mockSentenceBuilder.Object,_mockTextConverter.Object, _mockTextCounter.Object,_mockMapper.Object, _mockGeminiSettings.Object, _mockGeminiSchemaGenerator.Object);
         }
         [Fact]
         public async Task Add_WithCorrectModel_InvokesStoryReposiryAdd()

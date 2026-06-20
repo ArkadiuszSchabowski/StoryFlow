@@ -38,11 +38,13 @@ namespace StoryFlow.Services
                 throw new ConflictException("This email is already registered.");
             }
 
-            var user = _mapper.Map<User>(dto);
+            User user = _mapper.Map<User>(dto);
 
-            var hashedPassword = _passwordHasher.HashPassword(user, dto.Password);
+            string hashedPassword = _passwordHasher.HashPassword(user, dto.Password);
 
             user.HashedPassword = hashedPassword;
+
+            user.RoleId = 1;
 
             await _userRepository.Add(user);
         }
@@ -87,7 +89,8 @@ namespace StoryFlow.Services
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email)
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, user.Role!.Name)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenticationSettings.JwtKey));

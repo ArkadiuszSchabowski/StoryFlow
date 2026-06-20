@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { map, Observable } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
@@ -7,5 +10,16 @@ import { AuthService } from 'src/app/_services/auth.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  constructor(public authService: AuthService) {}
+  isModerator$: boolean = false;
+  constructor(
+    public authService: AuthService,
+    private router: Router,
+    private toastr: ToastrService,
+  ) {}
+
+  logout() {
+    this.authService.logout();
+    this.toastr.success('Logged out successfully.');
+    this.router.navigateByUrl('');
+  }
 }
