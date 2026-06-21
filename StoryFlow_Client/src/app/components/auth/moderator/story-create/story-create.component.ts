@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { StoryService } from 'src/app/_services/story.service';
 import { AddStoryDto } from 'src/app/models/add-story-dto';
 import { GenerateStoryDto } from 'src/app/models/generate-story-dto';
@@ -13,6 +14,7 @@ export class StoryCreateComponent {
   constructor(
     private fb: FormBuilder,
     private storyService: StoryService,
+    private toastr: ToastrService,
   ) {}
 
   generateForm: any = this.fb.group({
@@ -68,8 +70,6 @@ export class StoryCreateComponent {
 
     this.storyService.generate(dto).subscribe({
       next: (response) => {
-        console.log(response);
-
         this.addForm.patchValue({
           languageLevel: response.languageLevel,
           storyCategory: response.storyCategory,
@@ -81,9 +81,7 @@ export class StoryCreateComponent {
           englishStory: response.englishStory,
         });
       },
-      error: (error) => {
-        console.error(error);
-      },
+      error: () => {},
     });
   }
   public add() {
@@ -104,7 +102,9 @@ export class StoryCreateComponent {
         console.log(response);
         this.addForm.reset();
       },
-      error: (error) => console.log(error),
+      error: (error) => {
+        this.toastr.error(error.error);
+      },
     });
   }
 }
