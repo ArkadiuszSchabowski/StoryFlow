@@ -105,6 +105,9 @@ namespace StoryFlow_Database.Migrations
                     b.Property<int?>("LanguageLevel")
                         .HasColumnType("int");
 
+                    b.Property<int>("MaxPoints")
+                        .HasColumnType("int");
+
                     b.Property<string>("PolishDescription")
                         .HasColumnType("nvarchar(max)");
 

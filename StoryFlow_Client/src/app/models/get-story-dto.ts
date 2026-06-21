@@ -15,6 +15,7 @@ export interface GetStoryDto {
     englishDescription: string | null;
     storyCategory: StoryCategory | null;
     storySize: StorySize | null;
+    maxPoints: number;
     languageLevel: LanguageLevel | null;
     sentences: GetSentenceDto[];
     userStories: GetUserStoryDto[];

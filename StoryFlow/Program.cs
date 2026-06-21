@@ -53,6 +53,7 @@ builder.Services.AddScoped<IValidatorId, ValidatorId>();
 builder.Services.AddScoped<ISentenceBuilder, SentenceBuilder>();
 builder.Services.AddScoped<ITextConverter, TextConverter>();
 builder.Services.AddScoped<ITextCounter, TextCounter>();
+builder.Services.AddScoped<IPointsCalculator, PointsCalculator>();
 builder.Services.AddScoped<GeminiSchemaGenerator>();
 
 builder.Services.AddScoped<HttpClient>();
@@ -95,7 +96,7 @@ builder.Services.AddAuthentication(option =>
 
 var app = builder.Build();
 
-app.UseMiddleware<ErrorHandlingMiddleware>();
+//app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseCors("StoryFlowPolicy");
 

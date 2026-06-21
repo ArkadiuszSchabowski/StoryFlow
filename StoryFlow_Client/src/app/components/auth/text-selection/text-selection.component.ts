@@ -79,6 +79,19 @@ export class TextSelectionComponent implements OnInit {
     }
   }
 
+  showSize(size: any) {
+    switch (size) {
+      case 0:
+        return 'Short';
+      case 1:
+        return 'Medium';
+      case 2:
+        return 'Long';
+      default:
+        return 'Unknown';
+    }
+  }
+
   get() {
     this.dto = {
       languageLevel: this.form.value.languageLevel,
@@ -89,6 +102,7 @@ export class TextSelectionComponent implements OnInit {
     this.storyService.getAll(this.dto).subscribe({
       next: (response) => {
         this.stories = response;
+        console.log(response);
       },
       error: (error) => console.log(error),
     });

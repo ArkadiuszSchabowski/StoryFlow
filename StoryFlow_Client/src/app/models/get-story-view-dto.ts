@@ -12,6 +12,7 @@ export class GetStoryViewDto {
   englishTitle: string = '';
   polishDescription: string = '';
   englishDescription: string = '';
+  maxPoints: number = 0;
   storyCategory: StoryCategory | null = null;
   storySize: StorySize | null = null;
   languageLevel: LanguageLevel | null = null;
