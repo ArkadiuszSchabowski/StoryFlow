@@ -56,6 +56,13 @@ export class StoryService {
   }
 
   getAll(dto: StoryFilter | null) {
+
+        const token: string | null = this.authService.getToken();
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
     let params = new HttpParams();
 
     if (dto?.languageLevel)
@@ -63,7 +70,7 @@ export class StoryService {
     if (dto?.category) params = params.set('category', dto.category);
     if (dto?.size) params = params.set('size', dto.size);
 
-    return this.http.get<GetStoryViewDto[]>(this.apiUrl + 'story', { params });
+    return this.http.get<GetStoryViewDto[]>(this.apiUrl + 'story', { params, headers });
   }
 
   get(id: number) {

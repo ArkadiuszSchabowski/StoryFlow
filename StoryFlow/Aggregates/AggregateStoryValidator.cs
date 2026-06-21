@@ -11,12 +11,14 @@ namespace StoryFlow.Aggregates
         private readonly IValidator<AddStoryDto> _storyValidator;
         private readonly IValidatorId _validatorId;
         private readonly IEntityValidator<Story> _entityValidator;
+        private readonly IResultValidator _resultValidator;
 
-        public AggregateStoryValidator(IValidator<AddStoryDto> storyValidator, IValidatorId validatorId, IEntityValidator<Story> entityValidator)
+        public AggregateStoryValidator(IValidator<AddStoryDto> storyValidator, IValidatorId validatorId, IEntityValidator<Story> entityValidator, IResultValidator resultValidator)
         {
             _storyValidator = storyValidator;
             _validatorId = validatorId;
             _entityValidator = entityValidator;
+            _resultValidator = resultValidator;
         }
 
         public void ThrowIsNull(Story? entity)
@@ -32,6 +34,11 @@ namespace StoryFlow.Aggregates
         public void ValidateId(int? id)
         {
             _validatorId.ValidateId(id);
+        }
+
+        public void ValidateResult(int result)
+        {
+           _resultValidator.ValidateResult(result);
         }
 
         public void ValidateSentencesCount(int polishSentencesCount, int englishSentencesCount)

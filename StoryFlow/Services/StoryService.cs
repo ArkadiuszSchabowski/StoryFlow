@@ -134,9 +134,9 @@ namespace StoryFlow.Services
             return geminiResponse;
         }
 
-        public async Task<ICollection<GetStoryDto>> Get(StoryFilter? filter)
+        public async Task<ICollection<GetStoryDto>> Get(StoryFilter? filter, int userId)
         {
-            var query = _storyRepository.Get();
+            IQueryable<Story> query = _storyRepository.Get();
 
             if (filter != null)
             {
@@ -150,9 +150,24 @@ namespace StoryFlow.Services
                     query = query.Where(x => x.StorySize == filter.Size.Value);
             }
 
-            var results = await query.ToListAsync();
+            List<Story>? results = await query.ToListAsync();
 
-            var stories = _mapper.Map<List<GetStoryDto>>(results);
+            List<GetStoryDto> stories = _mapper.Map<List<GetStoryDto>>(results);
+
+            foreach (var story in stories)
+            {
+                var userStory = story.UserStories
+                    .FirstOrDefault(us => us.UserId == userId);
+
+                if (userStory != null)
+                {
+                    story.UserStories = new List<GetUserStoryDto> { userStory };
+                }
+                else
+                {
+                    story.UserStories = new List<GetUserStoryDto>();
+                }
+            }
 
             return stories;
         }
@@ -179,6 +194,32 @@ namespace StoryFlow.Services
             _serviceValidator.ThrowIsNull(result);
 
             await _storyRepository.Remove(result!);
+        }
+
+        public async Task SaveStoryBestResultForUser(int userId, int storyId, int result)
+        {
+            _serviceValidator.ValidateResult(result);
+
+            UserStory? userStory = await _storyRepository.GetByUserAndStory(userId, storyId);
+
+            if (userStory == null)
+            {
+                userStory = new UserStory
+                {
+                    StoryId = storyId,
+                    UserId = userId,
+                    BestResult = result
+                };
+
+                await _storyRepository.AddBestResult(userStory);
+                return;
+            }
+
+            if (result > userStory.BestResult)
+            {
+                userStory.BestResult = result;
+                await _storyRepository.Update(userStory);
+            }
         }
     }
 }

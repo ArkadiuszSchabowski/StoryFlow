@@ -50,6 +50,10 @@ namespace StoryFlow_Database
             modelBuilder.Entity<Hobby>().HasMany(h => h.UserHobbies)
                 .WithOne(uh => uh.Hobby)
                 .HasForeignKey(uh => uh.HobbyId);
+
+            modelBuilder.Entity<UserStory>()
+                .HasIndex(us => new { us.UserId, us.StoryId })
+                .IsUnique();
         }
     }
 }
