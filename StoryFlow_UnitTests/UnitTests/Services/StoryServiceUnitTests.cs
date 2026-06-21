@@ -23,6 +23,7 @@ namespace StoryFlow_Tests.UnitTests.Services
         private readonly Mock<IMapper> _mockMapper;
         private readonly Mock<IOptions<GeminiSettings>> _mockGeminiSettings;
         private readonly Mock<GeminiSchemaGenerator> _mockGeminiSchemaGenerator;
+        private readonly Mock<IPointsCalculator> _mockPointsCalculator;
 
         private readonly StoryService _storyService;
 
@@ -53,8 +54,9 @@ namespace StoryFlow_Tests.UnitTests.Services
             _mockMapper = new Mock<IMapper>();
             _mockGeminiSettings = new Mock<IOptions<GeminiSettings>>();
             _mockGeminiSchemaGenerator = new Mock<GeminiSchemaGenerator>();
+            _mockPointsCalculator = new Mock<IPointsCalculator>();
 
-            _storyService = new StoryService( _mockRepository.Object,  _mocServiceValidator.Object, _mockSentenceBuilder.Object,_mockTextConverter.Object, _mockTextCounter.Object,_mockMapper.Object, _mockGeminiSettings.Object, _mockGeminiSchemaGenerator.Object);
+            _storyService = new StoryService( _mockRepository.Object,  _mocServiceValidator.Object, _mockSentenceBuilder.Object,_mockTextConverter.Object, _mockTextCounter.Object,_mockMapper.Object, _mockGeminiSettings.Object, _mockGeminiSchemaGenerator.Object, _mockPointsCalculator.Object);
         }
         [Fact]
         public async Task Add_WithCorrectModel_InvokesStoryReposiryAdd()

@@ -11,6 +11,7 @@ namespace StoryFlow_Database.Entities
         public string? EnglishTitle { get; set; }
         public string? PolishDescription { get; set; }
         public string? EnglishDescription { get; set; }
+        public int MaxPoints { get; set; }
         public StoryCategory? StoryCategory { get; set; }
         public StorySize? StorySize {get; set;}
         public LanguageLevel? LanguageLevel { get; set; }

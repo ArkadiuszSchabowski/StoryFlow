@@ -12,7 +12,7 @@ using StoryFlow_Database;
 namespace StoryFlow_Database.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20260620140748_Init")]
+    [Migration("20260621173623_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -106,6 +106,9 @@ namespace StoryFlow_Database.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("LanguageLevel")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxPoints")
                         .HasColumnType("int");
 
                     b.Property<string>("PolishDescription")

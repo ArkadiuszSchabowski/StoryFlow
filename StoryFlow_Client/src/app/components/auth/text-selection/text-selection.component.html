@@ -51,6 +51,9 @@
             <div class="story-card-language-level">
              {{ showLanguageLevel(story.languageLevel) }}
             </div>
+                        <div class="story-card-story-size">
+             {{ showSize(story.storySize) }}
+            </div>
       <div class="story-card-button-container">
         <button
           mat-raised-button
@@ -61,7 +64,7 @@
         </button>
       </div>
       <div class="score">
-        0 <mat-icon>star</mat-icon> / 120<mat-icon>star</mat-icon>
+        0 <mat-icon>star</mat-icon> / {{story.maxPoints}}<mat-icon>star</mat-icon>
       </div>
     </div>
   </div>

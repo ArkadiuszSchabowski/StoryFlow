@@ -49,6 +49,7 @@ namespace StoryFlow_Database.Migrations
                     EnglishTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PolishDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EnglishDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MaxPoints = table.Column<int>(type: "int", nullable: false),
                     StoryCategory = table.Column<int>(type: "int", nullable: true),
                     StorySize = table.Column<int>(type: "int", nullable: true),
                     LanguageLevel = table.Column<int>(type: "int", nullable: true)
