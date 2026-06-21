@@ -95,7 +95,7 @@ builder.Services.AddAuthentication(option =>
 
 var app = builder.Build();
 
-//app.UseMiddleware<ErrorHandlingMiddleware>();
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseCors("StoryFlowPolicy");
 

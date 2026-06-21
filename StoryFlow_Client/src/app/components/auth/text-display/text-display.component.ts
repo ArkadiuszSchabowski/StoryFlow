@@ -33,7 +33,7 @@ export class TextDisplayComponent implements OnInit {
         next: (response) => {
           ((this.story = response), console.log(response));
         },
-        error: () => this.router.navigateByUrl((`error-page`)),
+        error: () => this.router.navigateByUrl(`error-page`),
       });
     }
   }
@@ -46,5 +46,57 @@ export class TextDisplayComponent implements OnInit {
   }
   changeTitleLanguage(story: GetStoryViewDto) {
     story.isTitleEnglish = !story.isTitleEnglish;
+  }
+  showLanguageLevel(level: any) {
+    switch (level) {
+      case 0:
+        return 'A1 - Beginner';
+      case 1:
+        return 'A2 - Elementary';
+      case 2:
+        return 'B1 - Intermediate';
+      case 3:
+        return 'B2 - Upper-Intermediate';
+      case 4:
+        return 'C1 - Advanced';
+      case 5:
+        return 'C2 - Proficiency';
+      default:
+        return 'Unknown';
+    }
+  }
+
+  showSize(size: any) {
+    switch (size) {
+      case 0:
+        return 'Short';
+      case 1:
+        return 'Medium';
+      case 2:
+        return 'Long';
+      default:
+        return 'Unknown';
+    }
+  }
+
+  showCategory(category: any) {
+    switch (category) {
+      case 0:
+        return 'Animals';
+      case 1:
+        return 'Health';
+      case 2:
+        return 'Technology';
+      case 3:
+        return 'Sport';
+      case 4:
+        return 'Art';
+      case 5:
+        return 'History';
+      case 6:
+        return 'Music';
+      default:
+        return 'Unknown';
+    }
   }
 }

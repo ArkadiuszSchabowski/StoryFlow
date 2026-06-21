@@ -1,5 +1,7 @@
-<div id="text-display-container" class="container" *ngIf="story">
-  <div id="story-information">Category: {{ story.storyCategory }}, Size: {{ story.storySize }}, Level:{{ story.languageLevel }}
+<div id="text-display-container" *ngIf="story">
+  <div id="story-information">
+    Category: {{showCategory(story.storyCategory)}}, Size: {{showSize(story.storySize)}}, Level:
+    {{ showLanguageLevel(story.languageLevel) }}
   </div>
 
   <div id="title-container">

@@ -1,40 +1,43 @@
 <div id="create-story-container">
-  <div>
-    <form
-      id="generate-story-container"
-      [formGroup]="generateForm"
-      (ngSubmit)="generate()"
-    >
-      <mat-form-field class="filter-field">
-        <mat-label>Category:</mat-label>
-        <mat-select id="storyCategory" formControlName="storyCategory">
-          <mat-option
-            *ngFor="let category of categories"
-            [value]="category.value"
-            >{{ category.viewValue }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field class="filter-field">
-        <mat-label>Language level:</mat-label>
-        <mat-select id="languageLevel" formControlName="languageLevel">
-          <mat-option
-            *ngFor="let level of languageLevels"
-            [value]="level.value"
-            >{{ level.viewValue }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field class="filter-field">
-        <mat-label>Story size:</mat-label>
-        <mat-select id="storySize" formControlName="storySize">
-          <mat-option *ngFor="let size of sizes" [value]="size.value">{{
-            size.viewValue
-          }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div id="submit-button-container">
-        <button mat-raised-button class="submit-button" id="submit-button-generate" type="submit">
+  <div id="generate-story-container">
+    <form [formGroup]="generateForm" (ngSubmit)="generate()">
+      <div id="filter-story-container">
+        <mat-form-field class="filter-field">
+          <mat-label>Category:</mat-label>
+          <mat-select id="storyCategory" formControlName="storyCategory">
+            <mat-option
+              *ngFor="let category of categories"
+              [value]="category.value"
+              >{{ category.viewValue }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="filter-field">
+          <mat-label>Language level:</mat-label>
+          <mat-select id="languageLevel" formControlName="languageLevel">
+            <mat-option
+              *ngFor="let level of languageLevels"
+              [value]="level.value"
+              >{{ level.viewValue }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="filter-field">
+          <mat-label>Story size:</mat-label>
+          <mat-select id="storySize" formControlName="storySize">
+            <mat-option *ngFor="let size of sizes" [value]="size.value">{{
+              size.viewValue
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="submit-button-container">
+        <button
+          mat-raised-button
+          class="submit-button"
+          id="submit-button-generate"
+          type="submit"
+        >
           Generate
         </button>
       </div>
@@ -119,8 +122,13 @@
       ></textarea>
     </mat-form-field>
 
-    <div id="submit-button-container">
-      <button mat-raised-button class="submit-button" id="submit-button-create" type="submit">
+    <div class="submit-button-container">
+      <button
+        mat-raised-button
+        class="submit-button"
+        id="submit-button-create"
+        type="submit"
+      >
         Add
       </button>
     </div>
