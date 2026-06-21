@@ -64,7 +64,7 @@
         </button>
       </div>
       <div class="score">
-        0 <mat-icon>star</mat-icon> / {{story.maxPoints}}<mat-icon>star</mat-icon>
+        {{ story?.userStories?.[0]?.bestResult ?? 0 }} <mat-icon>star</mat-icon> / {{story.maxPoints}}<mat-icon>star</mat-icon>
       </div>
     </div>
   </div>

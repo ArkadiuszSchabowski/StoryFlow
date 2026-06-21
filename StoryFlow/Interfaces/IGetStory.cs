@@ -4,7 +4,7 @@ namespace StoryFlow_Shared.Interfaces
 {
     public interface IGetStory
     {
-        Task<ICollection<GetStoryDto>> Get(StoryFilter? storyFilter);
+        Task<ICollection<GetStoryDto>> Get(StoryFilter? storyFilter, int userId);
         Task<GetStoryDto> Get(int id);
     }
 }

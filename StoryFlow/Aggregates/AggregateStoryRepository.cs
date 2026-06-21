@@ -9,15 +9,22 @@ namespace StoryFlow.Aggregates
     {
         private readonly IRepository<Story> _repository;
         private readonly IGetStoryRepository _storyRepository;
+        private readonly IUserStoryRepository _userStoryRepository;
 
-        public AggregateStoryRepository(IRepository<Story> repository, IGetStoryRepository storyRepository)
+        public AggregateStoryRepository(IRepository<Story> repository, IGetStoryRepository storyRepository, IUserStoryRepository userStoryRepository)
         {
             _repository = repository;
             _storyRepository = storyRepository;
+            _userStoryRepository = userStoryRepository;
         }
         public async Task Add(Story entity)
         {
             await _repository.Add(entity);
+        }
+
+        public async Task AddBestResult(UserStory userStory)
+        {
+            await _userStoryRepository.AddBestResult(userStory);
         }
 
         public async Task<Story?> Get(int id)
@@ -30,9 +37,19 @@ namespace StoryFlow.Aggregates
             return _storyRepository.Get();
         }
 
+        public Task<UserStory?> GetByUserAndStory(int userId, int storyId)
+        {
+            return _userStoryRepository.GetByUserAndStory(userId, storyId);
+        }
+
         public async Task Remove(Story entity)
         {
             await _repository.Remove(entity);
+        }
+
+        public async Task Update(UserStory userStory)
+        {
+            await _userStoryRepository.Update(userStory);
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StoryFlow_Shared.Interfaces;
 using StoryFlow_Shared.Models;
+using System.Security.Claims;
 
 namespace StoryFlow.Controllers
 {
@@ -16,10 +17,13 @@ namespace StoryFlow.Controllers
             _service = service;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<GetStoryDto>> Get([FromQuery] StoryFilter? dto)
         {
-            var stories = await _service.Get(dto!);
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+
+            var stories = await _service.Get(dto!, userId);
 
             return Ok(stories);
         }
@@ -29,6 +33,19 @@ namespace StoryFlow.Controllers
         {
             var story = await _service.Get(id);
             return Ok(story);
+        }
+
+        [Authorize]
+        [HttpPost("{storyId}/result")]
+        public async Task<IActionResult> SubmitResult(
+            [FromRoute] int storyId,
+            [FromBody] SubmitStoryResultDto dto)
+        {
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+
+            await _service.SaveStoryBestResultForUser(userId, storyId, dto.Result);
+
+            return Ok();
         }
 
         [Authorize(Roles = "Moderator,Administrator")]

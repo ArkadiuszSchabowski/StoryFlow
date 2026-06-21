@@ -26,13 +26,30 @@ namespace StoryFlow.Repositories
 
         public IQueryable<Story> Get()
         {
-            return _context.Stories.Include(s => s.Sentences).AsQueryable();
+            return _context.Stories.Include(s => s.UserStories).Include(s => s.Sentences).AsQueryable();
         }
 
+        public async Task AddBestResult(UserStory userStory)
+        {
+            await _context.UserStories.AddAsync(userStory);
+            await _context.SaveChangesAsync();
+        }
 
         public async Task Remove(Story story)
         {
             _context.Stories.Remove(story);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<UserStory?> GetByUserAndStory(int userId, int storyId)
+        {
+            return await _context.UserStories
+                .FirstOrDefaultAsync(x => x.UserId == userId && x.StoryId == storyId);
+        }
+
+        public async Task Update(UserStory userStory)
+        {
+            _context.UserStories.Update(userStory);
             await _context.SaveChangesAsync();
         }
     }
