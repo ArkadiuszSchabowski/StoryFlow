@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StoryFlow.Interfaces;
+using StoryFlow.Services;
 using StoryFlow_Shared.Models;
+using System.Security.Claims;
 
 namespace StoryFlow.Controllers
 {
@@ -23,6 +25,26 @@ namespace StoryFlow.Controllers
             var users = await _service.Get();
 
             return Ok(users);
+        }
+
+        [HttpGet("profile")]
+        public async Task<ActionResult<GetUserDto>> GetProfile()
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (!int.TryParse(userIdClaim, out var userId))
+            {
+                return Unauthorized();
+            }
+
+            var user = await _service.Get(userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
         }
 
         [Authorize(Roles = "Administrator")]

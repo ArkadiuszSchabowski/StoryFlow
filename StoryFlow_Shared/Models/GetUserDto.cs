@@ -11,6 +11,7 @@ namespace StoryFlow_Shared.Models
         public string? LastName { get; set; }
         public Gender? Gender { get; set; }
         public DateOnly? DateOfBirth { get; set; }
+        public int? Stars { get; set; }
         public ICollection<GetHobbyDto> Hobbies { get; set; } = new List<GetHobbyDto>();
     }
 }

@@ -1,3 +1,38 @@
 <div class="container">
-Profile works!
+  <div id="profile-information">
+    <div id="profile-information-label" class="title">Profile Information</div>
+    <div id="email" class="profile-information-item">
+      <div class="profile-information-key">Email:</div>
+      <div class="profile-information-value">{{ profile.email }}</div>
+    </div>
+
+    <div id="first-name" class="profile-information-item">
+      <div class="profile-information-key">First name:</div>
+      <div class="profile-information-value">{{ profile.firstName }}</div>
+    </div>
+
+    <div id="last-name" class="profile-information-item">
+      <div class="profile-information-key">Last name:</div>
+      <div class="profile-information-value">{{ profile.lastName }}</div>
+    </div>
+
+    <div id="gender" class="profile-information-item">
+      <div class="profile-information-key">Gender:</div>
+      <div class="profile-information-value">
+        {{ profile.gender === 0 ? "Female" : "Male" }}
+      </div>
+    </div>
+
+    <div id="date-of-birth" class="profile-information-item">
+      <div class="profile-information-key">Date of birth:</div>
+      <div class="profile-information-value">{{ profile.dateOfBirth }}</div>
+    </div>
+
+    <div id="stars" class="profile-information-item">
+      <div class="profile-information-key">Result:</div>
+      <div class="profile-information-value">
+        {{ profile.stars }}&nbsp;<mat-icon>star</mat-icon>
+      </div>
+    </div>
+  </div>
 </div>

@@ -162,7 +162,7 @@ namespace StoryFlow_Database.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserPoints")
+                    b.Property<int>("Stars")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -239,7 +239,8 @@ namespace StoryFlow_Database.Migrations
 
                     b.HasIndex("StoryId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId", "StoryId")
+                        .IsUnique();
 
                     b.ToTable("UserStories");
                 });
