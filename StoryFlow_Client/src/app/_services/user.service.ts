@@ -13,20 +13,32 @@ import { RegisterUserDto } from '../models/register-user-dto';
 export class UserService {
   apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+  ) {}
 
-  
+  getProfile() {
+    const token: string | null = this.authService.getToken();
 
-  login(dto: LoginDto) {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
 
-    return this.http.post<TokenDto>(this.apiUrl + 'user/login', dto).pipe(tap((response) => {
-      if(response.token){
-        this.authService.setUser(response.token);
-      }
-    }))
+    return this.http.get(this.apiUrl + 'user/profile', {headers});
   }
 
-  register(dto: RegisterUserDto){
-    return this.http.post(this.apiUrl + 'user/register', dto)
+  login(dto: LoginDto) {
+    return this.http.post<TokenDto>(this.apiUrl + 'user/login', dto).pipe(
+      tap((response) => {
+        if (response.token) {
+          this.authService.setUser(response.token);
+        }
+      }),
+    );
+  }
+
+  register(dto: RegisterUserDto) {
+    return this.http.post(this.apiUrl + 'user/register', dto);
   }
 }
