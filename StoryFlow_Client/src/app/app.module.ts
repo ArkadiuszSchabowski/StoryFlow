@@ -26,6 +26,7 @@ import { ToastrModule } from 'ngx-toastr';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { StoryCreateComponent } from './components/auth/moderator/story-create/story-create.component';
+import { QuizCreateComponent } from './components/auth/moderator/quiz-create/quiz-create.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { StoryCreateComponent } from './components/auth/moderator/story-create/s
     TextDisplayComponent,
     ErrorPageComponent,
     StoryCreateComponent,
+    QuizCreateComponent,
   ],
   imports: [
     BrowserModule,
