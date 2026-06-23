@@ -12,5 +12,6 @@ namespace StoryFlow_Shared.Models
         public string? EnglishDescription { get; set; }
         public StoryCategory? StoryCategory { get; set; }
         public LanguageLevel? LanguageLevel { get; set; }
+        public AddQuizDto? Quiz { get; set; }
     }
 }
