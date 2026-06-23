@@ -17,5 +17,6 @@ namespace StoryFlow_Shared.Models
         public LanguageLevel? LanguageLevel { get; set; }
         public ICollection<GetSentenceDto> Sentences { get; set; } = new List<GetSentenceDto>();
         public ICollection<GetUserStoryDto> UserStories { get; set; } = new List<GetUserStoryDto>();
+        public GetQuizDto? Quiz { get; set; }
     }
 }

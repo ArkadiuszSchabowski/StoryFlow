@@ -110,6 +110,13 @@ namespace StoryFlow.Services
                     - Check the length before finishing the story
                     - Do not exceed the character limit
                     - Adapt the writing style to the language level
+
+                    Quiz requirements:
+                    - Generate exactly 4 quiz questions based on the story
+                    - Each question must have exactly 4 answer options
+                    - Only one answer can be correct
+                    - Use English for questions and answers
+                    - Return the index of the correct answer (0-3)
                     
                     Return ONLY JSON that matches the responseSchema.
 """

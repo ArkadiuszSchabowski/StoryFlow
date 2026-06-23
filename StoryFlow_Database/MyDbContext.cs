@@ -15,6 +15,9 @@ namespace StoryFlow_Database
         public DbSet<UserSentence> UserSentences { get; set; }
         public DbSet<UserStory> UserStories { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Quiz> Quizzes { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
         {
 
@@ -54,6 +57,21 @@ namespace StoryFlow_Database
             modelBuilder.Entity<UserStory>()
                 .HasIndex(us => new { us.UserId, us.StoryId })
                 .IsUnique();
+
+            modelBuilder.Entity<Story>()
+                .HasOne(s => s.Quiz)
+                .WithOne(q => q.Story)
+                .HasForeignKey<Quiz>(q => q.StoryId);
+
+            modelBuilder.Entity<Quiz>()
+                .HasMany(q => q.Questions)
+                .WithOne(qu => qu.Quiz)
+                .HasForeignKey(qu => qu.QuizId);
+
+            modelBuilder.Entity<Question>()
+                .HasMany(q => q.Answers)
+                .WithOne(a => a.Question)
+                .HasForeignKey(a => a.QuestionId);
         }
     }
 }

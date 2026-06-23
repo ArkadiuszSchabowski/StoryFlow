@@ -22,6 +22,35 @@ namespace StoryFlow_Database.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("StoryFlow_Database.Entities.Answer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsCorrect")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("Answers");
+                });
+
             modelBuilder.Entity("StoryFlow_Database.Entities.Hobby", b =>
                 {
                     b.Property<int>("Id")
@@ -37,6 +66,47 @@ namespace StoryFlow_Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Hobbies");
+                });
+
+            modelBuilder.Entity("StoryFlow_Database.Entities.Question", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("QuestionText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("QuizId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuizId");
+
+                    b.ToTable("Questions");
+                });
+
+            modelBuilder.Entity("StoryFlow_Database.Entities.Quiz", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("StoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StoryId")
+                        .IsUnique();
+
+                    b.ToTable("Quizzes");
                 });
 
             modelBuilder.Entity("StoryFlow_Database.Entities.Role", b =>
@@ -245,6 +315,39 @@ namespace StoryFlow_Database.Migrations
                     b.ToTable("UserStories");
                 });
 
+            modelBuilder.Entity("StoryFlow_Database.Entities.Answer", b =>
+                {
+                    b.HasOne("StoryFlow_Database.Entities.Question", "Question")
+                        .WithMany("Answers")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Question");
+                });
+
+            modelBuilder.Entity("StoryFlow_Database.Entities.Question", b =>
+                {
+                    b.HasOne("StoryFlow_Database.Entities.Quiz", "Quiz")
+                        .WithMany("Questions")
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Quiz");
+                });
+
+            modelBuilder.Entity("StoryFlow_Database.Entities.Quiz", b =>
+                {
+                    b.HasOne("StoryFlow_Database.Entities.Story", "Story")
+                        .WithOne("Quiz")
+                        .HasForeignKey("StoryFlow_Database.Entities.Quiz", "StoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Story");
+                });
+
             modelBuilder.Entity("StoryFlow_Database.Entities.Sentence", b =>
                 {
                     b.HasOne("StoryFlow_Database.Entities.Story", "Story")
@@ -329,6 +432,16 @@ namespace StoryFlow_Database.Migrations
                     b.Navigation("UserHobbies");
                 });
 
+            modelBuilder.Entity("StoryFlow_Database.Entities.Question", b =>
+                {
+                    b.Navigation("Answers");
+                });
+
+            modelBuilder.Entity("StoryFlow_Database.Entities.Quiz", b =>
+                {
+                    b.Navigation("Questions");
+                });
+
             modelBuilder.Entity("StoryFlow_Database.Entities.Role", b =>
                 {
                     b.Navigation("Users");
@@ -341,6 +454,8 @@ namespace StoryFlow_Database.Migrations
 
             modelBuilder.Entity("StoryFlow_Database.Entities.Story", b =>
                 {
+                    b.Navigation("Quiz");
+
                     b.Navigation("Sentences");
 
                     b.Navigation("UserStories");

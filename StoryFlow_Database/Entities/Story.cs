@@ -17,5 +17,6 @@ namespace StoryFlow_Database.Entities
         public LanguageLevel? LanguageLevel { get; set; }
         public ICollection<Sentence> Sentences { get; set; } = new List<Sentence>();
         public ICollection<UserStory> UserStories { get; set; } = new List<UserStory>();
+        public Quiz? Quiz { get; set; }
     }
 }
