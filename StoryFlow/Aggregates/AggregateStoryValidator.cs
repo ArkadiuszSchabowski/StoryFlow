@@ -1,6 +1,7 @@
 ﻿using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
 using StoryFlow_Database.Entities;
+using StoryFlow_Shared.Enums;
 using StoryFlow_Shared.Interfaces;
 using StoryFlow_Shared.Models;
 
@@ -36,9 +37,9 @@ namespace StoryFlow.Aggregates
             _validatorId.ValidateId(id);
         }
 
-        public void ValidateResult(int result)
+        public void ValidateResult(StorySize? size, LanguageLevel? languageLevel, int result)
         {
-           _resultValidator.ValidateResult(result);
+           _resultValidator.ValidateResult(size, languageLevel, result);
         }
 
         public void ValidateSentencesCount(int polishSentencesCount, int englishSentencesCount)

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using StoryFlow.Exceptions;
 using StoryFlow.Helpers;
 using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
@@ -198,7 +199,14 @@ namespace StoryFlow.Services
 
         public async Task SaveStoryBestResultForUser(int userId, int storyId, int result)
         {
-            _serviceValidator.ValidateResult(result);
+            var story = await _storyRepository.Get(storyId);
+
+            if(story == null)
+            {
+                throw new BadRequestException("Story not found.");
+            }
+
+            _serviceValidator.ValidateResult(story.StorySize, story.LanguageLevel, result);
 
             UserStory? userStory = await _storyRepository.GetByUserAndStory(userId, storyId);
 
