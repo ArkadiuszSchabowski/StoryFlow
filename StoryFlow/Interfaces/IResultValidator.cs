@@ -1,7 +1,9 @@
-﻿namespace StoryFlow.Interfaces
+﻿using StoryFlow_Shared.Enums;
+
+namespace StoryFlow.Interfaces
 {
     public interface IResultValidator
     {
-        void ValidateResult(int result);
+        void ValidateResult(StorySize? size, LanguageLevel? languageLevel, int result);
     }
 }

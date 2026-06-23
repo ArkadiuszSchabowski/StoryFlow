@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using StoryFlow.Exceptions;
 using StoryFlow.Helpers;
 using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
@@ -61,7 +62,7 @@ namespace StoryFlow.Services
             string storyLengthMin = "";
             string storyLengthMax = "";
 
-            object schema = _geminiSchemaGenerator.GenerateSchema();
+            object schema = _geminiSchemaGenerator.GenerateStorySchema();
 
             if (dto.StorySize == StorySize.Short)
             {
@@ -109,6 +110,13 @@ namespace StoryFlow.Services
                     - Check the length before finishing the story
                     - Do not exceed the character limit
                     - Adapt the writing style to the language level
+
+                    Quiz requirements:
+                    - Generate exactly 4 quiz questions based on the story
+                    - Each question must have exactly 4 answer options
+                    - Only one answer can be correct
+                    - Use English for questions and answers
+                    - Return the index of the correct answer (0-3)
                     
                     Return ONLY JSON that matches the responseSchema.
 """
@@ -198,7 +206,14 @@ namespace StoryFlow.Services
 
         public async Task SaveStoryBestResultForUser(int userId, int storyId, int result)
         {
-            _serviceValidator.ValidateResult(result);
+            var story = await _storyRepository.Get(storyId);
+
+            if(story == null)
+            {
+                throw new BadRequestException("Story not found.");
+            }
+
+            _serviceValidator.ValidateResult(story.StorySize, story.LanguageLevel, result);
 
             UserStory? userStory = await _storyRepository.GetByUserAndStory(userId, storyId);
 

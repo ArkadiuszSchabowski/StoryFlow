@@ -10,7 +10,6 @@ namespace StoryFlow.Helpers
             int storySizePoints = 0;
             int pointsPerCorrectAnswer = 0;
             int questions = 4;
-            int maxPointsWithoutTranslation = 50;
 
             switch (size)
             {
@@ -47,7 +46,7 @@ namespace StoryFlow.Helpers
                     break;
             }
 
-            return pointsPerCorrectAnswer * questions + maxPointsWithoutTranslation + storySizePoints;
+            return pointsPerCorrectAnswer * questions + storySizePoints;
         }
     }
 }

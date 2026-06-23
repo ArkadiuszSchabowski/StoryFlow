@@ -1,6 +1,7 @@
 import { LanguageLevel } from "../enums/language-level";
 import { StoryCategory } from "../enums/story-category";
 import { StorySize } from "../enums/story-size";
+import { GetQuizDto } from "./get-quiz-dto";
 import { GetSentenceDto } from "./get-sentence-dto";
 import { GetUserStoryDto } from "./get-user-story-dto";
 
@@ -19,4 +20,5 @@ export interface GetStoryDto {
     languageLevel: LanguageLevel | null;
     sentences: GetSentenceDto[];
     userStories: GetUserStoryDto[];
+    quiz: GetQuizDto;
 }
