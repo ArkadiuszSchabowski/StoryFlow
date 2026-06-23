@@ -19,29 +19,29 @@ namespace StoryFlow_Tests.UnitTests.Validators
         }
 
         [Theory]
-        [InlineData(StorySize.Short, LanguageLevel.A1, 101, 100)]
-        [InlineData(StorySize.Medium, LanguageLevel.A1, 111, 110)]
-        [InlineData(StorySize.Long, LanguageLevel.A1, 121, 120)]
+        [InlineData(StorySize.Short, LanguageLevel.A1, 51, 50)]
+        [InlineData(StorySize.Medium, LanguageLevel.A1, 61, 60)]
+        [InlineData(StorySize.Long, LanguageLevel.A1, 71, 70)]
 
-        [InlineData(StorySize.Short, LanguageLevel.A2, 121, 120)]
-        [InlineData(StorySize.Medium, LanguageLevel.A2, 131, 130)]
-        [InlineData(StorySize.Long, LanguageLevel.A2, 141, 140)]
+        [InlineData(StorySize.Short, LanguageLevel.A2, 71, 70)]
+        [InlineData(StorySize.Medium, LanguageLevel.A2, 81, 80)]
+        [InlineData(StorySize.Long, LanguageLevel.A2, 91, 90)]
 
-        [InlineData(StorySize.Short, LanguageLevel.B1, 141, 140)]
-        [InlineData(StorySize.Medium, LanguageLevel.B1, 151, 150)]
-        [InlineData(StorySize.Long, LanguageLevel.B1, 161, 160)]
+        [InlineData(StorySize.Short, LanguageLevel.B1, 91, 90)]
+        [InlineData(StorySize.Medium, LanguageLevel.B1, 101, 100)]
+        [InlineData(StorySize.Long, LanguageLevel.B1, 111, 110)]
 
-        [InlineData(StorySize.Short, LanguageLevel.B2, 161, 160)]
-        [InlineData(StorySize.Medium, LanguageLevel.B2, 171, 170)]
-        [InlineData(StorySize.Long, LanguageLevel.B2, 181, 180)]
+        [InlineData(StorySize.Short, LanguageLevel.B2, 111, 110)]
+        [InlineData(StorySize.Medium, LanguageLevel.B2, 121, 120)]
+        [InlineData(StorySize.Long, LanguageLevel.B2, 131, 130)]
 
-        [InlineData(StorySize.Short, LanguageLevel.C1, 181, 180)]
-        [InlineData(StorySize.Medium, LanguageLevel.C1, 191, 190)]
-        [InlineData(StorySize.Long, LanguageLevel.C1, 201, 200)]
+        [InlineData(StorySize.Short, LanguageLevel.C1, 131, 130)]
+        [InlineData(StorySize.Medium, LanguageLevel.C1, 141, 140)]
+        [InlineData(StorySize.Long, LanguageLevel.C1, 151, 150)]
 
-        [InlineData(StorySize.Short, LanguageLevel.C2, 201, 200)]
-        [InlineData(StorySize.Medium, LanguageLevel.C2, 211, 210)]
-        [InlineData(StorySize.Long, LanguageLevel.C2, 221, 220)]
+        [InlineData(StorySize.Short, LanguageLevel.C2, 151, 150)]
+        [InlineData(StorySize.Medium, LanguageLevel.C2, 161, 160)]
+        [InlineData(StorySize.Long, LanguageLevel.C2, 171, 170)]
         public void ValidateResult_WhenResultIsBiggerThanMaxPoints_ShouldThrowBadRequestException(
             StorySize size,
             LanguageLevel level,
@@ -58,29 +58,29 @@ namespace StoryFlow_Tests.UnitTests.Validators
         }
 
         [Theory]
-        [InlineData(StorySize.Short, LanguageLevel.A1, 100, 100)]
-        [InlineData(StorySize.Medium, LanguageLevel.A1, 110, 110)]
-        [InlineData(StorySize.Long, LanguageLevel.A1, 120, 120)]
+        [InlineData(StorySize.Short, LanguageLevel.A1, 50, 50)]
+        [InlineData(StorySize.Medium, LanguageLevel.A1, 60, 60)]
+        [InlineData(StorySize.Long, LanguageLevel.A1, 70, 70)]
 
-        [InlineData(StorySize.Short, LanguageLevel.A2, 120, 120)]
-        [InlineData(StorySize.Medium, LanguageLevel.A2, 130, 130)]
-        [InlineData(StorySize.Long, LanguageLevel.A2, 140, 140)]
+        [InlineData(StorySize.Short, LanguageLevel.A2, 70, 70)]
+        [InlineData(StorySize.Medium, LanguageLevel.A2, 80, 80)]
+        [InlineData(StorySize.Long, LanguageLevel.A2, 90, 90)]
 
-        [InlineData(StorySize.Short, LanguageLevel.B1, 140, 140)]
-        [InlineData(StorySize.Medium, LanguageLevel.B1, 150, 150)]
-        [InlineData(StorySize.Long, LanguageLevel.B1, 160, 160)]
+        [InlineData(StorySize.Short, LanguageLevel.B1, 90, 90)]
+        [InlineData(StorySize.Medium, LanguageLevel.B1, 100, 100)]
+        [InlineData(StorySize.Long, LanguageLevel.B1, 110, 110)]
 
-        [InlineData(StorySize.Short, LanguageLevel.B2, 160, 160)]
-        [InlineData(StorySize.Medium, LanguageLevel.B2, 170, 170)]
-        [InlineData(StorySize.Long, LanguageLevel.B2, 180, 180)]
+        [InlineData(StorySize.Short, LanguageLevel.B2, 110, 110)]
+        [InlineData(StorySize.Medium, LanguageLevel.B2, 120, 120)]
+        [InlineData(StorySize.Long, LanguageLevel.B2, 130, 130)]
 
-        [InlineData(StorySize.Short, LanguageLevel.C1, 180, 180)]
-        [InlineData(StorySize.Medium, LanguageLevel.C1, 190, 190)]
-        [InlineData(StorySize.Long, LanguageLevel.C1, 200, 200)]
+        [InlineData(StorySize.Short, LanguageLevel.C1, 130, 130)]
+        [InlineData(StorySize.Medium, LanguageLevel.C1, 140, 140)]
+        [InlineData(StorySize.Long, LanguageLevel.C1, 150, 150)]
 
-        [InlineData(StorySize.Short, LanguageLevel.C2, 200, 200)]
-        [InlineData(StorySize.Medium, LanguageLevel.C2, 210, 210)]
-        [InlineData(StorySize.Long, LanguageLevel.C2, 220, 220)]
+        [InlineData(StorySize.Short, LanguageLevel.C2, 150, 150)]
+        [InlineData(StorySize.Medium, LanguageLevel.C2, 160, 160)]
+        [InlineData(StorySize.Long, LanguageLevel.C2, 170, 170)]
         public void ValidateResult_WhenResultEqualsMaxPoints_ShouldNotThrowException(
             StorySize size,
             LanguageLevel level,
