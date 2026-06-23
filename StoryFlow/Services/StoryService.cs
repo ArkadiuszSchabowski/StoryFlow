@@ -62,7 +62,7 @@ namespace StoryFlow.Services
             string storyLengthMin = "";
             string storyLengthMax = "";
 
-            object schema = _geminiSchemaGenerator.GenerateSchema();
+            object schema = _geminiSchemaGenerator.GenerateStorySchema();
 
             if (dto.StorySize == StorySize.Short)
             {
