@@ -26,12 +26,16 @@ export class TextDisplayComponent implements OnInit {
       this.get(id);
     });
   }
+  gotoQuiz() {
+    this.router.navigateByUrl(`text/${this.storyId}/quiz`);
+  }
 
   get(id: number) {
     if (this.storyId != 0) {
       this.storyService.get(id).subscribe({
         next: (response) => {
-          ((this.story = response), console.log(response));
+          console.log(response),
+          this.story = response
         },
         error: () => this.router.navigateByUrl(`error-page`),
       });

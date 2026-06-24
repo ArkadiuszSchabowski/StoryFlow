@@ -1,8 +1,13 @@
+@use "@angular/material" as mat;
+@use "src/styles" as theme;
+
 #text-display-container {
   display: flex;
   flex-direction: column;
   height: auto;
+  width: 100%;
   padding: 20px 20px;
+  background-color: #0a192f;
 }
 
 #title-container,
@@ -42,8 +47,19 @@
   padding-top: 10px;
 }
 
+#submit-button {
+  background-color: mat.get-color-from-palette(theme.$accent);
+}
+
 .action-button {
   margin-right: 10px;
+}
+
+.submit-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
@@ -52,8 +68,8 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    min-width: 450px;
-    height: calc(100vh - 64px);
+    min-width: calc(100vh - 64px);
+    height: auto;
     min-height: 400px;
     background-color: #0a192f;
   }
@@ -78,6 +94,9 @@
   .sentence-item {
     width: auto;
     padding: 5px 20px;
+  }
+  .submit-button-container {
+    padding-top: 40px;
   }
 }
 
@@ -87,8 +106,8 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    min-width: 450px;
-    height: calc(100vh - 64px);
+    min-width: 100vh;
+    height: auto;
     min-height: 400px;
     background-color: #0a192f;
   }
@@ -113,5 +132,8 @@
   .sentence-item {
     width: auto;
     padding: 5px 20px;
+  }
+  .submit-button-container {
+    padding-top: 40px;
   }
 }

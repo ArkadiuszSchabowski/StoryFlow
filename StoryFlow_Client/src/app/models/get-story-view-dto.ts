@@ -1,6 +1,7 @@
 import { LanguageLevel } from '../enums/language-level';
 import { StoryCategory } from '../enums/story-category';
 import { StorySize } from '../enums/story-size';
+import { GetQuizDto } from './get-quiz-dto';
 import { GetSentenceViewDto } from './get-sentence-view-dto';
 import { GetUserStoryDto } from './get-user-story-dto';
 
@@ -20,6 +21,7 @@ export class GetStoryViewDto {
   userStories: GetUserStoryDto[] = [];
   isDescriptionEnglish: boolean = true;
   isTitleEnglish: boolean = true;
+  quiz: GetQuizDto | null = null;
 
   get visibleDescriptionMeaning(): string {
     return this.isDescriptionEnglish ? this.englishDescription : this.polishDescription;
