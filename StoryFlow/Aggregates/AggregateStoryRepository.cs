@@ -1,4 +1,5 @@
-﻿using StoryFlow.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
 using StoryFlow_Database.Entities;
 using StoryFlow_Shared.Interfaces;
@@ -50,6 +51,11 @@ namespace StoryFlow.Aggregates
         public async Task Update(UserStory userStory)
         {
             await _userStoryRepository.Update(userStory);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _userStoryRepository.SaveChangesAsync();
         }
     }
 }

@@ -41,6 +41,7 @@ builder.Services.AddScoped<IValidator<AddStoryDto>, StoryValidator>();
 builder.Services.AddScoped<IEntityValidator<Story>, StoryEntityValidator>();
 
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IQuizService, QuizService>();
 builder.Services.AddScoped<IAggregateUserValidator, AggregateUserValidator>();
 builder.Services.AddScoped<IAggregateUserRepository, AggregateUserRepository>();
 builder.Services.AddScoped<IRepository<User>, UserRepository>();
