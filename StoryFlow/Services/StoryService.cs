@@ -184,7 +184,7 @@ namespace StoryFlow.Services
         {
             _serviceValidator.ValidateId(id);
 
-            var result = await _storyRepository.Get(id);
+            Story? result = await _storyRepository.Get(id);
 
             _serviceValidator.ThrowIsNull(result);
 

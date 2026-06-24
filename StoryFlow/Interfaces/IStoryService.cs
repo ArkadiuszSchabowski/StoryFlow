@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using StoryFlow.Interfaces;
+﻿using StoryFlow.Interfaces;
 using StoryFlow_Shared.Models;
 
 namespace StoryFlow_Shared.Interfaces
