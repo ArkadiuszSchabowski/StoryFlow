@@ -101,8 +101,8 @@ export class TextSelectionComponent implements OnInit {
 
     this.storyService.getAll(this.dto).subscribe({
       next: (response) => {
-        this.stories = response;
         console.log(response);
+        this.stories = response;
       },
       error: (error) => console.log(error),
     });

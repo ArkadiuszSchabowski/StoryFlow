@@ -17,7 +17,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { TextDisplayComponent } from './components/auth/text-display/text-display.component';
 import { MatSelectModule } from '@angular/material/select';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -27,6 +27,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { StoryCreateComponent } from './components/auth/moderator/story-create/story-create.component';
 import { QuizCreateComponent } from './components/auth/moderator/quiz-create/quiz-create.component';
+import { GetQuizComponent } from './components/auth/get-quiz/get-quiz.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { QuizCreateComponent } from './components/auth/moderator/quiz-create/qui
     ErrorPageComponent,
     StoryCreateComponent,
     QuizCreateComponent,
+    GetQuizComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +54,7 @@ import { QuizCreateComponent } from './components/auth/moderator/quiz-create/qui
     MatToolbarModule,
     MatMenuModule,
     MatSelectModule,
+    FormsModule,
     ReactiveFormsModule,
     MatCardModule,
     MatFormFieldModule,

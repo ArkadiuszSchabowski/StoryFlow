@@ -88,6 +88,7 @@ export class StoryService {
           storySize: story.storySize,
           languageLevel: story.languageLevel,
           userStories: story.userStories,
+          quiz: story.quiz,
           sentences: story.sentences.map((sentence): GetSentenceViewDto => {
             return Object.assign(new GetSentenceViewDto(), {
               id: sentence.id,
@@ -97,7 +98,8 @@ export class StoryService {
               englishMeaning: sentence.englishMeaning,
               userSentences: sentence.userSentences,
             });
-          }),
+          },
+        ),
         });
       }),
     );

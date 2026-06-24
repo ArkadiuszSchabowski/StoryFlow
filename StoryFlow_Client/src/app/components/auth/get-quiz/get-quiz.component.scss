@@ -1,0 +1,32 @@
+@use "@angular/material" as mat;
+@use "src/styles" as theme;
+
+#quiz-container{
+    display: flex;
+    width: 100%;
+    height: auto;
+}
+
+#submit-button{
+      background-color: mat.get-color-from-palette(theme.$accent);
+}
+.title{
+    padding-top: 20px;
+}
+
+.submit-button{
+    width: 200px;
+    padding: 5px;
+}
+
+.question-text{
+    padding: 20px 0;
+}
+
+.answer{
+    padding: 5px 0;
+}
+
+.submit-button-container{
+    padding: 20px 0;
+}
