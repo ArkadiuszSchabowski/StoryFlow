@@ -5,6 +5,6 @@ namespace StoryFlow.Interfaces
 {
     public interface IQuizService : IAdd<AddQuizDto>
     {
-
+        Task<int> CheckAnswers(QuizSubmissionDto dto, int userId);
     }
 }

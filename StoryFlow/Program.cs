@@ -36,6 +36,7 @@ builder.Services.AddScoped<IRepository<Story>, StoryRepository>();
 builder.Services.AddScoped<IGetStoryRepository, StoryRepository>();
 builder.Services.AddScoped<IAdd<AddStoryDto>, StoryService>();
 builder.Services.AddScoped<IGetStory, StoryService>();
+builder.Services.AddScoped<IQuizRepository, QuizRepository>();
 
 builder.Services.AddScoped<IValidator<AddStoryDto>, StoryValidator>();
 builder.Services.AddScoped<IEntityValidator<Story>, StoryEntityValidator>();
@@ -59,6 +60,8 @@ builder.Services.AddScoped<ITextConverter, TextConverter>();
 builder.Services.AddScoped<ITextCounter, TextCounter>();
 builder.Services.AddScoped<IPointsCalculator, PointsCalculator>();
 builder.Services.AddScoped<GeminiSchemaGenerator>();
+builder.Services.AddScoped<IAnswerChecker, AnswerChecker>();
+builder.Services.AddScoped<IUserStoryRepositoryy, UserStoryRepository>();
 
 builder.Services.AddScoped<HttpClient>();
 
