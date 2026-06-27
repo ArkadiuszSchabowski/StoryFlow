@@ -35,19 +35,6 @@ namespace StoryFlow.Controllers
             return Ok(story);
         }
 
-        [Authorize]
-        [HttpPost("{storyId}/result")]
-        public async Task<IActionResult> SubmitResult(
-            [FromRoute] int storyId,
-            [FromBody] SubmitStoryResultDto dto)
-        {
-            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
-
-            await _service.SaveStoryBestResultForUser(userId, storyId, dto.Result);
-
-            return Ok();
-        }
-
         [Authorize(Roles = "Moderator,Administrator")]
         [HttpPost]
         public async Task<ActionResult> Add([FromBody] AddStoryDto dto)

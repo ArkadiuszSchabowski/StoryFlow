@@ -7,5 +7,7 @@ namespace StoryFlow.Interfaces.Repositories
     {
         Task SaveChangesAsync();
         Task Update(UserStory userStory);
+        Task AddBestResult(UserStory userStory);
+        Task<UserStory?> GetByUserAndStory(int userId, int storyId);
     }
 }

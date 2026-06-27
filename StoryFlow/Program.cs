@@ -52,7 +52,6 @@ builder.Services.AddScoped<IEntityValidator<User>, UserEntityValidator>();
 builder.Services.AddScoped<IGetAllRepository<User>, UserRepository>();
 builder.Services.AddScoped<IGetByEmailRepository, UserRepository>();
 builder.Services.AddScoped<IUserValidator, UserValidator>();
-builder.Services.AddScoped<IUserStoryRepository, StoryRepository>();
 
 builder.Services.AddScoped<IResultValidator, ResultValidator>();
 

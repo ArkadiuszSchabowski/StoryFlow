@@ -5,6 +5,7 @@ using StoryFlow.Exceptions;
 using StoryFlow.Helpers;
 using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
+using StoryFlow.Interfaces.Repositories;
 using StoryFlow_Database.Entities;
 using StoryFlow_Shared.Enums;
 using StoryFlow_Shared.Interfaces;
@@ -24,9 +25,10 @@ namespace StoryFlow.Services
         private readonly IMapper _mapper;
         private readonly GeminiSchemaGenerator _geminiSchemaGenerator;
         private readonly IPointsCalculator _pointsCalculator;
+        private readonly IUserStoryRepositoryy _userStoryRepository;
         private readonly GeminiSettings _geminiSettings;
 
-        public StoryService(IAggregateStoryRepository storyRepository, IAggregateStoryValidator serviceValidator, ISentenceBuilder sentenceBuilder, ITextConverter textConverter, ITextCounter textCounter, IMapper mapper, IOptions<GeminiSettings> geminiSettings, GeminiSchemaGenerator geminiSchemaGenerator, IPointsCalculator pointsCalculator)
+        public StoryService(IAggregateStoryRepository storyRepository, IAggregateStoryValidator serviceValidator, ISentenceBuilder sentenceBuilder, ITextConverter textConverter, ITextCounter textCounter, IMapper mapper, IOptions<GeminiSettings> geminiSettings, GeminiSchemaGenerator geminiSchemaGenerator, IPointsCalculator pointsCalculator, IUserStoryRepositoryy userStoryRepository)
         {
             _storyRepository = storyRepository;
             _serviceValidator = serviceValidator;
@@ -36,6 +38,7 @@ namespace StoryFlow.Services
             _mapper = mapper;
             _geminiSchemaGenerator = geminiSchemaGenerator;
             _pointsCalculator = pointsCalculator;
+            _userStoryRepository = userStoryRepository;
             _geminiSettings = geminiSettings.Value;
         }
         public async Task Add(AddStoryDto item)
@@ -202,39 +205,6 @@ namespace StoryFlow.Services
             _serviceValidator.ThrowIsNull(result);
 
             await _storyRepository.Remove(result!);
-        }
-
-        public async Task SaveStoryBestResultForUser(int userId, int storyId, int result)
-        {
-            var story = await _storyRepository.Get(storyId);
-
-            if(story == null)
-            {
-                throw new BadRequestException("Story not found.");
-            }
-
-            _serviceValidator.ValidateResult(story.StorySize, story.LanguageLevel, result);
-
-            UserStory? userStory = await _storyRepository.GetByUserAndStory(userId, storyId);
-
-            if (userStory == null)
-            {
-                userStory = new UserStory
-                {
-                    StoryId = storyId,
-                    UserId = userId,
-                    BestResult = result
-                };
-
-                await _storyRepository.AddBestResult(userStory);
-                return;
-            }
-
-            if (result > userStory.BestResult)
-            {
-                userStory.BestResult = result;
-                await _storyRepository.Update(userStory);
-            }
         }
     }
 }
