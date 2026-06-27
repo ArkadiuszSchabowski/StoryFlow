@@ -9,9 +9,9 @@ namespace StoryFlow.Aggregates
     {
         private readonly IRepository<Story> _repository;
         private readonly IGetStoryRepository _storyRepository;
-        private readonly IUserStoryRepositoryy _userStoryRepository;
+        private readonly IUserStoryRepository _userStoryRepository;
 
-        public AggregateStoryRepository(IRepository<Story> repository, IGetStoryRepository storyRepository, IUserStoryRepositoryy userStoryRepository)
+        public AggregateStoryRepository(IRepository<Story> repository, IGetStoryRepository storyRepository, IUserStoryRepository userStoryRepository)
         {
             _repository = repository;
             _storyRepository = storyRepository;

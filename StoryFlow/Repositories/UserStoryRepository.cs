@@ -5,7 +5,7 @@ using StoryFlow_Database.Entities;
 
 namespace StoryFlow.Repositories
 {
-    public class UserStoryRepository : IUserStoryRepositoryy
+    public class UserStoryRepository : IUserStoryRepository
     {
         private readonly MyDbContext _context;
 

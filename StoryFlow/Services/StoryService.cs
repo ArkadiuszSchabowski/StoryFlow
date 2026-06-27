@@ -25,10 +25,9 @@ namespace StoryFlow.Services
         private readonly IMapper _mapper;
         private readonly GeminiSchemaGenerator _geminiSchemaGenerator;
         private readonly IPointsCalculator _pointsCalculator;
-        private readonly IUserStoryRepositoryy _userStoryRepository;
         private readonly GeminiSettings _geminiSettings;
 
-        public StoryService(IAggregateStoryRepository storyRepository, IAggregateStoryValidator serviceValidator, ISentenceBuilder sentenceBuilder, ITextConverter textConverter, ITextCounter textCounter, IMapper mapper, IOptions<GeminiSettings> geminiSettings, GeminiSchemaGenerator geminiSchemaGenerator, IPointsCalculator pointsCalculator, IUserStoryRepositoryy userStoryRepository)
+        public StoryService(IAggregateStoryRepository storyRepository, IAggregateStoryValidator serviceValidator, ISentenceBuilder sentenceBuilder, ITextConverter textConverter, ITextCounter textCounter, IMapper mapper, IOptions<GeminiSettings> geminiSettings, GeminiSchemaGenerator geminiSchemaGenerator, IPointsCalculator pointsCalculator)
         {
             _storyRepository = storyRepository;
             _serviceValidator = serviceValidator;
@@ -38,7 +37,6 @@ namespace StoryFlow.Services
             _mapper = mapper;
             _geminiSchemaGenerator = geminiSchemaGenerator;
             _pointsCalculator = pointsCalculator;
-            _userStoryRepository = userStoryRepository;
             _geminiSettings = geminiSettings.Value;
         }
         public async Task Add(AddStoryDto item)
