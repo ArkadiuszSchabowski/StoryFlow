@@ -33,12 +33,6 @@ namespace StoryFlow.Services
         public async Task Add(AddQuizDto dto)
         {
             Story? story = await _storyRepository.Get(dto.StoryId);
-            int numberOfQuestions = 0;
-
-            foreach (var question in dto.Questions)
-            {
-                numberOfQuestions++;
-            }
 
             _validator.ThrowIsNull(story);
 
@@ -46,6 +40,8 @@ namespace StoryFlow.Services
             {
                 throw new BadRequestException($"Story '{story.EnglishTitle}' (Id: {story.Id}) already has a quiz.");
             }
+
+            int numberOfQuestions = dto.Questions.Count();
 
             Quiz quiz = _mapper.Map<Quiz>(dto);
 
