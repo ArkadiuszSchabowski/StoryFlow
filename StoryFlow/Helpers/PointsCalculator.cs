@@ -41,11 +41,10 @@ namespace StoryFlow.Helpers
             }
         }
 
-        public int SetMaxPoints(StorySize? size, LanguageLevel? level)
+        public int SetMaxPoints(StorySize? size, LanguageLevel? level, int numberOfQuestions)
         {
             int storySizePoints = 0;
             int pointsPerCorrectAnswer = 0;
-            int questions = 4;
 
             switch (size)
             {
@@ -82,7 +81,7 @@ namespace StoryFlow.Helpers
                     break;
             }
 
-            return pointsPerCorrectAnswer * questions + storySizePoints;
+            return pointsPerCorrectAnswer * numberOfQuestions + storySizePoints;
         }
     }
 }

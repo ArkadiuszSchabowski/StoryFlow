@@ -4,7 +4,7 @@ using StoryFlow_Shared.Models;
 
 namespace StoryFlow.Interfaces.Aggregates
 {
-    public interface IAggregateStoryValidator : IValidator<AddStoryDto>, IValidatorId, IEntityValidator<Story>, IResultValidator
+    public interface IAggregateStoryValidator : IValidator<AddStoryDto>, IValidatorId, IEntityValidator<Story>
     {
 
     }

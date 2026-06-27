@@ -53,8 +53,6 @@ builder.Services.AddScoped<IGetAllRepository<User>, UserRepository>();
 builder.Services.AddScoped<IGetByEmailRepository, UserRepository>();
 builder.Services.AddScoped<IUserValidator, UserValidator>();
 
-builder.Services.AddScoped<IResultValidator, ResultValidator>();
-
 builder.Services.AddScoped<IValidatorId, ValidatorId>();
 builder.Services.AddScoped<ISentenceBuilder, SentenceBuilder>();
 builder.Services.AddScoped<ITextConverter, TextConverter>();
