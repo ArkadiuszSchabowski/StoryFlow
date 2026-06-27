@@ -6,7 +6,7 @@ using StoryFlow_Shared.Interfaces;
 
 namespace StoryFlow.Repositories
 {
-    public class UserRepository : IRepository<User>, IGetAllRepository<User>, IGetByEmailRepository
+    public class UserRepository : IRepository<User>, IGetAllRepository<User>, IGetByEmailRepository, IUpdateStars
     {
         private readonly MyDbContext _context;
 
@@ -44,6 +44,12 @@ namespace StoryFlow.Repositories
         public async Task Update(UserStory userStory)
         {
             _context.UserStories.Update(userStory);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateStars(User user)
+        {
+            _context.Users.Update(user);
             await _context.SaveChangesAsync();
         }
     }

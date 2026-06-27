@@ -3,7 +3,6 @@ using StoryFlow.Exceptions;
 using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
 using StoryFlow_Database.Entities;
-using StoryFlow_Shared.Interfaces;
 using StoryFlow_Shared.Models;
 
 namespace StoryFlow.Services
@@ -78,6 +77,11 @@ namespace StoryFlow.Services
                 userStory.BestResult = quizPoints;
                 await _userStoryRepositoryy.Update(userStory);
             }
+
+
+            user.Stars = user.UserStories.Sum(us => us.BestResult);
+
+            await _userRepository.UpdateStars(user);
 
             return quizPoints;
         }

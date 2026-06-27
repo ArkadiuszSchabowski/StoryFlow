@@ -10,12 +10,14 @@ namespace StoryFlow.Aggregates
         private readonly IRepository<User> _repository;
         private readonly IGetAllRepository<User> _getAllRepository;
         private readonly IGetByEmailRepository _getByEmailRepository;
+        private readonly IUpdateStars _updateStars;
 
-        public AggregateUserRepository(IRepository<User> repository, IGetAllRepository<User> getAllRepository, IGetByEmailRepository getByEmailRepository)
+        public AggregateUserRepository(IRepository<User> repository, IGetAllRepository<User> getAllRepository, IGetByEmailRepository getByEmailRepository, IUpdateStars updateStars)
         {
             _repository = repository;
             _getAllRepository = getAllRepository;
             _getByEmailRepository = getByEmailRepository;
+            _updateStars = updateStars;
         }
         public async Task Add(User entity)
         {
@@ -40,6 +42,11 @@ namespace StoryFlow.Aggregates
         public async Task Remove(User entity)
         {
             await _repository.Remove(entity);
+        }
+
+        public async Task UpdateStars(User item)
+        {
+            await _updateStars.UpdateStars(item);
         }
     }
 }

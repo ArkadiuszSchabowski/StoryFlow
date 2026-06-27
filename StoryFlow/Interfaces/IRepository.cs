@@ -1,4 +1,6 @@
-﻿namespace StoryFlow_Shared.Interfaces
+﻿using StoryFlow_Database.Entities;
+
+namespace StoryFlow_Shared.Interfaces
 {
     public interface IRepository<T> where T : class
     {

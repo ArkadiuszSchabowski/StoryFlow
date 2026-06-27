@@ -62,6 +62,7 @@ builder.Services.AddScoped<IPointsCalculator, PointsCalculator>();
 builder.Services.AddScoped<GeminiSchemaGenerator>();
 builder.Services.AddScoped<IAnswerChecker, AnswerChecker>();
 builder.Services.AddScoped<IUserStoryRepositoryy, UserStoryRepository>();
+builder.Services.AddScoped<IUpdateStars, UserRepository>();
 
 builder.Services.AddScoped<HttpClient>();
 
