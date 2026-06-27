@@ -3,7 +3,7 @@ using StoryFlow_Shared.Interfaces;
 
 namespace StoryFlow.Interfaces.Aggregates
 {
-    public interface IAggregateUserRepository : IRepository<User>, IGetAllRepository<User>, IGetByEmailRepository
+    public interface IAggregateUserRepository : IRepository<User>, IGetAllRepository<User>, IGetByEmailRepository, IUpdateStars
     {
 
     }

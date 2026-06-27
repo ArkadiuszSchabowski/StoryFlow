@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StoryFlow.Interfaces;
 using StoryFlow_Shared.Models;
+using System.Security.Claims;
 
 namespace StoryFlow.Controllers
 {
@@ -21,6 +23,16 @@ namespace StoryFlow.Controllers
         {
             await _service.Add(dto);
             return Ok();
+        }
+
+        [Authorize]
+        [HttpPost("check")]
+        public async Task<ActionResult> Check([FromBody] QuizSubmissionDto dto)
+        {
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+
+            var points = await _service.CheckAnswers(dto, userId);
+            return Ok(points);
         }
     }
 }

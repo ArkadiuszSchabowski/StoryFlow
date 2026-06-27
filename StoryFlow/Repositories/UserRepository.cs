@@ -6,7 +6,7 @@ using StoryFlow_Shared.Interfaces;
 
 namespace StoryFlow.Repositories
 {
-    public class UserRepository : IRepository<User>, IGetAllRepository<User>, IGetByEmailRepository
+    public class UserRepository : IRepository<User>, IGetAllRepository<User>, IGetByEmailRepository, IUpdateStars
     {
         private readonly MyDbContext _context;
 
@@ -22,7 +22,7 @@ namespace StoryFlow.Repositories
 
         public async Task<User?> Get(int id)
         {
-            return await _context.Users.Include(u => u.UserHobbies).FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Users.Include(u => u.UserHobbies).Include(u => u.UserStories).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<ICollection<User>> Get()
@@ -38,6 +38,18 @@ namespace StoryFlow.Repositories
         public async Task Remove(User entity)
         {
             _context.Users.Remove(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Update(UserStory userStory)
+        {
+            _context.UserStories.Update(userStory);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateStars(User user)
+        {
+            _context.Users.Update(user);
             await _context.SaveChangesAsync();
         }
     }

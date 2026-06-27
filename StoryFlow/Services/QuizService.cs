@@ -11,13 +11,19 @@ namespace StoryFlow.Services
     {
         private readonly IAggregateStoryRepository _storyRepository;
         private readonly IEntityValidator<Story> _validator;
+        private readonly IAnswerChecker _answerChecker;
         private readonly IMapper _mapper;
+        private readonly IUserStoryRepositoryy _userStoryRepositoryy;
+        private readonly IAggregateUserRepository _userRepository;
 
-        public QuizService(IAggregateStoryRepository storyRepository, IEntityValidator<Story> validator, IMapper mapper)
+        public QuizService(IAggregateStoryRepository storyRepository, IAggregateUserRepository userRepository, IEntityValidator<Story> validator, IAnswerChecker answerChecker, IMapper mapper, IUserStoryRepositoryy userStoryRepositoryy)
         {
             _storyRepository = storyRepository;
             _validator = validator;
+            _answerChecker = answerChecker;
             _mapper = mapper;
+            _userStoryRepositoryy = userStoryRepositoryy;
+            _userRepository = userRepository;
         }
         public async Task Add(AddQuizDto dto)
         {
@@ -25,7 +31,7 @@ namespace StoryFlow.Services
 
             _validator.ThrowIsNull(result);
 
-            if(result!.Quiz != null)
+            if (result!.Quiz != null)
             {
                 throw new BadRequestException($"Story '{result.EnglishTitle}' (Id: {result.Id}) already has a quiz.");
             }
@@ -35,6 +41,49 @@ namespace StoryFlow.Services
             result!.Quiz = quiz;
 
             await _storyRepository.SaveChangesAsync();
+        }
+
+        public async Task<int> CheckAnswers(QuizSubmissionDto dto, int userId)
+        {
+            Story? result = await _storyRepository.Get(dto.StoryId);
+
+            _validator.ThrowIsNull(result);
+
+            if (result!.Quiz == null)
+            {
+                throw new NotFoundException("This story don't have active quiz");
+            }
+
+            int quizPoints = _answerChecker.CheckAnswers(result, dto.Answers);
+
+            var user = await _userRepository.Get(userId);
+
+            UserStory? userStory = user!.UserStories.SingleOrDefault(u => u.StoryId == dto.StoryId);
+
+            if (userStory == null)
+            {
+                var newUserStory = new UserStory
+                {
+                    UserId = userId,
+                    StoryId = dto.StoryId,
+                    BestResult = quizPoints
+                };
+
+                await _userStoryRepositoryy.Add(newUserStory);
+
+            }
+            else if (userStory.BestResult < quizPoints)
+            {
+                userStory.BestResult = quizPoints;
+                await _userStoryRepositoryy.Update(userStory);
+            }
+
+
+            user.Stars = user.UserStories.Sum(us => us.BestResult);
+
+            await _userRepository.UpdateStars(user);
+
+            return quizPoints;
         }
     }
 }
