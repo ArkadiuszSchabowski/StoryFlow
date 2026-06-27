@@ -1,4 +1,5 @@
-﻿using StoryFlow_Database.Entities;
+﻿using StoryFlow.Interfaces.Validators;
+using StoryFlow_Database.Entities;
 
 namespace StoryFlow.Interfaces.Aggregates
 {

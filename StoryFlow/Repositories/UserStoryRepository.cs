@@ -1,4 +1,4 @@
-﻿using StoryFlow.Interfaces;
+﻿using StoryFlow.Interfaces.Repositories;
 using StoryFlow_Database;
 using StoryFlow_Database.Entities;
 

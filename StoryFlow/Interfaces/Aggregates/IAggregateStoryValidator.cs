@@ -1,5 +1,5 @@
-﻿using StoryFlow_Database.Entities;
-using StoryFlow_Shared.Interfaces;
+﻿using StoryFlow.Interfaces.Validators;
+using StoryFlow_Database.Entities;
 using StoryFlow_Shared.Models;
 
 namespace StoryFlow.Interfaces.Aggregates
