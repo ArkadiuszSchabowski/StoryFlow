@@ -8,6 +8,8 @@ using StoryFlow.Builders;
 using StoryFlow.Helpers;
 using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
+using StoryFlow.Interfaces.Repositories;
+using StoryFlow.Interfaces.Validators;
 using StoryFlow.Middleware;
 using StoryFlow.Repositories;
 using StoryFlow.Services;
@@ -50,7 +52,6 @@ builder.Services.AddScoped<IEntityValidator<User>, UserEntityValidator>();
 builder.Services.AddScoped<IGetAllRepository<User>, UserRepository>();
 builder.Services.AddScoped<IGetByEmailRepository, UserRepository>();
 builder.Services.AddScoped<IUserValidator, UserValidator>();
-builder.Services.AddScoped<IUserStoryRepository, StoryRepository>();
 
 builder.Services.AddScoped<IResultValidator, ResultValidator>();
 
@@ -61,7 +62,7 @@ builder.Services.AddScoped<ITextCounter, TextCounter>();
 builder.Services.AddScoped<IPointsCalculator, PointsCalculator>();
 builder.Services.AddScoped<GeminiSchemaGenerator>();
 builder.Services.AddScoped<IAnswerChecker, AnswerChecker>();
-builder.Services.AddScoped<IUserStoryRepositoryy, UserStoryRepository>();
+builder.Services.AddScoped<IUserStoryRepository, UserStoryRepository>();
 builder.Services.AddScoped<IUpdateStars, UserRepository>();
 
 builder.Services.AddScoped<HttpClient>();

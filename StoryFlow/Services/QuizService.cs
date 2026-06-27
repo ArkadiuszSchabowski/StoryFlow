@@ -2,6 +2,8 @@
 using StoryFlow.Exceptions;
 using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
+using StoryFlow.Interfaces.Repositories;
+using StoryFlow.Interfaces.Validators;
 using StoryFlow_Database.Entities;
 using StoryFlow_Shared.Models;
 
@@ -13,10 +15,10 @@ namespace StoryFlow.Services
         private readonly IEntityValidator<Story> _validator;
         private readonly IAnswerChecker _answerChecker;
         private readonly IMapper _mapper;
-        private readonly IUserStoryRepositoryy _userStoryRepositoryy;
+        private readonly IUserStoryRepository _userStoryRepositoryy;
         private readonly IAggregateUserRepository _userRepository;
 
-        public QuizService(IAggregateStoryRepository storyRepository, IAggregateUserRepository userRepository, IEntityValidator<Story> validator, IAnswerChecker answerChecker, IMapper mapper, IUserStoryRepositoryy userStoryRepositoryy)
+        public QuizService(IAggregateStoryRepository storyRepository, IAggregateUserRepository userRepository, IEntityValidator<Story> validator, IAnswerChecker answerChecker, IMapper mapper, IUserStoryRepository userStoryRepositoryy)
         {
             _storyRepository = storyRepository;
             _validator = validator;

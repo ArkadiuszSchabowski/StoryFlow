@@ -1,5 +1,5 @@
 ﻿using StoryFlow.Exceptions;
-using StoryFlow.Interfaces;
+using StoryFlow.Interfaces.Validators;
 
 namespace StoryFlow.Validators
 {

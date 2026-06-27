@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StoryFlow.Interfaces;
+using StoryFlow.Interfaces.Repositories;
 using StoryFlow_Database;
 using StoryFlow_Database.Entities;
-using StoryFlow_Shared.Interfaces;
 
 namespace StoryFlow.Repositories
 {

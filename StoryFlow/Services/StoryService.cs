@@ -5,6 +5,7 @@ using StoryFlow.Exceptions;
 using StoryFlow.Helpers;
 using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
+using StoryFlow.Interfaces.Repositories;
 using StoryFlow_Database.Entities;
 using StoryFlow_Shared.Enums;
 using StoryFlow_Shared.Interfaces;
@@ -202,39 +203,6 @@ namespace StoryFlow.Services
             _serviceValidator.ThrowIsNull(result);
 
             await _storyRepository.Remove(result!);
-        }
-
-        public async Task SaveStoryBestResultForUser(int userId, int storyId, int result)
-        {
-            var story = await _storyRepository.Get(storyId);
-
-            if(story == null)
-            {
-                throw new BadRequestException("Story not found.");
-            }
-
-            _serviceValidator.ValidateResult(story.StorySize, story.LanguageLevel, result);
-
-            UserStory? userStory = await _storyRepository.GetByUserAndStory(userId, storyId);
-
-            if (userStory == null)
-            {
-                userStory = new UserStory
-                {
-                    StoryId = storyId,
-                    UserId = userId,
-                    BestResult = result
-                };
-
-                await _storyRepository.AddBestResult(userStory);
-                return;
-            }
-
-            if (result > userStory.BestResult)
-            {
-                userStory.BestResult = result;
-                await _storyRepository.Update(userStory);
-            }
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using StoryFlow.Exceptions;
-using StoryFlow.Interfaces;
+using StoryFlow.Interfaces.Validators;
 using StoryFlow_Database.Entities;
 
 namespace StoryFlow.Validators

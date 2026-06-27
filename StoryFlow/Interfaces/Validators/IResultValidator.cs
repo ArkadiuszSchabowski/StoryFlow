@@ -1,6 +1,6 @@
 ﻿using StoryFlow_Shared.Enums;
 
-namespace StoryFlow.Interfaces
+namespace StoryFlow.Interfaces.Validators
 {
     public interface IResultValidator
     {

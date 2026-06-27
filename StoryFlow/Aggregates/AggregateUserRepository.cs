@@ -1,7 +1,7 @@
 ﻿using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
+using StoryFlow.Interfaces.Repositories;
 using StoryFlow_Database.Entities;
-using StoryFlow_Shared.Interfaces;
 
 namespace StoryFlow.Aggregates
 {
