@@ -24,10 +24,9 @@ namespace StoryFlow.Services
         private readonly ITextCounter _textCounter;
         private readonly IMapper _mapper;
         private readonly GeminiSchemaGenerator _geminiSchemaGenerator;
-        private readonly IPointsCalculator _pointsCalculator;
         private readonly GeminiSettings _geminiSettings;
 
-        public StoryService(IAggregateStoryRepository storyRepository, IAggregateStoryValidator serviceValidator, ISentenceBuilder sentenceBuilder, ITextConverter textConverter, ITextCounter textCounter, IMapper mapper, IOptions<GeminiSettings> geminiSettings, GeminiSchemaGenerator geminiSchemaGenerator, IPointsCalculator pointsCalculator)
+        public StoryService(IAggregateStoryRepository storyRepository, IAggregateStoryValidator serviceValidator, ISentenceBuilder sentenceBuilder, ITextConverter textConverter, ITextCounter textCounter, IMapper mapper, IOptions<GeminiSettings> geminiSettings, GeminiSchemaGenerator geminiSchemaGenerator)
         {
             _storyRepository = storyRepository;
             _serviceValidator = serviceValidator;
@@ -36,7 +35,6 @@ namespace StoryFlow.Services
             _textCounter = textCounter;
             _mapper = mapper;
             _geminiSchemaGenerator = geminiSchemaGenerator;
-            _pointsCalculator = pointsCalculator;
             _geminiSettings = geminiSettings.Value;
         }
         public async Task Add(AddStoryDto item)
@@ -46,7 +44,6 @@ namespace StoryFlow.Services
             Story story = _mapper.Map<Story>(item);
 
             story.StorySize = _textCounter.SetTextSize(item.EnglishStory!);
-            story.MaxPoints = _pointsCalculator.SetMaxPoints(story.StorySize, story.LanguageLevel);
 
             var englishSentences = _textConverter.GetSentencesFromText(item.EnglishStory!);
             var polishSentences = _textConverter.GetSentencesFromText(item.PolishStory!);

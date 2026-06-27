@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using StoryFlow.Exceptions;
+using StoryFlow.Helpers;
 using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
 using StoryFlow.Interfaces.Repositories;
@@ -15,32 +16,38 @@ namespace StoryFlow.Services
         private readonly IEntityValidator<Story> _validator;
         private readonly IAnswerChecker _answerChecker;
         private readonly IMapper _mapper;
-        private readonly IUserStoryRepository _userStoryRepositoryy;
+        private readonly IUserStoryRepository _userStoryRepository;
+        private readonly IPointsCalculator _pointsCalculator;
         private readonly IAggregateUserRepository _userRepository;
 
-        public QuizService(IAggregateStoryRepository storyRepository, IAggregateUserRepository userRepository, IEntityValidator<Story> validator, IAnswerChecker answerChecker, IMapper mapper, IUserStoryRepository userStoryRepositoryy)
+        public QuizService(IAggregateStoryRepository storyRepository, IAggregateUserRepository userRepository, IEntityValidator<Story> validator, IAnswerChecker answerChecker, IMapper mapper, IUserStoryRepository userStoryRepository, IPointsCalculator pointsCalculator)
         {
             _storyRepository = storyRepository;
             _validator = validator;
             _answerChecker = answerChecker;
             _mapper = mapper;
-            _userStoryRepositoryy = userStoryRepositoryy;
+            _userStoryRepository = userStoryRepository;
+            _pointsCalculator = pointsCalculator;
             _userRepository = userRepository;
         }
         public async Task Add(AddQuizDto dto)
         {
-            Story? result = await _storyRepository.Get(dto.StoryId);
+            Story? story = await _storyRepository.Get(dto.StoryId);
 
-            _validator.ThrowIsNull(result);
+            _validator.ThrowIsNull(story);
 
-            if (result!.Quiz != null)
+            if (story!.Quiz != null)
             {
-                throw new BadRequestException($"Story '{result.EnglishTitle}' (Id: {result.Id}) already has a quiz.");
+                throw new BadRequestException($"Story '{story.EnglishTitle}' (Id: {story.Id}) already has a quiz.");
             }
+
+            int numberOfQuestions = dto.Questions.Count();
 
             Quiz quiz = _mapper.Map<Quiz>(dto);
 
-            result!.Quiz = quiz;
+            story!.Quiz = quiz;
+
+            story.MaxPoints = _pointsCalculator.SetMaxPoints(story.StorySize, story.LanguageLevel, numberOfQuestions);
 
             await _storyRepository.SaveChangesAsync();
         }
@@ -71,13 +78,13 @@ namespace StoryFlow.Services
                     BestResult = quizPoints
                 };
 
-                await _userStoryRepositoryy.Add(newUserStory);
+                await _userStoryRepository.Add(newUserStory);
 
             }
             else if (userStory.BestResult < quizPoints)
             {
                 userStory.BestResult = quizPoints;
-                await _userStoryRepositoryy.Update(userStory);
+                await _userStoryRepository.Update(userStory);
             }
 
 
