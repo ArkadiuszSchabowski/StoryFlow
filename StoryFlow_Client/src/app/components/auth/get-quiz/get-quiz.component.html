@@ -1,7 +1,7 @@
 <div id="quiz-container" class="container" *ngIf="quiz">
   <div class="title">Quiz - {{ story?.englishTitle }}</div>
 
-  <form (ngSubmit)="submitQuiz()">
+  <form (ngSubmit)="send()">
     <div
       class="question-card"
       *ngFor="let question of quiz.questions; let i = index"

@@ -11,7 +11,7 @@ import { RegisterUserDto } from '../models/register-user-dto';
   providedIn: 'root',
 })
 export class UserService {
-  apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiUrl;
 
   constructor(
     private http: HttpClient,
