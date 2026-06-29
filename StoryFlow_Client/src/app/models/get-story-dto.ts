@@ -4,6 +4,7 @@ import { StorySize } from "../enums/story-size";
 import { GetQuizDto } from "./get-quiz-dto";
 import { GetSentenceDto } from "./get-sentence-dto";
 import { GetUserStoryDto } from "./get-user-story-dto";
+import { GetStoryPoint } from "./get-story-points";
 
 
 export interface GetStoryDto {
@@ -16,9 +17,11 @@ export interface GetStoryDto {
     englishDescription: string | null;
     storyCategory: StoryCategory | null;
     storySize: StorySize | null;
-    maxPoints: number;
+    storyPointId: number;
+    storyPoint: GetStoryPoint | null;
     languageLevel: LanguageLevel | null;
     sentences: GetSentenceDto[];
     userStories: GetUserStoryDto[];
     quiz: GetQuizDto;
+    numberOfQuestions : number;
 }

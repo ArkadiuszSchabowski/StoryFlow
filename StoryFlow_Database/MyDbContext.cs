@@ -18,6 +18,7 @@ namespace StoryFlow_Database
         public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
+        public DbSet<StoryPoint> StoryPoints { get; set; }
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
         {
 
@@ -62,6 +63,11 @@ namespace StoryFlow_Database
                 .HasOne(s => s.Quiz)
                 .WithOne(q => q.Story)
                 .HasForeignKey<Quiz>(q => q.StoryId);
+
+            modelBuilder.Entity<Story>()
+                .HasOne(s => s.StoryPoint)
+                .WithOne(sp => sp.Story)
+                .HasForeignKey<StoryPoint>(sp => sp.StoryId);
 
             modelBuilder.Entity<Quiz>()
                 .HasMany(q => q.Questions)

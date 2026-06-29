@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using StoryFlow.Exceptions;
-using StoryFlow.Helpers;
 using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
 using StoryFlow.Interfaces.Repositories;
@@ -47,7 +46,18 @@ namespace StoryFlow.Services
 
             story!.Quiz = quiz;
 
-            story.MaxPoints = _pointsCalculator.SetMaxPoints(story.StorySize, story.LanguageLevel, numberOfQuestions);
+            if (story.StoryPoint == null)
+            {
+                story.StoryPoint = new StoryPoint();
+            }
+
+            story.StoryPoint.MaxPoints = _pointsCalculator.SetMaxPoints(story.StorySize, story.LanguageLevel, numberOfQuestions);
+
+            story.StoryPoint.PointsPerAnswer = _pointsCalculator.GetPointsPerAnswer(story.LanguageLevel);
+
+            story.StoryPoint.BonusPointsForStoryLength = _pointsCalculator.GetBonusPointsForStoryLength(story.StorySize);
+
+            story.NumberOfQuestions = numberOfQuestions;
 
             await _storyRepository.SaveChangesAsync();
         }

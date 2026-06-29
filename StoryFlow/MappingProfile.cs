@@ -16,15 +16,16 @@ namespace StoryFlow
             CreateMap<AddQuestionDto, Question>();
             CreateMap<AddAnswerDto, Answer>();
             CreateMap<Story, GetStoryDto>();
+            CreateMap<StoryPoint, GetStoryPointDto>();
             CreateMap<Quiz, GetQuizDto>();
             CreateMap<Question, GetQuestionDto>();
             CreateMap<Answer, GetAnswerDto>();
             CreateMap<Sentence, GetSentenceDto>();
+            CreateMap<User, GetUserDto>();
+            CreateMap<Hobby, GetHobbyDto>();
             CreateMap<UserStory, GetUserStoryDto>();
             CreateMap<UserSentence, GetUserSentenceDto>();
             CreateMap<RegisterUserDto, User>();
-            CreateMap<User, GetUserDto>();
-            CreateMap<Hobby, GetHobbyDto>();
         }
     }
 }

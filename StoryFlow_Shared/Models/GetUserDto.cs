@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using StoryFlow_Shared.Enums;
+﻿using StoryFlow_Shared.Enums;
 
 namespace StoryFlow_Shared.Models
 {

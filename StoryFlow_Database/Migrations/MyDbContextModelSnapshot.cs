@@ -175,7 +175,7 @@ namespace StoryFlow_Database.Migrations
                     b.Property<int?>("LanguageLevel")
                         .HasColumnType("int");
 
-                    b.Property<int>("MaxPoints")
+                    b.Property<int?>("NumberOfQuestions")
                         .HasColumnType("int");
 
                     b.Property<string>("PolishDescription")
@@ -196,6 +196,34 @@ namespace StoryFlow_Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Stories");
+                });
+
+            modelBuilder.Entity("StoryFlow_Database.Entities.StoryPoint", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("BonusPointsForStoryLength")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MaxPoints")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PointsPerAnswer")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StoryId")
+                        .IsUnique();
+
+                    b.ToTable("StoryPoints");
                 });
 
             modelBuilder.Entity("StoryFlow_Database.Entities.User", b =>
@@ -299,6 +327,9 @@ namespace StoryFlow_Database.Migrations
                     b.Property<int>("BestResult")
                         .HasColumnType("int");
 
+                    b.Property<bool>("HasReceivedStoryLengthBonus")
+                        .HasColumnType("bit");
+
                     b.Property<int>("StoryId")
                         .HasColumnType("int");
 
@@ -353,6 +384,17 @@ namespace StoryFlow_Database.Migrations
                     b.HasOne("StoryFlow_Database.Entities.Story", "Story")
                         .WithMany("Sentences")
                         .HasForeignKey("StoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Story");
+                });
+
+            modelBuilder.Entity("StoryFlow_Database.Entities.StoryPoint", b =>
+                {
+                    b.HasOne("StoryFlow_Database.Entities.Story", "Story")
+                        .WithOne("StoryPoint")
+                        .HasForeignKey("StoryFlow_Database.Entities.StoryPoint", "StoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -457,6 +499,8 @@ namespace StoryFlow_Database.Migrations
                     b.Navigation("Quiz");
 
                     b.Navigation("Sentences");
+
+                    b.Navigation("StoryPoint");
 
                     b.Navigation("UserStories");
                 });
