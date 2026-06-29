@@ -21,13 +21,13 @@ namespace StoryFlow.Repositories
 
         public async Task<Story?> Get(int id)
         {
-            return await _context.Stories.Include(s => s.Sentences).Include(s => s.Quiz!).ThenInclude(q => q.Questions)
+            return await _context.Stories.Include(s => s.Sentences).Include(s => s.StoryPoint).Include(s => s.Quiz!).ThenInclude(q => q.Questions)
                 .ThenInclude(q => q.Answers).FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public IQueryable<Story> Get()
         {
-            return _context.Stories.Include(s => s.UserStories).Include(s => s.Sentences).AsQueryable();
+            return _context.Stories.Include(s => s.UserStories).Include(s => s.Sentences).Include(s => s.StoryPoint).AsQueryable();
         }
 
         public async Task Remove(Story story)

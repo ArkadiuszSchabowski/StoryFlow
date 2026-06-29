@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { QuizService } from 'src/app/_services/quiz.service';
 import { StoryService } from 'src/app/_services/story.service';
 import { GetQuizDto } from 'src/app/models/get-quiz-dto';
 import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
+import { QuizSubmissionDto } from 'src/app/models/quiz-submission-dto';
 
 @Component({
   selector: 'app-get-quiz',
@@ -13,16 +15,34 @@ export class GetQuizComponent implements OnInit {
   storyId: number = 0;
   story: GetStoryViewDto | null = null;
   quiz: GetQuizDto | null = null;
-
+  quizSubmission: QuizSubmissionDto = {
+    storyId: 0,
+    answers: [],
+  };
   selectedAnswers: { [questionId: number]: number } = {};
 
-  submitQuiz(): void {
-    console.log(this.selectedAnswers);
+  send(): void {
+    this.quizSubmission = {
+      storyId: this.storyId,
+      answers: Object.entries(this.selectedAnswers).map(
+        ([questionId, answerId]) => ({
+          questionId: Number(questionId),
+          answerId,
+        }),
+      ),
+    };
+
+    this.quizService.sendAnswers(this.quizSubmission).subscribe({
+      next: (response) => console.log(response),
+      error: (error) => console.log(error),
+    });
   }
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private storyService: StoryService,
+    private quizService: QuizService,
   ) {}
 
   ngOnInit(): void {

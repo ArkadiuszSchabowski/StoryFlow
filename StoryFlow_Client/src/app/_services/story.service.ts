@@ -14,7 +14,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class StoryService {
-  apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiUrl;
 
   constructor(
     private authService: AuthService,

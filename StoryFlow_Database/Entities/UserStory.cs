@@ -8,5 +8,6 @@
         public int StoryId { get; set; }
         public Story? Story { get; set; }
         public int BestResult { get; set; } = 0;
+        public bool HasReceivedStoryLengthBonus { get; set; } = false;
     }
 }

@@ -38,7 +38,7 @@
   display: flex;
   flex-direction: column;
   width: 300px;
-  height: 300px;
+  height: 400px;
   text-align: center;
   justify-content: center;
   text-align: center;
@@ -70,11 +70,19 @@ button.story-card-button{
   background-color:white
 }
 
-.score{
+#score-card{
   font-size: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   text-align: center;
+}
+
+.score-item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {

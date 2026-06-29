@@ -4,6 +4,7 @@ import { StorySize } from '../enums/story-size';
 import { GetQuizDto } from './get-quiz-dto';
 import { GetSentenceViewDto } from './get-sentence-view-dto';
 import { GetUserStoryDto } from './get-user-story-dto';
+import { GetStoryPoint } from './get-story-points';
 
 export class GetStoryViewDto {
   id: number = 0;
@@ -13,15 +14,16 @@ export class GetStoryViewDto {
   englishTitle: string = '';
   polishDescription: string = '';
   englishDescription: string = '';
-  maxPoints: number = 0;
   storyCategory: StoryCategory | null = null;
   storySize: StorySize | null = null;
   languageLevel: LanguageLevel | null = null;
+  storyPoint: GetStoryPoint | null = null;
   sentences: GetSentenceViewDto[] = [];
   userStories: GetUserStoryDto[] = [];
   isDescriptionEnglish: boolean = true;
   isTitleEnglish: boolean = true;
   quiz: GetQuizDto | null = null;
+  numberOfQuestions : number = 0;
 
   get visibleDescriptionMeaning(): string {
     return this.isDescriptionEnglish ? this.englishDescription : this.polishDescription;

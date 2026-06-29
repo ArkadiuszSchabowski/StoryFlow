@@ -13,6 +13,7 @@ import { StoryFilter } from 'src/app/models/story-filter-dto';
 export class TextSelectionComponent implements OnInit {
   stories: GetStoryViewDto[] = [];
   selected = 'option2';
+  visibleStories: GetStoryViewDto[] = [];
 
   form: any = this.fb.group({
     languageLevel: [],

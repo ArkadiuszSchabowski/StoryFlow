@@ -1,5 +1,4 @@
 ﻿using StoryFlow_Shared.Enums;
-
 namespace StoryFlow_Database.Entities
 {
     public class Story
@@ -11,7 +10,8 @@ namespace StoryFlow_Database.Entities
         public string? EnglishTitle { get; set; }
         public string? PolishDescription { get; set; }
         public string? EnglishDescription { get; set; }
-        public int MaxPoints { get; set; }
+        public int? NumberOfQuestions { get; set; }
+        public StoryPoint? StoryPoint { get; set; }
         public StoryCategory? StoryCategory { get; set; }
         public StorySize? StorySize {get; set;}
         public LanguageLevel? LanguageLevel { get; set; }

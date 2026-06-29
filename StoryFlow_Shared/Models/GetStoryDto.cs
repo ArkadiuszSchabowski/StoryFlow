@@ -11,12 +11,13 @@ namespace StoryFlow_Shared.Models
         public string? EnglishTitle { get; set; }
         public string? PolishDescription { get; set; }
         public string? EnglishDescription { get; set; }
-        public int MaxPoints { get; set; }
+        public int? NumberOfQuestions { get; set; }
         public StoryCategory? StoryCategory { get; set; }
         public StorySize? StorySize { get; set; }
         public LanguageLevel? LanguageLevel { get; set; }
         public ICollection<GetSentenceDto> Sentences { get; set; } = new List<GetSentenceDto>();
         public ICollection<GetUserStoryDto> UserStories { get; set; } = new List<GetUserStoryDto>();
         public GetQuizDto? Quiz { get; set; }
+        public GetStoryPointDto? StoryPoint { get; set; }
     }
 }

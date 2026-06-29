@@ -45,15 +45,15 @@
     No stories match your selected filters. Please try different filters.
   </div>
   <div *ngFor="let story of stories" class="story-item">
-    <div class="story-card">
+    <div class="story-card" *ngIf="story.storyPoint">
       <div class="story-card-title">{{ story.englishTitle }}</div>
       <div class="story-card-description">{{ story.englishDescription }}</div>
-            <div class="story-card-language-level">
-             {{ showLanguageLevel(story.languageLevel) }}
-            </div>
-                        <div class="story-card-story-size">
-             {{ showSize(story.storySize) }}
-            </div>
+      <div class="story-card-language-level">
+        {{ showLanguageLevel(story.languageLevel) }}
+      </div>
+      <div class="story-card-story-size">
+        {{ showSize(story.storySize) }}
+      </div>
       <div class="story-card-button-container">
         <button
           mat-raised-button
@@ -63,8 +63,18 @@
           <div><mat-icon>auto_awesome</mat-icon></div>
         </button>
       </div>
-      <div class="score">
-        {{ story?.userStories?.[0]?.bestResult ?? 0 }} <mat-icon>star</mat-icon> / {{story.maxPoints}}<mat-icon>star</mat-icon>
+      <div id="score-card" *ngIf="story.storyPoint">
+        <div>Questions: {{ story.numberOfQuestions }}</div>
+        <div>Points for question: {{ story.storyPoint.pointsPerAnswer }}</div>
+        <div>
+          Bonus for story length:
+          {{ story.storyPoint.bonusPointsForStoryLength }}
+        </div>
+        <div class="score-item">
+          {{ story?.userStories?.[0]?.bestResult ?? 0 }}
+          <mat-icon>star</mat-icon> / {{ story.storyPoint.maxPoints }}
+          <mat-icon>star</mat-icon>
+        </div>
       </div>
     </div>
   </div>
