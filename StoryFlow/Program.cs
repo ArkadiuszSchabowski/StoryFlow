@@ -27,7 +27,7 @@ builder.Host.UseNLog();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<MyDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("MyDbConnectionString")));
+builder.Services.AddDbContext<MyDbContext>(opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("MyDbConnectionString")));
 
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
