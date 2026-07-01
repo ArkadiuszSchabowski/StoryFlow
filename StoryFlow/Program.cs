@@ -71,7 +71,8 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("StoryFlowPolicy", policy =>
     {
-        policy.WithOrigins("http://localhost:4200")
+        policy.WithOrigins("http://localhost:4200",
+            "https://red-hill-0235bd503.7.azurestaticapps.net/login")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
