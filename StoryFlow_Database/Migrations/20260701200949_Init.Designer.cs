@@ -12,7 +12,7 @@ using StoryFlow_Database;
 namespace StoryFlow_Database.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20260701155707_Init")]
+    [Migration("20260701200949_Init")]
     partial class Init
     {
         /// <inheritdoc />
