@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { StoryService } from 'src/app/_services/story.service';
 import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
 import { StoryFilter } from 'src/app/models/story-filter-dto';
@@ -55,6 +56,7 @@ export class TextSelectionComponent implements OnInit {
     private fb: FormBuilder,
     private storyService: StoryService,
     private router: Router,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -102,14 +104,25 @@ export class TextSelectionComponent implements OnInit {
 
     this.storyService.getAll(this.dto).subscribe({
       next: (response) => {
-        console.log(response);
         this.stories = response;
       },
-      error: (error) => console.log(error),
+      error: () => {},
     });
   }
 
-  NavigateToTextDisplay(id: number | null) {
-    this.router.navigateByUrl(`text/${id}`);
+  NavigateToTextDisplay(id: number) {
+    this.getStory(id);
+  }
+
+  getStory(id: number) {
+    this.storyService.get(id).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.router.navigateByUrl(`text/${id}`);
+      },
+      error: (error) => {
+         this.toastr.error(error.error);
+      },
+    });
   }
 }

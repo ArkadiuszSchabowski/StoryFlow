@@ -29,10 +29,10 @@ namespace StoryFlow.Controllers
         [HttpPost("check")]
         public async Task<ActionResult> Check([FromBody] QuizSubmissionDto dto)
         {
-            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+            string? userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
 
-            var points = await _service.CheckAnswers(dto, userId);
-            return Ok(points);
+            QuizResult quizResult = await _service.CheckAnswers(dto, userId);
+            return Ok(quizResult);
         }
     }
 }

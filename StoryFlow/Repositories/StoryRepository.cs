@@ -40,5 +40,10 @@ namespace StoryFlow.Repositories
         {
             await _context.SaveChangesAsync();
         }
+
+        public Task Update(Story entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

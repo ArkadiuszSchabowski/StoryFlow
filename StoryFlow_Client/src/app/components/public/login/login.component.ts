@@ -49,7 +49,6 @@ export class LoginComponent {
           this.toastr.error(error.error);
           this.form.reset();
         }
-        console.log(error);
       },
     });
   }

@@ -3,6 +3,9 @@ import { StoryService } from 'src/app/_services/story.service';
 import { GetSentenceViewDto } from 'src/app/models/get-sentence-view-dto';
 import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GetQuizDto } from 'src/app/models/get-quiz-dto';
+import { QuizSubmissionDto } from 'src/app/models/quiz-submission-dto';
+import { QuizService } from 'src/app/_services/quiz.service';
 
 @Component({
   selector: 'app-text-display',
@@ -12,11 +15,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class TextDisplayComponent implements OnInit {
   storyId: number = 0;
   story: GetStoryViewDto | null = null;
+  isQuiz = false;
+
+  quiz: GetQuizDto | null = null;
+  quizSubmission: QuizSubmissionDto = {
+    storyId: 0,
+    answers: [],
+  };
+  selectedAnswers: { [questionId: number]: number } = {};
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private storyService: StoryService,
+    private quizService: QuizService,
   ) {}
 
   ngOnInit(): void {
@@ -27,17 +39,21 @@ export class TextDisplayComponent implements OnInit {
     });
   }
   gotoQuiz() {
-    this.router.navigateByUrl(`text/${this.storyId}/quiz`);
+    this.isQuiz = true;
   }
 
   get(id: number) {
     if (this.storyId != 0) {
       this.storyService.get(id).subscribe({
         next: (response) => {
-          console.log(response),
-          this.story = response
+          this.story = response;
+          this.quiz = response.quiz;
         },
-        error: () => this.router.navigateByUrl(`error-page`),
+        error: (error) => {
+          if (error.status == 401) {
+            this.router.navigateByUrl(`error-page`);
+          }
+        },
       });
     }
   }
@@ -102,5 +118,21 @@ export class TextDisplayComponent implements OnInit {
       default:
         return 'Unknown';
     }
+  }
+
+  send(): void {
+    this.quizSubmission = {
+      storyId: this.storyId,
+      answers: Object.entries(this.selectedAnswers).map(
+        ([questionId, answerId]) => ({
+          questionId: Number(questionId),
+          answerId,
+        }),
+      ),
+    };
+    this.quizService.sendAnswers(this.quizSubmission).subscribe({
+      next: (response) => console.log(response),
+      error: (error) => console.log(error),
+    });
   }
 }

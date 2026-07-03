@@ -7,5 +7,6 @@ namespace StoryFlow.Interfaces.Repositories
         Task Add(T entity);
         Task<T?> Get(int id);
         Task Remove(T entity);
+        Task Update(T entity);
     }
 }

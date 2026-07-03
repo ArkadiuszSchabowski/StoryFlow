@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using StoryFlow.Exceptions;
 using StoryFlow.Helpers;
 using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
+using StoryFlow.Interfaces.Repositories;
 using StoryFlow_Database.Entities;
 using StoryFlow_Shared.Enums;
 using StoryFlow_Shared.Interfaces;
@@ -22,9 +24,11 @@ namespace StoryFlow.Services
         private readonly ITextCounter _textCounter;
         private readonly IMapper _mapper;
         private readonly GeminiSchemaGenerator _geminiSchemaGenerator;
+        private readonly IAggregateUserRepository _userRepository;
+        private readonly IUserStoryRepository _userStoryRepository;
         private readonly GeminiSettings _geminiSettings;
 
-        public StoryService(IAggregateStoryRepository storyRepository, IAggregateStoryValidator serviceValidator, ISentenceBuilder sentenceBuilder, ITextConverter textConverter, ITextCounter textCounter, IMapper mapper, IOptions<GeminiSettings> geminiSettings, GeminiSchemaGenerator geminiSchemaGenerator)
+        public StoryService(IAggregateStoryRepository storyRepository, IAggregateStoryValidator serviceValidator, ISentenceBuilder sentenceBuilder, ITextConverter textConverter, ITextCounter textCounter, IMapper mapper, IOptions<GeminiSettings> geminiSettings, GeminiSchemaGenerator geminiSchemaGenerator, IAggregateUserRepository userRepository, IUserStoryRepository userStoryRepository)
         {
             _storyRepository = storyRepository;
             _serviceValidator = serviceValidator;
@@ -33,6 +37,8 @@ namespace StoryFlow.Services
             _textCounter = textCounter;
             _mapper = mapper;
             _geminiSchemaGenerator = geminiSchemaGenerator;
+            _userRepository = userRepository;
+            _userStoryRepository = userStoryRepository;
             _geminiSettings = geminiSettings.Value;
         }
         public async Task Add(AddStoryDto item)
@@ -176,15 +182,49 @@ namespace StoryFlow.Services
             return stories;
         }
 
-        public async Task<GetStoryDto> Get(int id)
+        public async Task<GetStoryDto> Get(int storyId, string? userIdClaim)
         {
-            _serviceValidator.ValidateId(id);
+            if (!int.TryParse(userIdClaim, out var userId))
+            {
+                throw new UnauthorizedException("User is not authorized to perform this action.");
+            }
 
-            Story? result = await _storyRepository.Get(id);
+            User? user = await _userRepository.Get(userId);
 
-            _serviceValidator.ThrowIsNull(result);
+            if (user == null)
+            {
+                throw new NotFoundException("User not found.");
+            }
 
-            var storyDto = _mapper.Map<GetStoryDto>(result);
+            _serviceValidator.ValidateId(storyId);
+
+            Story? story = await _storyRepository.Get(storyId);
+
+            if (story == null)
+            {
+                throw new NotFoundException("Story not found.");
+            }
+
+            UserStory? userStory = await _userStoryRepository.GetByUserAndStory(user.Id, story.Id);
+
+            if(user.Tickets < 1 && userStory == null)
+            {
+                throw new BadRequestException("You don't have any tickets left. Complete another open quiz with a score of at least 50% to earn one.");
+            }
+
+            if (user.Tickets >= 1 && userStory == null)
+            {
+                var userStoryItem = new UserStory
+                {
+                    UserId = user.Id,
+                    StoryId = story.Id
+                };
+                await _userStoryRepository.Add(userStoryItem);
+                user.Tickets--;
+                await _userRepository.Update(user);
+            }
+
+            var storyDto = _mapper.Map<GetStoryDto>(story);
 
             return storyDto;
         }
