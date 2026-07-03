@@ -6,5 +6,6 @@
         public int UserId { get; set; }
         public int StoryId { get; set; }
         public int BestResult { get; set; }
+        public double PercentageScore { get; set; }
     }
 }

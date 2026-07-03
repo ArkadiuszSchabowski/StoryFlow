@@ -27,7 +27,6 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { StoryCreateComponent } from './components/auth/moderator/story-create/story-create.component';
 import { QuizCreateComponent } from './components/auth/moderator/quiz-create/quiz-create.component';
-import { GetQuizComponent } from './components/auth/get-quiz/get-quiz.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +41,6 @@ import { GetQuizComponent } from './components/auth/get-quiz/get-quiz.component'
     ErrorPageComponent,
     StoryCreateComponent,
     QuizCreateComponent,
-    GetQuizComponent,
   ],
   imports: [
     BrowserModule,

@@ -75,8 +75,7 @@ export class RegisterComponent {
     };
 
     this.userService.register(dto).subscribe({
-      next: (response) => {
-        console.log(response);
+      next: () => {
         this.toastr.success('Registered successfully.');
         this.router.navigateByUrl('login');
       },
@@ -85,7 +84,6 @@ export class RegisterComponent {
           this.toastr.error(error.error);
           this.form.reset();
         }
-        console.log(error);
       },
     });
   }

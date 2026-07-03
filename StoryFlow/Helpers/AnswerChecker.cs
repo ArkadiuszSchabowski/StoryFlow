@@ -1,7 +1,6 @@
-﻿using StoryFlow.Exceptions;
-using StoryFlow.Interfaces;
-using StoryFlow.Repositories;
+﻿using StoryFlow.Interfaces;
 using StoryFlow_Database.Entities;
+using StoryFlow_Shared.Models;
 
 namespace StoryFlow.Helpers
 {
@@ -15,10 +14,13 @@ namespace StoryFlow.Helpers
             _quizRepository = quizRepository;
             _pointsCalculator = pointsCalculator;
         }
-        public int CheckAnswers(Story story, List<AnswerDto> dto)
+        public QuizResult CheckAnswers(Story story, List<AnswerDto> dto)
         {
-            int quizPoints = _pointsCalculator.GetBonusPointsForStoryLength(story.StorySize);
+            int userQuizPoints = 0;
+            int bonusQuizPoints = _pointsCalculator.GetBonusPointsForStoryLength(story.StorySize);
             int pointsPerAnswer = _pointsCalculator.GetPointsPerAnswer(story.LanguageLevel);
+
+            userQuizPoints += bonusQuizPoints;
 
             foreach (Question question in story.Quiz!.Questions)
             {
@@ -31,11 +33,19 @@ namespace StoryFlow.Helpers
 
                 if (userAnswer.AnswerId == correctAnswerId)
                 {
-                    quizPoints += pointsPerAnswer;
+                    userQuizPoints += pointsPerAnswer;
                 }
             }
 
-            return quizPoints;
+            double scorePercentage = (userQuizPoints / (double)story.StoryPoint!.MaxPoints!) * 100;
+
+            var quizResult = new QuizResult
+            {
+                Points = userQuizPoints,
+                ScorePercentage = scorePercentage
+            };
+
+            return quizResult;
         }
 
     }

@@ -6,6 +6,7 @@ import { TokenDto } from '../models/token-dto';
 import { AuthService } from './auth.service';
 import { tap } from 'rxjs';
 import { RegisterUserDto } from '../models/register-user-dto';
+import { GetUserDto } from '../models/get-user-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +26,7 @@ export class UserService {
       Authorization: `Bearer ${token}`,
     };
 
-    return this.http.get(this.apiUrl + 'user/profile', {headers});
+    return this.http.get<GetUserDto>(this.apiUrl + 'user/profile', {headers});
   }
 
   login(dto: LoginDto) {

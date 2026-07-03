@@ -9,7 +9,6 @@ import { TextDisplayComponent } from './components/auth/text-display/text-displa
 import { ErrorPageComponent } from './components/system/error-page/error-page.component';
 import { StoryCreateComponent } from './components/auth/moderator/story-create/story-create.component';
 import { QuizCreateComponent } from './components/auth/moderator/quiz-create/quiz-create.component';
-import { GetQuizComponent } from './components/auth/get-quiz/get-quiz.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,7 +17,6 @@ const routes: Routes = [
   { path: 'text-selection', component: TextSelectionComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'text/:id', component: TextDisplayComponent },
-  { path: 'text/:id/quiz', component: GetQuizComponent },
   {path: 'error-page', component: ErrorPageComponent},
   {path: 'create-story', component: StoryCreateComponent},
   {path: 'create-quiz', component: QuizCreateComponent}

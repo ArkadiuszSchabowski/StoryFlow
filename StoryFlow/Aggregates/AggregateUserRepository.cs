@@ -44,6 +44,11 @@ namespace StoryFlow.Aggregates
             await _repository.Remove(entity);
         }
 
+        public async Task Update(User entity)
+        {
+            await _repository.Update(entity);
+        }
+
         public async Task UpdateStars(User item)
         {
             await _updateStars.UpdateStars(item);

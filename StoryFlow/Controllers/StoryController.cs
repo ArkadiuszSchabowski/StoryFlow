@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StoryFlow.Exceptions;
 using StoryFlow_Shared.Interfaces;
 using StoryFlow_Shared.Models;
 using System.Security.Claims;
@@ -28,10 +29,13 @@ namespace StoryFlow.Controllers
             return Ok(stories);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<GetStoryDto>> Get(int id) 
+        [Authorize]
+        [HttpGet("{storyId}")]
+        public async Task<ActionResult<GetStoryDto>> Get([FromRoute] int storyId) 
         {
-            var story = await _service.Get(id);
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            var story = await _service.Get(storyId, userIdClaim);
             return Ok(story);
         }
 

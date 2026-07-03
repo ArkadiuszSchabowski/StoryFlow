@@ -8,6 +8,7 @@
         public int StoryId { get; set; }
         public Story? Story { get; set; }
         public int BestResult { get; set; } = 0;
+        public double PercentageScore { get; set; }
         public bool HasReceivedStoryLengthBonus { get; set; } = false;
     }
 }

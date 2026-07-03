@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StoryFlow.Exceptions;
 using StoryFlow.Interfaces;
 using StoryFlow_Shared.Models;
 using System.Security.Claims;
@@ -26,6 +27,7 @@ namespace StoryFlow.Controllers
             return Ok(users);
         }
 
+        [Authorize]
         [HttpGet("profile")]
         public async Task<ActionResult<GetUserDto>> GetProfile()
         {
@@ -40,7 +42,7 @@ namespace StoryFlow.Controllers
 
             if (user == null)
             {
-                return NotFound();
+                throw new NotFoundException("User not found.");
             }
 
             return Ok(user);

@@ -47,6 +47,12 @@ namespace StoryFlow.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task Update(User entity)
+        {
+            _context.Users.Update(entity);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task UpdateStars(User user)
         {
             _context.Users.Update(user);

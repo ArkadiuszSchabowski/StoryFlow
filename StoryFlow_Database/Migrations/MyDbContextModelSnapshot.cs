@@ -263,6 +263,9 @@ namespace StoryFlow_Database.Migrations
                     b.Property<int>("Stars")
                         .HasColumnType("integer");
 
+                    b.Property<int>("Tickets")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
@@ -329,6 +332,9 @@ namespace StoryFlow_Database.Migrations
 
                     b.Property<bool>("HasReceivedStoryLengthBonus")
                         .HasColumnType("boolean");
+
+                    b.Property<double>("PercentageScore")
+                        .HasColumnType("double precision");
 
                     b.Property<int>("StoryId")
                         .HasColumnType("integer");

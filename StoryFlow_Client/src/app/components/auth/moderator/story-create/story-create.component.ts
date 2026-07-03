@@ -66,8 +66,6 @@ export class StoryCreateComponent {
       storySize: this.generateForm.get('storySize').value,
     };
 
-    console.log(dto);
-
     this.storyService.generate(dto).subscribe({
       next: (response) => {
         this.addForm.patchValue({
@@ -98,8 +96,7 @@ export class StoryCreateComponent {
     };
 
     this.storyService.add(dto).subscribe({
-      next: (response) => {
-        console.log(response);
+      next: () => {
         this.addForm.reset();
       },
       error: (error) => {

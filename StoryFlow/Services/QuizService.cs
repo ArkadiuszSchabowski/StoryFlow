@@ -62,22 +62,35 @@ namespace StoryFlow.Services
             await _storyRepository.SaveChangesAsync();
         }
 
-        public async Task<int> CheckAnswers(QuizSubmissionDto dto, int userId)
+        public async Task<QuizResult> CheckAnswers(QuizSubmissionDto dto, string? userIdString)
         {
-            Story? result = await _storyRepository.Get(dto.StoryId);
+            if(userIdString == null)
+            {
+                throw new NotFoundException("User doesn't exist.");
+            }
 
-            _validator.ThrowIsNull(result);
+            var userId = int.Parse(userIdString);
 
-            if (result!.Quiz == null)
+            Story? story = await _storyRepository.Get(dto.StoryId);
+
+            _validator.ThrowIsNull(story);
+
+            if (story!.Quiz == null)
             {
                 throw new NotFoundException("This story don't have active quiz");
             }
 
-            int quizPoints = _answerChecker.CheckAnswers(result, dto.Answers);
+            User? user = await _userRepository.Get(userId);
 
-            var user = await _userRepository.Get(userId);
+            if (user == null)
+            {
+                throw new NotFoundException("User not found.");
+            }
 
-            UserStory? userStory = user!.UserStories.SingleOrDefault(u => u.StoryId == dto.StoryId);
+            QuizResult quizResult = new QuizResult();
+            quizResult = _answerChecker.CheckAnswers(story, dto.Answers);
+
+            UserStory? userStory = user.UserStories.SingleOrDefault(u => u.StoryId == dto.StoryId);
 
             if (userStory == null)
             {
@@ -85,24 +98,31 @@ namespace StoryFlow.Services
                 {
                     UserId = userId,
                     StoryId = dto.StoryId,
-                    BestResult = quizPoints
+                    BestResult = quizResult.Points,
+                    PercentageScore = quizResult.ScorePercentage                 
                 };
 
                 await _userStoryRepository.Add(newUserStory);
 
             }
-            else if (userStory.BestResult < quizPoints)
+
+            if (quizResult.ScorePercentage >= 50 && userStory!.PercentageScore < 50)
             {
-                userStory.BestResult = quizPoints;
-                await _userStoryRepository.Update(userStory);
+                user.Tickets++;
             }
 
+            if (userStory!.BestResult < quizResult.Points)
+            {
+                userStory.BestResult = quizResult.Points;
+                userStory.PercentageScore = quizResult.ScorePercentage;
+                await _userStoryRepository.Update(userStory);
+            }
 
             user.Stars = user.UserStories.Sum(us => us.BestResult);
 
             await _userRepository.UpdateStars(user);
 
-            return quizPoints;
+            return quizResult;
         }
     }
 }

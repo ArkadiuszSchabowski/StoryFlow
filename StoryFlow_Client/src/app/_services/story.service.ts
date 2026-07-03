@@ -74,7 +74,14 @@ export class StoryService {
   }
 
   get(id: number) {
-    return this.http.get<GetStoryViewDto>(this.apiUrl + `story/${id}`).pipe(
+
+        const token: string | null = this.authService.getToken();
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return this.http.get<GetStoryViewDto>(this.apiUrl + `story/${id}`, {headers}).pipe(
       map((story): GetStoryViewDto => {
         return Object.assign(new GetStoryViewDto(), {
           id: story.id,

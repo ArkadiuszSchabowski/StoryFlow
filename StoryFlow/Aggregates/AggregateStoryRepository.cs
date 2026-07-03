@@ -56,5 +56,10 @@ namespace StoryFlow.Aggregates
         {
             await _userStoryRepository.SaveChangesAsync();
         }
+
+        public async Task Update(Story entity)
+        {
+            await _repository.Update(entity);
+        }
     }
 }
