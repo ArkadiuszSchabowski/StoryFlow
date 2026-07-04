@@ -55,6 +55,7 @@
 #submit-button-generate {
   color: mat.get-color-from-palette(theme.$accent);
   background-color: white;
+  border: 1px solid transparent;
 }
 
 #submit-button-generate:hover {

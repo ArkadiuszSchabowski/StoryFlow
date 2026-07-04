@@ -3,7 +3,9 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StoryService } from 'src/app/_services/story.service';
+import { UserService } from 'src/app/_services/user.service';
 import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
+import { GetUserDto } from 'src/app/models/get-user-dto';
 import { StoryFilter } from 'src/app/models/story-filter-dto';
 
 @Component({
@@ -15,6 +17,10 @@ export class TextSelectionComponent implements OnInit {
   stories: GetStoryViewDto[] = [];
   selected = 'option2';
   visibleStories: GetStoryViewDto[] = [];
+  dto: StoryFilter | null = null;
+  icon: string = '';
+  openedStoryId: number | null = null;
+  profile: GetUserDto | undefined;
 
   form: any = this.fb.group({
     languageLevel: [],
@@ -50,16 +56,52 @@ export class TextSelectionComponent implements OnInit {
     { value: '2', viewValue: 'Long' },
   ];
 
-  dto: StoryFilter | null = null;
-
   constructor(
     private fb: FormBuilder,
     private storyService: StoryService,
     private router: Router,
     private toastr: ToastrService,
+    private userService: UserService,
   ) {}
 
-  openedStoryId: number | null = null;
+  ngOnInit(): void {
+    this.get();
+    this.getProfile();
+  }
+
+  getProfile() {
+    this.userService.getProfile().subscribe({
+      next: (response) => {
+        this.profile = response;
+        console.log(response);
+      },
+      error: () => {},
+    });
+  }
+
+  getIcon(storyId: number): string {
+    const userStory = this.stories
+      .flatMap((s) => s.userStories ?? [])
+      .find((us) => us.storyId === storyId);
+
+    if (userStory == null && this.profile?.tickets == 0) {
+      return 'lock';
+    }
+    if (userStory == null) {
+      return 'play_arrow';
+    }
+
+    if (userStory?.percentageScore < 50) {
+      return 'replay';
+    }
+    if (userStory?.percentageScore >= 50 && userStory?.percentageScore < 100)
+      return 'play_arrow';
+
+    if (userStory?.percentageScore === 100) {
+      return 'emoji_events';
+    }
+    return '';
+  }
 
   hideStoryDescription(storyId: number) {
     if (this.openedStoryId === storyId) {
@@ -75,10 +117,6 @@ export class TextSelectionComponent implements OnInit {
     } else {
       this.openedStoryId = storyId;
     }
-  }
-
-  ngOnInit(): void {
-    this.get();
   }
 
   showLanguageLevel(level: any) {

@@ -3,4 +3,5 @@ export interface GetUserStoryDto {
     userId: number;
     storyId: number;
     bestResult: number;
+    percentageScore: number;
 }
