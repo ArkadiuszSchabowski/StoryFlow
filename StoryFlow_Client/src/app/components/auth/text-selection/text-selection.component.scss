@@ -12,13 +12,13 @@
 
 #story-container {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
+  flex-wrap: wrap;
   width: 100%;
   height: auto;
-  padding: 10px;
+  padding: 30px 100px 200px 100px;
 }
 
 #no-story-information {
@@ -34,60 +34,129 @@
   color: white;
 }
 
-.story-card{
+.story-card {
+  position: absolute;
   display: flex;
   flex-direction: column;
-  width: 300px;
-  height: 400px;
-  text-align: center;
+  width: 250px;
+  height: 350px;
   justify-content: center;
-  text-align: center;
-  padding: 10px;
+  padding: 0 10px 0 10px;
   background-color: mat.get-color-from-palette(theme.$accent);
   border-radius: 25px;
+  z-index: 5;
+  left: 5%;
+  border: 2px solid white;
+  top: -5%;
 }
 
-.story-card-description{
-  padding: 20px 10px;
+.story-card-description {
+  padding: 10px;
   text-align: left;
 }
 
-.story-card-story-size{
+.story-card-story-size {
   padding-top: 10px;
 }
 
-.story-card-button-container{
+.story-card-button-container {
   display: flex;
   width: 100%;
   height: 100%;
   justify-content: center;
   align-items: center;
 }
-button.story-card-button{
-  width: 70px !important;
-  height: 70px !important;
+button.story-card-button {
+  font-weight: bold !important;
+  font-size: 26px !important;
+  width: 100% !important;
+  height: 50px !important;
   color: mat.get-color-from-palette(theme.$accent);
-  background-color:white
+  background-color: white;
+  margin-top: 10px;
 }
 
-#score-card{
-  font-size: 20px;
+.story-card-button:hover {
+  color: white;
+  background-color: #26a69a;
+  border: 1px solid black;
+}
+
+#score-card {
+  font-size: 16px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
 }
 
-.score-item{
+.score-item {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 20px;
+  padding-top: 10px;
+}
+.story-preview-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: mat.get-color-from-palette(theme.$accent);
+  padding: 25px;
+  height: 150px;
+  width: 200px;
+  border-radius: 50px;
+  border: 2px solid white;
+  margin: 20px 40px;
+}
+.story-preview-button-title {
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: 10px;
 }
 
+.story-previev-button-level-and-size {
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+}
+.story-wrapper {
+  position: relative;
+}
+
+.story-preview-button {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.story-preview-button:hover {
+  background-color: #26a69a;
+}
+
+.button-close {
+  position: absolute;
+  width: 40px;
+  color: mat.get-color-from-palette(theme.$accent);
+  margin-left: 150px;
+  margin-top: -20px;
+}
+
+.button-close:hover {
+  color: white;
+  background-color: #26a69a;
+}
+.story-card-button-close {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   #story-container {
     min-height: calc(100vh - 160px);
+    justify-content: flex-start;
+    padding: 30px 50px 200px 50px;
   }
   #filter-container {
     flex-direction: row;
@@ -100,6 +169,8 @@ button.story-card-button{
 @media screen and (min-width: 1200px) {
   #story-container {
     min-height: calc(100vh - 160px);
+    justify-content: flex-start;
+    padding: 30px 50px 200px 50px;
   }
   #filter-container {
     flex-direction: row;

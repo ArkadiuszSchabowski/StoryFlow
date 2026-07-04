@@ -1,7 +1,8 @@
 @use "@angular/material" as mat;
 @use "src/styles" as theme;
 
-#quiz-container-wrapper, #text-display-subcontainer{
+#quiz-container-wrapper,
+#text-display-subcontainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -63,6 +64,14 @@
   margin-right: 10px;
 }
 
+.action-button:hover {
+  background-color: #26a69a;
+}
+
+#submit-button:hover {
+  background-color: #26a69a;
+}
+
 .submit-button-container {
   display: flex;
   justify-content: center;
@@ -70,34 +79,34 @@
   padding-top: 20px;
 }
 
-#quiz-container{
-    display: flex;
-    width: 100%;
-    height: auto;
+#quiz-container {
+  display: flex;
+  width: 100%;
+  height: auto;
 }
 
-#submit-button{
-      background-color: mat.get-color-from-palette(theme.$accent);
+#submit-button {
+  background-color: mat.get-color-from-palette(theme.$accent);
 }
-.title{
-    padding-top: 20px;
-}
-
-.submit-button{
-    width: 200px;
-    padding: 5px;
+.title {
+  padding-top: 20px;
 }
 
-.question-text{
-    padding: 20px 0;
+.submit-button {
+  width: 200px;
+  padding: 5px;
 }
 
-.answer{
-    padding: 5px 0;
+.question-text {
+  padding: 20px 0;
 }
 
-.submit-button-container{
-    padding: 20px 0;
+.answer {
+  padding: 5px 0;
+}
+
+.submit-button-container {
+  padding: 20px 0;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {

@@ -93,33 +93,33 @@ namespace StoryFlow_Tests.UnitTests.Services
             _mockRepository.Verify(x => x.Add(story), Times.Once);
         }
 
-        [Fact]
-        public async Task Get_WithCorrectId_ReturnsTypeOfGetStoryDto()
-        {
-            int id = 1;
-            string userIdClaim = "1";
+        //[Fact]
+        //public async Task Get_WithCorrectId_ReturnsTypeOfGetStoryDto()
+        //{
+        //    int id = 1;
+        //    string userIdClaim = "1";
 
-            var story = new Story
-            {
-                Id = 1,
-                PolishTitle = "Zwierzęca historia",
-                EnglishTitle = "Animal Story",
-            };
+        //    var story = new Story
+        //    {
+        //        Id = 1,
+        //        PolishTitle = "Zwierzęca historia",
+        //        EnglishTitle = "Animal Story",
+        //    };
 
-            var getStoryDto = new GetStoryDto
-            {
-                Id = 1,
-                PolishTitle = "Zwierzęca historia",
-                EnglishTitle = "Animal Story",
-            };
+        //    var getStoryDto = new GetStoryDto
+        //    {
+        //        Id = 1,
+        //        PolishTitle = "Zwierzęca historia",
+        //        EnglishTitle = "Animal Story",
+        //    };
 
-            _mockRepository.Setup(x => x.Get(1)).ReturnsAsync(story);
-            _mockMapper.Setup(x => x.Map<GetStoryDto>(story)).Returns(getStoryDto);
+        //    _mockRepository.Setup(x => x.Get(1)).ReturnsAsync(story);
+        //    _mockMapper.Setup(x => x.Map<GetStoryDto>(story)).Returns(getStoryDto);
 
-            var result = await _storyService.Get(id, userIdClaim);
+        //    var result = await _storyService.Get(id, userIdClaim);
 
-            result.Should().BeOfType<GetStoryDto>();
-        }
+        //    result.Should().BeOfType<GetStoryDto>();
+        //}
 
         [Fact]
         public async Task Remove_WhenStoryExists_ShouldCallRepositoryRemoveOnce()

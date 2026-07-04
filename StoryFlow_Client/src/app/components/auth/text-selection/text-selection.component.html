@@ -44,37 +44,62 @@
   <div id="no-story-information" class="subtitle" *ngIf="stories.length === 0">
     No stories match your selected filters. Please try different filters.
   </div>
-  <div *ngFor="let story of stories" class="story-item">
-    <div class="story-card" *ngIf="story.storyPoint">
-      <div class="story-card-title">{{ story.englishTitle }}</div>
-      <div class="story-card-description">{{ story.englishDescription }}</div>
-      <div class="story-card-language-level">
-        {{ showLanguageLevel(story.languageLevel) }}
+  <div *ngFor="let story of stories" class="story-wrapper">
+    <div class="story-preview-button" (click)="toggleStory(story.id)">
+      <div class="story-preview-button-title">
+        {{ story.englishTitle }}
       </div>
-      <div class="story-card-story-size">
-        {{ showSize(story.storySize) }}
+
+      <div class="story-previev-button-level-and-size">
+        <div>
+          {{ showLanguageLevelShort(story.languageLevel) }} -
+          {{ showSize(story.storySize) }}
+        </div>
       </div>
-      <div class="story-card-button-container">
+
+      <div class="score-item" *ngIf="story.storyPoint">
+        {{ story?.userStories?.[0]?.bestResult ?? 0 }}
+        <mat-icon>star</mat-icon>
+        / {{ story.storyPoint.maxPoints }}
+        <mat-icon>star</mat-icon>
+      </div>
+    </div>
+
+    <div
+      class="story-card"
+      *ngIf="story.storyPoint && openedStoryId === story.id"
+    >
+    <div class="story-card-button-close"><button class="button-close" (click)="hideStoryDescription(story.id)"><mat-icon>close</mat-icon></button></div>
+      <div class="story-card-description">
+        {{ story.englishDescription }}
+      </div>
+
+      <div id="score-card">
+        <div class="score-item">
+          Points per question:
+          {{ story.numberOfQuestions }} * {{ story.storyPoint.pointsPerAnswer }} 
+          <mat-icon>star</mat-icon>
+        </div>
+
+        <div class="score-item">
+          Story length bonus:
+          {{ story.storyPoint.bonusPointsForStoryLength }} 
+          <mat-icon>star</mat-icon>
+        </div>
+
+        <div class="score-item">
+          Maximum points:
+          {{ story.storyPoint.maxPoints }} 
+          <mat-icon>star</mat-icon>
+        </div>
+
         <button
           mat-raised-button
           class="story-card-button"
           (click)="NavigateToTextDisplay(story.id)"
         >
-          <div><mat-icon>auto_awesome</mat-icon></div>
+          START
         </button>
-      </div>
-      <div id="score-card" *ngIf="story.storyPoint">
-        <div>Questions: {{ story.numberOfQuestions }}</div>
-        <div>Points for question: {{ story.storyPoint.pointsPerAnswer }}</div>
-        <div>
-          Bonus for story length:
-          {{ story.storyPoint.bonusPointsForStoryLength }}
-        </div>
-        <div class="score-item">
-          {{ story?.userStories?.[0]?.bestResult ?? 0 }}
-          <mat-icon>star</mat-icon> / {{ story.storyPoint.maxPoints }}
-          <mat-icon>star</mat-icon>
-        </div>
       </div>
     </div>
   </div>

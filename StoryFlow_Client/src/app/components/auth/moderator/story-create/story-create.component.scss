@@ -57,6 +57,12 @@
   background-color: white;
 }
 
+#submit-button-generate:hover {
+  color: white;
+  background-color: #26a69a;
+  border: 1px solid black;
+}
+
 textarea.textarea {
   background-color: white;
 }
@@ -75,7 +81,7 @@ textarea.textarea {
   #generate-story-container {
     flex-direction: row;
   }
-  #submit-button-generate{
+  #submit-button-generate {
     margin-top: 10px;
   }
 
@@ -88,7 +94,7 @@ textarea.textarea {
 }
 
 @media screen and (min-width: 1200px) {
-  form{
+  form {
     display: flex;
     flex-direction: row;
   }

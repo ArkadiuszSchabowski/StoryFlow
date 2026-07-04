@@ -59,6 +59,24 @@ export class TextSelectionComponent implements OnInit {
     private toastr: ToastrService,
   ) {}
 
+  openedStoryId: number | null = null;
+
+  hideStoryDescription(storyId: number) {
+    if (this.openedStoryId === storyId) {
+      this.openedStoryId = null;
+    } else {
+      this.openedStoryId = storyId;
+    }
+  }
+
+  toggleStory(storyId: number) {
+    if (this.openedStoryId === storyId) {
+      this.openedStoryId = null;
+    } else {
+      this.openedStoryId = storyId;
+    }
+  }
+
   ngOnInit(): void {
     this.get();
   }
@@ -82,6 +100,31 @@ export class TextSelectionComponent implements OnInit {
     }
   }
 
+  showLanguageLevelShort(level: any) {
+    switch (level) {
+      case 0:
+        return 'A1';
+
+      case 1:
+        return 'A2';
+
+      case 2:
+        return 'B1';
+
+      case 3:
+        return 'B2';
+
+      case 4:
+        return 'C1';
+
+      case 5:
+        return 'C2';
+
+      default:
+        return level;
+    }
+  }
+
   showSize(size: any) {
     switch (size) {
       case 0:
@@ -96,6 +139,7 @@ export class TextSelectionComponent implements OnInit {
   }
 
   get() {
+    this.openedStoryId = null;
     this.dto = {
       languageLevel: this.form.value.languageLevel,
       category: this.form.value.category,
@@ -121,7 +165,7 @@ export class TextSelectionComponent implements OnInit {
         this.router.navigateByUrl(`text/${id}`);
       },
       error: (error) => {
-         this.toastr.error(error.error);
+        this.toastr.error(error.error);
       },
     });
   }
