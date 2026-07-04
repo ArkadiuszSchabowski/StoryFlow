@@ -18,7 +18,7 @@
   flex-wrap: wrap;
   width: 100%;
   height: auto;
-  padding: 30px 100px 200px 100px;
+  padding: 40px 100px 200px 100px;
 }
 
 #no-story-information {
@@ -38,7 +38,7 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 250px;
+  width: 290px;
   height: 350px;
   justify-content: center;
   padding: 0 10px 0 10px;
@@ -94,7 +94,7 @@ button.story-card-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 10px;
+  padding-top: 5px;
 }
 .story-preview-button {
   display: flex;
@@ -104,11 +104,11 @@ button.story-card-button {
   color: white;
   background-color: mat.get-color-from-palette(theme.$accent);
   padding: 25px;
-  height: 150px;
-  width: 200px;
+  height: 250px;
+  width: 250px;
   border-radius: 50px;
   border: 2px solid white;
-  margin: 20px 40px;
+  margin: 40px 40px;
 }
 .story-preview-button-title {
   font-size: 18px;
@@ -151,6 +151,28 @@ button.story-card-button {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
+}
+
+.story-preview-button-icon {
+  display: flex;
+  color: mat.get-color-from-palette(theme.$accent);
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 50px;
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 25px;
+}
+
+.score-item-hint{
+  margin-top: 10px;
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   #story-container {

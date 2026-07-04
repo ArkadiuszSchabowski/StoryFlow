@@ -46,6 +46,9 @@
   </div>
   <div *ngFor="let story of stories" class="story-wrapper">
     <div class="story-preview-button" (click)="toggleStory(story.id)">
+      <div class="story-preview-button-icon">
+        <mat-icon>{{ getIcon(story.id) }}</mat-icon>
+      </div>
       <div class="story-preview-button-title">
         {{ story.englishTitle }}
       </div>
@@ -69,7 +72,11 @@
       class="story-card"
       *ngIf="story.storyPoint && openedStoryId === story.id"
     >
-    <div class="story-card-button-close"><button class="button-close" (click)="hideStoryDescription(story.id)"><mat-icon>close</mat-icon></button></div>
+      <div class="story-card-button-close">
+        <button class="button-close" (click)="hideStoryDescription(story.id)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
       <div class="story-card-description">
         {{ story.englishDescription }}
       </div>
@@ -77,28 +84,33 @@
       <div id="score-card">
         <div class="score-item">
           Points per question:
-          {{ story.numberOfQuestions }} * {{ story.storyPoint.pointsPerAnswer }} 
+          {{ story.numberOfQuestions }} * {{ story.storyPoint.pointsPerAnswer }}
           <mat-icon>star</mat-icon>
         </div>
 
         <div class="score-item">
           Story length bonus:
-          {{ story.storyPoint.bonusPointsForStoryLength }} 
+          {{ story.storyPoint.bonusPointsForStoryLength }}
           <mat-icon>star</mat-icon>
         </div>
 
         <div class="score-item">
           Maximum points:
-          {{ story.storyPoint.maxPoints }} 
+          {{ story.storyPoint.maxPoints }}
           <mat-icon>star</mat-icon>
+        </div>
+
+        <div class="score-item score-item-hint">
+          {{ getIcon(story.id) === "lock" ? "Your ticket is locked. Try another quiz and get 50%+ to get it back" : "" }}
         </div>
 
         <button
           mat-raised-button
           class="story-card-button"
           (click)="NavigateToTextDisplay(story.id)"
+          [disabled]="getIcon(story.id) === 'lock'"
         >
-          START
+          {{ getIcon(story.id) === "lock" ? "UNLOCK QUIZ" : "START" }}
         </button>
       </div>
     </div>
