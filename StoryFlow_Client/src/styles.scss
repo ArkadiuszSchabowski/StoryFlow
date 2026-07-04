@@ -2,7 +2,7 @@
 
 @include mat.core();
 
-$primary: mat.define-palette(mat.$blue-palette, 900);
+$primary: mat.define-palette(mat.$teal-palette, 700);
 $accent: mat.define-palette(mat.$purple-palette);
 $warn: mat.define-palette(mat.$red-palette);
 
@@ -28,7 +28,7 @@ html,
 body {
   height: 100%;
   color: white;
-    background-color: #0a192f;
+  background-color: #0a192f;
 }
 body {
   margin: 0;
@@ -48,6 +48,14 @@ button {
 input[type="password"]::-ms-reveal,
 input[type="password"]::-ms-clear {
   display: none;
+}
+
+::ng-deep .mat-mdc-menu-panel {
+  background-color: mat.get-color-from-palette($accent) !important;
+}
+
+::ng-deep .mat-menu-desktop{
+  margin-top: 2px !important;
 }
 
 mat-card-content {
@@ -105,6 +113,20 @@ mat-form-field.card-input {
   padding: 20px;
   color: white;
   background-color: mat.get-color-from-palette($accent);
+}
+
+.submit-button:hover {
+  box-sizing: border-box;
+  background-color: #26a69a;
+}
+
+.password-button:hover {
+  background-color: #26a69a;
+}
+
+.toast-success {
+  background-color: #26a69a !important;
+  color: white !important;
 }
 
 @media (min-width: 600px) {
