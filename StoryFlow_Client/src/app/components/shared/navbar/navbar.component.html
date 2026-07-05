@@ -61,27 +61,27 @@
   <div id="desktop-navbar">
     <div id="desktop-navbar-logo" class="logo"></div>
     <div id="desktop-navbar-buttons">
-      <a routerLink="/" class="desktop-button">HOME</a>
+      <a routerLink="/" class="desktop-button">START</a>
       <a
         routerLink="/login"
         class="desktop-button"
         *ngIf="!(authService.currentUserSource$ | async)"
       >
-        LOGIN
+        ZALOGUJ
       </a>
       <a
         routerLink="/register"
         class="desktop-button"
         *ngIf="!(authService.currentUserSource$ | async)"
       >
-        REGISTER
+        ZAREJESTRUJ
       </a>
       <a
         routerLink="/text-selection"
         class="desktop-button"
         *ngIf="authService.currentUserSource$ | async"
       >
-        LIBRARY
+        PRZYGODA
       </a>
       <div
         class="desktop-button"
@@ -112,7 +112,7 @@
         #profileTrigger="matMenuTrigger"
       >
         <div class="desktop-button-body">
-          PROFILE
+          PROFIL
           <mat-icon class="desktop-icon-drop-down">arrow_drop_down</mat-icon>
         </div>
       </div>
@@ -121,14 +121,15 @@
 </mat-toolbar>
 <mat-menu #profileMenu="matMenu" class="mat-menu-desktop">
   <button mat-menu-item routerLink="/profile" class="mat-menu-desktop">
-    INFORMATION
+    INFORMACJE
   </button>
-  <button mat-menu-item (click)="logout()">LOGOUT</button>
+  <button mat-menu-item (click)="logout()">WYLOGUJ</button>
 </mat-menu>
 <mat-menu #moderatorMenu="matMenu" class="mat-menu-desktop">
-  <button mat-menu-item routerLink="/create-story">CREATE STORY</button>
+  <button mat-menu-item routerLink="/create-story">NOWA HISTORIA</button>
+  <button mat-menu-item routerLink="/create-quiz">NOWY QUIZ</button>
 </mat-menu>
 <mat-menu #administratorMenu="matMenu" class="mat-menu-desktop">
-  <button mat-menu-item routerLink="/create-story">CREATE STORY</button>
-  <button mat-menu-item routerLink="/create-quiz">CREATE QUIZ</button>
+  <button mat-menu-item routerLink="/create-story">NOWA HISTORIA</button>
+  <button mat-menu-item routerLink="/create-quiz">NOWY QUIZ</button>
 </mat-menu>

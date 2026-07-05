@@ -3,7 +3,7 @@
     <form [formGroup]="generateForm" (ngSubmit)="generate()">
       <div id="filter-story-container">
         <mat-form-field class="filter-field">
-          <mat-label>Category:</mat-label>
+          <mat-label>Kategoria:</mat-label>
           <mat-select id="storyCategory" formControlName="storyCategory">
             <mat-option
               *ngFor="let category of categories"
@@ -13,7 +13,7 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field class="filter-field">
-          <mat-label>Language level:</mat-label>
+          <mat-label>Poziom językowy:</mat-label>
           <mat-select id="languageLevel" formControlName="languageLevel">
             <mat-option
               *ngFor="let level of languageLevels"
@@ -23,7 +23,7 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field class="filter-field">
-          <mat-label>Story size:</mat-label>
+          <mat-label>Długość:</mat-label>
           <mat-select id="storySize" formControlName="storySize">
             <mat-option *ngFor="let size of sizes" [value]="size.value">{{
               size.viewValue
@@ -38,14 +38,14 @@
           id="submit-button-generate"
           type="submit"
         >
-          Generate
+          Generuj
         </button>
       </div>
     </form>
   </div>
   <form [formGroup]="addForm" id="add-form" (ngSubmit)="add()">
     <mat-form-field>
-      <mat-label>Polish title</mat-label>
+      <mat-label>Polski tytuł</mat-label>
       <textarea
         class="textarea"
         matInput
@@ -58,7 +58,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>English title</mat-label>
+      <mat-label>Angielski tytuł</mat-label>
       <textarea
         class="textarea"
         matInput
@@ -71,7 +71,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Polish description</mat-label>
+      <mat-label>Polski opis</mat-label>
       <textarea
         class="textarea"
         matInput
@@ -84,7 +84,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>English description</mat-label>
+      <mat-label>Angielski opis</mat-label>
       <textarea
         class="textarea"
         matInput
@@ -97,7 +97,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Polish story</mat-label>
+      <mat-label>Polska historia</mat-label>
       <textarea
         class="textarea"
         matInput
@@ -110,7 +110,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>English story</mat-label>
+      <mat-label>Angielska historia</mat-label>
       <textarea
         class="textarea"
         matInput
@@ -130,7 +130,7 @@
         color="accent"
         type="submit"
       >
-        Add
+        Dodaj
       </button>
     </div>
   </form>

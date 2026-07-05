@@ -67,58 +67,58 @@ export class TextDisplayComponent implements OnInit {
   changeTitleLanguage(story: GetStoryViewDto) {
     story.isTitleEnglish = !story.isTitleEnglish;
   }
-  showLanguageLevel(level: any) {
-    switch (level) {
-      case 0:
-        return 'A1 - Beginner';
-      case 1:
-        return 'A2 - Elementary';
-      case 2:
-        return 'B1 - Intermediate';
-      case 3:
-        return 'B2 - Upper-Intermediate';
-      case 4:
-        return 'C1 - Advanced';
-      case 5:
-        return 'C2 - Proficiency';
-      default:
-        return 'Unknown';
-    }
+showLanguageLevel(level: any) {
+  switch (level) {
+    case 0:
+      return 'A1 - Początkujący';
+    case 1:
+      return 'A2 - Podstawowy';
+    case 2:
+      return 'B1 - Średnio zaawansowany';
+    case 3:
+      return 'B2 - Wyższy średnio zaawansowany';
+    case 4:
+      return 'C1 - Zaawansowany';
+    case 5:
+      return 'C2 - Biegły';
+    default:
+      return 'Nieznany';
   }
+}
 
-  showSize(size: any) {
-    switch (size) {
-      case 0:
-        return 'Short';
-      case 1:
-        return 'Medium';
-      case 2:
-        return 'Long';
-      default:
-        return 'Unknown';
-    }
+showSize(size: any) {
+  switch (size) {
+    case 0:
+      return 'Krótka';
+    case 1:
+      return 'Średnia';
+    case 2:
+      return 'Długa';
+    default:
+      return 'Nieznana długość historii';
   }
+}
 
-  showCategory(category: any) {
-    switch (category) {
-      case 0:
-        return 'Animals';
-      case 1:
-        return 'Health';
-      case 2:
-        return 'Technology';
-      case 3:
-        return 'Sport';
-      case 4:
-        return 'Art';
-      case 5:
-        return 'History';
-      case 6:
-        return 'Music';
-      default:
-        return 'Unknown';
-    }
+showCategory(category: any) {
+  switch (category) {
+    case 0:
+      return 'Zwierzęta';
+    case 1:
+      return 'Zdrowie';
+    case 2:
+      return 'Technologia';
+    case 3:
+      return 'Sport';
+    case 4:
+      return 'Sztuka';
+    case 5:
+      return 'Historia';
+    case 6:
+      return 'Muzyka';
+    default:
+      return 'Nieznany';
   }
+}
 
   send(): void {
     this.quizSubmission = {

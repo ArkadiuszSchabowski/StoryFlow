@@ -1,7 +1,7 @@
 @use "@angular/material" as mat;
 @use "src/styles" as theme;
 
-#login-container{
+#login-container {
   display: flex;
   min-height: 500px;
   padding: 10px 0;
@@ -30,11 +30,17 @@ mat-card.login-card {
   background-color: mat.get-color-from-palette(theme.$accent);
 }
 
-#submit-login-button{
+#submit-login-button {
   margin: 40px 20px 20px 20px;
 }
 
-.card-input{
+#loader-text {
+  font-size: 20px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+.card-input {
   padding-bottom: 10px;
 }
 

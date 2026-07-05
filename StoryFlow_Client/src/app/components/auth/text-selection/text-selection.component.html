@@ -2,7 +2,7 @@
   <div>
     <form id="filter-container" [formGroup]="form" (ngSubmit)="get()">
       <mat-form-field class="filter-field">
-        <mat-label>Category:</mat-label>
+        <mat-label>Kategoria:</mat-label>
         <mat-select
           id="category"
           formControlName="category"
@@ -16,7 +16,7 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field class="filter-field">
-        <mat-label>Language level:</mat-label>
+        <mat-label>Poziom językowy:</mat-label>
         <mat-select
           id="languageLevel"
           formControlName="languageLevel"
@@ -30,7 +30,7 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field class="filter-field">
-        <mat-label>Story size:</mat-label>
+        <mat-label>Długość historii:</mat-label>
         <mat-select id="size" formControlName="size" (selectionChange)="get()">
           <mat-option *ngFor="let size of sizes" [value]="size.value">{{
             size.viewValue
@@ -42,7 +42,8 @@
 </div>
 <div id="story-container">
   <div id="no-story-information" class="subtitle" *ngIf="stories.length === 0">
-    No stories match your selected filters. Please try different filters.
+    Nie znaleziono historii pasujących do wybranych filtrów. Spróbuj innych
+    filtrów.
   </div>
   <div *ngFor="let story of stories" class="story-wrapper">
     <div class="story-preview-button" (click)="toggleStory(story.id)">
@@ -50,7 +51,7 @@
         <mat-icon>{{ getIcon(story.id) }}</mat-icon>
       </div>
       <div class="story-preview-button-title">
-        {{ story.englishTitle }}
+        {{ story.polishTitle }}
       </div>
 
       <div class="story-previev-button-level-and-size">
@@ -78,30 +79,34 @@
         </button>
       </div>
       <div class="story-card-description">
-        {{ story.englishDescription }}
+        {{ story.polishDescription }}
       </div>
 
       <div id="score-card">
         <div class="score-item">
-          Points per question:
+          Punkty za pytanie:
           {{ story.numberOfQuestions }} * {{ story.storyPoint.pointsPerAnswer }}
           <mat-icon>star</mat-icon>
         </div>
 
         <div class="score-item">
-          Story length bonus:
+          Bonus długości historii:
           {{ story.storyPoint.bonusPointsForStoryLength }}
           <mat-icon>star</mat-icon>
         </div>
 
         <div class="score-item">
-          Maximum points:
+          Maksymalna ilość punktów:
           {{ story.storyPoint.maxPoints }}
           <mat-icon>star</mat-icon>
         </div>
 
         <div class="score-item score-item-hint">
-          {{ getIcon(story.id) === "lock" ? "Your ticket is locked. Try another quiz and get 50%+ to get it back" : "" }}
+          {{
+            getIcon(story.id) === "lock"
+              ? "Twój bilet jest zablokowany. Spróbuj innego quizu i zdobądź co najmniej 50%, aby go odzyskać."
+              : ""
+          }}
         </div>
 
         <button
@@ -110,7 +115,7 @@
           (click)="NavigateToTextDisplay(story.id)"
           [disabled]="getIcon(story.id) === 'lock'"
         >
-          {{ getIcon(story.id) === "lock" ? "UNLOCK QUIZ" : "START" }}
+          {{ getIcon(story.id) === "lock" ? "ODBLOKUJ QUIZ" : "START" }}
         </button>
       </div>
     </div>

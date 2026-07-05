@@ -7,6 +7,7 @@ import { AuthService } from './auth.service';
 import { tap } from 'rxjs';
 import { RegisterUserDto } from '../models/register-user-dto';
 import { GetUserDto } from '../models/get-user-dto';
+import { LoaderService } from './loader.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,7 @@ export class UserService {
   constructor(
     private http: HttpClient,
     private authService: AuthService,
+    private loaderService: LoaderService
   ) {}
 
   getProfile() {
@@ -29,15 +31,26 @@ export class UserService {
     return this.http.get<GetUserDto>(this.apiUrl + 'user/profile', {headers});
   }
 
-  login(dto: LoginDto) {
-    return this.http.post<TokenDto>(this.apiUrl + 'user/login', dto).pipe(
-      tap((response) => {
-        if (response.token) {
-          this.authService.setUser(response.token);
-        }
-      }),
-    );
-  }
+login(dto: LoginDto) {
+  this.loaderService.show();
+
+  const start = Date.now();
+  const minTime = 3000;
+
+  return this.http.post<TokenDto>(this.apiUrl + 'user/login', dto).pipe(
+    tap((response) => {
+      if (!response.token) return;
+
+      const elapsed = Date.now() - start;
+      const remaining = Math.max(0, minTime - elapsed);
+
+      setTimeout(() => {
+        this.loaderService.hide();
+        this.authService.setUser(response.token);
+      }, remaining);
+    })
+  );
+}
 
   register(dto: RegisterUserDto) {
     return this.http.post(this.apiUrl + 'user/register', dto);
