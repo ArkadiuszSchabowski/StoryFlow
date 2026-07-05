@@ -19,7 +19,8 @@ const routes: Routes = [
   { path: 'text/:id', component: TextDisplayComponent },
   {path: 'error-page', component: ErrorPageComponent},
   {path: 'create-story', component: StoryCreateComponent},
-  {path: 'create-quiz', component: QuizCreateComponent}
+  {path: 'create-quiz', component: QuizCreateComponent},
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({

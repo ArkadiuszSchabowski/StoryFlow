@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -11,11 +11,12 @@ import { NavbarService } from 'src/app/_services/navbar.service';
 })
 export class NavbarComponent {
   isModerator$: boolean = false;
+
   constructor(
     public authService: AuthService,
     private router: Router,
     private toastr: ToastrService,
-    public navbarService: NavbarService
+    public navbarService: NavbarService,
   ) {}
 
   logout() {

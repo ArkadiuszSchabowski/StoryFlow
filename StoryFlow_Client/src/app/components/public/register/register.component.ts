@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/_services/user.service';
+import { GENDERS } from 'src/app/constants/select-options';
 import { RegisterUserDto } from 'src/app/models/register-user-dto';
 
 @Component({
@@ -14,10 +15,7 @@ export class RegisterComponent {
   hidePassword = signal(true);
   hideRepeatPassword = signal(true);
 
-  genders = [
-    { value: 0, viewValue: 'Kobieta' },
-    { value: 1, viewValue: 'Mężczyzna' },
-  ];
+  genders = GENDERS;
 
   form: any = this.fb.group({
     firstName: [
@@ -71,7 +69,10 @@ export class RegisterComponent {
       firstName: this.form.get('firstName').value,
       lastName: this.form.get('lastName').value,
       gender: this.form.get('gender').value,
-      dateOfBirth: this.form.get('dateOfBirth').value.toISOString().split('T')[0]
+      dateOfBirth: this.form
+        .get('dateOfBirth')
+        .value.toISOString()
+        .split('T')[0],
     };
 
     this.userService.register(dto).subscribe({

@@ -7,6 +7,8 @@ import { UserService } from 'src/app/_services/user.service';
 import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
 import { GetUserDto } from 'src/app/models/get-user-dto';
 import { StoryFilter } from 'src/app/models/story-filter-dto';
+import { showLanguageLevelShort, showSize } from 'src/app/helpers/formatter';
+import { CATEGORIES_WITH_PLACEHOLDER, LANGUAGE_LEVELS_WITH_PLACEHOLDER, SIZES_WITH_PLACEHOLDER } from 'src/app/constants/select-options';
 
 @Component({
   selector: 'app-text-selection',
@@ -15,46 +17,25 @@ import { StoryFilter } from 'src/app/models/story-filter-dto';
 })
 export class TextSelectionComponent implements OnInit {
   stories: GetStoryViewDto[] = [];
-  selected = 'option2';
   visibleStories: GetStoryViewDto[] = [];
   dto: StoryFilter | null = null;
   icon: string = '';
   openedStoryId: number | null = null;
   profile: GetUserDto | undefined;
 
+  categories = CATEGORIES_WITH_PLACEHOLDER;
+  sizes = SIZES_WITH_PLACEHOLDER;
+  languageLevels = LANGUAGE_LEVELS_WITH_PLACEHOLDER;
+  
+  showSize = showSize;
+  showLanguageLevelShort = showLanguageLevelShort;
+
+
   form: any = this.fb.group({
     languageLevel: [],
     category: [],
     size: [],
   });
-
-  categories = [
-    { value: null, viewValue: 'Kategoria:' },
-    { value: '0', viewValue: 'Zwierzęta' },
-    { value: '1', viewValue: 'Zdrowie' },
-    { value: '2', viewValue: 'Technologia' },
-    { value: '3', viewValue: 'Sport' },
-    { value: '4', viewValue: 'Sztuka' },
-    { value: '5', viewValue: 'Historia' },
-    { value: '6', viewValue: 'Muzyka' },
-  ];
-
-  languageLevels = [
-    { value: null, viewValue: 'Poziom językowy:' },
-    { value: '0', viewValue: 'A1 - Początkujący' },
-    { value: '1', viewValue: 'A2 - Podstawowy' },
-    { value: '2', viewValue: 'B1 - Średni' },
-    { value: '3', viewValue: 'B2 - Wyższy' },
-    { value: '4', viewValue: 'C1 - Zaawansowany' },
-    { value: '5', viewValue: 'C2 - Biegły' },
-  ];
-
-  sizes = [
-    { value: null, viewValue: 'Długość historii:' },
-    { value: '0', viewValue: 'Krótka' },
-    { value: '1', viewValue: 'Średnia' },
-    { value: '2', viewValue: 'Długa' },
-  ];
 
   constructor(
     private fb: FormBuilder,
@@ -67,6 +48,34 @@ export class TextSelectionComponent implements OnInit {
   ngOnInit(): void {
     this.get();
     this.getProfile();
+  }
+
+    get() {
+    this.openedStoryId = null;
+    this.dto = {
+      languageLevel: this.form.value.languageLevel,
+      category: this.form.value.category,
+      size: this.form.value.size,
+    };
+
+    this.storyService.getAll(this.dto).subscribe({
+      next: (response) => {
+        this.stories = response;
+      },
+      error: () => {},
+    });
+  }
+
+    getStory(id: number) {
+    this.storyService.get(id).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.router.navigateByUrl(`text/${id}`);
+      },
+      error: (error) => {
+        this.toastr.error(error.error);
+      },
+    });
   }
 
   getProfile() {
@@ -115,92 +124,7 @@ export class TextSelectionComponent implements OnInit {
     return Math.round(value * 100) / 100;
   }
 
-  showLanguageLevel(level: any) {
-    switch (level) {
-      case 0:
-        return 'A1 - Początkujący';
-      case 1:
-        return 'A2 - Podstawowy';
-      case 2:
-        return 'B1 - Średniozaawansowany';
-      case 3:
-        return 'B2 - Wyższy średniozaawansowany';
-      case 4:
-        return 'C1 - Zaawansowany';
-      case 5:
-        return 'C2 - Biegły';
-      default:
-        return 'Nieznany';
-    }
-  }
-
-  showLanguageLevelShort(level: any) {
-    switch (level) {
-      case 0:
-        return 'A1';
-
-      case 1:
-        return 'A2';
-
-      case 2:
-        return 'B1';
-
-      case 3:
-        return 'B2';
-
-      case 4:
-        return 'C1';
-
-      case 5:
-        return 'C2';
-
-      default:
-        return level;
-    }
-  }
-
-  showSize(size: any) {
-    switch (size) {
-      case 0:
-        return 'Krótka';
-      case 1:
-        return 'Średnia';
-      case 2:
-        return 'Długa';
-      default:
-        return 'Nieznana długość';
-    }
-  }
-
-  get() {
-    this.openedStoryId = null;
-    this.dto = {
-      languageLevel: this.form.value.languageLevel,
-      category: this.form.value.category,
-      size: this.form.value.size,
-    };
-
-    this.storyService.getAll(this.dto).subscribe({
-      next: (response) => {
-        this.stories = response;
-      },
-      error: () => {},
-    });
-  }
-
   NavigateToTextDisplay(id: number) {
     this.getStory(id);
-  }
-
-  getStory(id: number) {
-    this.storyService.get(id).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.router.navigateByUrl(`text/${id}`);
-      },
-      error: (error) => {
-        this.toastr.error(error.error);
-      },
-    });
   }
 }

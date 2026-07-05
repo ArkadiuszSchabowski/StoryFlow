@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     public authService: AuthService,
     public loaderService: LoaderService,
-    private navbarService: NavbarService
+    private navbarService: NavbarService,
   ) {}
 
   ngOnInit(): void {
@@ -38,53 +38,53 @@ export class LoginComponent implements OnInit {
     event.stopPropagation();
   }
   login() {
-  if (this.form.invalid) {
-    this.form.markAllAsTouched();
-    return;
-  }
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
 
-  const dto: LoginDto = {
-    email: this.form.get('email')?.value,
-    password: this.form.get('password')?.value,
-  };
+    const dto: LoginDto = {
+      email: this.form.get('email')?.value,
+      password: this.form.get('password')?.value,
+    };
 
-  this.navbarService.blockButtons();
-  this.loaderService.show();
+    this.navbarService.blockButtons();
+    this.loaderService.show();
 
-  const start = Date.now();
-  const minTime = 3000;
+    const start = Date.now();
+    const minTime = 3000;
 
-  this.userService.login(dto).subscribe({
-    next: (response) => {
-      if (!response.token) {
-        this.loaderService.hide();
-        this.navbarService.unblockButtons();
-        return;
-      }
-
-      const elapsed = Date.now() - start;
-      const remaining = Math.max(0, minTime - elapsed);
-
-      setTimeout(() => {
-        this.loaderService.hide();
-        this.toastr.success('Zalogowano pomyślnie.');
-        this.router.navigateByUrl('text-selection');
-      }, remaining);
-    },
-
-    error: (error) => {
-      const elapsed = Date.now() - start;
-      const remaining = Math.max(0, minTime - elapsed);
-
-      setTimeout(() => {
-        this.loaderService.hide();
-
-        if (error.status === 400) {
-          this.toastr.error('Błędne dane logowania.');
-          this.form.reset();
+    this.userService.login(dto).subscribe({
+      next: (response) => {
+        if (!response.token) {
+          this.loaderService.hide();
+          this.navbarService.unblockButtons();
+          return;
         }
-      }, remaining);
-    },
-  });
-}
+
+        const elapsed = Date.now() - start;
+        const remaining = Math.max(0, minTime - elapsed);
+
+        setTimeout(() => {
+          this.loaderService.hide();
+          this.toastr.success('Zalogowano pomyślnie.');
+          this.router.navigateByUrl('text-selection');
+        }, remaining);
+      },
+
+      error: (error) => {
+        const elapsed = Date.now() - start;
+        const remaining = Math.max(0, minTime - elapsed);
+
+        setTimeout(() => {
+          this.loaderService.hide();
+
+          if (error.status === 400) {
+            this.toastr.error('Błędne dane logowania.');
+            this.form.reset();
+          }
+        }, remaining);
+      },
+    });
+  }
 }

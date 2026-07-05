@@ -1,74 +1,34 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/public/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
-import { LoginComponent } from './components/public/login/login.component';
-import { RegisterComponent } from './components/public/register/register.component';
-import { ProfileComponent } from './components/auth/profile/profile.component';
-import { TextSelectionComponent } from './components/auth/text-selection/text-selection.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatMenuModule } from '@angular/material/menu';
-import { TextDisplayComponent } from './components/auth/text-display/text-display.component';
-import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { ErrorPageComponent } from './components/system/error-page/error-page.component';
 import { ToastrModule } from 'ngx-toastr';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
-import { StoryCreateComponent } from './components/auth/moderator/story-create/story-create.component';
-import { QuizCreateComponent } from './components/auth/moderator/quiz-create/quiz-create.component';
-
-import { LottieModule } from 'ngx-lottie';
-import player from 'lottie-web';
-
-export function playerFactory() {
-  return player;
-}
+import { MaterialModule } from './modules/material/material.module';
+import { PublicModule } from './modules/public/public.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     NavbarComponent,
-    LoginComponent,
-    RegisterComponent,
-    ProfileComponent,
-    TextSelectionComponent,
-    TextDisplayComponent,
     ErrorPageComponent,
-    StoryCreateComponent,
-    QuizCreateComponent,
   ],
   imports: [
+    AuthModule,
     BrowserModule,
+    MaterialModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatSelectModule,
     FormsModule,
+    PublicModule,
     ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-        LottieModule.forRoot({ player: playerFactory }),
-    ToastrModule.forRoot({
-    }),
+    ToastrModule.forRoot({}),
   ],
   providers: [],
   bootstrap: [AppComponent],
