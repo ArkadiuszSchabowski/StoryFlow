@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
 
       setTimeout(() => {
         this.loaderService.hide();
-        this.toastr.success('Logged in successfully.');
+        this.toastr.success('Zalogowano pomyślnie.');
         this.router.navigateByUrl('text-selection');
       }, remaining);
     },
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
         this.loaderService.hide();
 
         if (error.status === 400) {
-          this.toastr.error(error.error);
+          this.toastr.error('Błędne dane logowania.');
           this.form.reset();
         }
       }, remaining);

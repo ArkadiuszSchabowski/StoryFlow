@@ -35,7 +35,7 @@ namespace StoryFlow.Services
             User? existedUser = await _userRepository.GetByEmail(dto.Email);
 
             if (existedUser != null) {
-                throw new ConflictException("This email is already registered.");
+                throw new ConflictException("Ten adres e-mail jest już zarejestrowany.");
             }
 
             User user = _mapper.Map<User>(dto);
@@ -76,14 +76,14 @@ namespace StoryFlow.Services
             User? user = await _userRepository.GetByEmail(dto.Email);
 
             if (user == null) {
-                throw new BadRequestException("Invalid email or password.");
+                throw new BadRequestException("Błędne dane logowania.");
             }
 
             var result = _passwordHasher.VerifyHashedPassword(user, user.HashedPassword, dto.Password);
 
             if(result == PasswordVerificationResult.Failed)
             {
-                throw new BadRequestException("Invalid email or password.");
+                throw new BadRequestException("Błędne dane logowania.");
             }
 
             var claims = new List<Claim>

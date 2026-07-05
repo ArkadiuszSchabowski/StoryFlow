@@ -10,7 +10,7 @@ namespace StoryFlow.Validators
         {
             if (entity is null)
             {
-                throw new NotFoundException("Story not found.");
+                throw new NotFoundException("Nie znaleziono historii.");
             }
         }
     }

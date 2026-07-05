@@ -186,14 +186,14 @@ namespace StoryFlow.Services
         {
             if (!int.TryParse(userIdClaim, out var userId))
             {
-                throw new UnauthorizedException("User is not authorized to perform this action.");
+                throw new UnauthorizedException("Użytkownik nie ma uprawnień do wykonania tej operacji.");
             }
 
             User? user = await _userRepository.Get(userId);
 
             if (user == null)
             {
-                throw new NotFoundException("User not found.");
+                throw new NotFoundException("Nie znaleziono użytkownika.");
             }
 
             _serviceValidator.ValidateId(storyId);
@@ -202,14 +202,14 @@ namespace StoryFlow.Services
 
             if (story == null)
             {
-                throw new NotFoundException("Story not found.");
+                throw new NotFoundException("Nie znaleziono historii.");
             }
 
             UserStory? userStory = await _userStoryRepository.GetByUserAndStory(user.Id, story.Id);
 
             if(user.Tickets < 1 && userStory == null)
             {
-                throw new BadRequestException("You don't have any tickets left. Complete another open quiz with a score of at least 50% to earn one.");
+                throw new BadRequestException("Nie masz już żadnych biletów. Ukończ kolejny otwarty quiz z wynikiem co najmniej 50%, aby zdobyć kolejny.");
             }
 
             if (user.Tickets >= 1 && userStory == null)

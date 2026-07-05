@@ -15,8 +15,8 @@ export class RegisterComponent {
   hideRepeatPassword = signal(true);
 
   genders = [
-    { value: 0, viewValue: 'Female' },
-    { value: 1, viewValue: 'Male' },
+    { value: 0, viewValue: 'Kobieta' },
+    { value: 1, viewValue: 'Mężczyzna' },
   ];
 
   form: any = this.fb.group({
@@ -76,7 +76,7 @@ export class RegisterComponent {
 
     this.userService.register(dto).subscribe({
       next: () => {
-        this.toastr.success('Registered successfully.');
+        this.toastr.success('Zarejestrowano pomyślnie.');
         this.router.navigateByUrl('login');
       },
       error: (error) => {

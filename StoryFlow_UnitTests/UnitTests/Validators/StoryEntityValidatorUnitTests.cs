@@ -20,7 +20,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             var act = () => _storyEntityValidator.ThrowIsNull(story);
 
-            act.Should().Throw<NotFoundException>().WithMessage("Story not found.");
+            act.Should().Throw<NotFoundException>().WithMessage("Nie znaleziono historii.");
         }
 
         [Fact]

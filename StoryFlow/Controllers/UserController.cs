@@ -42,7 +42,7 @@ namespace StoryFlow.Controllers
 
             if (user == null)
             {
-                throw new NotFoundException("User not found.");
+                throw new NotFoundException("Nie znaleziono użytkownika.");
             }
 
             return Ok(user);
