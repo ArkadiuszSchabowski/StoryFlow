@@ -69,7 +69,7 @@ mat-card-content {
 
 mat-form-field.card-input {
   display: flex;
-  width: 410px;
+  padding: bottom;
 }
 
 .title,
@@ -122,6 +122,11 @@ mat-form-field.card-input {
 
 .password-button:hover {
   background-color: #26a69a;
+}
+
+.mat-mdc-option:hover {
+  color: white !important;
+  background-color: mat.get-color-from-palette($accent) !important;
 }
 
 @media (min-width: 600px) {

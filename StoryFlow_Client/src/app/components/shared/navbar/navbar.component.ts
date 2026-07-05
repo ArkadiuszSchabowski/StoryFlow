@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/_services/auth.service';
+import { NavbarService } from 'src/app/_services/navbar.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,10 +15,12 @@ export class NavbarComponent {
     public authService: AuthService,
     private router: Router,
     private toastr: ToastrService,
+    public navbarService: NavbarService
   ) {}
 
   logout() {
     this.authService.logout();
+    this.navbarService.unblockButtons();
     this.toastr.success('Logged out successfully.');
     this.router.navigateByUrl('');
   }

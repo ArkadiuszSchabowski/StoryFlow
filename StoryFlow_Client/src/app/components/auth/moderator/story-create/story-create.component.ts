@@ -35,28 +35,28 @@ export class StoryCreateComponent {
   });
 
   categories = [
-    { value: 0, viewValue: 'Animals' },
-    { value: 1, viewValue: 'Health' },
-    { value: 2, viewValue: 'Technology' },
+    { value: 0, viewValue: 'Zwierzęta' },
+    { value: 1, viewValue: 'Zdrowie' },
+    { value: 2, viewValue: 'Technologia' },
     { value: 3, viewValue: 'Sport' },
-    { value: 4, viewValue: 'Art' },
-    { value: 5, viewValue: 'History' },
-    { value: 6, viewValue: 'Music' },
+    { value: 4, viewValue: 'Sztuka' },
+    { value: 5, viewValue: 'Historia' },
+    { value: 6, viewValue: 'Muzyka' },
   ];
 
   languageLevels = [
-    { value: 0, viewValue: 'A1 - Beginner' },
-    { value: 1, viewValue: 'A2 - Elementary' },
-    { value: 2, viewValue: 'B1 - Intermediate' },
-    { value: 3, viewValue: 'B2 - Upper-Intermediate' },
-    { value: 4, viewValue: 'C1 - Advanced' },
-    { value: 5, viewValue: 'C2 - Proficiency' },
+    { value: 0, viewValue: 'A1 - Początkujący' },
+    { value: 1, viewValue: 'A2 - Podstawowy' },
+    { value: 2, viewValue: 'B1 - Średni' },
+    { value: 3, viewValue: 'B2 - Wyższy' },
+    { value: 4, viewValue: 'C1 - Zaawansowany' },
+    { value: 5, viewValue: 'C2 - Biegły' },
   ];
 
   sizes = [
-    { value: 0, viewValue: 'Short' },
-    { value: 1, viewValue: 'Medium' },
-    { value: 2, viewValue: 'Long' },
+    { value: 0, viewValue: 'Krótka' },
+    { value: 1, viewValue: 'Średnia' },
+    { value: 2, viewValue: 'Długa' },
   ];
 
   public generate() {
@@ -97,6 +97,7 @@ export class StoryCreateComponent {
 
     this.storyService.add(dto).subscribe({
       next: () => {
+        this.toastr.success('Historia została dodana.');
         this.addForm.reset();
       },
       error: (error) => {
