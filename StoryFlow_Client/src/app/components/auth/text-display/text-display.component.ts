@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GetQuizDto } from 'src/app/models/get-quiz-dto';
 import { QuizSubmissionDto } from 'src/app/models/quiz-submission-dto';
 import { QuizService } from 'src/app/_services/quiz.service';
+import { showCategory, showLanguageLevel, showSize } from 'src/app/helpers/formatter';
 
 @Component({
   selector: 'app-text-display',
@@ -23,6 +24,10 @@ export class TextDisplayComponent implements OnInit {
     answers: [],
   };
   selectedAnswers: { [questionId: number]: number } = {};
+
+  showLanguageLevel = showLanguageLevel;
+  showSize = showSize;
+  showCategory = showCategory;
 
   constructor(
     private router: Router,
@@ -67,58 +72,6 @@ export class TextDisplayComponent implements OnInit {
   changeTitleLanguage(story: GetStoryViewDto) {
     story.isTitleEnglish = !story.isTitleEnglish;
   }
-showLanguageLevel(level: any) {
-  switch (level) {
-    case 0:
-      return 'A1 - Początkujący';
-    case 1:
-      return 'A2 - Podstawowy';
-    case 2:
-      return 'B1 - Średnio zaawansowany';
-    case 3:
-      return 'B2 - Wyższy średnio zaawansowany';
-    case 4:
-      return 'C1 - Zaawansowany';
-    case 5:
-      return 'C2 - Biegły';
-    default:
-      return 'Nieznany';
-  }
-}
-
-showSize(size: any) {
-  switch (size) {
-    case 0:
-      return 'Krótka';
-    case 1:
-      return 'Średnia';
-    case 2:
-      return 'Długa';
-    default:
-      return 'Nieznana długość historii';
-  }
-}
-
-showCategory(category: any) {
-  switch (category) {
-    case 0:
-      return 'Zwierzęta';
-    case 1:
-      return 'Zdrowie';
-    case 2:
-      return 'Technologia';
-    case 3:
-      return 'Sport';
-    case 4:
-      return 'Sztuka';
-    case 5:
-      return 'Historia';
-    case 6:
-      return 'Muzyka';
-    default:
-      return 'Nieznany';
-  }
-}
 
   send(): void {
     this.quizSubmission = {

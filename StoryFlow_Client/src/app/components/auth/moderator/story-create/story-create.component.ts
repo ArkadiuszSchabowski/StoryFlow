@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { StoryService } from 'src/app/_services/story.service';
+import { CATEGORIES, LANGUAGELEVELS, SIZES } from 'src/app/constants/select-options';
 import { AddStoryDto } from 'src/app/models/add-story-dto';
 import { GenerateStoryDto } from 'src/app/models/generate-story-dto';
 
@@ -11,6 +12,11 @@ import { GenerateStoryDto } from 'src/app/models/generate-story-dto';
   styleUrls: ['./story-create.component.scss'],
 })
 export class StoryCreateComponent {
+
+  categories = CATEGORIES;
+  languageLevels = LANGUAGELEVELS;
+  sizes = SIZES;
+
   constructor(
     private fb: FormBuilder,
     private storyService: StoryService,
@@ -33,31 +39,6 @@ export class StoryCreateComponent {
     polishStory: [''],
     englishStory: [''],
   });
-
-  categories = [
-    { value: 0, viewValue: 'Zwierzęta' },
-    { value: 1, viewValue: 'Zdrowie' },
-    { value: 2, viewValue: 'Technologia' },
-    { value: 3, viewValue: 'Sport' },
-    { value: 4, viewValue: 'Sztuka' },
-    { value: 5, viewValue: 'Historia' },
-    { value: 6, viewValue: 'Muzyka' },
-  ];
-
-  languageLevels = [
-    { value: 0, viewValue: 'A1 - Początkujący' },
-    { value: 1, viewValue: 'A2 - Podstawowy' },
-    { value: 2, viewValue: 'B1 - Średni' },
-    { value: 3, viewValue: 'B2 - Wyższy' },
-    { value: 4, viewValue: 'C1 - Zaawansowany' },
-    { value: 5, viewValue: 'C2 - Biegły' },
-  ];
-
-  sizes = [
-    { value: 0, viewValue: 'Krótka' },
-    { value: 1, viewValue: 'Średnia' },
-    { value: 2, viewValue: 'Długa' },
-  ];
 
   public generate() {
     const dto: GenerateStoryDto = {
