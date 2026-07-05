@@ -1,8 +1,8 @@
-<div id="login-container" class="container">
+<div id="login-container" class="container" *ngIf="!(loaderService.loading$ | async)">
   <form [formGroup]="form" (ngSubmit)="login()" autocomplete="off">
     <mat-card class="login-card">
       <mat-card-title id="card-title"
-        >Ready to continue? Sign in.</mat-card-title
+        >Gotowy do dalszej nauki? Zaloguj się.</mat-card-title
       >
       <mat-card-content>
         <mat-form-field class="card-input">
@@ -14,7 +14,7 @@
               form.get('email')?.touched
             "
           >
-            Email is required.
+            Email jest wymagany.
           </mat-error>
 
           <mat-error
@@ -22,11 +22,11 @@
               form.get('email')?.hasError('email') && form.get('email')?.touched
             "
           >
-            Please enter a valid email address.
+            Wprowadź poprawny adres e-mail.
           </mat-error>
         </mat-form-field>
         <mat-form-field class="card-input">
-          <mat-label>Password</mat-label>
+          <mat-label>Hasło</mat-label>
           <input
             class="input"
             matInput
@@ -53,7 +53,7 @@
               form.get('password')?.touched
             "
           >
-            Password is required.
+            Hasło jest wymagane.
           </mat-error>
         </mat-form-field>
         <div id="submit-button-container">
@@ -64,10 +64,16 @@
             color="accent"
             type="submit"
           >
-            Login
+            Zaloguj
           </button>
         </div>
       </mat-card-content>
     </mat-card>
   </form>
+</div>
+<div id="loader-container" class="container" *ngIf="loaderService.loading$ | async">
+  <div id="loader-text">Zaraz zaczynamy...</div>
+  <div id="loader-logo">
+    <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>
+  </div>
 </div>

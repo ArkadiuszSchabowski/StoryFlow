@@ -29,31 +29,31 @@ export class TextSelectionComponent implements OnInit {
   });
 
   categories = [
-    { value: null, viewValue: 'Category:' },
-    { value: '0', viewValue: 'Animals' },
-    { value: '1', viewValue: 'Health' },
-    { value: '2', viewValue: 'Technology' },
+    { value: null, viewValue: 'Kategoria:' },
+    { value: '0', viewValue: 'Zwierzęta' },
+    { value: '1', viewValue: 'Zdrowie' },
+    { value: '2', viewValue: 'Technologia' },
     { value: '3', viewValue: 'Sport' },
-    { value: '4', viewValue: 'Art' },
-    { value: '5', viewValue: 'History' },
-    { value: '6', viewValue: 'Music' },
+    { value: '4', viewValue: 'Sztuka' },
+    { value: '5', viewValue: 'Historia' },
+    { value: '6', viewValue: 'Muzyka' },
   ];
 
   languageLevels = [
-    { value: null, viewValue: 'Language level:' },
-    { value: '0', viewValue: 'A1 - Begginer' },
-    { value: '1', viewValue: 'A2 - Elementary' },
-    { value: '2', viewValue: 'B1 - Intermediate' },
-    { value: '3', viewValue: 'B2 - Upper-Intermediate' },
-    { value: '4', viewValue: 'C1 - Advanced' },
-    { value: '5', viewValue: 'C2 - Proficiency' },
+    { value: null, viewValue: 'Poziom języka:' },
+    { value: '0', viewValue: 'A1 - Początkujący' },
+    { value: '1', viewValue: 'A2 - Podstawowy' },
+    { value: '2', viewValue: 'B1 - Średnio zaawansowany' },
+    { value: '3', viewValue: 'B2 - Wyższy średnio zaawansowany' },
+    { value: '4', viewValue: 'C1 - Zaawansowany' },
+    { value: '5', viewValue: 'C2 - Biegły' },
   ];
 
   sizes = [
-    { value: null, viewValue: 'Story size:' },
-    { value: '0', viewValue: 'Short' },
-    { value: '1', viewValue: 'Medium' },
-    { value: '2', viewValue: 'Long' },
+    { value: null, viewValue: 'Rozmiar historii:' },
+    { value: '0', viewValue: 'Krótka' },
+    { value: '1', viewValue: 'Średnia' },
+    { value: '2', viewValue: 'Długa' },
   ];
 
   constructor(
@@ -122,19 +122,19 @@ export class TextSelectionComponent implements OnInit {
   showLanguageLevel(level: any) {
     switch (level) {
       case 0:
-        return 'A1 - Beginner';
+        return 'A1 - Początkujący';
       case 1:
-        return 'A2 - Elementary';
+        return 'A2 - Podstawowy';
       case 2:
-        return 'B1 - Intermediate';
+        return 'B1 - Średnio zaawansowany';
       case 3:
-        return 'B2 - Upper-Intermediate';
+        return 'B2 - Wyższy średnio zaawansowany';
       case 4:
-        return 'C1 - Advanced';
+        return 'C1 - Zaawansowany';
       case 5:
-        return 'C2 - Proficiency';
+        return 'C2 - Biegły';
       default:
-        return 'Unknown';
+        return 'Nieznany';
     }
   }
 
@@ -166,13 +166,13 @@ export class TextSelectionComponent implements OnInit {
   showSize(size: any) {
     switch (size) {
       case 0:
-        return 'Short';
+        return 'Krótka';
       case 1:
-        return 'Medium';
+        return 'Średnia';
       case 2:
-        return 'Long';
+        return 'Długa';
       default:
-        return 'Unknown';
+        return 'Nieznana długość';
     }
   }
 

@@ -28,6 +28,13 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { StoryCreateComponent } from './components/auth/moderator/story-create/story-create.component';
 import { QuizCreateComponent } from './components/auth/moderator/quiz-create/quiz-create.component';
 
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
+
+export function playerFactory() {
+  return player;
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +66,7 @@ import { QuizCreateComponent } from './components/auth/moderator/quiz-create/qui
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+        LottieModule.forRoot({ player: playerFactory }),
     ToastrModule.forRoot({
     }),
   ],

@@ -3,7 +3,7 @@
 @include mat.core();
 
 $primary: mat.define-palette(mat.$teal-palette, 700);
-$accent: mat.define-palette(mat.$purple-palette);
+$accent: mat.define-palette(mat.$teal-palette, 500);
 $warn: mat.define-palette(mat.$red-palette);
 
 $StoryFlow_Client-theme: mat.define-light-theme(
@@ -54,7 +54,7 @@ input[type="password"]::-ms-clear {
   background-color: mat.get-color-from-palette($accent) !important;
 }
 
-::ng-deep .mat-menu-desktop{
+::ng-deep .mat-menu-desktop {
   margin-top: 2px !important;
 }
 
@@ -106,7 +106,7 @@ mat-form-field.card-input {
 }
 
 .submit-button {
-  width: 120px;
+  width: 200px;
   height: 70px;
   font-size: 20px;
   font-weight: bold;
@@ -122,11 +122,6 @@ mat-form-field.card-input {
 
 .password-button:hover {
   background-color: #26a69a;
-}
-
-.toast-success {
-  background-color: #26a69a !important;
-  color: white !important;
 }
 
 @media (min-width: 600px) {
