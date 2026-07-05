@@ -10,7 +10,7 @@ namespace StoryFlow.Validators
         {
             if (entity is null)
             {
-                throw new NotFoundException("User not found.");
+                throw new NotFoundException("Nie znaleziono użytkownika.");
             }
         }
     }

@@ -19,7 +19,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             var act = () => _validatorId.ValidateId(id);
 
-            act.Should().Throw<BadRequestException>().WithMessage("Id is required.");
+            act.Should().Throw<BadRequestException>().WithMessage("Id jest wymagane.");
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             var act = () => _validatorId.ValidateId(id);
 
-            act.Should().Throw<BadRequestException>().WithMessage("Id must be greater than 0.");
+            act.Should().Throw<BadRequestException>().WithMessage("Id musi być większe od 0.");
         }
 
         [Fact]
@@ -39,7 +39,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             var act = () => _validatorId.ValidateId(id);
 
-            act.Should().Throw<BadRequestException>().WithMessage("Id must be greater than 0.");
+            act.Should().Throw<BadRequestException>().WithMessage("Id musi być większe od 0.");
         }
 
         [Fact]

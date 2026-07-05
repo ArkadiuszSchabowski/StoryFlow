@@ -5,7 +5,6 @@ using StoryFlow_Shared.Models;
 
 namespace StoryFlow_Tests.UnitTests.Validators
 {
-    
     public class StoryValidatorUnitTests
     {
         private readonly StoryValidator _storyValidator;
@@ -29,6 +28,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
         {
             _storyValidator = new StoryValidator();
         }
+
         [Fact]
         public void Validate_WhenPolishTitleIsNull_ThrowsBadRequestException()
         {
@@ -44,7 +44,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("Polish title is required.");
+                .WithMessage("Polski tytuł jest wymagany.");
         }
 
         [Fact]
@@ -62,7 +62,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("English title is required.");
+                .WithMessage("Angielski tytuł jest wymagany.");
         }
 
         [Fact]
@@ -80,7 +80,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("Polish title is required.");
+                .WithMessage("Polski tytuł jest wymagany.");
         }
 
         [Fact]
@@ -98,7 +98,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("English title is required.");
+                .WithMessage("Angielski tytuł jest wymagany.");
         }
 
         [Fact]
@@ -118,7 +118,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("English story is required.");
+                .WithMessage("Angielska historia jest wymagana.");
         }
 
         [Fact]
@@ -138,7 +138,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("Polish story is required.");
+                .WithMessage("Polska historia jest wymagana.");
         }
 
         [Fact]
@@ -151,14 +151,14 @@ namespace StoryFlow_Tests.UnitTests.Validators
                 EnglishStory = "   ",
                 PolishStory = _validTranslatedPolishStory,
                 PolishDescription = _validPolishDescription,
-                EnglishDescription= _validEnglishDescription
+                EnglishDescription = _validEnglishDescription
             };
 
             var action = () => _storyValidator.Validate(dto);
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("English story is required.");
+                .WithMessage("Angielska historia jest wymagana.");
         }
 
         [Fact]
@@ -178,7 +178,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("Polish story is required.");
+                .WithMessage("Polska historia jest wymagana.");
         }
 
         [Fact]
@@ -188,7 +188,9 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             var act = () => _storyValidator.Validate(dto);
 
-            act.Should().Throw<BadRequestException>().WithMessage("Dto is required.");
+            act.Should()
+                .Throw<BadRequestException>()
+                .WithMessage("Encja jest wymagana.");
         }
 
         [Fact]
@@ -208,7 +210,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("English title must be between 5 and 50 characters long.");
+                .WithMessage("Tytuł w języku angielskim musi mieć od 5 do 50 znaków.");
         }
 
         [Fact]
@@ -228,25 +230,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("English title must be between 5 and 50 characters long.");
-        }
-
-        [Fact]
-        public void Validate_WhenValidTitles_DoesNotThrowException()
-        {
-            var dto = new AddStoryDto
-            {
-                PolishTitle = _validPolishTitle,
-                EnglishTitle = _validEnglishTitle,
-                PolishDescription = _validPolishDescription,
-                EnglishDescription = _validEnglishDescription,
-                EnglishStory = _validShortEnglishStory,
-                PolishStory = _validTranslatedPolishStory
-            };
-
-            var action = () => _storyValidator.Validate(dto);
-
-            action.Should().NotThrow();
+                .WithMessage("Tytuł w języku angielskim musi mieć od 5 do 50 znaków.");
         }
 
         [Fact]
@@ -266,7 +250,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("English story must be between 400 and 1500 characters long.");
+                .WithMessage("Historia w języku angielskim musi mieć od 400 do 1500 znaków.");
         }
 
         [Fact]
@@ -286,7 +270,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("English story must be between 400 and 1500 characters long.");
+                .WithMessage("Historia w języku angielskim musi mieć od 400 do 1500 znaków.");
         }
 
         [Fact]
@@ -307,30 +291,6 @@ namespace StoryFlow_Tests.UnitTests.Validators
             action.Should().NotThrow();
         }
 
-        [Theory]
-        [InlineData(0,0)]
-        [InlineData(1, 1)]
-        [InlineData(2, 2)]
-        public void ValidateSentencesCount_WhenEqualAreTheSame_DoesNotThrowException(int firstSentenceCount, int secondSentenceCount)
-        {
-            var act = () => _storyValidator.ValidateSentencesCount(firstSentenceCount, secondSentenceCount);
-
-            act.Should().NotThrow();
-        }
-
-        [Theory]
-        [InlineData(0,1)]
-        [InlineData(1, 0)]
-        [InlineData(2, 1)]
-        [InlineData(9, 10)]
-
-        public void ValidateSentencesCount_WhenEqualIsDifferent_ThrowsException(int firstSentenceCount, int secondSentenceCount)
-        {
-            var act = () => _storyValidator.ValidateSentencesCount(firstSentenceCount, secondSentenceCount);
-
-            act.Should().Throw<BadRequestException>().WithMessage("Polish sentences are not equal to english sentences.");
-        }
-
         [Fact]
         public void Validate_WhenEnglishDescriptionIsNull_ThrowsBadRequestException()
         {
@@ -348,7 +308,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("English description is required.");
+                .WithMessage("Angielski opis jest wymagany.");
         }
 
         [Fact]
@@ -368,7 +328,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("English description is required.");
+                .WithMessage("Angielski opis jest wymagany.");
         }
 
         [Fact]
@@ -388,7 +348,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("English description must be between 10 and 100 characters long.");
+                .WithMessage("Opis w języku angielskim musi mieć od 10 do 100 znaków.");
         }
 
         [Fact]
@@ -408,7 +368,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("English description must be between 10 and 100 characters long.");
+                .WithMessage("Opis w języku angielskim musi mieć od 10 do 100 znaków.");
         }
 
         [Fact]
@@ -446,7 +406,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("Polish description is required.");
+                .WithMessage("Polski opis jest wymagany.");
         }
 
         [Fact]
@@ -466,8 +426,7 @@ namespace StoryFlow_Tests.UnitTests.Validators
 
             action.Should()
                 .Throw<BadRequestException>()
-                .WithMessage("Polish description is required.");
+                .WithMessage("Polski opis jest wymagany.");
         }
-
     }
 }

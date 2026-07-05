@@ -10,44 +10,44 @@ namespace StoryFlow.Validators
         public void ValidateDto(RegisterUserDto dto)
         {
             if (string.IsNullOrWhiteSpace(dto.Email))
-                throw new BadRequestException("Email address cannot be empty.");
+                throw new BadRequestException("Adres e-mail nie może być pusty.");
 
             if (!Regex.IsMatch(dto.Email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$"))
-                throw new BadRequestException("Invalid email address format.");
+                throw new BadRequestException("Nieprawidłowy format adresu e-mail.");
 
             if (string.IsNullOrWhiteSpace(dto.FirstName) || dto.FirstName.Length < 3 || dto.FirstName.Length > 25)
             {
-                throw new BadRequestException("User first name must be between 3 and 25 characters.");
+                throw new BadRequestException("Imię musi mieć od 3 do 25 znaków.");
             }
 
             if (string.IsNullOrWhiteSpace(dto.LastName) || dto.LastName.Length < 3 || dto.LastName.Length > 25)
             {
-                throw new BadRequestException("User last name must be between 3 and 25 characters.");
+                throw new BadRequestException("Nazwisko musi mieć od 3 do 25 znaków.");
             }
 
             if (dto.Password != dto.RepeatPassword)
             {
-                throw new BadRequestException("Passwords are not the same.");
+                throw new BadRequestException("Hasła nie są takie same.");
             }
 
             if ((dto.Password.Length < 5 || dto.RepeatPassword.Length < 5) || (dto.Password.Length > 25 || dto.RepeatPassword.Length > 25))
             {
-                throw new BadRequestException("Password must be between 5 and 25 characters.");
+                throw new BadRequestException("Hasło musi mieć od 5 do 25 znaków.");
             }
 
-            if(dto.DateOfBirth == null)
+            if (dto.DateOfBirth == null)
             {
-                throw new BadRequestException("Date of birth is required.");
+                throw new BadRequestException("Data urodzenia jest wymagana.");
             }
 
             if (dto.DateOfBirth < DateOnly.Parse("1900-01-01") || dto.DateOfBirth > DateOnly.FromDateTime(DateTime.Now))
             {
-                throw new BadRequestException("Incorrect date of birth.");
+                throw new BadRequestException("Nieprawidłowa data urodzenia.");
             }
 
             if (dto.Gender == null)
             {
-                throw new BadRequestException("Gender is required.");
+                throw new BadRequestException("Płeć jest wymagana.");
             }
         }
     }

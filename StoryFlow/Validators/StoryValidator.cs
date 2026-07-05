@@ -10,58 +10,58 @@ namespace StoryFlow.Validators
         {
             if(dto is null)
             {
-                throw new BadRequestException("Dto is required.");
+                throw new BadRequestException("Encja jest wymagana.");
             }
             if (string.IsNullOrWhiteSpace(dto.PolishTitle))
             {
-                throw new BadRequestException("Polish title is required.");
+                throw new BadRequestException("Polski tytuł jest wymagany.");
             }
 
             if (string.IsNullOrWhiteSpace(dto.EnglishTitle))
             {
-                throw new BadRequestException("English title is required.");
+                throw new BadRequestException("Angielski tytuł jest wymagany.");
             }
 
             if (string.IsNullOrWhiteSpace(dto.PolishDescription))
             {
-                throw new BadRequestException("Polish description is required.");
+                throw new BadRequestException("Polski opis jest wymagany.");
             }
 
             if (string.IsNullOrWhiteSpace(dto.EnglishDescription))
             {
-                throw new BadRequestException("English description is required.");
+                throw new BadRequestException("Angielski opis jest wymagany.");
             }
 
             if (string.IsNullOrWhiteSpace(dto.EnglishStory))
             {
-                throw new BadRequestException("English story is required.");
+                throw new BadRequestException("Angielska historia jest wymagana.");
             }
 
             if (string.IsNullOrWhiteSpace(dto.PolishStory))
             {
-                throw new BadRequestException("Polish story is required.");
+                throw new BadRequestException("Polska historia jest wymagana.");
             }
 
             if (dto.EnglishTitle.Length < 5 || dto.EnglishTitle.Length > 50)
             {
-                throw new BadRequestException("English title must be between 5 and 50 characters long.");
+                throw new BadRequestException("Tytuł w języku angielskim musi mieć od 5 do 50 znaków.");
             }
 
             if (dto.EnglishDescription.Length < 10 || dto.EnglishDescription.Length > 100)
             {
-                throw new BadRequestException("English description must be between 10 and 100 characters long.");
+                throw new BadRequestException("Opis w języku angielskim musi mieć od 10 do 100 znaków.");
             }
 
             if (dto.EnglishStory.Length < 400 || dto.EnglishStory.Length > 1500)
             {
-                throw new BadRequestException("English story must be between 400 and 1500 characters long.");
+                throw new BadRequestException("Historia w języku angielskim musi mieć od 400 do 1500 znaków.");
             }
         }
         public void ValidateSentencesCount(int polishSentencesCount, int englishSentencesCount)
         {
             if (polishSentencesCount != englishSentencesCount)
             {
-                throw new BadRequestException("Polish sentences are not equal to english sentences.");
+                throw new BadRequestException("Liczba zdań w języku polskim różni się od liczby zdań w języku angielskim.");
             }
         }
     }

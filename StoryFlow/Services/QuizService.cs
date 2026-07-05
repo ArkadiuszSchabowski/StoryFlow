@@ -37,7 +37,7 @@ namespace StoryFlow.Services
 
             if (story!.Quiz != null)
             {
-                throw new BadRequestException($"Story '{story.EnglishTitle}' (Id: {story.Id}) already has a quiz.");
+                throw new BadRequestException($"Historia '{story.PolishTitle}' (Id: {story.Id}) posiada już quiz.");
             }
 
             int numberOfQuestions = dto.Questions.Count();
@@ -66,7 +66,7 @@ namespace StoryFlow.Services
         {
             if(userIdString == null)
             {
-                throw new NotFoundException("User doesn't exist.");
+                throw new NotFoundException("Nie znaleziono użytkownika.");
             }
 
             var userId = int.Parse(userIdString);
@@ -77,14 +77,14 @@ namespace StoryFlow.Services
 
             if (story!.Quiz == null)
             {
-                throw new NotFoundException("This story don't have active quiz");
+                throw new NotFoundException("Historia nie ma dostępnego quizu.");
             }
 
             User? user = await _userRepository.Get(userId);
 
             if (user == null)
             {
-                throw new NotFoundException("User not found.");
+                throw new NotFoundException("Nie znaleziono użytkownika.");
             }
 
             QuizResult quizResult = new QuizResult();

@@ -9,12 +9,12 @@ namespace StoryFlow.Validators
         {
             if(id is null)
             {
-                throw new BadRequestException("Id is required.");
+                throw new BadRequestException("Id jest wymagane.");
             }
 
             if (id <= 0)
             {
-                throw new BadRequestException("Id must be greater than 0.");
+                throw new BadRequestException("Id musi być większe od 0.");
             }
         }
     }
