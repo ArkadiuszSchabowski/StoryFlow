@@ -1,21 +1,30 @@
 <mat-toolbar id="toolbar-container" class="toolbar">
   <div id="mobile-navbar">
     <div id="mobile-navbar-buttons">
-      <a routerLink="/" class="mobile-button"> <mat-icon>home</mat-icon></a>
-      <a
+      <button
+        routerLink="/"
+        class="mobile-button"
+        *ngIf="!(authService.currentUserSource$ | async)"
+        [disabled]="!(navbarService.navbarPublicButton$ | async)"
+      >
+        <mat-icon>home</mat-icon>
+      </button>
+      <button
         routerLink="/login"
         class="mobile-button"
         *ngIf="!(authService.currentUserSource$ | async)"
+        [disabled]="!(navbarService.navbarPublicButton$ | async)"
       >
         <mat-icon>key</mat-icon>
-      </a>
-      <a
+      </button>
+      <button
         routerLink="/register"
         class="mobile-button"
         *ngIf="!(authService.currentUserSource$ | async)"
+        [disabled]="!(navbarService.navbarPublicButton$ | async)"
       >
         <mat-icon>person_add</mat-icon>
-      </a>
+    </button>
       <a
         routerLink="/text-selection"
         class="mobile-button"
@@ -61,21 +70,30 @@
   <div id="desktop-navbar">
     <div id="desktop-navbar-logo" class="logo"></div>
     <div id="desktop-navbar-buttons">
-      <a routerLink="/" class="desktop-button">START</a>
-      <a
+      <button
+        routerLink="/"
+        class="desktop-button"
+        *ngIf="!(authService.currentUserSource$ | async)"
+        [disabled]="!(navbarService.navbarPublicButton$ | async)"
+      >
+        START
+      </button>
+      <button
         routerLink="/login"
         class="desktop-button"
         *ngIf="!(authService.currentUserSource$ | async)"
+        [disabled]="!(navbarService.navbarPublicButton$ | async)"
       >
         ZALOGUJ
-      </a>
-      <a
+      </button>
+      <button
         routerLink="/register"
         class="desktop-button"
         *ngIf="!(authService.currentUserSource$ | async)"
+        [disabled]="!(navbarService.navbarPublicButton$ | async)"
       >
         ZAREJESTRUJ
-      </a>
+      </button>
       <a
         routerLink="/text-selection"
         class="desktop-button"

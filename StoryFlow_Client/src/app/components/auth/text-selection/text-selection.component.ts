@@ -40,17 +40,17 @@ export class TextSelectionComponent implements OnInit {
   ];
 
   languageLevels = [
-    { value: null, viewValue: 'Poziom języka:' },
+    { value: null, viewValue: 'Poziom językowy:' },
     { value: '0', viewValue: 'A1 - Początkujący' },
     { value: '1', viewValue: 'A2 - Podstawowy' },
-    { value: '2', viewValue: 'B1 - Średnio zaawansowany' },
-    { value: '3', viewValue: 'B2 - Wyższy średnio zaawansowany' },
+    { value: '2', viewValue: 'B1 - Średni' },
+    { value: '3', viewValue: 'B2 - Wyższy' },
     { value: '4', viewValue: 'C1 - Zaawansowany' },
     { value: '5', viewValue: 'C2 - Biegły' },
   ];
 
   sizes = [
-    { value: null, viewValue: 'Rozmiar historii:' },
+    { value: null, viewValue: 'Długość historii:' },
     { value: '0', viewValue: 'Krótka' },
     { value: '1', viewValue: 'Średnia' },
     { value: '2', viewValue: 'Długa' },
@@ -95,20 +95,12 @@ export class TextSelectionComponent implements OnInit {
       return 'replay';
     }
     if (userStory?.percentageScore >= 50 && userStory?.percentageScore < 100)
-      return 'play_arrow';
+      return 'thumb_up';
 
     if (userStory?.percentageScore === 100) {
       return 'emoji_events';
     }
     return '';
-  }
-
-  hideStoryDescription(storyId: number) {
-    if (this.openedStoryId === storyId) {
-      this.openedStoryId = null;
-    } else {
-      this.openedStoryId = storyId;
-    }
   }
 
   toggleStory(storyId: number) {
@@ -119,6 +111,10 @@ export class TextSelectionComponent implements OnInit {
     }
   }
 
+  roundToTwoDecimals(value: number): number {
+    return Math.round(value * 100) / 100;
+  }
+
   showLanguageLevel(level: any) {
     switch (level) {
       case 0:
@@ -126,9 +122,9 @@ export class TextSelectionComponent implements OnInit {
       case 1:
         return 'A2 - Podstawowy';
       case 2:
-        return 'B1 - Średnio zaawansowany';
+        return 'B1 - Średniozaawansowany';
       case 3:
-        return 'B2 - Wyższy średnio zaawansowany';
+        return 'B2 - Wyższy średniozaawansowany';
       case 4:
         return 'C1 - Zaawansowany';
       case 5:

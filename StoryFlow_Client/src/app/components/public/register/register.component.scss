@@ -1,18 +1,22 @@
 @use "@angular/material" as mat;
 @use "src/styles" as theme;
 
-#register-container{
+#register-container {
   display: flex;
   min-height: 930px;
+}
+
+mat-form-field.card-input {
+  width: 258px;
 }
 
 mat-card.register-card {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: calc(90vw);
+  width: 350px;
   height: 100%;
-  min-width: 450px;
+  min-width: 350px;
   padding: 40px 0;
 }
 
@@ -29,18 +33,18 @@ mat-card.register-card {
   background-color: mat.get-color-from-palette(theme.$accent);
 }
 
-.card-input{
-  padding-bottom: 10px;
+.card-input {
+  margin-bottom: 10px;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   mat-card.register-card {
-    width: calc(60vw - 20px);
+    width: 450px;
   }
 }
 
 @media screen and (min-width: 1200px) {
   mat-card.register-card {
-    width: calc(40vw - 20px);
+    width: 450px;
   }
 }

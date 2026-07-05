@@ -7,6 +7,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  min-width: 300px;
   height: auto;
 }
 
@@ -74,11 +75,12 @@ textarea.textarea {
   width: 100%;
   height: auto;
 }
+  
+  .filter-field-create{
+    padding: 0 10px;
+  }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
-  mat-form-field.filter-field {
-    width: 200px;
-  }
   #generate-story-container {
     flex-direction: row;
   }
@@ -89,8 +91,8 @@ textarea.textarea {
   #filter-story-container {
     flex-direction: row;
   }
-  .filter-field {
-    padding: 0 10px;
+  .filter-field-create {
+    margin: 0 10px;
   }
 }
 
@@ -108,7 +110,7 @@ textarea.textarea {
   .submit-button-container {
     padding-left: 20px;
   }
-  .filter-field {
-    padding: 0 20px;
+  .filter-field-create {
+    margin: 0 20px;
   }
 }

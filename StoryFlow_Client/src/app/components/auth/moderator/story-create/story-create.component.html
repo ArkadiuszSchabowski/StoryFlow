@@ -2,7 +2,7 @@
   <div id="generate-story-container">
     <form [formGroup]="generateForm" (ngSubmit)="generate()">
       <div id="filter-story-container">
-        <mat-form-field class="filter-field">
+        <mat-form-field class="filter-field-create">
           <mat-label>Kategoria:</mat-label>
           <mat-select id="storyCategory" formControlName="storyCategory">
             <mat-option
@@ -12,7 +12,7 @@
             >
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="filter-field">
+        <mat-form-field class="filter-field-create">
           <mat-label>Poziom językowy:</mat-label>
           <mat-select id="languageLevel" formControlName="languageLevel">
             <mat-option
@@ -22,7 +22,7 @@
             >
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="filter-field">
+        <mat-form-field class="filter-field-create">
           <mat-label>Długość:</mat-label>
           <mat-select id="storySize" formControlName="storySize">
             <mat-option *ngFor="let size of sizes" [value]="size.value">{{

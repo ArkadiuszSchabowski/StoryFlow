@@ -46,7 +46,11 @@
     filtrów.
   </div>
   <div *ngFor="let story of stories" class="story-wrapper">
-    <div class="story-preview-button" (click)="toggleStory(story.id)">
+    <div
+      class="story-preview-button"
+      (click)="toggleStory(story.id)"
+      *ngIf="story.storyPoint"
+    >
       <div class="story-preview-button-icon">
         <mat-icon>{{ getIcon(story.id) }}</mat-icon>
       </div>
@@ -67,6 +71,9 @@
         / {{ story.storyPoint.maxPoints }}
         <mat-icon>star</mat-icon>
       </div>
+      <div class="score-item score-percentage" *ngIf="story.storyPoint">
+         {{roundToTwoDecimals(story?.userStories?.[0]?.percentageScore ?? 0)}}&nbsp;%
+      </div>
     </div>
 
     <div
@@ -74,7 +81,7 @@
       *ngIf="story.storyPoint && openedStoryId === story.id"
     >
       <div class="story-card-button-close">
-        <button class="button-close" (click)="hideStoryDescription(story.id)">
+        <button class="button-close" (click)="toggleStory(story.id)">
           <mat-icon>close</mat-icon>
         </button>
       </div>
@@ -104,7 +111,7 @@
         <div class="score-item score-item-hint">
           {{
             getIcon(story.id) === "lock"
-              ? "Twój bilet jest zablokowany. Spróbuj innego quizu i zdobądź co najmniej 50%, aby go odzyskać."
+              ? "Twój bilet jest zablokowany. Spróbuj innego dostępnego quizu i zdobądź co najmniej 50%, aby go odzyskać."
               : ""
           }}
         </div>

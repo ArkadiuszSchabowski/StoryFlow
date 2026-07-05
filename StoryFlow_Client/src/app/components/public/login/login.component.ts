@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/_services/auth.service';
 import { LoaderService } from 'src/app/_services/loader.service';
+import { NavbarService } from 'src/app/_services/navbar.service';
 import { UserService } from 'src/app/_services/user.service';
 import { LoginDto } from 'src/app/models/login-dto';
 
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
     private toastr: ToastrService,
     private userService: UserService,
     public authService: AuthService,
-    public loaderService: LoaderService
+    public loaderService: LoaderService,
+    private navbarService: NavbarService
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +48,7 @@ export class LoginComponent implements OnInit {
     password: this.form.get('password')?.value,
   };
 
+  this.navbarService.blockButtons();
   this.loaderService.show();
 
   const start = Date.now();
@@ -55,6 +58,7 @@ export class LoginComponent implements OnInit {
     next: (response) => {
       if (!response.token) {
         this.loaderService.hide();
+        this.navbarService.unblockButtons();
         return;
       }
 

@@ -7,13 +7,17 @@
   padding: 10px 0;
 }
 
+mat-form-field.card-input {
+  width: 258px;
+}
+
 mat-card.login-card {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: calc(90vw);
+  width: 350px;
   height: 100%;
-  min-width: 450px;
+  min-width: 350px;
   padding: 40px 0;
 }
 
@@ -40,18 +44,38 @@ mat-card.login-card {
   padding-bottom: 30px;
 }
 
+#loader-container {
+  padding-top: 50px;
+}
+
 .card-input {
   padding-bottom: 10px;
 }
 
+#loader-logo {
+  display: flex;
+  height: 300px;
+  width: 300px;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   mat-card.login-card {
-    width: calc(60vw - 20px);
+    width: 450px;
+  }
+  #loader-logo {
+    display: flex;
+    height: 400px;
+    width: 400px;
   }
 }
 
 @media screen and (min-width: 1200px) {
   mat-card.login-card {
-    width: calc(40vw - 20px);
+    width: 450px;
+  }
+  #loader-logo {
+    display: flex;
+    height: 400px;
+    width: 400px;
   }
 }
