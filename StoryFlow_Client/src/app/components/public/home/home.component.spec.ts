@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
+import { LottieModule } from 'ngx-lottie';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -8,7 +9,12 @@ describe('HomeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent]
+      declarations: [HomeComponent],
+      imports: [
+        LottieModule.forRoot({
+          player: () => import('lottie-web'),
+        }),
+      ],
     });
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;

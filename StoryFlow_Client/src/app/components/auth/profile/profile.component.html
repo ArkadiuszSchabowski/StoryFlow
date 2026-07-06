@@ -1,19 +1,19 @@
-<div class="container">
+<div class="container" *ngIf="profile">
   <div id="profile-information">
     <div id="profile-information-label" class="title">Informacje profilowe</div>
     <div id="email" class="profile-information-item">
       <div class="profile-information-key">Adres e-mail:</div>
-      <div class="profile-information-value">{{ profile!.email }}</div>
+      <div class="profile-information-value">{{ profile.email }}</div>
     </div>
 
     <div id="first-name" class="profile-information-item">
       <div class="profile-information-key">Imię:</div>
-      <div class="profile-information-value">{{ profile!.firstName }}</div>
+      <div class="profile-information-value">{{ profile.firstName }}</div>
     </div>
 
     <div id="last-name" class="profile-information-item">
       <div class="profile-information-key">Nazwisko:</div>
-      <div class="profile-information-value">{{ profile!.lastName }}</div>
+      <div class="profile-information-value">{{ profile.lastName }}</div>
     </div>
 
     <div id="gender" class="profile-information-item">
@@ -25,7 +25,7 @@
 
     <div id="date-of-birth" class="profile-information-item">
       <div class="profile-information-key">Data urodzenia:</div>
-      <div class="profile-information-value">{{ profile!.dateOfBirth }}</div>
+      <div class="profile-information-value">{{ profile.dateOfBirth }}</div>
     </div>
 
     <div id="stars" class="profile-information-item">
