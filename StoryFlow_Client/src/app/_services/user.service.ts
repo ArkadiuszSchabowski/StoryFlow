@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LoginDto } from '../models/login-dto';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { TokenDto } from '../models/token-dto';
 import { AuthService } from './auth.service';
