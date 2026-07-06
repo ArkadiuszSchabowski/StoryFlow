@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { map } from 'rxjs';
 import { GetStoryViewDto } from '../models/get-story-view-dto';
 import { GetSentenceViewDto } from '../models/get-sentence-view-dto';
