@@ -22,7 +22,7 @@ export class NavbarComponent {
   logout() {
     this.authService.logout();
     this.navbarService.unblockButtons();
-    this.toastr.success('Logged out successfully.');
+    this.toastr.success('Wylogowano pomyślnie.');
     this.router.navigateByUrl('');
   }
 }
