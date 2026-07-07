@@ -1,9 +1,19 @@
 #home-title {
-  padding-top: 30px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   text-align: center;
   width: 100%;
   height: auto;
+}
+
+#mobile-logo {
+  display: flex;
+  width: 250px;
+  height: 250px;
+  background-image: url(../../../../assets/kitty/kitty1.png);
+  background-position: center;
+  background-size: cover;
+  background-position: no-repeat;
 }
 
 #home-subtitle {
@@ -11,7 +21,7 @@
 }
 
 #loader-logo {
-  display: flex;
+  display: none;
   width: 300px;
   min-width: 300px;
   height: 300px;
@@ -26,25 +36,39 @@
 }
 
 #home-subtitle {
-  font-size: 16px;
+  font-size: 20px;
+}
+
+.home-subtitle-row {
+  padding: 5px 0;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   #home-subtitle {
     font-size: 18px;
+    padding: 50px;
   }
   #loader-logo {
+    display: flex;
     width: 400px;
     height: 400px;
+  }
+  #mobile-logo {
+    display: none;
   }
 }
 
 @media screen and (min-width: 1200px) {
   #home-subtitle {
     font-size: 26px;
+    padding: 50px;
   }
   #loader-logo {
+    display: flex;
     width: 400px;
     height: 400px;
+  }
+  #mobile-logo {
+    display: none;
   }
 }
