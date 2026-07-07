@@ -54,3 +54,4 @@ jobs:
         with:
           action: "close"
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_RED_HILL_0235BD503 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
