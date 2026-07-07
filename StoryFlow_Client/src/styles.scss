@@ -129,6 +129,11 @@ mat-form-field.card-input {
   background-color: mat.get-color-from-palette($accent) !important;
 }
 
+.mat-mdc-option {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+
 @media (min-width: 600px) {
   .container {
     height: calc(100vh - 64px);
