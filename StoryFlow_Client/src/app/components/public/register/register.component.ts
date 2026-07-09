@@ -87,7 +87,7 @@ export class RegisterComponent implements OnInit {
     this.loaderService.show();
 
     const start = Date.now();
-    const minTime = 10000;
+    const minTime = 3000;
 
     this.userService.register(dto).subscribe({
       next: () => {
