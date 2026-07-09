@@ -1,7 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { LoaderService } from 'src/app/_services/loader.service';
+import { NavbarService } from 'src/app/_services/navbar.service';
 import { UserService } from 'src/app/_services/user.service';
 import { GENDERS } from 'src/app/constants/select-options';
 import { RegisterUserDto } from 'src/app/models/register-user-dto';
@@ -11,7 +13,7 @@ import { RegisterUserDto } from 'src/app/models/register-user-dto';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   hidePassword = signal(true);
   hideRepeatPassword = signal(true);
 
@@ -44,7 +46,13 @@ export class RegisterComponent {
     private router: Router,
     private toastr: ToastrService,
     private userService: UserService,
+    public loaderService: LoaderService,
+    private navbarService: NavbarService,
   ) {}
+
+  ngOnInit(): void {
+    this.loaderService.hide();
+  }
 
   changePasswordVisibility(event: MouseEvent) {
     this.hidePassword.set(!this.hidePassword());
@@ -75,16 +83,29 @@ export class RegisterComponent {
         .split('T')[0],
     };
 
+    this.navbarService.blockButtons();
+    this.loaderService.show();
+
+    const start = Date.now();
+    const minTime = 10000;
+
     this.userService.register(dto).subscribe({
       next: () => {
-        this.toastr.success('Zarejestrowano pomyślnie.');
-        this.router.navigateByUrl('login');
+        const elapsed = Date.now() - start;
+        const remaining = Math.max(0, minTime - elapsed);
+
+        setTimeout(() => {
+          this.loaderService.hide();
+          this.navbarService.unblockButtons();
+          this.toastr.success('Zarejestrowano pomyślnie.');
+          this.router.navigateByUrl('login');
+        }, remaining);
       },
       error: (error) => {
-        if (error.status === 400) {
-          this.toastr.error(error.error);
-          this.form.reset();
-        }
+        this.toastr.error(error.error);
+        this.loaderService.hide();
+        this.navbarService.unblockButtons();
+        this.form.reset();
       },
     });
   }

@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loaderService.hide();
   }
+  
   changePasswordVisibility(event: MouseEvent) {
     this.hidePassword.set(!this.hidePassword());
     event.stopPropagation();
@@ -81,6 +82,8 @@ export class LoginComponent implements OnInit {
 
           if (error.status === 400) {
             this.toastr.error('Błędne dane logowania.');
+            this.loaderService.hide();
+            this.navbarService.unblockButtons();
             this.form.reset();
           }
         }, remaining);
