@@ -6,9 +6,4 @@ import { LoaderService } from 'src/app/_services/loader.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
-  constructor(public loader: LoaderService) {}
-  ngOnInit(): void {
-    this.loader.show();
-  }
-}
+export class HomeComponent {}

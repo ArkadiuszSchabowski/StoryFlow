@@ -38,6 +38,11 @@ mat-card.login-card {
   margin: 40px 20px 20px 20px;
 }
 
+
+.card-input {
+  padding-bottom: 10px;
+}
+
 #loader-text {
   font-size: 20px;
   padding-top: 20px;
@@ -46,10 +51,6 @@ mat-card.login-card {
 
 #loader-container {
   padding-top: 50px;
-}
-
-.card-input {
-  padding-bottom: 10px;
 }
 
 #loader-logo {

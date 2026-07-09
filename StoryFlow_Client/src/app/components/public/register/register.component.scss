@@ -37,14 +37,40 @@ mat-card.register-card {
   margin-bottom: 10px;
 }
 
+#loader-text {
+  font-size: 20px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+#loader-container {
+  padding-top: 50px;
+}
+
+#loader-logo {
+  display: flex;
+  height: 300px;
+  width: 300px;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   mat-card.register-card {
     width: 450px;
+  }
+  #loader-logo {
+    display: flex;
+    height: 400px;
+    width: 400px;
   }
 }
 
 @media screen and (min-width: 1200px) {
   mat-card.register-card {
     width: 450px;
+  }
+  #loader-logo {
+    display: flex;
+    height: 400px;
+    width: 400px;
   }
 }
