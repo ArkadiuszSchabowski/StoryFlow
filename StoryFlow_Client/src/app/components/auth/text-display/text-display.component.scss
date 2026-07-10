@@ -109,6 +109,59 @@
   padding: 20px 0;
 }
 
+#loader-text {
+  font-size: 20px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+#loader-container {
+  padding: 50px 20px 0 20px;
+}
+
+#loader-logo,
+.logo {
+  display: flex;
+  height: 300px;
+  width: 300px;
+}
+
+#loader-button {
+  margin-top: 10px;
+  color: white;
+  background-color: mat.get-color-from-palette(theme.$accent);
+}
+
+.question-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  background-image: url(../../../../assets/kitty/kitty2.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#next-button,
+#back-button,
+#again-button {
+  width: 200px;
+  height: 50px;
+}
+
+#next-button {
+  margin-top: 50px;
+}
+
+#back-button,
+#again-button {
+  margin-top: 10px;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   #text-display-container {
     display: flex;
@@ -145,6 +198,26 @@
   .submit-button-container {
     padding-top: 40px;
   }
+
+  #loader-logo,
+  .logo {
+    display: flex;
+    height: 350px;
+    width: 350px;
+  }
+  #loader-container {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+
+  #again-button {
+    margin-right: 50px;
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 @media screen and (min-width: 1200px) {
@@ -176,11 +249,32 @@
   #story-information {
     padding-bottom: 50px;
   }
+
   .sentence-item {
     width: auto;
     padding: 5px 20px;
   }
   .submit-button-container {
     padding-top: 40px;
+  }
+
+  #loader-logo,
+  .logo {
+    display: flex;
+    height: 350px;
+    width: 350px;
+  }
+  #loader-container {
+    padding-left: 150px;
+    padding-right: 150px;
+  }
+
+  #again-button {
+    margin-right: 50px;
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: row;
   }
 }

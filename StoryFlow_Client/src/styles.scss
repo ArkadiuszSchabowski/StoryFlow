@@ -134,6 +134,14 @@ mat-form-field.card-input {
   padding-right: 16px !important;
 }
 
+.disabled {
+  background-color: #bdbdbd;
+}
+
+.disabled:hover {
+  background-color: #b3b3b3;
+}
+
 @media (min-width: 600px) {
   .container {
     height: calc(100vh - 64px);

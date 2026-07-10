@@ -1,4 +1,30 @@
-<div id="text-display-container" *ngIf="story">
+<div
+  id="loader-container"
+  class="container"
+  *ngIf="loaderService.loading$ | async"
+>
+  <div id="loader-text">
+    Twój bilet jest teraz w użyciu. Odpowiedz na wszystkie pytania, aby otrzymać
+    punkty za historię. Jeśli uzyskasz minimum 50% punktów to bilet wróci do
+    Ciebie!...
+  </div>
+  <div id="loader-logo">
+    <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>
+  </div>
+  <button
+    mat-raised-button
+    id="loader-button"
+    class="submit-button"
+    (click)="hideLoader()"
+  >
+    Dalej
+  </button>
+</div>
+
+<div
+  id="text-display-container"
+  *ngIf="story && !(loaderService.loading$ | async) && !isQuizFinishied"
+>
   <div id="text-display-subcontainer" *ngIf="!isQuiz">
     <div id="story-information">
       Kategoria: {{ showCategory(story.storyCategory) }}, Długość historii:
@@ -63,44 +89,89 @@
     </div>
   </div>
 
-  <div id="quiz-container-wrapper" *ngIf="isQuiz">
+  <div id="quiz-container-wrapper" *ngIf="isQuiz && !isQuizFinishied">
     <div id="quiz-container" class="container" *ngIf="quiz">
       <div class="title">Quiz - {{ story!.englishTitle }}</div>
 
-      <form (ngSubmit)="send()">
-        <div
-          class="question-card"
-          *ngFor="let question of quiz.questions; let i = index"
-        >
+      <form (ngSubmit)="checkAnswer()">
+        <div class="question-card" *ngIf="currentQuestion">
           <h3 class="question-text">
-            {{ i + 1 }}. {{ question.questionText }}
+            {{ currentQuestionIndex + 1 }}. {{ currentQuestion.questionText }}
           </h3>
 
-          <div class="answer" *ngFor="let answer of question.answers">
-            <label>
-              <input
-                type="radio"
-                [name]="'question-' + question.id"
-                [value]="answer.id"
-                [(ngModel)]="selectedAnswers[question.id]"
-              />
-
-              <span> {{ answer.key }}. {{ answer.text }} </span>
-            </label>
-          </div>
-        </div>
-
-        <div class="submit-button-container">
-          <button
-            mat-raised-button
-            class="submit-button"
-            id="submit-button"
-            type="submit"
+          <div
+            id="answer-button"
+            class="answer"
+            *ngFor="let answer of currentQuestion.answers"
           >
-            SEND ANSWERS
+            <button
+              [ngClass]="{
+                disabled: !isNextButtonDisabled,
+              }"
+              [disabled]="!isNextButtonDisabled"
+              type="submit"
+              class="submit-button"
+              (click)="selectedAnswers[currentQuestion.id] = answer.id"
+            >
+              {{ answer.text }}
+            </button>
+          </div>
+          <button
+            [ngClass]="{
+              disabled: isNextButtonDisabled,
+            }"
+            [disabled]="isNextButtonDisabled"
+            class="submit-button disabled"
+            id="next-button"
+            (click)="showNextQuestion()"
+          >
+            {{
+              currentQuestionIndex === quiz.questions.length - 1
+                ? "Pokaż wynik"
+                : "Dalej"
+            }}
           </button>
         </div>
       </form>
     </div>
+  </div>
+</div>
+<div *ngIf="isQuizFinishied" class="container">
+  <div>Gratulacje! Ukończyłeś quiz!</div>
+  <div>
+    Zdobyte punkty za odpowiedzi:
+    {{
+      quizResult!.points - (story!.storyPoint!.bonusPointsForStoryLength ?? 0)
+    }}/
+    {{
+      (story!.storyPoint!.maxPoints ?? 0) -
+        (story!.storyPoint!.bonusPointsForStoryLength ?? 0)
+    }}
+  </div>
+  <div>
+    Bonus za długość historii:
+    {{ story!.storyPoint!.bonusPointsForStoryLength }}
+  </div>
+
+  <div>
+    Wynik quizu: {{ quizResult!.points }} / {{ story!.storyPoint!.maxPoints! }}
+  </div>
+  <div>Wynik procentowy quizu: {{roundToTwoDecimals(quizResult!.scorePercentage)}}&nbsp;%</div>
+  <div class="logo"></div>
+  <div class="button-container">
+    <button
+      id="again-button"
+      class="submit-button"
+      (click)="navigateToTextStory(story!.id)"
+    >
+      Spróbuj ponownie
+    </button>
+    <button
+      id="back-button"
+      class="submit-button"
+      (click)="navigateToTextSelection()"
+    >
+      Kolejne wyzwanie
+    </button>
   </div>
 </div>

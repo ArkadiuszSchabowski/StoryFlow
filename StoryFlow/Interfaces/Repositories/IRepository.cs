@@ -1,6 +1,4 @@
-﻿using StoryFlow_Database.Entities;
-
-namespace StoryFlow.Interfaces.Repositories
+﻿namespace StoryFlow.Interfaces.Repositories
 {
     public interface IRepository<T> where T : class
     {

@@ -27,7 +27,19 @@ namespace StoryFlow.Controllers
 
         [Authorize]
         [HttpPost("check")]
-        public async Task<ActionResult> Check([FromBody] QuizSubmissionDto dto)
+        public async Task<ActionResult<QuestionSubmissionResult>> Check(
+            [FromBody] QuestionSubmissionDto dto)
+        {
+            string? userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            QuestionSubmissionResult result = await _service.CheckAnswer(dto, userId!);
+
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpPost("submit")]
+        public async Task<ActionResult> Submit([FromBody] QuizSubmissionDto dto)
         {
             string? userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
 
