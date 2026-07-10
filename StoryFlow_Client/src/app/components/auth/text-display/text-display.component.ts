@@ -6,7 +6,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GetQuizDto } from 'src/app/models/get-quiz-dto';
 import { QuizSubmissionDto } from 'src/app/models/quiz-submission-dto';
 import { QuizService } from 'src/app/_services/quiz.service';
-import { showCategory, showLanguageLevel, showSize } from 'src/app/helpers/formatter';
+import {
+  showCategory,
+  showLanguageLevel,
+  showSize,
+} from 'src/app/helpers/formatter';
+import { LoaderService } from 'src/app/_services/loader.service';
+import { QuizResult } from 'src/app/models/quiz-result';
 
 @Component({
   selector: 'app-text-display',
@@ -25,6 +31,16 @@ export class TextDisplayComponent implements OnInit {
   };
   selectedAnswers: { [questionId: number]: number } = {};
 
+  currentQuestionIndex = 0;
+
+  isNextButtonDisabled = true;
+  isQuizFinishied = false;
+  quizResult: QuizResult | null = null;
+
+  get currentQuestion() {
+    return this.quiz?.questions[this.currentQuestionIndex];
+  }
+
   showLanguageLevel = showLanguageLevel;
   showSize = showSize;
   showCategory = showCategory;
@@ -34,15 +50,61 @@ export class TextDisplayComponent implements OnInit {
     private route: ActivatedRoute,
     private storyService: StoryService,
     private quizService: QuizService,
+    public loaderService: LoaderService,
   ) {}
 
   ngOnInit(): void {
+    this.getStoryIdFromRoute();
+    //show
+    this.hideLoader();
+  }
+
+  getStoryIdFromRoute() {
     this.route.paramMap.subscribe((params) => {
       const id = Number(params.get('id'));
       this.storyId = id;
       this.get(id);
     });
   }
+
+  checkAnswer() {
+    this.isNextButtonDisabled = false;
+
+    const questionId = this.quiz!.questions[this.currentQuestionIndex].id;
+    const answerId = this.selectedAnswers[questionId];
+
+    console.log(questionId, answerId);
+  }
+
+  showLoader() {
+    this.loaderService.show();
+  }
+
+  showNextQuestion() {
+    if (!this.quiz) {
+      return;
+    }
+
+    if (this.currentQuestionIndex < this.quiz.questions.length - 1) {
+      this.currentQuestionIndex++;
+      this.isNextButtonDisabled = true;
+    } else {
+      this.send();
+    }
+  }
+
+  hideLoader() {
+    this.loaderService.hide();
+  }
+
+  navigateToTextSelection() {
+    this.router.navigateByUrl('/text-selection');
+  }
+
+  navigateToTextStory(id: number) {
+    window.location.href = `/text/${id}`;
+  }
+
   gotoQuiz() {
     this.isQuiz = true;
   }
@@ -51,6 +113,7 @@ export class TextDisplayComponent implements OnInit {
     if (this.storyId != 0) {
       this.storyService.get(id).subscribe({
         next: (response) => {
+          console.log(response);
           this.story = response;
           this.quiz = response.quiz;
         },
@@ -61,6 +124,10 @@ export class TextDisplayComponent implements OnInit {
         },
       });
     }
+  }
+
+  roundToTwoDecimals(value: number): number {
+    return Math.round(value * 100) / 100;
   }
 
   changeDescriptionLanguage(story: GetStoryViewDto) {
@@ -84,7 +151,10 @@ export class TextDisplayComponent implements OnInit {
       ),
     };
     this.quizService.sendAnswers(this.quizSubmission).subscribe({
-      next: (response) => console.log(response),
+      next: (response) => {
+        this.isQuizFinishied = true;
+        this.quizResult = response;
+      },
       error: (error) => console.log(error),
     });
   }

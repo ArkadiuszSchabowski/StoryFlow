@@ -28,7 +28,7 @@ export class StoryService {
       Authorization: `Bearer ${token}`,
     };
 
-    return this.http.post(this.apiUrl + 'story', dto, {headers});
+    return this.http.post(this.apiUrl + 'story', dto, { headers });
   }
 
   generate(dto: GenerateStoryDto) {
@@ -56,8 +56,7 @@ export class StoryService {
   }
 
   getAll(dto: StoryFilter | null) {
-
-        const token: string | null = this.authService.getToken();
+    const token: string | null = this.authService.getToken();
 
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -70,45 +69,49 @@ export class StoryService {
     if (dto?.category) params = params.set('category', dto.category);
     if (dto?.size) params = params.set('size', dto.size);
 
-    return this.http.get<GetStoryViewDto[]>(this.apiUrl + 'story', { params, headers });
+    return this.http.get<GetStoryViewDto[]>(this.apiUrl + 'story', {
+      params,
+      headers,
+    });
   }
 
   get(id: number) {
-
-        const token: string | null = this.authService.getToken();
+    const token: string | null = this.authService.getToken();
 
     const headers = {
       Authorization: `Bearer ${token}`,
     };
 
-    return this.http.get<GetStoryViewDto>(this.apiUrl + `story/${id}`, {headers}).pipe(
-      map((story): GetStoryViewDto => {
-        return Object.assign(new GetStoryViewDto(), {
-          id: story.id,
-          polishStory: story.polishStory,
-          englishStory: story.englishStory,
-          polishTitle: story.polishTitle,
-          englishTitle: story.englishTitle,
-          polishDescription: story.polishDescription,
-          englishDescription: story.englishDescription,
-          storyCategory: story.storyCategory,
-          storySize: story.storySize,
-          languageLevel: story.languageLevel,
-          userStories: story.userStories,
-          quiz: story.quiz,
-          sentences: story.sentences.map((sentence): GetSentenceViewDto => {
-            return Object.assign(new GetSentenceViewDto(), {
-              id: sentence.id,
-              storyId: sentence.storyId,
-              order: sentence.order,
-              polishMeaning: sentence.polishMeaning,
-              englishMeaning: sentence.englishMeaning,
-              userSentences: sentence.userSentences,
-            });
-          },
-        ),
-        });
-      }),
-    );
+    return this.http
+      .get<GetStoryViewDto>(this.apiUrl + `story/${id}`, { headers })
+      .pipe(
+        map((story): GetStoryViewDto => {
+          return Object.assign(new GetStoryViewDto(), {
+            id: story.id,
+            polishStory: story.polishStory,
+            englishStory: story.englishStory,
+            polishTitle: story.polishTitle,
+            englishTitle: story.englishTitle,
+            polishDescription: story.polishDescription,
+            englishDescription: story.englishDescription,
+            storyCategory: story.storyCategory,
+            storySize: story.storySize,
+            languageLevel: story.languageLevel,
+            userStories: story.userStories,
+            quiz: story.quiz,
+            storyPoint: story.storyPoint,
+            sentences: story.sentences.map((sentence): GetSentenceViewDto => {
+              return Object.assign(new GetSentenceViewDto(), {
+                id: sentence.id,
+                storyId: sentence.storyId,
+                order: sentence.order,
+                polishMeaning: sentence.polishMeaning,
+                englishMeaning: sentence.englishMeaning,
+                userSentences: sentence.userSentences,
+              });
+            }),
+          });
+        }),
+      );
   }
 }

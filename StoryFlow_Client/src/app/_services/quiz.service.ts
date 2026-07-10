@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import { QuizSubmissionDto } from '../models/quiz-submission-dto';
+import { QuizResult } from '../models/quiz-result';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,6 @@ export class QuizService {
       Authorization: `Bearer ${token}`,
     };
 
-    return this.http.post(this.apiUrl + 'quiz/check', dto, { headers });
+    return this.http.post<QuizResult | null>(this.apiUrl + 'quiz/submit', dto, { headers });
   }
 }

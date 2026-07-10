@@ -62,6 +62,8 @@ builder.Services.AddScoped<GeminiSchemaGenerator>();
 builder.Services.AddScoped<IAnswerChecker, AnswerChecker>();
 builder.Services.AddScoped<IUserStoryRepository, UserStoryRepository>();
 builder.Services.AddScoped<IUpdateStars, UserRepository>();
+builder.Services.AddScoped<IAnswerRepository, AnswerRepository>();
+builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 
 builder.Services.AddScoped<HttpClient>();
 
@@ -113,7 +115,7 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.UseMiddleware<ErrorHandlingMiddleware>();
+//app.UseMiddleware<ErrorHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {

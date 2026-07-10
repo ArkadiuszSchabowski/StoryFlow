@@ -18,8 +18,10 @@ namespace StoryFlow.Services
         private readonly IUserStoryRepository _userStoryRepository;
         private readonly IPointsCalculator _pointsCalculator;
         private readonly IAggregateUserRepository _userRepository;
+        private readonly IQuestionRepository _questionRepository;
+        private readonly IAnswerRepository _answerRepository;
 
-        public QuizService(IAggregateStoryRepository storyRepository, IAggregateUserRepository userRepository, IEntityValidator<Story> validator, IAnswerChecker answerChecker, IMapper mapper, IUserStoryRepository userStoryRepository, IPointsCalculator pointsCalculator)
+        public QuizService(IAggregateStoryRepository storyRepository, IAggregateUserRepository userRepository, IQuestionRepository questionRepository, IEntityValidator<Story> validator, IAnswerChecker answerChecker, IMapper mapper, IUserStoryRepository userStoryRepository, IAnswerRepository answerRepository, IPointsCalculator pointsCalculator)
         {
             _storyRepository = storyRepository;
             _validator = validator;
@@ -28,6 +30,8 @@ namespace StoryFlow.Services
             _userStoryRepository = userStoryRepository;
             _pointsCalculator = pointsCalculator;
             _userRepository = userRepository;
+            _questionRepository = questionRepository;
+            _answerRepository = answerRepository;
         }
         public async Task Add(AddQuizDto dto)
         {
@@ -62,9 +66,57 @@ namespace StoryFlow.Services
             await _storyRepository.SaveChangesAsync();
         }
 
+        public async Task<QuestionSubmissionResult> CheckAnswer(QuestionSubmissionDto dto, string userIdString)
+        {
+            if (userIdString == null)
+            {
+                throw new NotFoundException("Nie znaleziono użytkownika.");
+            }
+
+            var userId = int.Parse(userIdString);
+
+            Story? story = await _storyRepository.Get(dto.StoryId);
+
+            _validator.ThrowIsNull(story);
+
+            if (story!.Quiz == null)
+            {
+                throw new NotFoundException("Historia nie ma dostępnego quizu.");
+            }
+
+            User? user = await _userRepository.Get(userId);
+
+            if (user == null)
+            {
+                throw new NotFoundException("Nie znaleziono użytkownika.");
+            }
+
+            Question? question = await _questionRepository.Get(dto.QuestionId);
+
+            if (question == null)
+            {
+                throw new NotFoundException("Nie znaleziono pytania.");
+            }
+
+            Answer? answer = await _answerRepository.Get(dto.AnswerId);
+
+            if (answer == null)
+            {
+                throw new NotFoundException("Nie znaleziono odpowiedzi.");
+            }
+
+            return new QuestionSubmissionResult
+            {
+                IsCorrect = answer.IsCorrect,
+                CorrectAnswerId = question.Answers
+                .First(x => x.IsCorrect)
+                .Id
+            };
+        }
+
         public async Task<QuizResult> CheckAnswers(QuizSubmissionDto dto, string? userIdString)
         {
-            if(userIdString == null)
+            if (userIdString == null)
             {
                 throw new NotFoundException("Nie znaleziono użytkownika.");
             }
@@ -99,7 +151,7 @@ namespace StoryFlow.Services
                     UserId = userId,
                     StoryId = dto.StoryId,
                     BestResult = quizResult.Points,
-                    PercentageScore = quizResult.ScorePercentage                 
+                    PercentageScore = quizResult.ScorePercentage
                 };
 
                 await _userStoryRepository.Add(newUserStory);

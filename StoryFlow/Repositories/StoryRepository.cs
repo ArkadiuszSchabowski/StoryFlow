@@ -15,7 +15,7 @@ namespace StoryFlow.Repositories
         }
         public async Task Add(Story item)
         {
-            await _context.AddAsync(item);
+            await _context.Stories.AddAsync(item);
             await _context.SaveChangesAsync();
         }
 
