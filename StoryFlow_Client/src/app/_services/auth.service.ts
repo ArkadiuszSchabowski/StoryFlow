@@ -8,30 +8,30 @@ export class AuthService {
   private currentUserSource = new BehaviorSubject<string | null>(null);
   currentUserSource$ = this.currentUserSource.asObservable();
 
- public isModerator$ = this.currentUserSource$.pipe(
-    map(token => {
+  public isModerator$ = this.currentUserSource$.pipe(
+    map((token) => {
       if (!token) return false;
 
       const payload = JSON.parse(atob(token.split('.')[1]));
 
       const role =
-        payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+        payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
 
       return role?.toLowerCase() === 'moderator';
-    })
+    }),
   );
 
-   public isAdmin$ = this.currentUserSource$.pipe(
-    map(token => {
+  public isAdmin$ = this.currentUserSource$.pipe(
+    map((token) => {
       if (!token) return false;
 
       const payload = JSON.parse(atob(token.split('.')[1]));
 
       const role =
-        payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+        payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
 
       return role?.toLowerCase() === 'administrator';
-    })
+    }),
   );
 
   constructor() {}
@@ -44,6 +44,11 @@ export class AuthService {
     }
 
     return token;
+  }
+
+  initializeUser() {
+    const token = localStorage.getItem('token');
+    this.currentUserSource.next(token);
   }
 
   setUser(token: string) {

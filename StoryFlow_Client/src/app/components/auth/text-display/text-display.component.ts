@@ -55,8 +55,7 @@ export class TextDisplayComponent implements OnInit {
 
   ngOnInit(): void {
     this.getStoryIdFromRoute();
-    //show
-    this.hideLoader();
+    this.showLoader();
   }
 
   getStoryIdFromRoute() {

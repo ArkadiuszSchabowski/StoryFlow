@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StoryFlow.Exceptions;
 using StoryFlow_Shared.Interfaces;
 using StoryFlow_Shared.Models;
 using System.Security.Claims;
@@ -49,7 +48,6 @@ namespace StoryFlow.Controllers
 
         [Authorize(Roles = "Moderator,Administrator")]
         [HttpPost("generate")]
-
         public async Task<ActionResult> Generate([FromBody] GenerateStoryDto dto)
         {
             return Ok(await _service.Generate(dto));
