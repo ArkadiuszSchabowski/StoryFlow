@@ -27,7 +27,7 @@ namespace StoryFlow.Repositories
 
         public IQueryable<Story> Get()
         {
-            return _context.Stories.Include(s => s.UserStories).Include(s => s.Sentences).Include(s => s.StoryPoint).AsQueryable();
+            return _context.Stories.Include(s => s.UserStories).Include(s => s.Sentences).Include(s => s.Quiz!).Include(s => s.StoryPoint).AsQueryable();
         }
 
         public async Task Remove(Story story)

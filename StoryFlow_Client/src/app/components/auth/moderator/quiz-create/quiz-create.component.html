@@ -1,1 +1,62 @@
-<p>quiz-create works!</p>
+<div id="story-create-container">
+  <div id="story-container">
+    <form
+      id="filter-container"
+      [formGroup]="form"
+      *ngIf="stories"
+      (ngSubmit)="generateQuiz()"
+    >
+      <mat-form-field class="filter-field-create">
+        <mat-label>Wybierz historię:</mat-label>
+        <mat-select id="story" formControlName="story">
+          <mat-option *ngFor="let story of stories" [value]="story.id">{{
+            story.englishTitle
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="submit-button-container">
+        <button
+          mat-raised-button
+          class="submit-button"
+          id="submit-button-generate"
+          type="submit"
+        >
+          Generuj
+        </button>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="selectedStory && isResponse" class="question-container">
+    <form [formGroup]="addForm" id="add-form" (ngSubmit)="add()">
+      <div class="question-container-english-story">
+        {{ selectedStory.englishStory }}
+      </div>
+
+      <div
+        *ngFor="let question of generateQuizResponse!.questions"
+        class="question-container-questions"
+      >
+        <h3 class="question-container-question">{{ question.question }}</h3>
+
+        <ul>
+          <li *ngFor="let answer of question.answers">
+            {{ answer }}
+          </li>
+        </ul>
+
+        <p class="question-container-correct-answer">
+          Correct answer: {{ question.answers[question.correctAnswerIndex] }}
+        </p>
+      </div>
+      <button
+        mat-raised-button
+        class="submit-button"
+        id="submit-button-create"
+        color="accent"
+        type="submit"
+      >
+        Dodaj
+      </button>
+    </form>
+  </div>
+</div>

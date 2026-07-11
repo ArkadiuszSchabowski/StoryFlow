@@ -1,11 +1,15 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Options;
 using StoryFlow.Exceptions;
+using StoryFlow.Helpers;
 using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
 using StoryFlow.Interfaces.Repositories;
 using StoryFlow.Interfaces.Validators;
 using StoryFlow_Database.Entities;
 using StoryFlow_Shared.Models;
+using System.Text;
+using System.Text.Json;
 
 namespace StoryFlow.Services
 {
@@ -17,11 +21,13 @@ namespace StoryFlow.Services
         private readonly IMapper _mapper;
         private readonly IUserStoryRepository _userStoryRepository;
         private readonly IPointsCalculator _pointsCalculator;
+        private readonly GeminiSchemaGenerator _geminiSchemaGenerator;
         private readonly IAggregateUserRepository _userRepository;
         private readonly IQuestionRepository _questionRepository;
         private readonly IAnswerRepository _answerRepository;
+        private readonly GeminiSettings _geminiSettings;
 
-        public QuizService(IAggregateStoryRepository storyRepository, IAggregateUserRepository userRepository, IQuestionRepository questionRepository, IEntityValidator<Story> validator, IAnswerChecker answerChecker, IMapper mapper, IUserStoryRepository userStoryRepository, IAnswerRepository answerRepository, IPointsCalculator pointsCalculator)
+        public QuizService(IAggregateStoryRepository storyRepository, IAggregateUserRepository userRepository, IQuestionRepository questionRepository, IEntityValidator<Story> validator, IAnswerChecker answerChecker, IMapper mapper, IUserStoryRepository userStoryRepository, IAnswerRepository answerRepository, IPointsCalculator pointsCalculator, GeminiSchemaGenerator geminiSchemaGenerator, IOptions<GeminiSettings> geminiSettings)
         {
             _storyRepository = storyRepository;
             _validator = validator;
@@ -29,9 +35,11 @@ namespace StoryFlow.Services
             _mapper = mapper;
             _userStoryRepository = userStoryRepository;
             _pointsCalculator = pointsCalculator;
+            _geminiSchemaGenerator = geminiSchemaGenerator;
             _userRepository = userRepository;
             _questionRepository = questionRepository;
             _answerRepository = answerRepository;
+            _geminiSettings = geminiSettings.Value;
         }
         public async Task Add(AddQuizDto dto)
         {
@@ -175,6 +183,59 @@ namespace StoryFlow.Services
             await _userRepository.UpdateStars(user);
 
             return quizResult;
+        }
+
+        public async Task<object?> Generate(GenerateQuizDto dto)
+        {
+            object schema = _geminiSchemaGenerator.GenerateStoryQuizSchema();
+
+            using var client = new HttpClient
+            {
+                BaseAddress = new Uri(_geminiSettings.BaseUrl)
+            };
+
+
+            var requestBody = new
+            {
+                contents = new[]
+                {
+        new
+        {
+            parts = new[]
+            {
+                new
+                {
+                    text = $"""
+                    Write a quiz in English based on {dto.EnglishStory}.
+
+                    Quiz requirements:
+                    - Generate exactly 4 quiz questions based on the story
+                    - Each question must have exactly 4 answer options
+                    - Only one answer can be correct
+                    - Use English for questions and answers
+                    - Return the index of the correct answer (0-3)
+                    
+                    Return ONLY JSON that matches the responseSchema.
+"""
+        }
+            }
+        }
+                },
+                generationConfig = new
+                {
+                    responseMimeType = "application/json",
+                    responseSchema = schema
+                }
+            };
+
+            var json = JsonSerializer.Serialize(requestBody);
+
+            var response = await client.PostAsync(
+                $"/v1beta/models/{_geminiSettings.ModelName}:generateContent?key={_geminiSettings.ApiKey}",
+                new StringContent(json, Encoding.UTF8, "application/json"));
+
+            var geminiResponse = await response.Content.ReadAsStringAsync();
+            return geminiResponse;
         }
     }
 }

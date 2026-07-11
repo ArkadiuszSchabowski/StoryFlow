@@ -7,5 +7,6 @@ namespace StoryFlow.Interfaces
     {
         Task<QuestionSubmissionResult> CheckAnswer(QuestionSubmissionDto dto, string userIdString);
         Task<QuizResult> CheckAnswers(QuizSubmissionDto dto, string userIdString);
+        Task<object?> Generate(GenerateQuizDto dto);
     }
 }

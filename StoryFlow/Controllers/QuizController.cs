@@ -17,12 +17,19 @@ namespace StoryFlow.Controllers
             _service = service;
         }
 
-        //[Authorize(Roles = "Moderator,Administrator")]
+        [Authorize(Roles = "Moderator,Administrator")]
         [HttpPost]
         public async Task<ActionResult> Add([FromBody] AddQuizDto dto)
         {
             await _service.Add(dto);
             return Ok();
+        }
+
+        [Authorize(Roles = "Moderator,Administrator")]
+        [HttpPost("generate")]
+        public async Task<ActionResult> Generate([FromBody] GenerateQuizDto dto)
+        {
+            return Ok(await _service.Generate(dto));
         }
 
         [Authorize]
