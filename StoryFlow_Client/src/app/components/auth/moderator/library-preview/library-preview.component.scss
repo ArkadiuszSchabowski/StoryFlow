@@ -125,6 +125,10 @@ button.story-card-button {
   position: relative;
 }
 
+.story-preview-button-category{
+  padding-bottom: 10px;
+}
+
 .story-preview-button {
   cursor: pointer;
   transition: 0.2s;
@@ -159,6 +163,7 @@ button.story-card-button {
   align-items: center;
   text-align: center;
   height: 50px;
+  min-height: 50px;
   width: 100%;
   margin-bottom: 10px;
   border-radius: 25px;

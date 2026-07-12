@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using StoryFlow.Exceptions;
 using StoryFlow.Helpers;
 using StoryFlow.Interfaces;
@@ -85,6 +86,19 @@ namespace StoryFlow.Services
                 storyLengthMax = "1500";
             }
 
+            if (dto.StorySize != StorySize.Short && dto.StorySize != StorySize.Medium && dto.StorySize != StorySize.Long)
+            {
+                throw new BadRequestException("Historia w języku angielskim musi mieć od 400 do 1500 znaków.");
+            }
+
+            var additionalInstructions = string.IsNullOrWhiteSpace(dto.AdditionalInstructions)
+                ? ""
+                : $""" 
+        Additional instructions:
+        - {dto.AdditionalInstructions}
+        """;
+
+
             using var client = new HttpClient
             {
                 BaseAddress = new Uri(_geminiSettings.BaseUrl)
@@ -95,31 +109,38 @@ namespace StoryFlow.Services
             {
                 contents = new[]
                 {
-        new
-        {
-            parts = new[]
+            new
             {
-                new
+                parts = new[]
                 {
-                    text = $"""
-                    Write a story in English and Polish.
-                    
-                    Requirements:
-                    - Category: {dto.StoryCategory}
-                    - Language level: {dto.LanguageLevel}
-                    - Length: from {storyLengthMin} to {storyLengthMax} characters
-                    
-                    Rules:
-                    - Check the length before finishing the story
-                    - Do not exceed the character limit
-                    - Adapt the writing style to the language level
-                    
-                    Return ONLY JSON that matches the responseSchema.
-"""
-        }
+                    new
+                    {
+                        text = $"""
+                        Create one story in English and provide a Polish translation.
+
+                        Requirements:
+                        - Category: {dto.StoryCategory}
+                        - Language level: {dto.LanguageLevel}
+                        - Title length in both languages: 5 - 50 characters
+                        - Description length in both languages: 10 - 100 characters
+                        - English story length: from {storyLengthMin} to {storyLengthMax} characters
+                        - The number of sentences in both versions must be exactly the same.
+                        - Keep the same sentence order and meaning in both versions.
+                        - The Polish version should be a natural translation, not a word-for-word translation.
+
+                        Rules:
+                        - Check the length before finishing the story.
+                        - Do not exceed the character limit.
+                        - Adapt the writing style to the language level.
+
+                        {additionalInstructions}
+
+                        Return ONLY JSON that matches the responseSchema.
+                        """
+                    }
+                }
             }
-        }
-                },
+        },
                 generationConfig = new
                 {
                     responseMimeType = "application/json",
@@ -135,6 +156,9 @@ namespace StoryFlow.Services
                 new StringContent(json, Encoding.UTF8, "application/json"));
 
             var geminiResponse = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine(geminiResponse);
+
             return geminiResponse;
         }
 
@@ -250,7 +274,7 @@ namespace StoryFlow.Services
 
             UserStory? userStory = await _userStoryRepository.GetByUserAndStory(user.Id, story.Id);
 
-            if(user.Tickets < 1 && userStory == null)
+            if (user.Tickets < 1 && userStory == null)
             {
                 throw new BadRequestException("Nie masz już żadnych biletów. Ukończ kolejny otwarty quiz z wynikiem co najmniej 50%, aby zdobyć kolejny.");
             }

@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { StoryService } from 'src/app/_services/story.service';
 import { UserService } from 'src/app/_services/user.service';
 import { CATEGORIES_WITH_PLACEHOLDER, SIZES_WITH_PLACEHOLDER, LANGUAGE_LEVELS_WITH_PLACEHOLDER } from 'src/app/constants/select-options';
-import { showSize, showLanguageLevelShort } from 'src/app/helpers/formatter';
+import { showSize, showLanguageLevelShort, showCategory } from 'src/app/helpers/formatter';
 import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
 import { GetUserDto } from 'src/app/models/get-user-dto';
 import { StoryFilter } from 'src/app/models/story-filter-dto';
@@ -28,6 +28,7 @@ export class LibraryPreviewComponent implements OnInit {
 
   showSize = showSize;
   showLanguageLevelShort = showLanguageLevelShort;
+  showCategory = showCategory;
 
   form: any = this.fb.group({
     languageLevel: [],
