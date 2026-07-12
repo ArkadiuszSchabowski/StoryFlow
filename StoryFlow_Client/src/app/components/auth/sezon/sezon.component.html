@@ -8,6 +8,7 @@
       class="story-preview-button"
       (click)="toggleStory(story.id)"
     >
+        <div class="story-preview-button-category">{{ showCategory(story.storyCategory) }}</div>
       <div class="story-preview-button-icon">
         <mat-icon>{{ getIcon(story.id) }}</mat-icon>
       </div>

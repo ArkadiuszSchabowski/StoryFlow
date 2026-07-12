@@ -9,7 +9,11 @@ import {
   SIZES_WITH_PLACEHOLDER,
   LANGUAGE_LEVELS_WITH_PLACEHOLDER,
 } from 'src/app/constants/select-options';
-import { showSize, showLanguageLevelShort } from 'src/app/helpers/formatter';
+import {
+  showSize,
+  showLanguageLevelShort,
+  showCategory,
+} from 'src/app/helpers/formatter';
 import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
 import { GetUserDto } from 'src/app/models/get-user-dto';
 import { StoryFilter } from 'src/app/models/story-filter-dto';
@@ -33,6 +37,7 @@ export class SezonComponent implements OnInit {
 
   showSize = showSize;
   showLanguageLevelShort = showLanguageLevelShort;
+  showCategory = showCategory;
 
   form: any = this.fb.group({
     languageLevel: [],
@@ -70,11 +75,11 @@ export class SezonComponent implements OnInit {
     };
 
     this.storyService.getBySeason(seasonId).subscribe({
-      next: response =>{
-        this.stories = response
+      next: (response) => {
+        this.stories = response;
       },
-      error: error => console.log(error)
-    })
+      error: (error) => console.log(error),
+    });
   }
 
   getStory(id: number) {

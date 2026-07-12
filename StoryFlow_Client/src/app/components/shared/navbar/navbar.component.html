@@ -114,9 +114,9 @@
       </div>
       <div
         class="desktop-button"
-        *ngIf="authService.currentUserSource$ | async"
+        *ngIf="authService.isAdmin$ | async"
         [matMenuTriggerFor]="administratorMenu"
-        #profileTrigger="matMenuTrigger"
+        #administratorTrigger="matMenuTrigger"
       >
         <div class="desktop-button-body">
           ADMINISTRATOR

@@ -7,5 +7,6 @@ namespace StoryFlow_Shared.Models
         public StorySize StorySize {get; set;}
         public StoryCategory StoryCategory { get; set; }
         public LanguageLevel LanguageLevel { get; set; }
+        public string? AdditionalInstructions { get; set; } = string.Empty;
     }
 }

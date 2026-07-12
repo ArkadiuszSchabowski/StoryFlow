@@ -2,7 +2,11 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { StoryService } from 'src/app/_services/story.service';
-import { CATEGORIES, LANGUAGELEVELS, SIZES } from 'src/app/constants/select-options';
+import {
+  CATEGORIES,
+  LANGUAGELEVELS,
+  SIZES,
+} from 'src/app/constants/select-options';
 import { AddStoryDto } from 'src/app/models/add-story-dto';
 import { GenerateStoryDto } from 'src/app/models/generate-story-dto';
 
@@ -12,7 +16,6 @@ import { GenerateStoryDto } from 'src/app/models/generate-story-dto';
   styleUrls: ['./story-create.component.scss'],
 })
 export class StoryCreateComponent {
-
   categories = CATEGORIES;
   languageLevels = LANGUAGELEVELS;
   sizes = SIZES;
@@ -27,6 +30,7 @@ export class StoryCreateComponent {
     languageLevel: [0],
     storyCategory: [0],
     storySize: [0],
+    additionalInstructions: '',
   });
 
   addForm: any = this.fb.group({
@@ -45,6 +49,8 @@ export class StoryCreateComponent {
       storyCategory: this.generateForm.get('storyCategory').value,
       languageLevel: this.generateForm.get('languageLevel').value,
       storySize: this.generateForm.get('storySize').value,
+      additionalInstructions: this.generateForm.get('additionalInstructions')
+        .value,
     };
 
     this.storyService.generate(dto).subscribe({
@@ -76,10 +82,15 @@ export class StoryCreateComponent {
       englishStory: this.addForm.get('englishStory')?.value,
     };
 
+    console.log(dto);
+
     this.storyService.add(dto).subscribe({
       next: () => {
         this.toastr.success('Historia została dodana.');
         this.addForm.reset();
+        this.generateForm.patchValue({
+          additionalInstructions: '',
+        });
       },
       error: (error) => {
         this.toastr.error(error.error);
