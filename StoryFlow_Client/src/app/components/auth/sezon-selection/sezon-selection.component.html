@@ -1,0 +1,6 @@
+<div id="season-container" class="container">
+    <div class="season-div" *ngFor="let season of seasons">
+        <div>Sezon: {{season.seasonNumber}}</div>
+        <button mat-raised-button class="submit-button" (click)="goToSeason(season.id)">START</button>
+    </div>
+</div>

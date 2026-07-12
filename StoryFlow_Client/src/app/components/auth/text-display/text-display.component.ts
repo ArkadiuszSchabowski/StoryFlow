@@ -154,7 +154,7 @@ export class TextDisplayComponent implements OnInit {
         this.isQuizFinishied = true;
         this.quizResult = response;
       },
-      error: (error) => console.log(error),
+      error: () => {},
     });
   }
 }

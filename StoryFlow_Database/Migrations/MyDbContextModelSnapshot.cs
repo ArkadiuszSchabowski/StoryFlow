@@ -178,6 +178,9 @@ namespace StoryFlow_Database.Migrations
                     b.Property<int?>("NumberOfQuestions")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("OrderInSeason")
+                        .HasColumnType("integer");
+
                     b.Property<string>("PolishDescription")
                         .HasColumnType("text");
 
@@ -190,10 +193,15 @@ namespace StoryFlow_Database.Migrations
                     b.Property<int?>("StoryCategory")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("StorySeasonId")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("StorySize")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("StorySeasonId");
 
                     b.ToTable("Stories");
                 });
@@ -224,6 +232,25 @@ namespace StoryFlow_Database.Migrations
                         .IsUnique();
 
                     b.ToTable("StoryPoints");
+                });
+
+            modelBuilder.Entity("StoryFlow_Database.Entities.StorySeason", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsVisibleForUser")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("SeasonNumber")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StorySeazons");
                 });
 
             modelBuilder.Entity("StoryFlow_Database.Entities.User", b =>
@@ -396,6 +423,15 @@ namespace StoryFlow_Database.Migrations
                     b.Navigation("Story");
                 });
 
+            modelBuilder.Entity("StoryFlow_Database.Entities.Story", b =>
+                {
+                    b.HasOne("StoryFlow_Database.Entities.StorySeason", "StorySeason")
+                        .WithMany("Stories")
+                        .HasForeignKey("StorySeasonId");
+
+                    b.Navigation("StorySeason");
+                });
+
             modelBuilder.Entity("StoryFlow_Database.Entities.StoryPoint", b =>
                 {
                     b.HasOne("StoryFlow_Database.Entities.Story", "Story")
@@ -509,6 +545,11 @@ namespace StoryFlow_Database.Migrations
                     b.Navigation("StoryPoint");
 
                     b.Navigation("UserStories");
+                });
+
+            modelBuilder.Entity("StoryFlow_Database.Entities.StorySeason", b =>
+                {
+                    b.Navigation("Stories");
                 });
 
             modelBuilder.Entity("StoryFlow_Database.Entities.User", b =>

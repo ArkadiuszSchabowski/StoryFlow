@@ -30,6 +30,16 @@ namespace StoryFlow.Repositories
             return _context.Stories.Include(s => s.UserStories).Include(s => s.Sentences).Include(s => s.Quiz!).Include(s => s.StoryPoint).AsQueryable();
         }
 
+        public  IQueryable<Story> GetBySeason(int seasonId)
+        {
+            return _context.Stories.Include(s => s.UserStories).Include(s => s.Sentences).Include(s => s.Quiz!).Include(s => s.StoryPoint).Where(s => s.StorySeasonId == seasonId).AsQueryable();
+        }
+
+        public async Task<List<StorySeason>> GetStorySeasonsAsync()
+        {
+            return await _context.StorySeazons.ToListAsync();
+        }
+
         public async Task Remove(Story story)
         {
             _context.Stories.Remove(story);

@@ -11,12 +11,16 @@ import { ToastrModule } from 'ngx-toastr';
 import { MaterialModule } from './modules/material/material.module';
 import { PublicModule } from './modules/public/public.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { SezonSelectionComponent } from './components/auth/sezon-selection/sezon-selection.component';
+import { SezonComponent } from './components/auth/sezon/sezon.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     ErrorPageComponent,
+    SezonSelectionComponent,
+    SezonComponent,
   ],
   imports: [
     AuthModule,
@@ -29,6 +33,9 @@ import { AuthModule } from './modules/auth/auth.module';
     PublicModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({}),
+  ],
+  exports: [
+
   ],
   providers: [],
   bootstrap: [AppComponent],

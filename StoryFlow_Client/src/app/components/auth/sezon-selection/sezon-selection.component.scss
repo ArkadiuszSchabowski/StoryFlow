@@ -1,0 +1,33 @@
+@use "@angular/material" as mat;
+@use "src/styles" as theme;
+
+#season-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.season-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 250px;
+  color: white;
+  margin: 20px;
+  border: 2px solid white;
+  border-radius: 25px;
+  background-color: mat.get-color-from-palette(theme.$accent);
+}
+
+.submit-button {
+  padding-top: 20px;
+  color: mat.get-color-from-palette(theme.$accent) !important;
+  background-color: white !important;
+}
+
+.submit-button:hover {
+  background-color: #f2f2f2;
+}

@@ -1,9 +1,8 @@
-<div id="story-create-container">
+<div id="story-create-container" *ngIf="stories.length">
   <div id="story-container">
     <form
       id="filter-container"
       [formGroup]="form"
-      *ngIf="stories"
       (ngSubmit)="generateQuiz()"
     >
       <mat-form-field class="filter-field-create">
@@ -60,3 +59,4 @@
     </form>
   </div>
 </div>
+<div *ngIf="stories.length == 0" class="container">Wszystkie historię mają już swoje quizy. Dodaj kolejną historię, aby mieć opcję dodania quizu.</div>

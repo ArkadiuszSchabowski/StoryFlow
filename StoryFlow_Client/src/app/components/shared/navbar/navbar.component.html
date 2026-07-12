@@ -24,13 +24,13 @@
         [disabled]="!(navbarService.navbarPublicButton$ | async)"
       >
         <mat-icon>person_add</mat-icon>
-    </button>
+      </button>
       <a
-        routerLink="/text-selection"
+        routerLink="/sezon-selection"
         class="mobile-button"
         *ngIf="authService.currentUserSource$ | async"
       >
-        <mat-icon>school</mat-icon>
+        <mat-icon>public</mat-icon>
       </a>
       <div class="mobile-button" *ngIf="authService.isModerator$ | async">
         <div
@@ -95,11 +95,11 @@
         ZAREJESTRUJ
       </button>
       <a
-        routerLink="/text-selection"
+        routerLink="/sezon-selection"
         class="desktop-button"
         *ngIf="authService.currentUserSource$ | async"
       >
-        PRZYGODA
+        MOJA PODRÓŻ
       </a>
       <div
         class="desktop-button"
@@ -144,10 +144,12 @@
   <button mat-menu-item (click)="logout()">WYLOGUJ</button>
 </mat-menu>
 <mat-menu #moderatorMenu="matMenu" class="mat-menu-desktop">
+  <button mat-menu-item routerLink="/library">PODGLĄD HISTORII</button>
   <button mat-menu-item routerLink="/create-story">NOWA HISTORIA</button>
   <button mat-menu-item routerLink="/create-quiz">NOWY QUIZ</button>
 </mat-menu>
 <mat-menu #administratorMenu="matMenu" class="mat-menu-desktop">
+  <button mat-menu-item routerLink="/library">PODGLĄD HISTORII</button>
   <button mat-menu-item routerLink="/create-story">NOWA HISTORIA</button>
   <button mat-menu-item routerLink="/create-quiz">NOWY QUIZ</button>
 </mat-menu>

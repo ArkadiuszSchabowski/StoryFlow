@@ -1,0 +1,129 @@
+<div id="text-selection-container">
+  <div>
+    <form id="filter-container" [formGroup]="form" (ngSubmit)="get()">
+      <mat-form-field class="filter-field">
+        <mat-label>Kategoria:</mat-label>
+        <mat-select
+          id="category"
+          formControlName="category"
+          (selectionChange)="get()"
+        >
+          <mat-option
+            *ngFor="let category of categories"
+            [value]="category.value"
+            >{{ category.viewValue }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="filter-field">
+        <mat-label>Poziom językowy:</mat-label>
+        <mat-select
+          id="languageLevel"
+          formControlName="languageLevel"
+          (selectionChange)="get()"
+        >
+          <mat-option
+            *ngFor="let level of languageLevels"
+            [value]="level.value"
+            >{{ level.viewValue }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="filter-field">
+        <mat-label>Długość historii:</mat-label>
+        <mat-select id="size" formControlName="size" (selectionChange)="get()">
+          <mat-option *ngFor="let size of sizes" [value]="size.value">{{
+            size.viewValue
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </div>
+</div>
+<div id="story-container">
+  <div id="no-story-information" class="subtitle" *ngIf="stories.length === 0">
+    Nie znaleziono historii pasujących do wybranych filtrów. Spróbuj innych
+    filtrów.
+  </div>
+  <div *ngFor="let story of stories" class="story-wrapper">
+    <div
+      class="story-preview-button"
+      (click)="toggleStory(story.id)"
+    >
+      <div class="story-preview-button-icon">
+        <mat-icon>{{ getIcon(story.id) }}</mat-icon>
+      </div>
+      <div class="story-preview-button-title">
+        {{ story.polishTitle }}
+      </div>
+
+      <div class="story-previev-button-level-and-size">
+        <div>
+          {{ showLanguageLevelShort(story.languageLevel) }} -
+          {{ showSize(story.storySize) }}
+        </div>
+      </div>
+
+      <div class="score-item" *ngIf="story.storyPoint">
+        {{ story?.userStories?.[0]?.bestResult ?? 0 }}
+        <mat-icon>star</mat-icon>
+        / {{ story.storyPoint.maxPoints }}
+        <mat-icon>star</mat-icon>
+      </div>
+      <div class="score-item score-percentage" *ngIf="story.storyPoint">
+         {{roundToTwoDecimals(story?.userStories?.[0]?.percentageScore ?? 0)}}&nbsp;%
+      </div>
+    </div>
+
+    <div
+      class="story-card"
+      *ngIf="story.storyPoint && openedStoryId === story.id"
+    >
+      <div class="story-card-button-close">
+        <button class="button-close" (click)="toggleStory(story.id)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="story-card-description">
+        {{ story.polishDescription }}
+      </div>
+
+      <div id="score-card">
+        <div class="score-item">
+          Punkty za pytanie:
+          {{ story.numberOfQuestions }} * {{ story.storyPoint.pointsPerAnswer }}
+          <mat-icon>star</mat-icon>
+        </div>
+
+        <div class="score-item">
+          Bonus długości historii:
+          {{ story.storyPoint.bonusPointsForStoryLength }}
+          <mat-icon>star</mat-icon>
+        </div>
+
+        <div class="score-item">
+          Maksymalna ilość punktów:
+          {{ story.storyPoint.maxPoints }}
+          <mat-icon>star</mat-icon>
+        </div>
+
+        <div class="score-item score-item-hint">
+          {{
+            getIcon(story.id) === "lock"
+              ? "Twój bilet jest zablokowany. Spróbuj innego dostępnego quizu i zdobądź co najmniej 50%, aby go odzyskać."
+              : ""
+          }}
+        </div>
+
+        <button
+          mat-raised-button
+          class="story-card-button"
+          (click)="NavigateToTextDisplay(story.id)"
+          [disabled]="getIcon(story.id) === 'lock'"
+        >
+          {{ getIcon(story.id) === "lock" ? "ODBLOKUJ QUIZ" : "START" }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
