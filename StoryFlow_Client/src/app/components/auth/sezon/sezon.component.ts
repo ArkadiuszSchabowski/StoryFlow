@@ -1,23 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StoryService } from 'src/app/_services/story.service';
 import { UserService } from 'src/app/_services/user.service';
+import {
+  CATEGORIES_WITH_PLACEHOLDER,
+  SIZES_WITH_PLACEHOLDER,
+  LANGUAGE_LEVELS_WITH_PLACEHOLDER,
+} from 'src/app/constants/select-options';
+import { showSize, showLanguageLevelShort } from 'src/app/helpers/formatter';
 import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
 import { GetUserDto } from 'src/app/models/get-user-dto';
 import { StoryFilter } from 'src/app/models/story-filter-dto';
-import { showLanguageLevelShort, showSize } from 'src/app/helpers/formatter';
-import { CATEGORIES_WITH_PLACEHOLDER, LANGUAGE_LEVELS_WITH_PLACEHOLDER, SIZES_WITH_PLACEHOLDER } from 'src/app/constants/select-options';
 
 @Component({
-  selector: 'app-text-selection',
-  templateUrl: './text-selection.component.html',
-  styleUrls: ['./text-selection.component.scss'],
+  selector: 'app-sezon',
+  templateUrl: './sezon.component.html',
+  styleUrls: ['./sezon.component.scss'],
 })
-export class TextSelectionComponent implements OnInit {
+export class SezonComponent implements OnInit {
+  seasonId: number = 0;
   stories: GetStoryViewDto[] = [];
-  visibleStories: GetStoryViewDto[] = [];
   dto: StoryFilter | null = null;
   icon: string = '';
   openedStoryId: number | null = null;
@@ -26,10 +30,9 @@ export class TextSelectionComponent implements OnInit {
   categories = CATEGORIES_WITH_PLACEHOLDER;
   sizes = SIZES_WITH_PLACEHOLDER;
   languageLevels = LANGUAGE_LEVELS_WITH_PLACEHOLDER;
-  
+
   showSize = showSize;
   showLanguageLevelShort = showLanguageLevelShort;
-
 
   form: any = this.fb.group({
     languageLevel: [],
@@ -38,6 +41,7 @@ export class TextSelectionComponent implements OnInit {
   });
 
   constructor(
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private storyService: StoryService,
     private router: Router,
@@ -46,11 +50,18 @@ export class TextSelectionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.get();
+    this.getIdFromRoute();
     this.getProfile();
   }
+  getIdFromRoute() {
+    this.route.paramMap.subscribe((params) => {
+      const id = Number(params.get('id'));
+      this.seasonId = id;
+      this.get(id);
+    });
+  }
 
-    get() {
+  get(seasonId: number) {
     this.openedStoryId = null;
     this.dto = {
       languageLevel: this.form.value.languageLevel,
@@ -58,18 +69,17 @@ export class TextSelectionComponent implements OnInit {
       size: this.form.value.size,
     };
 
-    this.storyService.getAll(this.dto).subscribe({
-      next: (response) => {
-        this.stories = response;
+    this.storyService.getBySeason(seasonId).subscribe({
+      next: response =>{
+        this.stories = response
       },
-      error: () => {},
-    });
+      error: error => console.log(error)
+    })
   }
 
-    getStory(id: number) {
+  getStory(id: number) {
     this.storyService.get(id).subscribe({
-      next: (response) => {
-        console.log(response);
+      next: () => {
         this.router.navigateByUrl(`text/${id}`);
       },
       error: (error) => {
@@ -82,7 +92,6 @@ export class TextSelectionComponent implements OnInit {
     this.userService.getProfile().subscribe({
       next: (response) => {
         this.profile = response;
-        console.log(response);
       },
       error: () => {},
     });

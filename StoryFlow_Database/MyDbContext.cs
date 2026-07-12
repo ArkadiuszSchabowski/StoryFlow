@@ -19,6 +19,7 @@ namespace StoryFlow_Database
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<StoryPoint> StoryPoints { get; set; }
+        public DbSet<StorySeason> StorySeazons { get; set; }
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
         {
 
@@ -42,6 +43,10 @@ namespace StoryFlow_Database
                 .HasOne(u => u.Role)
                 .WithMany(r => r.Users)
                 .HasForeignKey(u => u.RoleId);
+
+            modelBuilder.Entity<StorySeason>().HasMany(ss => ss.Stories)
+                .WithOne(s => s.StorySeason)
+                .HasForeignKey(s => s.StorySeasonId);
 
             modelBuilder.Entity<Story>().HasMany(s => s.Sentences)
                 .WithOne(se => se.Story)

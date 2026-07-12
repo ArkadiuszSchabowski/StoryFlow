@@ -115,7 +115,7 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.UseMiddleware<ErrorHandlingMiddleware>();
+//app.UseMiddleware<ErrorHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {

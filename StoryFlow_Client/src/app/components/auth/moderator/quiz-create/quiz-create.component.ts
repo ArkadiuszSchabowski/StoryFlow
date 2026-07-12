@@ -73,12 +73,9 @@ export class QuizCreateComponent implements OnInit {
     this.quizService.generate(this.dto).subscribe({
       next: (response) => {
         this.generateQuizResponse = response;
-        console.log('Generate quiz response:');
-        console.log(this.generateQuizResponse);
         this.isResponse = true;
       },
       error: (error) => {
-        console.log(error);
       },
     });
   }
@@ -100,8 +97,6 @@ public add() {
     })),
   };
 
-  console.log('AddQuizDto:', dto);
-
   this.quizService.add(dto).subscribe({
     next: () => {
       this.toastr.success('Quiz został dodany.');
@@ -109,7 +104,7 @@ public add() {
       this.getAll();
     },
     error: (error) => {
-      console.log(error);
+
     },
   });
 }

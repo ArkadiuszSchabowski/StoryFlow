@@ -1,45 +1,3 @@
-<div id="text-selection-container">
-  <div>
-    <form id="filter-container" [formGroup]="form" (ngSubmit)="get()">
-      <mat-form-field class="filter-field">
-        <mat-label>Kategoria:</mat-label>
-        <mat-select
-          id="category"
-          formControlName="category"
-          (selectionChange)="get()"
-        >
-          <mat-option
-            *ngFor="let category of categories"
-            [value]="category.value"
-            >{{ category.viewValue }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field class="filter-field">
-        <mat-label>Poziom językowy:</mat-label>
-        <mat-select
-          id="languageLevel"
-          formControlName="languageLevel"
-          (selectionChange)="get()"
-        >
-          <mat-option
-            *ngFor="let level of languageLevels"
-            [value]="level.value"
-            >{{ level.viewValue }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field class="filter-field">
-        <mat-label>Długość historii:</mat-label>
-        <mat-select id="size" formControlName="size" (selectionChange)="get()">
-          <mat-option *ngFor="let size of sizes" [value]="size.value">{{
-            size.viewValue
-          }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </form>
-  </div>
-</div>
 <div id="story-container">
   <div id="no-story-information" class="subtitle" *ngIf="stories.length === 0">
     Nie znaleziono historii pasujących do wybranych filtrów. Spróbuj innych
@@ -49,7 +7,6 @@
     <div
       class="story-preview-button"
       (click)="toggleStory(story.id)"
-      *ngIf="story.storyPoint"
     >
       <div class="story-preview-button-icon">
         <mat-icon>{{ getIcon(story.id) }}</mat-icon>

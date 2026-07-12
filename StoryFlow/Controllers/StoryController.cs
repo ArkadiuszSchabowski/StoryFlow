@@ -29,6 +29,17 @@ namespace StoryFlow.Controllers
         }
 
         [Authorize]
+        [HttpGet("season")]
+        public async Task<ActionResult<List<GetStorySeasonDto>>> GetSeasons()
+        {
+            string? userId = (User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+
+            List<GetStorySeasonDto> seasons = await _service.GetSeasons(userId);
+
+            return Ok(seasons);
+        }
+
+        [Authorize]
         [HttpGet("{storyId}")]
         public async Task<ActionResult<GetStoryDto>> Get([FromRoute] int storyId) 
         {
@@ -36,6 +47,16 @@ namespace StoryFlow.Controllers
 
             var story = await _service.Get(storyId, userIdClaim);
             return Ok(story);
+        }
+
+        [Authorize]
+        [HttpGet("season/{seasonId}")]
+        public async Task<ActionResult<GetStoryDto>> GetBySeason([FromRoute] int seasonId)
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            List<GetStoryDto> stories = await _service.GetBySeason(seasonId, userIdClaim);
+            return Ok(stories);
         }
 
         [Authorize(Roles = "Moderator,Administrator")]

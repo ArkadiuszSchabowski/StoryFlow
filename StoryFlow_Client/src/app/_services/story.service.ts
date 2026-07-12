@@ -31,6 +31,26 @@ export class StoryService {
     return this.http.post(this.apiUrl + 'story', dto, { headers });
   }
 
+  getSeasons() {
+    const token: string | null = this.authService.getToken();
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return this.http.get(this.apiUrl + 'story/season', { headers });
+  }
+
+  getBySeason(id: number){
+        const token: string | null = this.authService.getToken();
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return this.http.get<GetStoryViewDto[]>(this.apiUrl + `story/season/${id}`, { headers });
+  }
+
   generate(dto: GenerateStoryDto) {
     const token: string | null = this.authService.getToken();
 

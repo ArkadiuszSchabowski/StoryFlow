@@ -12,6 +12,7 @@ using StoryFlow_Shared.Interfaces;
 using StoryFlow_Shared.Models;
 using System.Text;
 using System.Text.Json;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace StoryFlow.Services
 {
@@ -137,6 +138,30 @@ namespace StoryFlow.Services
             return geminiResponse;
         }
 
+        public async Task<List<GetStorySeasonDto>> GetSeasons(string? userIdClaim)
+        {
+            if (!int.TryParse(userIdClaim, out var userId))
+            {
+                throw new UnauthorizedException("Użytkownik nie ma uprawnień do wykonania tej operacji.");
+            }
+
+            User? user = await _userRepository.Get(userId);
+
+            if (user == null)
+            {
+                throw new NotFoundException("Nie znaleziono użytkownika.");
+            }
+
+            List<StorySeason> seasons = await _storyRepository.GetStorySeasonsAsync();
+
+            List<StorySeason> seasonsVisibleForUser = seasons
+                .Where(s => s.IsVisibleForUser)
+                .ToList();
+
+            List<GetStorySeasonDto> dto = _mapper.Map<List<GetStorySeasonDto>>(seasonsVisibleForUser);
+            return dto;
+        }
+
         public async Task<ICollection<GetStoryDto>> Get(StoryFilter? filter, int userId)
         {
             IQueryable<Story> query = _storyRepository.Get();
@@ -174,6 +199,31 @@ namespace StoryFlow.Services
 
             return stories;
         }
+        public async Task<List<GetStoryDto>> GetBySeason(int seasonId, string? userIdClaim)
+        {
+            if (!int.TryParse(userIdClaim, out var userId))
+            {
+                throw new UnauthorizedException("Użytkownik nie ma uprawnień do wykonania tej operacji.");
+            }
+
+            User? user = await _userRepository.Get(userId);
+
+            if (user == null)
+            {
+                throw new NotFoundException("Nie znaleziono użytkownika.");
+            }
+
+            _serviceValidator.ValidateId(seasonId);
+
+            IQueryable<Story> query = _storyRepository.GetBySeason(seasonId);
+
+            List<Story>? stories = await query.ToListAsync();
+
+            List<GetStoryDto> dto = _mapper.Map<List<GetStoryDto>>(stories);
+
+            return dto;
+        }
+
 
         public async Task<GetStoryDto> Get(int storyId, string? userIdClaim)
         {

@@ -37,6 +37,11 @@ namespace StoryFlow.Aggregates
             return _storyRepository.Get();
         }
 
+        public IQueryable<Story> GetBySeason(int seasonId)
+        {
+            return _storyRepository.GetBySeason(seasonId);
+        }
+
         public Task<UserStory?> GetByUserAndStory(int userId, int storyId)
         {
             return _userStoryRepository.GetByUserAndStory(userId, storyId);
@@ -60,6 +65,11 @@ namespace StoryFlow.Aggregates
         public async Task Update(Story entity)
         {
             await _repository.Update(entity);
+        }
+
+        public async Task<List<StorySeason>> GetStorySeasonsAsync()
+        {
+            return await _storyRepository.GetStorySeasonsAsync();
         }
     }
 }

@@ -4,6 +4,7 @@ namespace StoryFlow_Database.Entities
     public class Story
     {
         public int Id { get; set; }
+        public int? OrderInSeason { get; set; }
         public string? PolishStory { get; set; }
         public string? EnglishStory { get; set; }
         public string? PolishTitle { get; set; }
@@ -11,6 +12,8 @@ namespace StoryFlow_Database.Entities
         public string? PolishDescription { get; set; }
         public string? EnglishDescription { get; set; }
         public int? NumberOfQuestions { get; set; }
+        public int? StorySeasonId { get; set; }
+        public StorySeason? StorySeason { get; set; }
         public StoryPoint? StoryPoint { get; set; }
         public StoryCategory? StoryCategory { get; set; }
         public StorySize? StorySize {get; set;}
