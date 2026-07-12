@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using StoryFlow.Exceptions;
 using StoryFlow.Helpers;
 using StoryFlow.Interfaces;
@@ -13,7 +12,6 @@ using StoryFlow_Shared.Interfaces;
 using StoryFlow_Shared.Models;
 using System.Text;
 using System.Text.Json;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace StoryFlow.Services
 {

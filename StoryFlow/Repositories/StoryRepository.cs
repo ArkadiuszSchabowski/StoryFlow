@@ -32,7 +32,7 @@ namespace StoryFlow.Repositories
 
         public  IQueryable<Story> GetBySeason(int seasonId)
         {
-            return _context.Stories.Include(s => s.UserStories).Include(s => s.Sentences).Include(s => s.Quiz!).Include(s => s.StoryPoint).Where(s => s.StorySeasonId == seasonId).AsQueryable();
+            return _context.Stories.Include(s => s.UserStories).Include(s => s.Sentences).Include(s => s.Quiz!).Include(s => s.StoryPoint).Where(s => s.StorySeasonId == seasonId).OrderBy(s => s.OrderInSeason).AsQueryable();
         }
 
         public async Task<List<StorySeason>> GetStorySeasonsAsync()
