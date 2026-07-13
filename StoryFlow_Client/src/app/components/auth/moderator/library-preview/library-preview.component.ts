@@ -4,8 +4,16 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StoryService } from 'src/app/_services/story.service';
 import { UserService } from 'src/app/_services/user.service';
-import { CATEGORIES_WITH_PLACEHOLDER, SIZES_WITH_PLACEHOLDER, LANGUAGE_LEVELS_WITH_PLACEHOLDER } from 'src/app/constants/select-options';
-import { showSize, showLanguageLevelShort, showCategory } from 'src/app/helpers/formatter';
+import {
+  CATEGORIES_WITH_PLACEHOLDER,
+  SIZES_WITH_PLACEHOLDER,
+  LANGUAGE_LEVELS_WITH_PLACEHOLDER,
+} from 'src/app/constants/select-options';
+import {
+  showSize,
+  showLanguageLevelShort,
+  showCategory,
+} from 'src/app/helpers/formatter';
 import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
 import { GetUserDto } from 'src/app/models/get-user-dto';
 import { StoryFilter } from 'src/app/models/story-filter-dto';
@@ -13,7 +21,7 @@ import { StoryFilter } from 'src/app/models/story-filter-dto';
 @Component({
   selector: 'app-library-preview',
   templateUrl: './library-preview.component.html',
-  styleUrls: ['./library-preview.component.scss']
+  styleUrls: ['./library-preview.component.scss'],
 })
 export class LibraryPreviewComponent implements OnInit {
   stories: GetStoryViewDto[] = [];
@@ -31,9 +39,9 @@ export class LibraryPreviewComponent implements OnInit {
   showCategory = showCategory;
 
   form: any = this.fb.group({
-    languageLevel: [],
-    category: [],
-    size: [],
+    languageLevel: [null],
+    category: [null],
+    size: [null],
   });
 
   constructor(
@@ -45,11 +53,16 @@ export class LibraryPreviewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.form.valueChanges.subscribe(() => {
+      this.get();
+    });
+
     this.get();
     this.getProfile();
   }
 
   get() {
+      
     this.openedStoryId = null;
     this.dto = {
       languageLevel: this.form.value.languageLevel,
@@ -59,7 +72,7 @@ export class LibraryPreviewComponent implements OnInit {
 
     this.storyService.getAll(this.dto).subscribe({
       next: (response) => {
-        console.log(response)
+        console.log(response);
         this.stories = response;
       },
       error: () => {},

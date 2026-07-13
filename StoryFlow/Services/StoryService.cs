@@ -180,7 +180,13 @@ namespace StoryFlow.Services
                 .Where(s => s.IsVisibleForUser)
                 .ToList();
 
+            foreach (var season in seasonsVisibleForUser)
+            {
+                season.MaxPoints = season.Stories.Sum(s => s.StoryPoint?.MaxPoints ?? 0);
+            }
+
             List<GetStorySeasonDto> dto = _mapper.Map<List<GetStorySeasonDto>>(seasonsVisibleForUser);
+            
             return dto;
         }
 
@@ -236,6 +242,23 @@ namespace StoryFlow.Services
             }
 
             _serviceValidator.ValidateId(seasonId);
+
+            if (seasonId == 2)
+            {
+                if (user.Stars < 750)
+                {
+                    throw new BadRequestException("Nie masz wystarczającej ilości gwiazdek, by przejść do tego sezonu.");
+                }
+            }
+
+            if (seasonId == 3)
+            {
+                if (user.Stars < 1000)
+                {
+                    throw new BadRequestException("Nie masz wystarczającej ilości gwiazdek, by przejść do tego sezonu.");
+                }
+            }
+
 
             IQueryable<Story> query = _storyRepository.GetBySeason(seasonId);
 

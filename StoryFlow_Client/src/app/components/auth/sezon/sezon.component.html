@@ -1,8 +1,4 @@
 <div id="story-container">
-  <div id="no-story-information" class="subtitle" *ngIf="stories.length === 0">
-    Nie znaleziono historii pasujących do wybranych filtrów. Spróbuj innych
-    filtrów.
-  </div>
   <div *ngFor="let story of stories" class="story-wrapper">
     <div
       class="story-preview-button"

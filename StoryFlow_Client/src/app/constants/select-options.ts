@@ -10,13 +10,13 @@ export const CATEGORIES = [
 
  export const CATEGORIES_WITH_PLACEHOLDER = [
     { value: null, viewValue: 'Kategoria:' },
-    { value: '0', viewValue: 'Zwierzęta' },
-    { value: '1', viewValue: 'Zdrowie' },
-    { value: '2', viewValue: 'Technologia' },
-    { value: '3', viewValue: 'Sport' },
-    { value: '4', viewValue: 'Sztuka' },
-    { value: '5', viewValue: 'Historia' },
-    { value: '6', viewValue: 'Muzyka' },
+    { value: 0, viewValue: 'Zwierzęta' },
+    { value: 1, viewValue: 'Zdrowie' },
+    { value: 2, viewValue: 'Technologia' },
+    { value: 3, viewValue: 'Sport' },
+    { value: 4, viewValue: 'Sztuka' },
+    { value: 5, viewValue: 'Historia' },
+    { value: 6, viewValue: 'Muzyka' },
   ];
 
 export const LANGUAGELEVELS = [

@@ -245,6 +245,13 @@ namespace StoryFlow_Database.Migrations
                     b.Property<bool>("IsVisibleForUser")
                         .HasColumnType("boolean");
 
+                    b.Property<int?>("MaxPoints")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<int>("SeasonNumber")
                         .HasColumnType("integer");
 
