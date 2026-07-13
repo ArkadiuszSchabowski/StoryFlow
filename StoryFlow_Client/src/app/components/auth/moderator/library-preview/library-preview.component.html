@@ -6,7 +6,6 @@
         <mat-select
           id="category"
           formControlName="category"
-          (selectionChange)="get()"
         >
           <mat-option
             *ngFor="let category of categories"
@@ -20,7 +19,6 @@
         <mat-select
           id="languageLevel"
           formControlName="languageLevel"
-          (selectionChange)="get()"
         >
           <mat-option
             *ngFor="let level of languageLevels"
@@ -31,7 +29,7 @@
       </mat-form-field>
       <mat-form-field class="filter-field">
         <mat-label>Długość historii:</mat-label>
-        <mat-select id="size" formControlName="size" (selectionChange)="get()">
+        <mat-select id="size" formControlName="size">
           <mat-option *ngFor="let size of sizes" [value]="size.value">{{
             size.viewValue
           }}</mat-option>

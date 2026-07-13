@@ -41,14 +41,17 @@ export class StoryService {
     return this.http.get(this.apiUrl + 'story/season', { headers });
   }
 
-  getBySeason(id: number){
-        const token: string | null = this.authService.getToken();
+  getBySeason(id: number) {
+    const token: string | null = this.authService.getToken();
 
     const headers = {
       Authorization: `Bearer ${token}`,
     };
 
-    return this.http.get<GetStoryViewDto[]>(this.apiUrl + `story/season/${id}`, { headers });
+    return this.http.get<GetStoryViewDto[]>(
+      this.apiUrl + `story/season/${id}`,
+      { headers },
+    );
   }
 
   generate(dto: GenerateStoryDto) {
@@ -84,10 +87,14 @@ export class StoryService {
 
     let params = new HttpParams();
 
-    if (dto?.languageLevel)
+    console.log(dto);
+
+    if (dto?.languageLevel != null)
       params = params.set('languageLevel', dto.languageLevel);
-    if (dto?.category) params = params.set('category', dto.category);
-    if (dto?.size) params = params.set('size', dto.size);
+
+    if (dto?.category != null) params = params.set('category', dto.category);
+
+    if (dto?.size != null) params = params.set('size', dto.size);
 
     return this.http.get<GetStoryViewDto[]>(this.apiUrl + 'story', {
       params,

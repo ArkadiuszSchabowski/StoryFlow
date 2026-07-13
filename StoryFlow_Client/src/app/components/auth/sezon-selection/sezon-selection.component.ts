@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { StoryService } from 'src/app/_services/story.service';
 
 @Component({
@@ -12,6 +13,7 @@ export class SezonSelectionComponent implements OnInit {
   constructor(
     private storyService: StoryService,
     private router: Router,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -19,7 +21,12 @@ export class SezonSelectionComponent implements OnInit {
   }
 
   goToSeason(id: number) {
-    this.router.navigateByUrl(`/sezon/${id}`);
+    this.storyService.getBySeason(id).subscribe({
+      next: (response) => {
+        this.router.navigateByUrl(`/sezon/${id}`);
+      },
+      error: (error) => this.toastr.error(error.error),
+    });
   }
 
   getSeasons() {
