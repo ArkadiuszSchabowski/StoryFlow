@@ -238,7 +238,7 @@ namespace StoryFlow.Services
 
             if (seasonId == 3)
             {
-                if (user.Stars < 1000)
+                if (user.Stars < 1600)
                 {
                     throw new BadRequestException("Nie masz wystarczającej ilości gwiazdek, by przejść do tego sezonu.");
                 }

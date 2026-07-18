@@ -252,6 +252,9 @@ namespace StoryFlow_Database.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int?>("PointsRequiredToUnlock")
+                        .HasColumnType("integer");
+
                     b.Property<int>("SeasonNumber")
                         .HasColumnType("integer");
 

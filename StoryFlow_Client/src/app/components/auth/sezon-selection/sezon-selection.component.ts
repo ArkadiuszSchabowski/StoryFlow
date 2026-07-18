@@ -32,6 +32,7 @@ export class SezonSelectionComponent implements OnInit {
   getSeasons() {
     this.storyService.getSeasons().subscribe({
       next: (response) => {
+        console.log(response)
         this.seasons = response;
       },
       error: (error) => console.log(error),
