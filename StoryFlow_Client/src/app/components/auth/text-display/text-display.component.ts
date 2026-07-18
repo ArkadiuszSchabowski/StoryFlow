@@ -168,7 +168,7 @@ export class TextDisplayComponent implements OnInit {
   }
 
   send(): void {
-    if (this.storyId != 79) {
+    if (this.storyId != 79 || (this.storyId === 79 && this.authService.getToken())) {
       this.quizSubmission = {
         storyId: this.storyId,
         answers: Object.entries(this.selectedAnswers).map(

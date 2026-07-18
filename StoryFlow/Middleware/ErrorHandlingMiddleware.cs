@@ -52,8 +52,7 @@ namespace StoryFlow.Middleware
             {
                 _logger.LogError(ex.ToString());
                 context.Response.StatusCode = 500;
-                await context.Response.WriteAsync(ex.Message);
-                //await context.Response.WriteAsync("Unexpected server error. Try again later.");
+                await context.Response.WriteAsync("Unexpected server error. Try again later.");
             }
         }
 
