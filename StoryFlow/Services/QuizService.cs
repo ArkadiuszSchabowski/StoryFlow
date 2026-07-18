@@ -169,6 +169,8 @@ namespace StoryFlow.Services
 
             UserStory? userStory = user.UserStories.SingleOrDefault(u => u.StoryId == dto.StoryId);
 
+            bool isFirstAttempt = userStory == null;
+
             if (userStory == null)
             {
                 userStory = new UserStory
@@ -180,6 +182,11 @@ namespace StoryFlow.Services
                 };
 
                 await _userStoryRepository.Add(userStory);
+            }
+
+            if(isFirstAttempt && quizResult.ScorePercentage >= 50)
+            {
+                user.Tickets++;
             }
 
             if (quizResult.ScorePercentage >= 50 && userStory.PercentageScore < 50)
