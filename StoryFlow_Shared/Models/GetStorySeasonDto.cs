@@ -8,5 +8,6 @@
         public bool IsVisibleForUser { get; set; }
         public List<GetStoryDto> Stories { get; set; } = new();
         public int? MaxPoints { get; set; }
+        public int? PointsRequiredToUnlock { get; set; }
     }
 }

@@ -1,7 +1,17 @@
 <div id="season-container" class="container">
-    <div class="season-div" *ngFor="let season of seasons">
-        <div class="season-item">Sezon: {{season.seasonNumber}}</div>
-        <div class="season-item">{{season.name}}</div>
-        <button mat-raised-button class="submit-button" (click)="goToSeason(season.id)">START</button>
+  <div class="season-div" *ngFor="let season of seasons">
+    <div class="season-item">Sezon: {{ season.seasonNumber }}</div>
+    <div class="season-item">{{ season.name }}</div>
+    <div class="season-item" *ngIf="season.pointsRequiredToUnlock">
+      Stars required to unlock: {{ season.pointsRequiredToUnlock }}
     </div>
+
+    <button
+      mat-raised-button
+      class="submit-button"
+      (click)="goToSeason(season.id)"
+    >
+      START
+    </button>
+  </div>
 </div>
