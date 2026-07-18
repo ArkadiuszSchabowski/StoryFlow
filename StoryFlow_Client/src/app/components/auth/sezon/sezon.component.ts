@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { LoaderService } from 'src/app/_services/loader.service';
 import { StoryService } from 'src/app/_services/story.service';
 import { UserService } from 'src/app/_services/user.service';
 import {
@@ -52,6 +53,7 @@ export class SezonComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private userService: UserService,
+    private loaderService: LoaderService,
   ) {}
 
   ngOnInit(): void {
@@ -74,11 +76,17 @@ export class SezonComponent implements OnInit {
       size: this.form.value.size,
     };
 
+    this.apiCallGetBySeason(seasonId);
+  }
+
+  apiCallGetBySeason(seasonId: number) {
     this.storyService.getBySeason(seasonId).subscribe({
       next: (response) => {
         this.stories = response;
       },
-      error: (error) => console.log(error),
+      error: (error) => {
+        console.log(error);
+      },
     });
   }
 
@@ -88,6 +96,7 @@ export class SezonComponent implements OnInit {
         this.router.navigateByUrl(`text/${id}`);
       },
       error: (error) => {
+        this.loaderService.hide();
         this.toastr.error(error.error);
       },
     });

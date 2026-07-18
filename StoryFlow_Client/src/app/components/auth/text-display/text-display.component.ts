@@ -14,6 +14,7 @@ import {
 import { LoaderService } from 'src/app/_services/loader.service';
 import { QuizResult } from 'src/app/models/quiz-result';
 import { AuthService } from 'src/app/_services/auth.service';
+import { NavbarService } from 'src/app/_services/navbar.service';
 
 @Component({
   selector: 'app-text-display',
@@ -53,11 +54,12 @@ export class TextDisplayComponent implements OnInit {
     private quizService: QuizService,
     public authService: AuthService,
     public loaderService: LoaderService,
+    private navbarService: NavbarService,
   ) {}
 
   ngOnInit(): void {
-    this.getStoryIdFromRoute();
     this.showLoader();
+    this.getStoryIdFromRoute();
   }
 
   getStoryIdFromRoute() {
@@ -113,7 +115,6 @@ export class TextDisplayComponent implements OnInit {
 
   navigateToTextStory(id: number) {
     window.location.href = `/text/${id}?showLoader=false`;
-    this.loaderService.hide();
   }
 
   navigateToRegister() {
@@ -168,7 +169,17 @@ export class TextDisplayComponent implements OnInit {
   }
 
   send(): void {
-    if (this.storyId != 79 || (this.storyId === 79 && this.authService.getToken())) {
+    this.isQuizFinishied = true;
+    this.navbarService.blockButtons();
+    this.loaderService.show();
+
+    const start = Date.now();
+    const minTime = 2000;
+
+    if (
+      this.storyId != 79 ||
+      (this.storyId === 79 && this.authService.getToken())
+    ) {
       this.quizSubmission = {
         storyId: this.storyId,
         answers: Object.entries(this.selectedAnswers).map(
@@ -180,14 +191,23 @@ export class TextDisplayComponent implements OnInit {
       };
       this.quizService.sendAnswers(this.quizSubmission).subscribe({
         next: (response) => {
-          this.isQuizFinishied = true;
-          this.quizResult = response;
+          const elapsedTime = Date.now() - start;
+          const remaining = Math.max(0, minTime - elapsedTime);
+
+          setTimeout(() => {
+            this.quizResult = response;
+            this.loaderService.hide();
+            this.navbarService.unblockButtons();
+          }, remaining);
         },
-        error: () => {},
+        error: () => {
+          this.loaderService.hide();
+          this.navbarService.unblockButtons();
+        },
       });
     }
 
-    if (this.storyId === 79) {
+    if (this.storyId === 79 && !this.authService.getToken()) {
       this.quizSubmission = {
         storyId: this.storyId,
         answers: Object.entries(this.selectedAnswers).map(
@@ -204,15 +224,21 @@ export class TextDisplayComponent implements OnInit {
         .sendWelcomeAnswers(this.quizSubmission.answers)
         .subscribe({
           next: (response) => {
-            this.isQuizFinishied = true;
-            this.quizResult = response;
+            const elapsedTime = Date.now() - start;
+            const remaining = Math.max(0, minTime - elapsedTime);
+            setTimeout(() => {
+              this.quizResult = response;
+              this.loaderService.hide();
+              this.navbarService.unblockButtons();
+            }, remaining);
           },
-          error: (error) => {
-            console.log(error);
+          error: () => {
+            this.loaderService.hide();
+            this.navbarService.unblockButtons();
           },
-        })
-        
-        this.quizSubmission=null;
-      }
+        });
+
+      this.quizSubmission = null;
+    }
   }
 }

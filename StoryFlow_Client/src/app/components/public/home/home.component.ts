@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoaderService } from 'src/app/_services/loader.service';
+import { NavbarService } from 'src/app/_services/navbar.service';
 import { StoryService } from 'src/app/_services/story.service';
 
 @Component({
@@ -11,17 +13,36 @@ export class HomeComponent implements OnInit {
   constructor(
     private storyService: StoryService,
     private router: Router,
+    public loaderService: LoaderService,
+    private navbarService: NavbarService,
   ) {}
 
   ngOnInit(): void {}
 
   navigateToWelcomeStory() {
     const WELCOME_STORY_ID: number = 79;
+
+    this.navbarService.blockButtons();
+    this.loaderService.show();
+
+    const start = Date.now();
+    const minTime = 2000;
+
     this.storyService.getWelcomeStory().subscribe({
       next: () => {
-        this.router.navigateByUrl(`text/${WELCOME_STORY_ID}`);
+        const elapsedTime = Date.now() - start;
+        const remaining = Math.max(0, minTime - elapsedTime);
+
+        setTimeout(() => {
+          this.router.navigateByUrl(`text/${WELCOME_STORY_ID}`);
+          this.loaderService.hide();
+          this.navbarService.unblockButtons();
+        }, remaining);
       },
-      error: (error) => console.log(error),
+      error: (error) => {
+        this.loaderService.hide();
+        this.navbarService.unblockButtons();
+      },
     });
   }
 }

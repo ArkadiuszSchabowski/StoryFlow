@@ -17,14 +17,19 @@
       >
         <mat-icon>key</mat-icon>
       </button>
-      <a
+      <button
         routerLink="/sezon-selection"
         class="mobile-button"
         *ngIf="authService.currentUserSource$ | async"
+        [disabled]="!(navbarService.navbarPublicButton$ | async)"
       >
         <mat-icon>public</mat-icon>
-      </a>
-      <div class="mobile-button" *ngIf="authService.isModerator$ | async">
+      </button>
+      <button
+        class="mobile-button"
+        *ngIf="authService.isModerator$ | async"
+        [disabled]="!(navbarService.navbarPublicButton$ | async)"
+      >
         <div
           mat-button
           class="mobile-button-body"
@@ -34,8 +39,12 @@
           <mat-icon>security</mat-icon>
           <mat-icon>arrow_drop_down</mat-icon>
         </div>
-      </div>
-      <div class="mobile-button" *ngIf="authService.isAdmin$ | async">
+      </button>
+      <button
+        class="mobile-button"
+        *ngIf="authService.isAdmin$ | async"
+        [disabled]="!(navbarService.navbarPublicButton$ | async)"
+      >
         <div
           mat-button
           class="mobile-button-body"
@@ -45,8 +54,12 @@
           <mat-icon>security</mat-icon>
           <mat-icon>arrow_drop_down</mat-icon>
         </div>
-      </div>
-      <div class="mobile-button" *ngIf="authService.currentUserSource$ | async">
+      </button>
+      <button
+        class="mobile-button"
+        *ngIf="authService.currentUserSource$ | async"
+        [disabled]="!(navbarService.navbarPublicButton$ | async)"
+      >
         <div
           mat-button
           class="mobile-button-body"
@@ -56,20 +69,18 @@
           <mat-icon>account_circle</mat-icon>
           <mat-icon>arrow_drop_down</mat-icon>
         </div>
-      </div>
+      </button>
     </div>
   </div>
   <div id="desktop-navbar">
     <div id="desktop-navbar-buttons">
-        <button
+      <button
         routerLink="/"
         id="desktop-button-logo"
         class="desktop-button"
         *ngIf="!(authService.currentUserSource$ | async)"
         [disabled]="!(navbarService.navbarPublicButton$ | async)"
-      >
-        
-      </button>
+      ></button>
       <button
         routerLink="/login"
         class="desktop-button"
@@ -78,16 +89,18 @@
       >
         ZALOGUJ
       </button>
-      <a
+      <button
         routerLink="/sezon-selection"
         class="desktop-button"
         *ngIf="authService.currentUserSource$ | async"
+        [disabled]="!(navbarService.navbarPublicButton$ | async)"
       >
         MOJA PODRÓŻ
-      </a>
-      <div
+      </button>
+      <button
         class="desktop-button"
         *ngIf="authService.isModerator$ | async"
+        [disabled]="!(navbarService.navbarPublicButton$ | async)"
         [matMenuTriggerFor]="moderatorMenu"
         #moderatorTrigger="matMenuTrigger"
       >
@@ -95,10 +108,11 @@
           MODERATOR
           <mat-icon class="desktop-icon-drop-down">arrow_drop_down</mat-icon>
         </div>
-      </div>
-      <div
+      </button>
+      <button
         class="desktop-button"
         *ngIf="authService.isAdmin$ | async"
+        [disabled]="!(navbarService.navbarPublicButton$ | async)"
         [matMenuTriggerFor]="administratorMenu"
         #administratorTrigger="matMenuTrigger"
       >
@@ -106,10 +120,11 @@
           ADMINISTRATOR
           <mat-icon class="desktop-icon-drop-down">arrow_drop_down</mat-icon>
         </div>
-      </div>
-      <div
+      </button>
+      <button
         class="desktop-button"
         *ngIf="authService.currentUserSource$ | async"
+        [disabled]="!(navbarService.navbarPublicButton$ | async)"
         [matMenuTriggerFor]="profileMenu"
         #profileTrigger="matMenuTrigger"
       >
@@ -117,7 +132,7 @@
           PROFIL
           <mat-icon class="desktop-icon-drop-down">arrow_drop_down</mat-icon>
         </div>
-      </div>
+      </button>
     </div>
   </div>
 </mat-toolbar>

@@ -38,7 +38,6 @@ export class UserService {
         if (!response.token) {
         return;
         }
-        this.authService.setUser(response.token);
       }),
     );
   }

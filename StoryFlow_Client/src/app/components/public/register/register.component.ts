@@ -2,6 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/_services/auth.service';
 import { LoaderService } from 'src/app/_services/loader.service';
 import { NavbarService } from 'src/app/_services/navbar.service';
 import { QuizService } from 'src/app/_services/quiz.service';
@@ -52,6 +53,7 @@ export class RegisterComponent implements OnInit {
     private navbarService: NavbarService,
     private quizService: QuizService,
     private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -89,12 +91,8 @@ export class RegisterComponent implements OnInit {
         .split('T')[0],
     };
 
-    this.navbarService.blockButtons();
-
     this.userService.register(dto).subscribe({
       next: () => {
-        console.log('Zarejestrowano pomyślnie');
-
         this.login();
       },
       error: (error) => {
@@ -120,23 +118,28 @@ export class RegisterComponent implements OnInit {
     this.navbarService.blockButtons();
     this.loaderService.show();
 
+    const start = Date.now();
+    const minTime = 2000;
+
     this.userService.login(dto).subscribe({
       next: (response) => {
-        if (!response.token) {
-          this.loaderService.hide();
-          this.navbarService.unblockButtons();
-          return;
-        }
+        const elapsedTime = Date.now() - start;
+        const remaining = Math.max(0, minTime - elapsedTime);
 
-        console.log('success');
-        this.loaderService.hide();
-        this.toastr.success('Zalogowano pomyślnie.');
+        setTimeout(() => {
+          if (response.token) {
+            this.loaderService.hide();
+            this.navbarService.unblockButtons();
+            this.authService.setUser(response.token);
+            this.toastr.success('Zalogowano pomyślnie.');
 
-        if (this.pendingQuiz) {
-          this.sendAnswers(this.pendingQuiz);
-        }
+            if (this.pendingQuiz) {
+              this.sendAnswers(this.pendingQuiz);
+            }
 
-        this.router.navigateByUrl('sezon-selection');
+            this.router.navigateByUrl('sezon-selection');
+          }
+        }, remaining);
       },
 
       error: (error) => {
@@ -147,7 +150,6 @@ export class RegisterComponent implements OnInit {
         }
 
         if (error.status === 400) {
-          console.log('error');
           this.toastr.error('Błędne dane logowania.');
           this.loaderService.hide();
           this.navbarService.unblockButtons();
@@ -161,9 +163,7 @@ export class RegisterComponent implements OnInit {
     const quiz = JSON.parse(pendingQuiz);
 
     this.quizService.sendAnswers(quiz).subscribe({
-      next: (response) => {
-        console.log(response);
-        console.log('remove pending quiz:');
+      next: () => {
         localStorage.removeItem('pendingQuiz');
       },
       error: (error) => console.log(error),

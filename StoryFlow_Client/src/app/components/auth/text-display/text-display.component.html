@@ -1,17 +1,16 @@
 <div
   id="loader-container"
-  class="container"
+  class="container loader-ticket-container"
   *ngIf="
-    (loaderService.loading$ | async) && (authService.currentUserSource$ | async)
+    (loaderService.loading$ | async) && (authService.currentUserSource$ | async) && !isQuizFinishied
   "
 >
-  <div id="loader-text">
+  <div id="loader-ticket-text">
     Twój bilet jest teraz w użyciu. Odpowiedz na wszystkie pytania, aby otrzymać
     punkty za historię. Jeśli uzyskasz minimum 50% punktów to bilet wróci do
     Ciebie!...
   </div>
-  <div id="loader-logo">
-    <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>
+  <div id="loader-ticket-logo">
   </div>
   <button
     mat-raised-button
@@ -138,7 +137,22 @@
     </div>
   </div>
 </div>
-<div *ngIf="isQuizFinishied" class="container">
+
+<div
+  id="loader-container"
+  class="container"
+  *ngIf="isQuizFinishied && (loaderService.loading$ | async)"
+>
+  <div id="loader-text">Chwileczkę, podliczamy punkty..</div>
+  <div class="loader-logo">
+    <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>
+  </div>
+</div>
+
+<div
+  *ngIf="isQuizFinishied && !(loaderService.loading$ | async)"
+  class="container"
+>
   <div>Gratulacje! Ukończyłeś quiz!</div>
   <div>
     Zdobyte punkty za odpowiedzi:

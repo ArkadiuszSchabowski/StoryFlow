@@ -1,6 +1,10 @@
 @use "@angular/material" as mat;
 @use "src/styles" as theme;
 
+#home-container{
+  display: flex;
+  min-height: 600px;
+}
 #home-title {
   padding: 10px;
   text-align: center;
@@ -11,7 +15,9 @@
 #mobile-logo {
   display: flex;
   width: 250px;
+  min-width: 250px;
   height: 250px;
+  min-height: 250px;
   background-image: url(../../../../assets/kitty/kitty1.png);
   background-position: center;
   background-size: cover;
@@ -20,17 +26,6 @@
 
 #home-subtitle {
   padding: 20px 10px;
-}
-
-#loader-logo {
-  display: none;
-  width: 300px;
-  min-width: 300px;
-  height: 300px;
-  background-image: url(../../../../assets/kitty/kitty.png);
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 
 #home-row {
@@ -69,15 +64,40 @@
   background-color: #26a69a;
 }
 
+#home-logo {
+  display: none;
+  width: 400px;
+  min-width: 400px;
+  height: 400px;
+  background-image: url(../../../../assets/kitty/kitty.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#loader-container {
+  padding: 50px 20px 0 20px;
+}
+
+#loader-text {
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+
+.loader-logo {
+  display: flex;
+  width: 350px;
+  min-width: 350px;
+  height: 350px;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   #home-subtitle {
     font-size: 18px;
     padding: 50px;
   }
-  #loader-logo {
+  #home-logo {
     display: flex;
-    width: 400px;
-    height: 400px;
   }
   #mobile-logo {
     display: none;
@@ -89,10 +109,8 @@
     font-size: 26px;
     padding: 50px;
   }
-  #loader-logo {
+  #home-logo {
     display: flex;
-    width: 400px;
-    height: 400px;
   }
   #mobile-logo {
     display: none;
