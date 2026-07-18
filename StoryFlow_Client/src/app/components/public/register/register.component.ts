@@ -4,8 +4,10 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LoaderService } from 'src/app/_services/loader.service';
 import { NavbarService } from 'src/app/_services/navbar.service';
+import { QuizService } from 'src/app/_services/quiz.service';
 import { UserService } from 'src/app/_services/user.service';
 import { GENDERS } from 'src/app/constants/select-options';
+import { LoginDto } from 'src/app/models/login-dto';
 import { RegisterUserDto } from 'src/app/models/register-user-dto';
 
 @Component({
@@ -18,6 +20,7 @@ export class RegisterComponent implements OnInit {
   hideRepeatPassword = signal(true);
 
   genders = GENDERS;
+  pendingQuiz: string | null = null;
 
   form: any = this.fb.group({
     firstName: [
@@ -43,15 +46,18 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
     private toastr: ToastrService,
     private userService: UserService,
     public loaderService: LoaderService,
     private navbarService: NavbarService,
+    private quizService: QuizService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.loaderService.hide();
+
+    this.pendingQuiz = localStorage.getItem('pendingQuiz');
   }
 
   changePasswordVisibility(event: MouseEvent) {
@@ -84,22 +90,12 @@ export class RegisterComponent implements OnInit {
     };
 
     this.navbarService.blockButtons();
-    this.loaderService.show();
-
-    const start = Date.now();
-    const minTime = 3000;
 
     this.userService.register(dto).subscribe({
       next: () => {
-        const elapsed = Date.now() - start;
-        const remaining = Math.max(0, minTime - elapsed);
+        console.log('Zarejestrowano pomyślnie');
 
-        setTimeout(() => {
-          this.loaderService.hide();
-          this.navbarService.unblockButtons();
-          this.toastr.success('Zarejestrowano pomyślnie.');
-          this.router.navigateByUrl('login');
-        }, remaining);
+        this.login();
       },
       error: (error) => {
         this.toastr.error(error.error);
@@ -107,6 +103,70 @@ export class RegisterComponent implements OnInit {
         this.navbarService.unblockButtons();
         this.form.reset();
       },
+    });
+  }
+
+  login() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    const dto: LoginDto = {
+      email: this.form.get('email')?.value,
+      password: this.form.get('password')?.value,
+    };
+
+    this.navbarService.blockButtons();
+    this.loaderService.show();
+
+    this.userService.login(dto).subscribe({
+      next: (response) => {
+        if (!response.token) {
+          this.loaderService.hide();
+          this.navbarService.unblockButtons();
+          return;
+        }
+
+        console.log('success');
+        this.loaderService.hide();
+        this.toastr.success('Zalogowano pomyślnie.');
+
+        if (this.pendingQuiz) {
+          this.sendAnswers(this.pendingQuiz);
+        }
+
+        this.router.navigateByUrl('sezon-selection');
+      },
+
+      error: (error) => {
+        if (error.status !== 400) {
+          this.loaderService.hide();
+          this.navbarService.unblockButtons();
+          this.toastr.error('Błąd serwera.');
+        }
+
+        if (error.status === 400) {
+          console.log('error');
+          this.toastr.error('Błędne dane logowania.');
+          this.loaderService.hide();
+          this.navbarService.unblockButtons();
+          this.form.reset();
+        }
+      },
+    });
+  }
+
+  sendAnswers(pendingQuiz: string) {
+    const quiz = JSON.parse(pendingQuiz);
+
+    this.quizService.sendAnswers(quiz).subscribe({
+      next: (response) => {
+        console.log(response);
+        console.log('remove pending quiz:');
+        localStorage.removeItem('pendingQuiz');
+      },
+      error: (error) => console.log(error),
     });
   }
 }

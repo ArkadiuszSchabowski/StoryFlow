@@ -8,6 +8,7 @@ import { GeminiResponse } from '../models/gemini-response';
 import { map } from 'rxjs';
 import { GenerateQuizDto } from '../models/generate-quiz-dto';
 import { AddQuizDto } from '../models/add-quiz-dto';
+import { AnswerDto } from '../models/answer-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -63,6 +64,11 @@ export class QuizService {
 
     return this.http.post<QuizResult | null>(this.apiUrl + 'quiz/submit', dto, {
       headers,
+    });
+  }
+
+  sendWelcomeAnswers(dto: AnswerDto[]){
+        return this.http.post<QuizResult | null>(this.apiUrl + 'quiz/submit/welcome', dto, {
     });
   }
 }

@@ -192,7 +192,7 @@ namespace StoryFlow.Services
 
         public async Task<ICollection<GetStoryDto>> Get(StoryFilter? filter, int userId)
         {
-            IQueryable<Story> query = _storyRepository.Get();
+            IQueryable<Story> query = _storyRepository.GetUserStories(userId);
 
             if (filter != null)
             {
@@ -209,21 +209,6 @@ namespace StoryFlow.Services
             List<Story>? results = await query.ToListAsync();
 
             List<GetStoryDto> stories = _mapper.Map<List<GetStoryDto>>(results);
-
-            foreach (var story in stories)
-            {
-                var userStory = story.UserStories
-                    .FirstOrDefault(us => us.UserId == userId);
-
-                if (userStory != null)
-                {
-                    story.UserStories = new List<GetUserStoryDto> { userStory };
-                }
-                else
-                {
-                    story.UserStories = new List<GetUserStoryDto>();
-                }
-            }
 
             return stories;
         }
@@ -260,7 +245,7 @@ namespace StoryFlow.Services
             }
 
 
-            IQueryable<Story> query = _storyRepository.GetBySeason(seasonId);
+            IQueryable<Story> query = _storyRepository.GetBySeason(userId, seasonId);
 
             List<Story>? stories = await query.ToListAsync();
 
@@ -326,6 +311,20 @@ namespace StoryFlow.Services
             _serviceValidator.ThrowIsNull(result);
 
             await _storyRepository.Remove(result!);
+        }
+
+        public async Task<GetStoryDto> GetWelcomeStory()
+        {
+            const int welcomeStoryId = 79;
+
+            Story? story = await _storyRepository.Get(welcomeStoryId);
+
+            if (story == null)
+            {
+                throw new NotFoundException("Nie znaleziono historii.");
+            }
+
+            return _mapper.Map<GetStoryDto>(story);
         }
     }
 }

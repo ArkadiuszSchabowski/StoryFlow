@@ -1,7 +1,9 @@
 <div
   id="loader-container"
   class="container"
-  *ngIf="loaderService.loading$ | async"
+  *ngIf="
+    (loaderService.loading$ | async) && (authService.currentUserSource$ | async)
+  "
 >
   <div id="loader-text">
     Twój bilet jest teraz w użyciu. Odpowiedz na wszystkie pytania, aby otrzymać
@@ -156,10 +158,25 @@
   <div>
     Wynik quizu: {{ quizResult!.points }} / {{ story!.storyPoint!.maxPoints! }}
   </div>
-  <div>Wynik procentowy quizu: {{roundToTwoDecimals(quizResult!.scorePercentage)}}&nbsp;%</div>
+  <div>
+    Wynik procentowy quizu:
+    {{ roundToTwoDecimals(quizResult!.scorePercentage) }}&nbsp;%
+  </div>
   <div class="logo"></div>
+  <div *ngIf="!(authService.currentUserSource$ | async)">
+    Zapisz swój wynik i odblokuj kolejne historie.
+  </div>
   <div class="button-container">
     <button
+      *ngIf="!(authService.currentUserSource$ | async)"
+      id="register-button"
+      class="submit-button"
+      (click)="navigateToRegister()"
+    >
+      Utwórz konto
+    </button>
+    <button
+      *ngIf="authService.currentUserSource$ | async"
       id="again-button"
       class="submit-button"
       (click)="navigateToTextStory(story!.id)"
@@ -167,6 +184,7 @@
       Spróbuj ponownie
     </button>
     <button
+      *ngIf="authService.currentUserSource$ | async"
       id="back-button"
       class="submit-button"
       (click)="navigateToTextSelection()"

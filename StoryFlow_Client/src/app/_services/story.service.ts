@@ -54,6 +54,39 @@ export class StoryService {
     );
   }
 
+  getWelcomeStory(){
+        return this.http.get<GetStoryViewDto>(
+      this.apiUrl + `story/welcome`
+    ).pipe(
+        map((story): GetStoryViewDto => {
+          return Object.assign(new GetStoryViewDto(), {
+            id: story.id,
+            polishStory: story.polishStory,
+            englishStory: story.englishStory,
+            polishTitle: story.polishTitle,
+            englishTitle: story.englishTitle,
+            polishDescription: story.polishDescription,
+            englishDescription: story.englishDescription,
+            storyCategory: story.storyCategory,
+            storySize: story.storySize,
+            languageLevel: story.languageLevel,
+            userStories: story.userStories,
+            quiz: story.quiz,
+            storyPoint: story.storyPoint,
+            sentences: story.sentences.map((sentence): GetSentenceViewDto => {
+              return Object.assign(new GetSentenceViewDto(), {
+                id: sentence.id,
+                storyId: sentence.storyId,
+                order: sentence.order,
+                polishMeaning: sentence.polishMeaning,
+                englishMeaning: sentence.englishMeaning,
+                userSentences: sentence.userSentences,
+              });
+            }),
+          });
+        })
+      )}
+
   generate(dto: GenerateStoryDto) {
     const token: string | null = this.authService.getToken();
 
@@ -86,8 +119,6 @@ export class StoryService {
     };
 
     let params = new HttpParams();
-
-    console.log(dto);
 
     if (dto?.languageLevel != null)
       params = params.set('languageLevel', dto.languageLevel);

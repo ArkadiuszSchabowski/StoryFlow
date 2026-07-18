@@ -17,14 +17,6 @@
       >
         <mat-icon>key</mat-icon>
       </button>
-      <button
-        routerLink="/register"
-        class="mobile-button"
-        *ngIf="!(authService.currentUserSource$ | async)"
-        [disabled]="!(navbarService.navbarPublicButton$ | async)"
-      >
-        <mat-icon>person_add</mat-icon>
-      </button>
       <a
         routerLink="/sezon-selection"
         class="mobile-button"
@@ -43,7 +35,7 @@
           <mat-icon>arrow_drop_down</mat-icon>
         </div>
       </div>
-      <div class="mobile-button" *ngIf="authService.currentUserSource$ | async">
+      <div class="mobile-button" *ngIf="authService.isAdmin$ | async">
         <div
           mat-button
           class="mobile-button-body"
@@ -68,15 +60,15 @@
     </div>
   </div>
   <div id="desktop-navbar">
-    <div id="desktop-navbar-logo" class="logo"></div>
     <div id="desktop-navbar-buttons">
-      <button
+        <button
         routerLink="/"
+        id="desktop-button-logo"
         class="desktop-button"
         *ngIf="!(authService.currentUserSource$ | async)"
         [disabled]="!(navbarService.navbarPublicButton$ | async)"
       >
-        START
+        
       </button>
       <button
         routerLink="/login"
@@ -85,14 +77,6 @@
         [disabled]="!(navbarService.navbarPublicButton$ | async)"
       >
         ZALOGUJ
-      </button>
-      <button
-        routerLink="/register"
-        class="desktop-button"
-        *ngIf="!(authService.currentUserSource$ | async)"
-        [disabled]="!(navbarService.navbarPublicButton$ | async)"
-      >
-        ZAREJESTRUJ
       </button>
       <a
         routerLink="/sezon-selection"

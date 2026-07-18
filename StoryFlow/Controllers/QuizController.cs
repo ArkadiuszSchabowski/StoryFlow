@@ -44,6 +44,14 @@ namespace StoryFlow.Controllers
             return Ok(result);
         }
 
+        [HttpPost("submit/welcome")]
+        public async Task<ActionResult> Submit([FromBody] List<AnswerDto> dto)
+        {
+
+            QuizResult quizResult = await _service.CheckWelcomeAnswers(dto);
+            return Ok(quizResult);
+        }
+
         [Authorize]
         [HttpPost("submit")]
         public async Task<ActionResult> Submit([FromBody] QuizSubmissionDto dto)

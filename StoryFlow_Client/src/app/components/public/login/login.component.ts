@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/_services/auth.service';
 import { LoaderService } from 'src/app/_services/loader.service';
 import { NavbarService } from 'src/app/_services/navbar.service';
+import { QuizService } from 'src/app/_services/quiz.service';
 import { UserService } from 'src/app/_services/user.service';
 import { LoginDto } from 'src/app/models/login-dto';
 
@@ -20,6 +21,8 @@ export class LoginComponent implements OnInit {
     password: ['', [Validators.required]],
   });
 
+  pendingQuiz: string | null = null;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -28,16 +31,20 @@ export class LoginComponent implements OnInit {
     public authService: AuthService,
     public loaderService: LoaderService,
     private navbarService: NavbarService,
+    private quizService: QuizService,
   ) {}
 
   ngOnInit(): void {
     this.loaderService.hide();
+
+    this.pendingQuiz = localStorage.getItem('pendingQuiz');
   }
-  
+
   changePasswordVisibility(event: MouseEvent) {
     this.hidePassword.set(!this.hidePassword());
     event.stopPropagation();
   }
+  
   login() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -52,9 +59,6 @@ export class LoginComponent implements OnInit {
     this.navbarService.blockButtons();
     this.loaderService.show();
 
-    const start = Date.now();
-    const minTime = 3000;
-
     this.userService.login(dto).subscribe({
       next: (response) => {
         if (!response.token) {
@@ -63,31 +67,45 @@ export class LoginComponent implements OnInit {
           return;
         }
 
-        const elapsed = Date.now() - start;
-        const remaining = Math.max(0, minTime - elapsed);
+        console.log('success');
+        this.loaderService.hide();
+        this.toastr.success('Zalogowano pomyślnie.');
 
-        setTimeout(() => {
-          this.loaderService.hide();
-          this.toastr.success('Zalogowano pomyślnie.');
-          this.router.navigateByUrl('text-selection');
-        }, remaining);
+        if (this.pendingQuiz) {
+          this.sendAnswers(this.pendingQuiz);
+        }
+
+        this.router.navigateByUrl('sezon-selection');
       },
 
       error: (error) => {
-        const elapsed = Date.now() - start;
-        const remaining = Math.max(0, minTime - elapsed);
-
-        setTimeout(() => {
+        if (error.status !== 400) {
           this.loaderService.hide();
+          this.navbarService.unblockButtons();
+          this.toastr.error('Błąd serwera.');
+        }
 
-          if (error.status === 400) {
-            this.toastr.error('Błędne dane logowania.');
-            this.loaderService.hide();
-            this.navbarService.unblockButtons();
-            this.form.reset();
-          }
-        }, remaining);
+        if (error.status === 400) {
+          console.log('error');
+          this.toastr.error('Błędne dane logowania.');
+          this.loaderService.hide();
+          this.navbarService.unblockButtons();
+          this.form.reset();
+        }
       },
+    });
+  }
+
+  sendAnswers(pendingQuiz: string) {
+    const quiz = JSON.parse(pendingQuiz);
+
+    this.quizService.sendAnswers(quiz).subscribe({
+      next: (response) => {
+        console.log(response);
+        console.log('remove pending quiz:');
+        localStorage.removeItem('pendingQuiz');
+      },
+      error: (error) => console.log(error),
     });
   }
 }

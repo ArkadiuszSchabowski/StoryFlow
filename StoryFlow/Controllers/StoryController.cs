@@ -49,6 +49,13 @@ namespace StoryFlow.Controllers
             return Ok(story);
         }
 
+        [HttpGet("welcome")]
+        public async Task<ActionResult<GetStoryDto>> GetIntroStory()
+        {
+            GetStoryDto story = await _service.GetWelcomeStory();
+            return Ok(story);
+        }
+
         [Authorize]
         [HttpGet("season/{seasonId}")]
         public async Task<ActionResult<GetStoryDto>> GetBySeason([FromRoute] int seasonId)

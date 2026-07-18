@@ -1,6 +1,8 @@
+@use "@angular/material" as mat;
+@use "src/styles" as theme;
+
 #home-title {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px;
   text-align: center;
   width: 100%;
   height: auto;
@@ -40,11 +42,31 @@
 }
 
 #home-subtitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   font-size: 20px;
 }
 
 .home-subtitle-row {
   padding: 5px 0;
+}
+
+#button-start {
+  width: 350px;
+  height: 56px;
+  padding: 0 40px;
+  font-size: 18px;
+  font-weight: bolder;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  color: white;
+  background-color: mat.get-color-from-palette(theme.$accent);
+}
+
+#button-start:hover {
+  background-color: #26a69a;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
