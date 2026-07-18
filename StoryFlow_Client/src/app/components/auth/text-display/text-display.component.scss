@@ -119,6 +119,12 @@
   padding: 50px 20px 0 20px;
 }
 
+.loader-ticket-container {
+  display: flex;
+  min-height: 600px;
+  margin-bottom: 20px;
+}
+
 #loader-logo,
 .logo {
   display: flex;
@@ -165,6 +171,38 @@
 
 #register-button {
   margin-top: 20px;
+}
+
+#loader-container {
+  padding: 50px 20px 0 20px;
+}
+
+#loader-text {
+  margin-bottom: 20px;
+}
+
+.loader-logo {
+  display: flex;
+  width: 350px;
+  min-width: 350px;
+  height: 350px;
+}
+
+#loader-ticket-logo {
+  display: flex;
+  width: 350px;
+  min-width: 350px;
+  height: 350px;
+  min-height: 350px;
+  background-image: url(../../../../assets/kitty/kitty3.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-top: 20px;
+}
+
+#loader-ticket-text {
+  font-size: 20px;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
