@@ -72,7 +72,6 @@ export class LibraryPreviewComponent implements OnInit {
 
     this.storyService.getAll(this.dto).subscribe({
       next: (response) => {
-        console.log(response);
         this.stories = response;
       },
       error: () => {},

@@ -13,6 +13,7 @@ import {
 } from 'src/app/helpers/formatter';
 import { LoaderService } from 'src/app/_services/loader.service';
 import { QuizResult } from 'src/app/models/quiz-result';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-text-display',
@@ -25,7 +26,7 @@ export class TextDisplayComponent implements OnInit {
   isQuiz = false;
 
   quiz: GetQuizDto | null = null;
-  quizSubmission: QuizSubmissionDto = {
+  quizSubmission: QuizSubmissionDto | null = {
     storyId: 0,
     answers: [],
   };
@@ -50,6 +51,7 @@ export class TextDisplayComponent implements OnInit {
     private route: ActivatedRoute,
     private storyService: StoryService,
     private quizService: QuizService,
+    public authService: AuthService,
     public loaderService: LoaderService,
   ) {}
 
@@ -71,12 +73,21 @@ export class TextDisplayComponent implements OnInit {
 
     const questionId = this.quiz!.questions[this.currentQuestionIndex].id;
     const answerId = this.selectedAnswers[questionId];
-
-    console.log(questionId, answerId);
   }
 
   showLoader() {
-    this.loaderService.show();
+    this.route.queryParamMap.subscribe((params) => {
+      const showLoader = params.get('showLoader');
+
+      this.authService.currentUserSource$.subscribe((token) => {
+        if (!token) {
+          this.loaderService.hide();
+        }
+        if (token && showLoader != 'false') {
+          this.loaderService.show();
+        }
+      });
+    });
   }
 
   showNextQuestion() {
@@ -97,11 +108,16 @@ export class TextDisplayComponent implements OnInit {
   }
 
   navigateToTextSelection() {
-    this.router.navigateByUrl('/text-selection');
+    this.router.navigateByUrl('/sezon-selection');
   }
 
   navigateToTextStory(id: number) {
-    window.location.href = `/text/${id}`;
+    window.location.href = `/text/${id}?showLoader=false`;
+    this.loaderService.hide();
+  }
+
+  navigateToRegister() {
+    this.router.navigateByUrl('/register');
   }
 
   gotoQuiz() {
@@ -109,19 +125,31 @@ export class TextDisplayComponent implements OnInit {
   }
 
   get(id: number) {
+    const WELCOME_STORY_ID: number = 79;
     if (this.storyId != 0) {
-      this.storyService.get(id).subscribe({
-        next: (response) => {
-          console.log(response);
-          this.story = response;
-          this.quiz = response.quiz;
-        },
-        error: (error) => {
-          if (error.status == 401) {
-            this.router.navigateByUrl(`error-page`);
-          }
-        },
-      });
+      if (this.storyId == 79) {
+        this.storyService.getWelcomeStory().subscribe({
+          next: (response) => {
+            this.story = response;
+            this.quiz = response.quiz;
+          },
+          error: (error) => console.log(error),
+        });
+      }
+
+      if (this.storyId != WELCOME_STORY_ID) {
+        this.storyService.get(id).subscribe({
+          next: (response) => {
+            this.story = response;
+            this.quiz = response.quiz;
+          },
+          error: (error) => {
+            if (error.status == 401) {
+              this.router.navigateByUrl(`error-page`);
+            }
+          },
+        });
+      }
     }
   }
 
@@ -140,21 +168,51 @@ export class TextDisplayComponent implements OnInit {
   }
 
   send(): void {
-    this.quizSubmission = {
-      storyId: this.storyId,
-      answers: Object.entries(this.selectedAnswers).map(
-        ([questionId, answerId]) => ({
-          questionId: Number(questionId),
-          answerId,
-        }),
-      ),
-    };
-    this.quizService.sendAnswers(this.quizSubmission).subscribe({
-      next: (response) => {
-        this.isQuizFinishied = true;
-        this.quizResult = response;
-      },
-      error: () => {},
-    });
+    if (this.storyId != 79) {
+      this.quizSubmission = {
+        storyId: this.storyId,
+        answers: Object.entries(this.selectedAnswers).map(
+          ([questionId, answerId]) => ({
+            questionId: Number(questionId),
+            answerId,
+          }),
+        ),
+      };
+      this.quizService.sendAnswers(this.quizSubmission).subscribe({
+        next: (response) => {
+          this.isQuizFinishied = true;
+          this.quizResult = response;
+        },
+        error: () => {},
+      });
+    }
+
+    if (this.storyId === 79) {
+      this.quizSubmission = {
+        storyId: this.storyId,
+        answers: Object.entries(this.selectedAnswers).map(
+          ([questionId, answerId]) => ({
+            questionId: Number(questionId),
+            answerId,
+          }),
+        ),
+      };
+
+      localStorage.setItem('pendingQuiz', JSON.stringify(this.quizSubmission));
+
+      this.quizService
+        .sendWelcomeAnswers(this.quizSubmission.answers)
+        .subscribe({
+          next: (response) => {
+            this.isQuizFinishied = true;
+            this.quizResult = response;
+          },
+          error: (error) => {
+            console.log(error);
+          },
+        })
+        
+        this.quizSubmission=null;
+      }
   }
 }

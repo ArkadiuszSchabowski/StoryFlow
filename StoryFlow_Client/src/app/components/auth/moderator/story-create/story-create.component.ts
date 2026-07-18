@@ -82,8 +82,6 @@ export class StoryCreateComponent {
       englishStory: this.addForm.get('englishStory')?.value,
     };
 
-    console.log(dto);
-
     this.storyService.add(dto).subscribe({
       next: () => {
         this.toastr.success('Historia została dodana.');

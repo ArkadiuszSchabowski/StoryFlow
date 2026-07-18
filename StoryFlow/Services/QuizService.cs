@@ -121,6 +121,23 @@ namespace StoryFlow.Services
                 .Id
             };
         }
+        public async Task<QuizResult> CheckWelcomeAnswers(List<AnswerDto> dto)
+        {
+            const int welcomeStoryId = 79;
+            Story? story = await _storyRepository.Get(welcomeStoryId);
+
+            _validator.ThrowIsNull(story);
+
+            if (story!.Quiz == null)
+            {
+                throw new NotFoundException("Historia nie ma dostępnego quizu.");
+            }
+
+            QuizResult quizResult = new QuizResult();
+            quizResult = _answerChecker.CheckAnswers(story, dto);
+
+            return quizResult;
+        }
 
         public async Task<QuizResult> CheckAnswers(QuizSubmissionDto dto, string? userIdString)
         {
@@ -154,7 +171,7 @@ namespace StoryFlow.Services
 
             if (userStory == null)
             {
-                var newUserStory = new UserStory
+                userStory = new UserStory
                 {
                     UserId = userId,
                     StoryId = dto.StoryId,
@@ -162,11 +179,10 @@ namespace StoryFlow.Services
                     PercentageScore = quizResult.ScorePercentage
                 };
 
-                await _userStoryRepository.Add(newUserStory);
-
+                await _userStoryRepository.Add(userStory);
             }
 
-            if (quizResult.ScorePercentage >= 50 && userStory!.PercentageScore < 50)
+            if (quizResult.ScorePercentage >= 50 && userStory.PercentageScore < 50)
             {
                 user.Tickets++;
             }

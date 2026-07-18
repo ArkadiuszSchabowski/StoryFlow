@@ -4,8 +4,8 @@ namespace StoryFlow.Interfaces.Repositories
 {
     public interface IGetStoryRepository
     {
-        IQueryable<Story> Get();
-        IQueryable<Story> GetBySeason(int seasonId);
+        IQueryable<Story> GetUserStories(int userId);
+        IQueryable<Story> GetBySeason(int userId, int seasonId);
         Task<List<StorySeason>> GetStorySeasonsAsync();
     }
 }

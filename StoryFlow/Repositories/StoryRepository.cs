@@ -25,14 +25,14 @@ namespace StoryFlow.Repositories
                 .ThenInclude(q => q.Answers).FirstOrDefaultAsync(s => s.Id == id);
         }
 
-        public IQueryable<Story> Get()
+        public IQueryable<Story> GetUserStories(int userId)
         {
-            return _context.Stories.Include(s => s.UserStories).Include(s => s.Sentences).Include(s => s.Quiz!).Include(s => s.StoryPoint).AsQueryable();
+            return _context.Stories.Include(s => s.UserStories.Where(us => us.UserId == userId)).Include(s => s.Sentences).Include(s => s.Quiz!).Include(s => s.StoryPoint).AsQueryable();
         }
 
-        public  IQueryable<Story> GetBySeason(int seasonId)
+        public  IQueryable<Story> GetBySeason(int userId, int seasonId)
         {
-            return _context.Stories.Include(s => s.UserStories).Include(s => s.Sentences).Include(s => s.Quiz!).Include(s => s.StoryPoint).Where(s => s.StorySeasonId == seasonId).OrderBy(s => s.OrderInSeason).AsQueryable();
+            return _context.Stories.Include(s => s.UserStories.Where(us => us.UserId == userId)).Include(s => s.Sentences).Include(s => s.Quiz!).Include(s => s.StoryPoint).Where(s => s.StorySeasonId == seasonId).OrderBy(s => s.OrderInSeason).AsQueryable();
         }
 
         public async Task<List<StorySeason>> GetStorySeasonsAsync()

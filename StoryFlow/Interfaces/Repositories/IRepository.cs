@@ -3,7 +3,7 @@
     public interface IRepository<T> where T : class
     {
         Task Add(T entity);
-        Task<T?> Get(int id);
+        Task<T?> Get(int storyId);
         Task Remove(T entity);
         Task Update(T entity);
     }

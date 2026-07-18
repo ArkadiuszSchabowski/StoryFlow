@@ -6,5 +6,6 @@ namespace StoryFlow_Shared.Interfaces
     {
         Task<ICollection<GetStoryDto>> Get(StoryFilter? storyFilter, int userId);
         Task<GetStoryDto> Get(int id, string? userIdClaim);
+        Task<GetStoryDto> GetWelcomeStory();
     }
 }

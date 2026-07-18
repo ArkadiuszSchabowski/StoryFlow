@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using StoryFlow.Interfaces.Aggregates;
+﻿using StoryFlow.Interfaces.Aggregates;
 using StoryFlow.Interfaces.Repositories;
 using StoryFlow_Database.Entities;
 
@@ -32,14 +31,14 @@ namespace StoryFlow.Aggregates
             return await _repository.Get(id);
         }
 
-        public IQueryable<Story> Get()
+        public IQueryable<Story> GetUserStories(int userId)
         {
-            return _storyRepository.Get();
+            return _storyRepository.GetUserStories(userId);
         }
 
-        public IQueryable<Story> GetBySeason(int seasonId)
+        public IQueryable<Story> GetBySeason(int userId, int seasonId)
         {
-            return _storyRepository.GetBySeason(seasonId);
+            return _storyRepository.GetBySeason(userId, seasonId);
         }
 
         public Task<UserStory?> GetByUserAndStory(int userId, int storyId)

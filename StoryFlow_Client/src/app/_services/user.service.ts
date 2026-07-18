@@ -18,7 +18,7 @@ export class UserService {
   constructor(
     private http: HttpClient,
     private authService: AuthService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
   ) {}
 
   getProfile() {
@@ -28,29 +28,20 @@ export class UserService {
       Authorization: `Bearer ${token}`,
     };
 
-    return this.http.get<GetUserDto>(this.apiUrl + 'user/profile', {headers});
+    return this.http.get<GetUserDto>(this.apiUrl + 'user/profile', { headers });
   }
 
-login(dto: LoginDto) {
-  this.loaderService.show();
+  login(dto: LoginDto) {
 
-  const start = Date.now();
-  const minTime = 3000;
-
-  return this.http.post<TokenDto>(this.apiUrl + 'user/login', dto).pipe(
-    tap((response) => {
-      if (!response.token) return;
-
-      const elapsed = Date.now() - start;
-      const remaining = Math.max(0, minTime - elapsed);
-
-      setTimeout(() => {
-        this.loaderService.hide();
+    return this.http.post<TokenDto>(this.apiUrl + 'user/login', dto).pipe(
+      tap((response) => {
+        if (!response.token) {
+        return;
+        }
         this.authService.setUser(response.token);
-      }, remaining);
-    })
-  );
-}
+      }),
+    );
+  }
 
   register(dto: RegisterUserDto) {
     return this.http.post(this.apiUrl + 'user/register', dto);
