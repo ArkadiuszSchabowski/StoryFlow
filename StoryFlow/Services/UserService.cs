@@ -38,6 +38,13 @@ namespace StoryFlow.Services
                 throw new ConflictException("Ten adres e-mail jest już zarejestrowany.");
             }
 
+            User? nick = await _userRepository.GetByNick(dto.Nick);
+
+            if (nick != null)
+            {
+                throw new ConflictException("Ten nick jest zajęty. Wybierz inny.");
+            }
+
             User user = _mapper.Map<User>(dto);
 
             string hashedPassword = _passwordHasher.HashPassword(user, dto.Password);

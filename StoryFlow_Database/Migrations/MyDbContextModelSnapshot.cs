@@ -288,7 +288,8 @@ namespace StoryFlow_Database.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("LastName")
+                    b.Property<string>("Nick")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("PremiumAccountDays")

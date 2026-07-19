@@ -28,11 +28,11 @@ export class RegisterComponent implements OnInit {
       '',
       [Validators.required, Validators.minLength(3), Validators.maxLength(25)],
     ],
-    lastName: [
+    nick: [
       '',
       [Validators.required, Validators.minLength(3), Validators.maxLength(25)],
     ],
-    dateOfBirth: ['', Validators.required],
+    dateOfBirth: [new Date(2000, 0, 15), Validators.required],
     gender: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     password: [
@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit {
     private navbarService: NavbarService,
     private quizService: QuizService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -83,7 +83,7 @@ export class RegisterComponent implements OnInit {
       password: this.form.get('password').value,
       repeatPassword: this.form.get('repeatPassword').value,
       firstName: this.form.get('firstName').value,
-      lastName: this.form.get('lastName').value,
+      nick: this.form.get('nick').value,
       gender: this.form.get('gender').value,
       dateOfBirth: this.form
         .get('dateOfBirth')
@@ -99,7 +99,6 @@ export class RegisterComponent implements OnInit {
         this.toastr.error(error.error);
         this.loaderService.hide();
         this.navbarService.unblockButtons();
-        this.form.reset();
       },
     });
   }
@@ -153,7 +152,6 @@ export class RegisterComponent implements OnInit {
           this.toastr.error('Błędne dane logowania.');
           this.loaderService.hide();
           this.navbarService.unblockButtons();
-          this.form.reset();
         }
       },
     });
