@@ -2,7 +2,9 @@
   id="loader-container"
   class="container loader-ticket-container"
   *ngIf="
-    (loaderService.loading$ | async) && (authService.currentUserSource$ | async) && !isQuizFinishied
+    (loaderService.loading$ | async) &&
+    (authService.currentUserSource$ | async) &&
+    !isQuizFinishied
   "
 >
   <div id="loader-ticket-text">
@@ -10,8 +12,7 @@
     punkty za historię. Jeśli uzyskasz minimum 50% punktów to bilet wróci do
     Ciebie!...
   </div>
-  <div id="loader-ticket-logo">
-  </div>
+  <div id="loader-ticket-logo"></div>
   <button
     mat-raised-button
     id="loader-button"
@@ -108,6 +109,12 @@
             <button
               [ngClass]="{
                 disabled: !isNextButtonDisabled,
+                selected: selectedAnswers[currentQuestion.id] === answer.id,
+                correct: answer.isCorrect && !isNextButtonDisabled,
+                wrong:
+                  selectedAnswers[currentQuestion.id] === answer.id &&
+                  !answer.isCorrect &&
+                  !isNextButtonDisabled,
               }"
               [disabled]="!isNextButtonDisabled"
               type="submit"
@@ -153,26 +160,26 @@
   *ngIf="isQuizFinishied && !(loaderService.loading$ | async)"
   class="container"
 >
-  <div>Gratulacje! Ukończyłeś quiz!</div>
-  <div>
+  <div class="item">Gratulacje! Ukończyłeś quiz!</div>
+  <div  class="item">
     Zdobyte punkty za odpowiedzi:
     {{
       quizResult!.points - (story!.storyPoint!.bonusPointsForStoryLength ?? 0)
-    }}/
+    }}&nbsp;<mat-icon class="mat-icon-star-color">star</mat-icon>/
     {{
       (story!.storyPoint!.maxPoints ?? 0) -
         (story!.storyPoint!.bonusPointsForStoryLength ?? 0)
-    }}
+    }}&nbsp;<mat-icon class="mat-icon-star-color">star</mat-icon>
   </div>
-  <div>
+  <div class="item">
     Bonus za długość historii:
-    {{ story!.storyPoint!.bonusPointsForStoryLength }}
+    {{ story!.storyPoint!.bonusPointsForStoryLength }}&nbsp;<mat-icon class="mat-icon-star-color">star</mat-icon>
   </div>
 
-  <div>
-    Wynik quizu: {{ quizResult!.points }} / {{ story!.storyPoint!.maxPoints! }}
+  <div class="item">
+    Wynik quizu: {{ quizResult!.points }}&nbsp;<mat-icon class="mat-icon-star-color">star</mat-icon> / {{ story!.storyPoint!.maxPoints! }}&nbsp;<mat-icon class="mat-icon-star-color">star</mat-icon>
   </div>
-  <div>
+  <div  class="item">
     Wynik procentowy quizu:
     {{ roundToTwoDecimals(quizResult!.scorePercentage) }}&nbsp;%
   </div>

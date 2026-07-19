@@ -1,45 +1,49 @@
 <div id="create-story-container">
   <div id="generate-story-container">
-    <form [formGroup]="generateForm" (ngSubmit)="generate()">
+    <form [formGroup]="generateForm" (ngSubmit)="generate()" id="form">
       <div id="filter-story-container">
-        <mat-form-field class="filter-field-create">
-          <mat-label>Kategoria:</mat-label>
-          <mat-select id="storyCategory" formControlName="storyCategory">
-            <mat-option
-              *ngFor="let category of categories"
-              [value]="category.value"
-              >{{ category.viewValue }}</mat-option
-            >
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="filter-field-create">
-          <mat-label>Poziom językowy:</mat-label>
-          <mat-select id="languageLevel" formControlName="languageLevel">
-            <mat-option
-              *ngFor="let level of languageLevels"
-              [value]="level.value"
-              >{{ level.viewValue }}</mat-option
-            >
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="filter-field-create">
-          <mat-label>Długość:</mat-label>
-          <mat-select id="storySize" formControlName="storySize">
-            <mat-option *ngFor="let size of sizes" [value]="size.value">{{
-              size.viewValue
-            }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="filter-field-create">
-          <mat-label>Dodatkowe instrukcje:</mat-label>
-          <input
-            matInput
-            id="additionalInstructions"
-            formControlName="additionalInstructions"
-            placeholder="Additional instructions for AI"
-            autocomplete="off"
-          />
-        </mat-form-field>
+        <div class="filter-story-container-upper-row">
+          <mat-form-field class="filter-field-create">
+            <mat-label>Kategoria:</mat-label>
+            <mat-select id="storyCategory" formControlName="storyCategory">
+              <mat-option
+                *ngFor="let category of categories"
+                [value]="category.value"
+                >{{ category.viewValue }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="filter-field-create">
+            <mat-label>Poziom językowy:</mat-label>
+            <mat-select id="languageLevel" formControlName="languageLevel">
+              <mat-option
+                *ngFor="let level of languageLevels"
+                [value]="level.value"
+                >{{ level.viewValue }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="filter-field-create">
+            <mat-label>Długość:</mat-label>
+            <mat-select id="storySize" formControlName="storySize">
+              <mat-option *ngFor="let size of sizes" [value]="size.value">{{
+                size.viewValue
+              }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="filter-story-container-bottom-row">
+          <mat-form-field class="additional-instructions">
+            <mat-label>Dodatkowe instrukcje:</mat-label>
+            <textarea
+              matInput
+              cdkAutosizeMinRows="1"
+              formControlName="additionalInstructions"
+              placeholder="Additional instructions for AI"
+              autocomplete="off"
+            ></textarea>
+          </mat-form-field>
+        </div>
       </div>
       <div class="submit-button-container">
         <button

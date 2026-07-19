@@ -1,17 +1,43 @@
-<div id="season-container" class="container">
-  <div class="season-div" *ngFor="let season of seasons">
-    <div class="season-item">Sezon: {{ season.seasonNumber }}</div>
-    <div class="season-item">{{ season.name }}</div>
-    <div class="season-item" *ngIf="season.pointsRequiredToUnlock">
-      Stars required to unlock: {{ season.pointsRequiredToUnlock }}
+<div id="season-container" *ngIf="profile">
+  <div id="profile-statistic">
+    <div class="profile-statistic-item">
+      Zdobyte gwiazdki:&nbsp;{{ profile.stars }}&nbsp;<mat-icon
+        class="mat-icon-star-color"
+        >star</mat-icon
+      >
     </div>
-
-    <button
-      mat-raised-button
-      class="submit-button"
-      (click)="goToSeason(season.id)"
+    <div class="profile-statistic-item">
+      Dostępne bilety:&nbsp;{{ profile.tickets }}&nbsp;<mat-icon
+        class="mat-icon-star-color"
+        >sell</mat-icon
+      >
+    </div>
+  </div>
+  <div id="season">
+    <div
+      class="season-div"
+      *ngFor="let season of seasons"
+      [ngClass]="{
+        locked: profile.stars! < season.pointsRequiredToUnlock,
+      }"
     >
-      START
-    </button>
+      <div class="season-item">Sezon: {{ season.seasonNumber }}</div>
+      <div class="season-item">{{ season.name }}</div>
+
+      <button *ngIf="profile.stars! > season.pointsRequiredToUnlock"
+        mat-raised-button
+        class="submit-button"
+        (click)="goToSeason(season.id)"
+      >
+        START
+      </button>
+
+      <div class="season-item" *ngIf="season.pointsRequiredToUnlock && (profile.stars!) < season.pointsRequiredToUnlock">
+        Odblokowanie: {{ season.pointsRequiredToUnlock }}&nbsp;<mat-icon
+          class="mat-icon-star-color"
+          >star</mat-icon
+        >
+      </div>
+    </div>
   </div>
 </div>
