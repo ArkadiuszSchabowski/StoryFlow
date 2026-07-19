@@ -1,15 +1,6 @@
 @use "@angular/material" as mat;
 @use "src/styles" as theme;
 
-#filter-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 20px;
-  background-color: mat.get-color-from-palette(theme.$accent);
-}
-
 #story-container {
   display: flex;
   flex-wrap: wrap;
@@ -18,7 +9,7 @@
   flex-wrap: wrap;
   width: 100%;
   height: auto;
-  padding: 40px 100px 200px 100px;
+  padding: 0 0 200px 0;
 }
 
 #no-story-information {
@@ -68,7 +59,7 @@
 }
 button.story-card-button {
   font-weight: bold !important;
-  font-size: 26px !important;
+  font-size: 18px !important;
   width: 100% !important;
   height: 50px !important;
   color: mat.get-color-from-palette(theme.$accent);
@@ -130,7 +121,7 @@ button.story-card-button {
   transition: 0.2s;
 }
 
-.story-preview-button:hover {
+.story-preview-button:not(.locked):hover {
   background-color: #26a69a;
 }
 
@@ -178,25 +169,37 @@ button:disabled {
   padding-top: 10px;
 }
 
-.filter-field {
-  padding: 0 10px;
-}
-
 .story-preview-button-category {
   padding-bottom: 10px;
+}
+
+#profile-statistic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  background-color: mat.get-color-from-palette(theme.$accent);
+  margin-bottom: 40px;
+}
+
+.profile-statistic-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 25px;
+}
+
+.locked {
+  background-color: #8c8b8b;
+  color: white;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   #story-container {
     min-height: calc(100vh - 160px);
     justify-content: flex-start;
-    padding: 30px 50px 200px 50px;
-  }
-  #filter-container {
-    flex-direction: row;
-  }
-  .filter-field {
-    margin: 0 10px;
+    padding: 30px 0x 200px 0;
   }
 }
 
@@ -204,12 +207,6 @@ button:disabled {
   #story-container {
     min-height: calc(100vh - 160px);
     justify-content: flex-start;
-    padding: 30px 50px 200px 50px;
-  }
-  #filter-container {
-    flex-direction: row;
-  }
-  .filter-field {
-    margin: 0 20px;
+    padding: 30px 0x 200px 0;
   }
 }

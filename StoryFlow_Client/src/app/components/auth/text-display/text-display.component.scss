@@ -93,7 +93,7 @@
 }
 
 .submit-button {
-  width: 200px;
+  width: 300px;
   padding: 5px;
 }
 
@@ -204,6 +204,30 @@
 #loader-ticket-text {
   font-size: 20px;
 }
+
+.selected{
+  background-color: orange;
+}
+
+.disabled:not(.wrong):not(.correct):hover {
+  background-color: #8c8b8b;
+}
+
+.wrong {
+  background-color: red !important;
+}
+
+.correct {
+  background-color: green !important;
+}
+
+  .item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+  }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   #text-display-container {

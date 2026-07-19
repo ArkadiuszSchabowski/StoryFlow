@@ -1,12 +1,31 @@
 <div id="story-container">
+  <div id="profile-statistic" *ngIf="profile">
+    <div class="profile-statistic-item">
+      Zdobyte gwiazdki:&nbsp;{{ profile.stars }}&nbsp;<mat-icon
+        class="mat-icon-star-color"
+        >star</mat-icon
+      >
+    </div>
+    <div class="profile-statistic-item">
+      Dostępne bilety:&nbsp;{{ profile.tickets }}&nbsp;<mat-icon
+        class="mat-icon-star-color"
+        >sell</mat-icon
+      >
+    </div>
+  </div>
   <div *ngFor="let story of stories" class="story-wrapper">
-    <div
-      class="story-preview-button"
-      (click)="toggleStory(story.id)"
-    >
-        <div class="story-preview-button-category">{{ showCategory(story.storyCategory) }}</div>
+    <div class="story-preview-button" (click)="toggleStory(story.id)"  [ngClass]="{ locked: getIcon(story.id) === 'lock' }">
+      <div class="story-preview-button-category">
+        {{ showCategory(story.storyCategory) }}
+      </div>
       <div class="story-preview-button-icon">
-        <mat-icon>{{ getIcon(story.id) }}</mat-icon>
+        <span *ngIf="getIcon(story.id) === 'replay'; else iconTemplate">
+          Odblokuj bilet za 50%
+        </span>
+
+        <ng-template #iconTemplate>
+          <mat-icon>{{ getIcon(story.id) }}</mat-icon>
+        </ng-template>
       </div>
       <div class="story-preview-button-title">
         {{ story.polishTitle }}
@@ -20,19 +39,22 @@
       </div>
 
       <div class="score-item" *ngIf="story.storyPoint">
-        {{ story?.userStories?.[0]?.bestResult ?? 0 }}
-        <mat-icon>star</mat-icon>
-        / {{ story.storyPoint.maxPoints }}
-        <mat-icon>star</mat-icon>
+        {{ story?.userStories?.[0]?.bestResult ?? 0 }}&nbsp;
+        <mat-icon class="mat-icon-star-color">star</mat-icon>
+        / {{ story.storyPoint.maxPoints }}&nbsp;
+        <mat-icon class="mat-icon-star-color">star</mat-icon>
       </div>
       <div class="score-item score-percentage" *ngIf="story.storyPoint">
-         {{roundToTwoDecimals(story?.userStories?.[0]?.percentageScore ?? 0)}}&nbsp;%
+        {{
+          roundToTwoDecimals(story?.userStories?.[0]?.percentageScore ?? 0)
+        }}&nbsp;%
       </div>
     </div>
 
     <div
       class="story-card"
       *ngIf="story.storyPoint && openedStoryId === story.id"
+      [ngClass]="{ locked: getIcon(story.id) === 'lock' }"
     >
       <div class="story-card-button-close">
         <button class="button-close" (click)="toggleStory(story.id)">
@@ -46,20 +68,23 @@
       <div id="score-card">
         <div class="score-item">
           Punkty za pytanie:
-          {{ story.numberOfQuestions }} * {{ story.storyPoint.pointsPerAnswer }}
-          <mat-icon>star</mat-icon>
+          {{ story.numberOfQuestions }} *
+          {{ story.storyPoint.pointsPerAnswer }}&nbsp;
+          <mat-icon class="mat-icon-star-color">star</mat-icon>
         </div>
 
         <div class="score-item">
           Bonus długości historii:
-          {{ story.storyPoint.bonusPointsForStoryLength }}
-          <mat-icon>star</mat-icon>
+          {{ story.storyPoint.bonusPointsForStoryLength }}&nbsp;
+          <mat-icon class="mat-icon-star-color">star</mat-icon>
         </div>
 
         <div class="score-item">
           Maksymalna ilość punktów:
-          {{ story.storyPoint.maxPoints }}
-          <mat-icon>star</mat-icon>
+          {{ story.storyPoint.maxPoints }}&nbsp;<mat-icon
+            class="mat-icon-star-color"
+            >star</mat-icon
+          >
         </div>
 
         <div class="score-item score-item-hint">
@@ -76,7 +101,7 @@
           (click)="NavigateToTextDisplay(story.id)"
           [disabled]="getIcon(story.id) === 'lock'"
         >
-          {{ getIcon(story.id) === "lock" ? "ODBLOKUJ QUIZ" : "START" }}
+          {{ getIcon(story.id) === "lock" ? "POTRZEBUJESZ BILETU" : "START" }}
         </button>
       </div>
     </div>

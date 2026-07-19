@@ -65,9 +65,9 @@
 
       <div class="score-item" *ngIf="story.storyPoint">
         {{ story?.userStories?.[0]?.bestResult ?? 0 }}
-        <mat-icon>star</mat-icon>
+        <mat-icon class="mat-icon-star-color">star</mat-icon>
         / {{ story.storyPoint.maxPoints }}
-        <mat-icon>star</mat-icon>
+        <mat-icon class="mat-icon-star-color">star</mat-icon>
       </div>
       <div class="score-item score-percentage" *ngIf="story.storyPoint">
          {{roundToTwoDecimals(story?.userStories?.[0]?.percentageScore ?? 0)}}&nbsp;%
@@ -91,19 +91,19 @@
         <div class="score-item">
           Punkty za pytanie:
           {{ story.numberOfQuestions }} * {{ story.storyPoint.pointsPerAnswer }}
-          <mat-icon>star</mat-icon>
+          <mat-icon class="mat-icon-star-color">star</mat-icon>
         </div>
 
         <div class="score-item">
           Bonus długości historii:
           {{ story.storyPoint.bonusPointsForStoryLength }}
-          <mat-icon>star</mat-icon>
+          <mat-icon class="mat-icon-star-color">star</mat-icon>
         </div>
 
         <div class="score-item">
           Maksymalna ilość punktów:
           {{ story.storyPoint.maxPoints }}
-          <mat-icon>star</mat-icon>
+          <mat-icon class="mat-icon-star-color">star</mat-icon>
         </div>
 
         <div class="score-item score-item-hint">
