@@ -78,6 +78,8 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
+    const date = this.form.get('dateOfBirth').value;
+
     let dto: RegisterUserDto = {
       email: this.form.get('email').value,
       password: this.form.get('password').value,
@@ -85,10 +87,7 @@ export class RegisterComponent implements OnInit {
       firstName: this.form.get('firstName').value,
       nick: this.form.get('nick').value,
       gender: this.form.get('gender').value,
-      dateOfBirth: this.form
-        .get('dateOfBirth')
-        .value.toISOString()
-        .split('T')[0],
+      dateOfBirth: `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`,
     };
 
     this.userService.register(dto).subscribe({
