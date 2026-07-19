@@ -198,15 +198,15 @@ button:disabled {
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   #story-container {
     min-height: calc(100vh - 160px);
-    justify-content: flex-start;
-    padding: 30px 0x 200px 0;
+    justify-content: flex;
+    padding: 30px auto 200px 0;
   }
 }
 
 @media screen and (min-width: 1200px) {
   #story-container {
     min-height: calc(100vh - 160px);
-    justify-content: flex-start;
-    padding: 30px 0x 200px 0;
+    justify-content: flex;
+    padding: 30px auto 200px 0;
   }
 }
