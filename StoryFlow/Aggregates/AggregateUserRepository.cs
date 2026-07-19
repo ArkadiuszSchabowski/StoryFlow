@@ -39,6 +39,11 @@ namespace StoryFlow.Aggregates
             return _getByEmailRepository.GetByEmail(email);
         }
 
+        public Task<User?> GetByNick(string nick)
+        {
+            return _getByEmailRepository.GetByNick(nick);
+        }
+
         public async Task Remove(User entity)
         {
             await _repository.Remove(entity);

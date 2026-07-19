@@ -20,9 +20,9 @@ namespace StoryFlow.Validators
                 throw new BadRequestException("Imię musi mieć od 3 do 25 znaków.");
             }
 
-            if (string.IsNullOrWhiteSpace(dto.LastName) || dto.LastName.Length < 3 || dto.LastName.Length > 25)
+            if (string.IsNullOrWhiteSpace(dto.Nick) || dto.Nick.Length < 3 || dto.Nick.Length > 25)
             {
-                throw new BadRequestException("Nazwisko musi mieć od 3 do 25 znaków.");
+                throw new BadRequestException("Nick musi mieć od 3 do 25 znaków.");
             }
 
             if (dto.Password != dto.RepeatPassword)
