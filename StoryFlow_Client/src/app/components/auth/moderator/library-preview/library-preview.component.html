@@ -1,12 +1,10 @@
 <div id="text-selection-container">
+  <h1 id="h1-title">Biblioteka historii</h1>
   <div>
     <form id="filter-container" [formGroup]="form" (ngSubmit)="get()">
       <mat-form-field class="filter-field">
         <mat-label>Kategoria:</mat-label>
-        <mat-select
-          id="category"
-          formControlName="category"
-        >
+        <mat-select id="category" formControlName="category">
           <mat-option
             *ngFor="let category of categories"
             [value]="category.value"
@@ -16,10 +14,7 @@
       </mat-form-field>
       <mat-form-field class="filter-field">
         <mat-label>Poziom językowy:</mat-label>
-        <mat-select
-          id="languageLevel"
-          formControlName="languageLevel"
-        >
+        <mat-select id="languageLevel" formControlName="languageLevel">
           <mat-option
             *ngFor="let level of languageLevels"
             [value]="level.value"
@@ -44,11 +39,10 @@
     filtrów.
   </div>
   <div *ngFor="let story of stories" class="story-wrapper">
-    <div
-      class="story-preview-button"
-      (click)="toggleStory(story.id)"
-    >
-    <div class="story-preview-button-category">{{ showCategory(story.storyCategory) }}</div>
+    <div class="story-preview-button" (click)="toggleStory(story.id)">
+      <div class="story-preview-button-category">
+        {{ showCategory(story.storyCategory) }}
+      </div>
       <div class="story-preview-button-icon">
         <mat-icon>{{ getIcon(story.id) }}</mat-icon>
       </div>
@@ -70,7 +64,9 @@
         <mat-icon class="mat-icon-star-color">star</mat-icon>
       </div>
       <div class="score-item score-percentage" *ngIf="story.storyPoint">
-         {{roundToTwoDecimals(story?.userStories?.[0]?.percentageScore ?? 0)}}&nbsp;%
+        {{
+          roundToTwoDecimals(story?.userStories?.[0]?.percentageScore ?? 0)
+        }}&nbsp;%
       </div>
     </div>
 

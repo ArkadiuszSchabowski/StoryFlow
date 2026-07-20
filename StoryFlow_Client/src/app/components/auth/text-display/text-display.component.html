@@ -45,7 +45,7 @@
           <div><mat-icon>repeat</mat-icon></div>
         </button>
       </div>
-      <h2>{{ story.visibleTitleMeaning }}</h2>
+      <h1 id="h1-title">{{ story.visibleTitleMeaning }}</h1>
     </div>
 
     <div id="description-container">
@@ -93,7 +93,7 @@
 
   <div id="quiz-container-wrapper" *ngIf="isQuiz && !isQuizFinishied">
     <div id="quiz-container" class="container" *ngIf="quiz">
-      <div class="title">Quiz - {{ story!.englishTitle }}</div>
+      <h1 class="title">Quiz - {{ story!.englishTitle }}</h1>
 
       <form (ngSubmit)="checkAnswer()">
         <div class="question-card" *ngIf="currentQuestion">

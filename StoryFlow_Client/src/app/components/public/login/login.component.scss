@@ -29,8 +29,9 @@ mat-card.login-card {
   justify-content: center;
   padding: 10px;
   margin-bottom: 30px;
-  font-size: 18px;
+  font-size: 24px;
   color: white;
+  font-weight: 400;
   background-color: mat.get-color-from-palette(theme.$accent);
 }
 

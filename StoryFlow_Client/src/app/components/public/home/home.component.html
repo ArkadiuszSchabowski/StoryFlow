@@ -1,10 +1,14 @@
-<div id="home-container" class="container"   *ngIf="!(loaderService.loading$ | async)">
+<div
+  id="home-container"
+  class="container"
+  *ngIf="!(loaderService.loading$ | async)"
+>
   <div id="home-row">
     <div id="home-logo"></div>
     <div id="home-text">
-      <div id="home-title" class="title">
-        Mała kotka Luna zabierze Cię w świat angielskich przygód!
-      </div>
+      <h1 id="home-title" class="title">
+        Nauka angielskiego z kotką Luną - odkrywaj świat angielskich przygód!
+      </h1>
       <div id="home-subtitle" class="subtitle">
         <div class="home-subtitle-row">
           <button
@@ -12,7 +16,7 @@
             id="button-start"
             (click)="navigateToWelcomeStory()"
           >
-            Rozpocznij pierwszą przygodę
+            Rozpocznij naukę
           </button>
         </div>
         <div class="home-subtitle-row">✓ Pierwsza historia bez rejestracji</div>

@@ -1,9 +1,11 @@
-<div id="login-container" class="container" *ngIf="!(loaderService.loading$ | async)">
+<div
+  id="login-container"
+  class="container"
+  *ngIf="!(loaderService.loading$ | async)"
+>
   <form [formGroup]="form" (ngSubmit)="login()" autocomplete="off">
     <mat-card class="login-card">
-      <mat-card-title id="card-title"
-        >Gotowy do dalszej nauki? Zaloguj się.</mat-card-title
-      >
+      <h1 id="card-title">Zaloguj się do StoryFlow</h1>
       <mat-card-content>
         <mat-form-field class="card-input" appearance="outline">
           <mat-label>E-mail</mat-label>
@@ -71,7 +73,11 @@
     </mat-card>
   </form>
 </div>
-<div id="loader-container" class="container" *ngIf="loaderService.loading$ | async">
+<div
+  id="loader-container"
+  class="container"
+  *ngIf="loaderService.loading$ | async"
+>
   <div id="loader-text">Zaraz zaczynamy...</div>
   <div id="loader-logo">
     <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>
