@@ -13,8 +13,13 @@
       >
     </div>
   </div>
+  <h1 id="h1-title">Wybierz historię</h1>
   <div *ngFor="let story of stories" class="story-wrapper">
-    <div class="story-preview-button" (click)="toggleStory(story.id)"  [ngClass]="{ locked: getIcon(story.id) === 'lock' }">
+    <div
+      class="story-preview-button"
+      (click)="toggleStory(story.id)"
+      [ngClass]="{ locked: getIcon(story.id) === 'lock' }"
+    >
       <div class="story-preview-button-category">
         {{ showCategory(story.storyCategory) }}
       </div>

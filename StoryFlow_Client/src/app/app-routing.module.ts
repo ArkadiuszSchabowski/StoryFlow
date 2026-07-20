@@ -13,17 +13,57 @@ import { SezonSelectionComponent } from './components/auth/sezon-selection/sezon
 import { LibraryPreviewComponent } from './components/auth/moderator/library-preview/library-preview.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'sezon-selection', component: SezonSelectionComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'error-page', component: ErrorPageComponent },
-  { path: 'create-story', component: StoryCreateComponent },
-  { path: 'create-quiz', component: QuizCreateComponent },
-  { path: 'library', component: LibraryPreviewComponent },
-  { path: 'sezon/:id', component: SezonComponent },
-  { path: 'text/:id', component: TextDisplayComponent },
+  {
+    path: '',
+    component: HomeComponent,
+    title: 'StoryFlow - Nauka angielskiego z kotką Luną',
+  },
+  { path: 'login', component: LoginComponent, title: 'Logowanie - StoryFlow' },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    title: 'Rejestracja - StoryFlow',
+  },
+  {
+    path: 'sezon-selection',
+    component: SezonSelectionComponent,
+    title: 'Wybór sezonu - StoryFlow',
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    title: 'Profil użytkownika - StoryFlow',
+  },
+  {
+    path: 'error-page',
+    component: ErrorPageComponent,
+    title: 'Błąd - StoryFlow',
+  },
+  {
+    path: 'create-story',
+    component: StoryCreateComponent,
+    title: 'Tworzenie historii - StoryFlow',
+  },
+  {
+    path: 'create-quiz',
+    component: QuizCreateComponent,
+    title: 'Tworzenie quizu - StoryFlow',
+  },
+  {
+    path: 'library',
+    component: LibraryPreviewComponent,
+    title: 'Biblioteka historii - StoryFlow',
+  },
+  {
+    path: 'sezon/:id',
+    component: SezonComponent,
+    title: 'Podgląd sezonu - StoryFlow',
+  },
+  {
+    path: 'text/:id',
+    component: TextDisplayComponent,
+    title: 'Historia - StoryFlow',
+  },
   { path: '**', redirectTo: '' },
 ];
 

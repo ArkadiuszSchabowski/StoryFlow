@@ -1,4 +1,15 @@
-#action-button{
-    margin-top: 20px;
-    font-weight: bold;
+@use "@angular/material" as mat;
+@use "src/styles" as theme;
+
+#action-button {
+  width: 300px;
+  height: 56px;
+  padding: 0 40px;
+  font-size: 18px;
+  font-weight: bolder;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  margin-top: 50px;
+  color: white;
+  background-color: mat.get-color-from-palette(theme.$accent);
 }

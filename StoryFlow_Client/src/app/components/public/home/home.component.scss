@@ -1,15 +1,25 @@
 @use "@angular/material" as mat;
 @use "src/styles" as theme;
 
-#home-container{
+#home-container {
   display: flex;
   min-height: 600px;
 }
+
 #home-title {
-  padding: 10px;
   text-align: center;
   width: 100%;
   height: auto;
+  padding: 10px 20px;
+}
+
+#home-subtitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  padding: 20px 10px;
 }
 
 #mobile-logo {
@@ -24,10 +34,6 @@
   background-position: no-repeat;
 }
 
-#home-subtitle {
-  padding: 20px 10px;
-}
-
 #home-row {
   display: flex;
   flex-direction: row;
@@ -36,28 +42,25 @@
   margin-top: 20px;
 }
 
-#home-subtitle {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-}
-
-.home-subtitle-row {
-  padding: 5px 0;
-}
-
 #button-start {
-  width: 350px;
+  width: 250px;
   height: 56px;
   padding: 0 40px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bolder;
   border-radius: 12px;
   margin-bottom: 30px;
   color: white;
   background-color: mat.get-color-from-palette(theme.$accent);
+}
+
+#loader-container {
+  padding: 50px 20px 0 20px;
+}
+
+#loader-text {
+  font-size: 20px;
+  margin-bottom: 40px;
 }
 
 #button-start:hover {
@@ -75,13 +78,8 @@
   background-repeat: no-repeat;
 }
 
-#loader-container {
-  padding: 50px 20px 0 20px;
-}
-
-#loader-text {
-  font-size: 20px;
-  margin-bottom: 40px;
+.home-subtitle-row {
+  padding: 5px 0;
 }
 
 .loader-logo {
@@ -93,7 +91,7 @@
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   #home-subtitle {
-    font-size: 18px;
+    font-size: 22px;
     padding: 50px;
   }
   #home-logo {
