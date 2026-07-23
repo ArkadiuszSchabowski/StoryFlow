@@ -40,7 +40,7 @@ jobs:
           action: "upload"
           app_location: "./StoryFlow_Client"
           api_location: ""
-          output_location: "dist/story-flow-client"
+          output_location: "dist/story-flow-client/browser"
           github_id_token: ${{ steps.idtoken.outputs.result }}
 
   close_pull_request_job:
