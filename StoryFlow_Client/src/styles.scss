@@ -132,7 +132,6 @@ mat-form-field.card-input {
   background-color: #f2f2f2;
 }
 
-
 .button-upper {
   width: 250px;
   height: 56px;
@@ -142,7 +141,7 @@ mat-form-field.card-input {
 
 .button-standard {
   width: 200px;
-  height: 50px;
+  height: 40px;
   font-size: 18px;
 }
 
@@ -152,22 +151,6 @@ mat-form-field.card-input {
 
 .disabled:hover {
   background-color: #8c8b8b !important;
-}
-
-.submit-button {
-  display: flex;
-  width: 200px;
-  height: 70px;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 20px;
-  color: white;
-  background-color: mat.m2-get-color-from-palette($accent);
-}
-
-.submit-button:hover {
-  box-sizing: border-box;
-  background-color: #26a69a;
 }
 
 .password-button:hover {
@@ -188,6 +171,19 @@ mat-form-field.card-input {
   color: gold;
 }
 
+.image-standard {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.loader-logo {
+  display: flex;
+  width: 350px;
+  min-width: 350px;
+  height: 350px;
+}
+
 @media (min-width: 600px) {
   .container {
     height: calc(100vh - 64px);
@@ -195,7 +191,15 @@ mat-form-field.card-input {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
+  .loader-logo {
+    width: 400px;
+    height: 400px;
+  }
 }
 
 @media screen and (min-width: 1200px) {
+  .loader-logo {
+    width: 400px;
+    height: 400px;
+  }
 }

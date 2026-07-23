@@ -14,18 +14,18 @@
     </div>
   </div>
     <h1 id="h1-title">Wybierz sezon</h1>
-  <div id="season">
+  <div id="season" *ngIf="profile.stars">
     <div
       class="season-div"
       *ngFor="let season of seasons"
       [ngClass]="{
-        locked: profile.stars! < season.pointsRequiredToUnlock,
+        locked: profile.stars < season.pointsRequiredToUnlock,
       }"
     >
       <div class="season-item">Sezon: {{ season.seasonNumber }}</div>
       <div class="season-item">{{ season.name }}</div>
 
-      <button *ngIf="profile.stars! > season.pointsRequiredToUnlock"
+      <button *ngIf="profile.stars > season.pointsRequiredToUnlock"
         mat-raised-button
         id="submit-button"
         class="button-app-reverse-color button-standard"
@@ -34,7 +34,7 @@
         START
       </button>
 
-      <div class="season-item" *ngIf="season.pointsRequiredToUnlock && (profile.stars!) < season.pointsRequiredToUnlock">
+      <div class="season-item" *ngIf="season.pointsRequiredToUnlock && (profile.stars) < season.pointsRequiredToUnlock">
         Odblokowanie: {{ season.pointsRequiredToUnlock }}&nbsp;<mat-icon
           class="mat-icon-star-color"
           >star</mat-icon

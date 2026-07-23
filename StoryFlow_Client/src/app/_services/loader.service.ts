@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AnimationOptions } from 'ngx-lottie';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -9,7 +10,7 @@ export class LoaderService {
   private loadingSubject = new BehaviorSubject<boolean>(false);
   loading$ = this.loadingSubject.asObservable();
 
-    animationOptions = {
+    animationOptions: AnimationOptions = {
     path: 'assets/kitty/kitty.json'
   };
   

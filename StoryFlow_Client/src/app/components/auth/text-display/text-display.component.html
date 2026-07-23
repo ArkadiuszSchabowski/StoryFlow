@@ -12,7 +12,7 @@
     punkty za historię. Jeśli uzyskasz minimum 50% punktów to bilet wróci do
     Ciebie!...
   </div>
-  <div id="loader-ticket-logo"></div>
+  <div id="loader-ticket-logo" class="image-standard"></div>
   <button
     mat-raised-button
     id="loader-button"
@@ -89,9 +89,9 @@
     </div>
   </div>
 
-  <div id="quiz-container-wrapper" *ngIf="isQuiz && !isQuizFinishied">
+  <div id="quiz-container-wrapper" *ngIf="isQuiz && !isQuizFinishied && story">
     <div id="quiz-container" class="container" *ngIf="quiz">
-      <h1 class="title">Quiz - {{ story!.englishTitle }}</h1>
+      <h1 class="title">Quiz - {{ story.englishTitle }}</h1>
 
       <form (ngSubmit)="checkAnswer()">
         <div class="question-card" *ngIf="currentQuestion">
@@ -155,43 +155,43 @@
 </div>
 
 <div
-  *ngIf="isQuizFinishied && !(loaderService.loading$ | async)"
+  *ngIf="isQuizFinishied && !(loaderService.loading$ | async) && story"
   class="container"
 >
   <div class="item">Gratulacje! Ukończyłeś quiz!</div>
-  <div class="item">
+  <div class="item" *ngIf="quizResult" && story>
     Zdobyte punkty za odpowiedzi:
     {{
-      quizResult!.points - (story!.storyPoint!.bonusPointsForStoryLength ?? 0)
+      quizResult.points - (story.storyPoint!.bonusPointsForStoryLength ?? 0)
     }}&nbsp;<mat-icon class="mat-icon-star-color">star</mat-icon>/
     {{
-      (story!.storyPoint!.maxPoints ?? 0) -
-        (story!.storyPoint!.bonusPointsForStoryLength ?? 0)
+      (story.storyPoint!.maxPoints ?? 0) -
+        (story.storyPoint!.bonusPointsForStoryLength ?? 0)
     }}&nbsp;<mat-icon class="mat-icon-star-color">star</mat-icon>
   </div>
   <div class="item">
     Bonus za długość historii:
-    {{ story!.storyPoint!.bonusPointsForStoryLength }}&nbsp;<mat-icon
+    {{ story.storyPoint!.bonusPointsForStoryLength }}&nbsp;<mat-icon
       class="mat-icon-star-color"
       >star</mat-icon
     >
   </div>
 
-  <div class="item">
-    Wynik quizu: {{ quizResult!.points }}&nbsp;<mat-icon
+  <div class="item" *ngIf="quizResult">
+    Wynik quizu: {{ quizResult.points }}&nbsp;<mat-icon
       class="mat-icon-star-color"
       >star</mat-icon
     >
-    / {{ story!.storyPoint!.maxPoints! }}&nbsp;<mat-icon
+    / {{ story.storyPoint!.maxPoints! }}&nbsp;<mat-icon
       class="mat-icon-star-color"
       >star</mat-icon
     >
   </div>
-  <div class="item">
+  <div class="item" *ngIf="quizResult">
     Wynik procentowy quizu:
-    {{ roundToTwoDecimals(quizResult!.scorePercentage) }}&nbsp;%
+    {{ roundToTwoDecimals(quizResult.scorePercentage) }}&nbsp;%
   </div>
-  <div class="logo"></div>
+  <div id="logo-result" class="image-standard"></div>
   <div *ngIf="!(authService.currentUserSource$ | async)">
     Zapisz swój wynik i odblokuj kolejne historie.
   </div>
