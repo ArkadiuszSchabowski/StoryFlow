@@ -2,8 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TextDisplayComponent } from './text-display.component';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { of } from 'rxjs';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('TextDisplayComponent', () => {
   let component: TextDisplayComponent;
@@ -18,10 +19,10 @@ class MockActivatedRoute {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TextDisplayComponent],
-      imports: [HttpClientTestingModule],
-      providers: [{ provide: ActivatedRoute, useClass: MockActivatedRoute }],
-    });
+    declarations: [TextDisplayComponent],
+    imports: [],
+    providers: [{ provide: ActivatedRoute, useClass: MockActivatedRoute }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     fixture = TestBed.createComponent(TextDisplayComponent);
     component = fixture.componentInstance;
     activatedRoute = TestBed.inject(ActivatedRoute);

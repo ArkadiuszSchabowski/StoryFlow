@@ -4,7 +4,7 @@
 #text-selection-container {
   text-align: center;
   padding: 20px 0 5px 0;
-  background-color: mat.get-color-from-palette(theme.$accent);
+  background-color: mat.m2-get-color-from-palette(theme.$accent);
 }
 
 #h1-title {
@@ -17,7 +17,7 @@
   justify-content: center;
   align-items: center;
   padding-top: 20px;
-  background-color: mat.get-color-from-palette(theme.$accent);
+  background-color: mat.m2-get-color-from-palette(theme.$accent);
 }
 
 #story-container {
@@ -52,7 +52,7 @@
   height: 350px;
   justify-content: center;
   padding: 0 10px 0 10px;
-  background-color: mat.get-color-from-palette(theme.$accent);
+  background-color: mat.m2-get-color-from-palette(theme.$accent);
   border-radius: 25px;
   z-index: 5;
   left: 5%;
@@ -81,7 +81,7 @@ button.story-card-button {
   font-size: 26px !important;
   width: 100% !important;
   height: 50px !important;
-  color: mat.get-color-from-palette(theme.$accent);
+  color: mat.m2-get-color-from-palette(theme.$accent);
   background-color: white;
   margin-top: 10px;
 }
@@ -111,7 +111,7 @@ button.story-card-button {
   justify-content: center;
   align-items: center;
   color: white;
-  background-color: mat.get-color-from-palette(theme.$accent);
+  background-color: mat.m2-get-color-from-palette(theme.$accent);
   padding: 25px;
   height: 250px;
   width: 250px;
@@ -151,7 +151,7 @@ button.story-card-button {
 .button-close {
   position: absolute;
   width: 40px;
-  color: mat.get-color-from-palette(theme.$accent);
+  color: mat.m2-get-color-from-palette(theme.$accent);
   margin-left: 150px;
   margin-top: -20px;
 }
@@ -167,7 +167,7 @@ button.story-card-button {
 
 .story-preview-button-icon {
   display: flex;
-  color: mat.get-color-from-palette(theme.$accent);
+  color: mat.m2-get-color-from-palette(theme.$accent);
   background-color: white;
   justify-content: center;
   align-items: center;

@@ -16,7 +16,7 @@
   <button
     mat-raised-button
     id="loader-button"
-    class="submit-button"
+    class="button-app button-standard"
     (click)="hideLoader()"
   >
     Dalej
@@ -80,10 +80,8 @@
     <div class="submit-button-container">
       <button
         mat-raised-button
-        class="submit-button"
-        id="submit-button"
+        class="button-app button-standard"
         type="submit"
-        color="accent"
         (click)="gotoQuiz()"
       >
         QUIZ
@@ -118,7 +116,7 @@
               }"
               [disabled]="!isNextButtonDisabled"
               type="submit"
-              class="submit-button"
+              class="button-app button-selected"
               (click)="selectedAnswers[currentQuestion.id] = answer.id"
             >
               {{ answer.text }}
@@ -129,7 +127,7 @@
               disabled: isNextButtonDisabled,
             }"
             [disabled]="isNextButtonDisabled"
-            class="submit-button disabled"
+            class="disabled button-app button-standard"
             id="next-button"
             (click)="showNextQuestion()"
           >
@@ -161,7 +159,7 @@
   class="container"
 >
   <div class="item">Gratulacje! Ukończyłeś quiz!</div>
-  <div  class="item">
+  <div class="item">
     Zdobyte punkty za odpowiedzi:
     {{
       quizResult!.points - (story!.storyPoint!.bonusPointsForStoryLength ?? 0)
@@ -173,13 +171,23 @@
   </div>
   <div class="item">
     Bonus za długość historii:
-    {{ story!.storyPoint!.bonusPointsForStoryLength }}&nbsp;<mat-icon class="mat-icon-star-color">star</mat-icon>
+    {{ story!.storyPoint!.bonusPointsForStoryLength }}&nbsp;<mat-icon
+      class="mat-icon-star-color"
+      >star</mat-icon
+    >
   </div>
 
   <div class="item">
-    Wynik quizu: {{ quizResult!.points }}&nbsp;<mat-icon class="mat-icon-star-color">star</mat-icon> / {{ story!.storyPoint!.maxPoints! }}&nbsp;<mat-icon class="mat-icon-star-color">star</mat-icon>
+    Wynik quizu: {{ quizResult!.points }}&nbsp;<mat-icon
+      class="mat-icon-star-color"
+      >star</mat-icon
+    >
+    / {{ story!.storyPoint!.maxPoints! }}&nbsp;<mat-icon
+      class="mat-icon-star-color"
+      >star</mat-icon
+    >
   </div>
-  <div  class="item">
+  <div class="item">
     Wynik procentowy quizu:
     {{ roundToTwoDecimals(quizResult!.scorePercentage) }}&nbsp;%
   </div>
@@ -191,7 +199,7 @@
     <button
       *ngIf="!(authService.currentUserSource$ | async)"
       id="register-button"
-      class="submit-button"
+      class="button-app button-standard"
       (click)="navigateToRegister()"
     >
       Utwórz konto
@@ -199,7 +207,7 @@
     <button
       *ngIf="authService.currentUserSource$ | async"
       id="again-button"
-      class="submit-button"
+      class="button-app button-standard"
       (click)="navigateToTextStory(story!.id)"
     >
       Spróbuj ponownie
@@ -207,7 +215,7 @@
     <button
       *ngIf="authService.currentUserSource$ | async"
       id="back-button"
-      class="submit-button"
+      class="button-app button-standard"
       (click)="navigateToTextSelection()"
     >
       Kolejne wyzwanie

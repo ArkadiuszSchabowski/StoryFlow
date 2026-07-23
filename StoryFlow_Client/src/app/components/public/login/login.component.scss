@@ -1,12 +1,6 @@
 @use "@angular/material" as mat;
 @use "src/styles" as theme;
 
-#login-container {
-  display: flex;
-  min-height: 500px;
-  padding: 10px 0;
-}
-
 mat-form-field.card-input {
   width: 258px;
 }
@@ -21,6 +15,12 @@ mat-card.login-card {
   padding: 40px 0;
 }
 
+#login-container {
+  display: flex;
+  min-height: 500px;
+  padding: 10px 0;
+}
+
 #card-title {
   display: flex;
   width: 100%;
@@ -32,16 +32,11 @@ mat-card.login-card {
   font-size: 24px;
   color: white;
   font-weight: 400;
-  background-color: mat.get-color-from-palette(theme.$accent);
+  background-color: mat.m2-get-color-from-palette(theme.$accent);
 }
 
 #submit-login-button {
   margin: 40px 20px 20px 20px;
-}
-
-
-.card-input {
-  padding-bottom: 10px;
 }
 
 #loader-text {
@@ -59,6 +54,11 @@ mat-card.login-card {
   height: 300px;
   width: 300px;
 }
+
+.card-input {
+  padding-bottom: 10px;
+}
+
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   mat-card.login-card {

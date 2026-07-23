@@ -18,7 +18,7 @@
   font-size: 24px;
   font-weight: 400;
   padding: 10px 0 10px 0;
-  background-color: mat.get-color-from-palette(theme.$accent);
+  background-color: mat.m2-get-color-from-palette(theme.$accent);
 }
 
 #story-container {
@@ -36,7 +36,7 @@
   justify-content: center;
   align-items: center;
   padding-top: 20px;
-  background-color: mat.get-color-from-palette(theme.$accent);
+  background-color: mat.m2-get-color-from-palette(theme.$accent);
 }
 .submit-button-container {
   display: flex;
@@ -45,20 +45,9 @@
   padding-bottom: 20px;
 }
 
-#submit-button-generate {
-  color: mat.get-color-from-palette(theme.$accent);
-  background-color: white;
-  border: 1px solid transparent;
-}
-
 #information-no-quiz{
   padding: 0 50px;
   font-size: 20px;
-}
-
-#submit-button-generate:hover {
-  background-color: #f2f2f2;
-  border: 1px solid black;
 }
 
 .question-container {

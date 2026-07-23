@@ -43,15 +43,7 @@
 }
 
 #button-start {
-  width: 250px;
-  height: 56px;
-  padding: 0 40px;
-  font-size: 20px;
-  font-weight: bolder;
-  border-radius: 12px;
   margin-bottom: 30px;
-  color: white;
-  background-color: mat.get-color-from-palette(theme.$accent);
 }
 
 #loader-container {
@@ -61,10 +53,6 @@
 #loader-text {
   font-size: 20px;
   margin-bottom: 40px;
-}
-
-#button-start:hover {
-  background-color: #26a69a;
 }
 
 #home-logo {

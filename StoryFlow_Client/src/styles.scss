@@ -2,11 +2,11 @@
 
 @include mat.core();
 
-$primary: mat.define-palette(mat.$teal-palette, 700);
-$accent: mat.define-palette(mat.$teal-palette, 500);
-$warn: mat.define-palette(mat.$red-palette);
+$primary: mat.m2-define-palette(mat.$m2-teal-palette, 700);
+$accent: mat.m2-define-palette(mat.$m2-teal-palette, 500);
+$warn: mat.m2-define-palette(mat.$m2-red-palette);
 
-$StoryFlow_Client-theme: mat.define-light-theme(
+$StoryFlow_Client-theme: mat.m2-define-light-theme(
   (
     color: (
       primary: $primary,
@@ -50,8 +50,12 @@ input[type="password"]::-ms-clear {
   display: none;
 }
 
+.mat-mdc-menu-item {
+  text-align: center;
+}
+
 ::ng-deep .mat-mdc-menu-panel {
-  background-color: mat.get-color-from-palette($accent) !important;
+  background-color: mat.m2-get-color-from-palette($accent) !important;
 }
 
 ::ng-deep .mat-menu-desktop {
@@ -89,7 +93,7 @@ mat-form-field.card-input {
 
 .password-button {
   margin-right: 10px;
-  background-color: mat.get-color-from-palette($accent);
+  background-color: mat.m2-get-color-from-palette($accent);
   color: white;
 }
 
@@ -106,6 +110,50 @@ mat-form-field.card-input {
   background-color: #0a192f;
 }
 
+.button-app {
+  font-weight: bolder;
+  color: white !important;
+  background-color: mat.m2-get-color-from-palette($accent) !important;
+  border-radius: 12px;
+}
+
+.button-app:hover {
+  background-color: #26a69a !important;
+}
+
+.button-app-reverse-color {
+  font-weight: bolder;
+  color: mat.m2-get-color-from-palette($accent) !important;
+  background-color: white !important;
+  border-radius: 12px;
+}
+
+.button-app-reverse-color:hover {
+  background-color: #f2f2f2;
+}
+
+
+.button-upper {
+  width: 250px;
+  height: 56px;
+  font-size: 20px;
+  padding: 0 40px;
+}
+
+.button-standard {
+  width: 200px;
+  height: 50px;
+  font-size: 18px;
+}
+
+.disabled {
+  background-color: #8c8b8b !important;
+}
+
+.disabled:hover {
+  background-color: #8c8b8b !important;
+}
+
 .submit-button {
   display: flex;
   width: 200px;
@@ -114,7 +162,7 @@ mat-form-field.card-input {
   font-weight: bold;
   padding: 20px;
   color: white;
-  background-color: mat.get-color-from-palette($accent);
+  background-color: mat.m2-get-color-from-palette($accent);
 }
 
 .submit-button:hover {
@@ -128,20 +176,12 @@ mat-form-field.card-input {
 
 .mat-mdc-option:hover {
   color: white !important;
-  background-color: mat.get-color-from-palette($accent) !important;
+  background-color: mat.m2-get-color-from-palette($accent) !important;
 }
 
 .mat-mdc-option {
   padding-left: 16px !important;
   padding-right: 16px !important;
-}
-
-.disabled {
-  background-color: #8c8b8b;
-}
-
-.disabled:hover {
-  background-color: #8c8b8b;
 }
 
 .mat-icon-star-color {
