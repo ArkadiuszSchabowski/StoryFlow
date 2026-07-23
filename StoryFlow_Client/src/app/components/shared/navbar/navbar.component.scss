@@ -16,43 +16,19 @@
   height: 100%;
 }
 
-#desktop-navbar {
-  display: none;
-  width: 0%;
-}
-
-#mobile-navbar-button {
-  display: flex;
-  width: 100%;
-}
-
-#mobile-navbar-logo {
-  display: flex;
-}
-
-.toolbar {
-  color: black;
-  background-color: mat.m2-get-color-from-palette(theme.$accent);
-  border-bottom: 2px solid white;
-}
-
-#desktop-navbar,
-#desktop-navbar-logo {
-  display: none;
-}
-
-#desktop-navbar {
-  width: 100%;
-  height: 100%;
-  align-items: center;
-}
-
 #mobile-navbar-buttons {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 100%;
+}
+
+#desktop-navbar {
+  display: none;
+  width: 100%;
+  height: 100%;
+  align-items: center;
 }
 
 #desktop-navbar-buttons {
@@ -62,16 +38,6 @@
   height: 100%;
   align-items: center;
   justify-content: space-between;
-}
-
-.logo {
-  display: flex;
-  width: 150px;
-  min-width: 150px;
-  background-image: url(../../../../assets/shared/logo.webp);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 #toolbar-subcontainer {
@@ -99,6 +65,7 @@
   width: 100%;
   height: 100%;
 }
+
 #desktop-button-logo {
   background-image: url(../../../../assets/shared/logo.webp);
   background-size: 15%;
@@ -148,19 +115,25 @@
   align-items: center;
 }
 
-.mat-mdc-focus-indicator {
-  color: mat.m2-get-color-from-palette(theme.$accent);
-  background-color: white;
-  border-left: 10px solid mat.m2-get-color-from-palette(theme.$accent);
-  border-right: 10px solid mat.m2-get-color-from-palette(theme.$accent);
-  border-top: 5px solid mat.m2-get-color-from-palette(theme.$accent);
-  border-bottom: 5px solid mat.m2-get-color-from-palette(theme.$accent);
-  font-weight: bolder;
-}
-
 .mat-mdc-focus-indicator:hover {
   color: white !important;
   background-color: #26a69a !important;
+}
+
+.toolbar {
+  color: black;
+  background-color: mat.m2-get-color-from-palette(theme.$accent);
+  border-bottom: 2px solid white;
+}
+
+.logo {
+  display: flex;
+  width: 150px;
+  min-width: 150px;
+  background-image: url(../../../../assets/shared/logo.webp);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
@@ -170,8 +143,7 @@
   #desktop-navbar-buttons {
     padding: 0px;
   }
-  #desktop-navbar,
-  #desktop-navbar-logo {
+  #desktop-navbar {
     display: flex;
   }
 
@@ -187,8 +159,7 @@
   #desktop-navbar-buttons {
     padding: 0 100px;
   }
-  #desktop-navbar,
-  #desktop-navbar-logo {
+  #desktop-navbar {
     display: flex;
   }
 

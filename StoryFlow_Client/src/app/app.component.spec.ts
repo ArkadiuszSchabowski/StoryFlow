@@ -3,7 +3,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { ToastrService } from 'ngx-toastr';
 import { MaterialModule } from './modules/material/material.module';
-import { provideRouter } from '@angular/router';
+import { provideRouter, RouterOutlet } from '@angular/router';
 
 describe('AppComponent', () => {
   class MockToastrService {}
@@ -11,7 +11,7 @@ describe('AppComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       declarations: [AppComponent, NavbarComponent],
-      imports: [MaterialModule],
+      imports: [MaterialModule, RouterOutlet],
       providers: [
         { provide: ToastrService, useClass: MockToastrService },
         provideRouter([]),
