@@ -11,9 +11,10 @@ import { AddStoryDto } from 'src/app/models/add-story-dto';
 import { GenerateStoryDto } from 'src/app/models/generate-story-dto';
 
 @Component({
-  selector: 'app-story-create',
-  templateUrl: './story-create.component.html',
-  styleUrls: ['./story-create.component.scss'],
+    selector: 'app-story-create',
+    templateUrl: './story-create.component.html',
+    styleUrls: ['./story-create.component.scss'],
+    standalone: false
 })
 export class StoryCreateComponent {
   categories = CATEGORIES;

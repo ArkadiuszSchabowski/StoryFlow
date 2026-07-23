@@ -121,8 +121,7 @@
   margin-bottom: 20px;
 }
 
-#loader-logo,
-.logo {
+#logo-result {
   display: flex;
   height: 300px;
   width: 300px;
@@ -139,20 +138,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.logo {
-  background-image: url(../../../../assets/kitty/kitty2.webp);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-#back-button,
-#again-button,
-#register-button {
-  width: 200px;
-  height: 50px;
 }
 
 #next-button {
@@ -176,11 +161,8 @@
   margin-bottom: 20px;
 }
 
-.loader-logo {
-  display: flex;
-  width: 350px;
-  min-width: 350px;
-  height: 350px;
+#logo-result {
+  background-image: url(../../../../assets/kitty/kitty2.webp);
 }
 
 #loader-ticket-logo {
@@ -190,9 +172,6 @@
   height: 350px;
   min-height: 350px;
   background-image: url(../../../../assets/kitty/kitty3.webp);
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
   margin-top: 20px;
 }
 
@@ -261,8 +240,7 @@
     padding-top: 40px;
   }
 
-  #loader-logo,
-  .logo {
+  #logo-result {
     display: flex;
     height: 350px;
     width: 350px;
@@ -320,8 +298,7 @@
     padding-top: 40px;
   }
 
-  #loader-logo,
-  .logo {
+  #logo-result {
     display: flex;
     height: 350px;
     width: 350px;

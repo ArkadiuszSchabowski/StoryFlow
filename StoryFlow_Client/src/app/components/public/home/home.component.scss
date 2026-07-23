@@ -29,9 +29,14 @@
   height: 250px;
   min-height: 250px;
   background-image: url(../../../../assets/kitty/kitty1.webp);
-  background-position: center;
-  background-size: cover;
-  background-position: no-repeat;
+}
+
+#desktop-logo {
+  display: none;
+  width: 400px;
+  min-width: 400px;
+  height: 400px;
+  background-image: url(../../../../assets/kitty/kitty.webp);
 }
 
 #home-row {
@@ -55,26 +60,8 @@
   margin-bottom: 40px;
 }
 
-#home-logo {
-  display: none;
-  width: 400px;
-  min-width: 400px;
-  height: 400px;
-  background-image: url(../../../../assets/kitty/kitty.webp);
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
 .home-subtitle-row {
   padding: 5px 0;
-}
-
-.loader-logo {
-  display: flex;
-  width: 350px;
-  min-width: 350px;
-  height: 350px;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
@@ -82,7 +69,7 @@
     font-size: 22px;
     padding: 50px;
   }
-  #home-logo {
+  #desktop-logo {
     display: flex;
   }
   #mobile-logo {
@@ -95,7 +82,7 @@
     font-size: 26px;
     padding: 50px;
   }
-  #home-logo {
+  #desktop-logo {
     display: flex;
   }
   #mobile-logo {

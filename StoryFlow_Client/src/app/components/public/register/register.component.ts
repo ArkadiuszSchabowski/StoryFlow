@@ -12,9 +12,10 @@ import { LoginDto } from 'src/app/models/login-dto';
 import { RegisterUserDto } from 'src/app/models/register-user-dto';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.scss'],
+    standalone: false
 })
 export class RegisterComponent implements OnInit {
   hidePassword = signal(true);

@@ -19,9 +19,10 @@ import { GetUserDto } from 'src/app/models/get-user-dto';
 import { StoryFilter } from 'src/app/models/story-filter-dto';
 
 @Component({
-  selector: 'app-library-preview',
-  templateUrl: './library-preview.component.html',
-  styleUrls: ['./library-preview.component.scss'],
+    selector: 'app-library-preview',
+    templateUrl: './library-preview.component.html',
+    styleUrls: ['./library-preview.component.scss'],
+    standalone: false
 })
 export class LibraryPreviewComponent implements OnInit {
   stories: GetStoryViewDto[] = [];
