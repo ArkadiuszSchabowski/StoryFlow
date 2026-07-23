@@ -6,9 +6,11 @@ import { StoryCreateComponent } from 'src/app/components/auth/moderator/story-cr
 import { TextDisplayComponent } from 'src/app/components/auth/text-display/text-display.component';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LottieModule } from 'ngx-lottie';
+import { LottieComponent, provideLottieOptions } from 'ngx-lottie';
 import { playerFactory } from 'src/app/config/lottie.config';
 import { LibraryPreviewComponent } from 'src/app/components/auth/moderator/library-preview/library-preview.component';
+import { SezonSelectionComponent } from 'src/app/components/auth/sezon-selection/sezon-selection.component';
+import { SezonComponent } from 'src/app/components/auth/sezon/sezon.component';
 
 @NgModule({
   declarations: [
@@ -17,20 +19,25 @@ import { LibraryPreviewComponent } from 'src/app/components/auth/moderator/libra
     StoryCreateComponent,
     TextDisplayComponent,
     LibraryPreviewComponent,
+    SezonSelectionComponent,
+    SezonComponent,
   ],
   imports: [
     CommonModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    LottieModule.forRoot({ player: playerFactory }),
+    LottieComponent,
   ],
   exports: [
     QuizCreateComponent,
     ProfileComponent,
     StoryCreateComponent,
     TextDisplayComponent,
-    LibraryPreviewComponent
+    LibraryPreviewComponent,
+    SezonSelectionComponent,
+    SezonComponent,
   ],
+  providers: [provideLottieOptions({ player: playerFactory })],
 })
 export class AuthModule {}

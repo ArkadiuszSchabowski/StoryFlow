@@ -12,7 +12,7 @@
   min-width: 300px;
   padding: 20px;
   border-radius: 25px;
-  background-color: mat.get-color-from-palette(theme.$accent);
+  background-color: mat.m2-get-color-from-palette(theme.$accent);
 }
 
 #profile-information-label {

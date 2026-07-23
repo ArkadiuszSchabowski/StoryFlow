@@ -62,19 +62,11 @@
   padding-top: 10px;
 }
 
-#submit-button {
-  background-color: mat.get-color-from-palette(theme.$accent);
-}
-
 .action-button {
   margin-right: 10px;
 }
 
 .action-button:hover {
-  background-color: #26a69a;
-}
-
-#submit-button:hover {
   background-color: #26a69a;
 }
 
@@ -91,15 +83,13 @@
   height: auto;
 }
 
-#submit-button {
-  background-color: mat.get-color-from-palette(theme.$accent);
-}
 .title {
   padding-top: 20px;
 }
 
-.submit-button {
-  width: 300px;
+.button-selected {
+  width: 320px;
+  height: 60px;
   padding: 5px;
 }
 
@@ -141,7 +131,7 @@
 #loader-button {
   margin-top: 10px;
   color: white;
-  background-color: mat.get-color-from-palette(theme.$accent);
+  background-color: mat.m2-get-color-from-palette(theme.$accent);
 }
 
 .question-card {
@@ -158,7 +148,6 @@
   background-repeat: no-repeat;
 }
 
-#next-button,
 #back-button,
 #again-button,
 #register-button {
@@ -211,7 +200,7 @@
   font-size: 20px;
 }
 
-.selected{
+.selected {
   background-color: orange;
 }
 
@@ -227,13 +216,13 @@
   background-color: green !important;
 }
 
-  .item{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: auto;
-  }
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   #text-display-container {
