@@ -76,27 +76,14 @@
   justify-content: center;
   align-items: center;
 }
-button.story-card-button {
-  font-weight: bold !important;
-  font-size: 26px !important;
-  width: 100% !important;
-  height: 50px !important;
-  color: mat.m2-get-color-from-palette(theme.$accent);
-  background-color: white;
-  margin-top: 10px;
-}
-
-.story-card-button:hover {
-  background-color: #f2f2f2;
-  border: 1px solid black;
-}
 
 #score-card {
-  font-size: 16px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   text-align: center;
+  font-size: 16px;
 }
 
 .score-item {
@@ -180,7 +167,7 @@ button.story-card-button {
 }
 
 .score-item-hint {
-  margin-top: 10px;
+  margin: 10px 0;
 }
 
 button:disabled {
@@ -194,6 +181,10 @@ button:disabled {
 
 .filter-field {
   padding: 0 10px;
+}
+
+.button-standard {
+  width: 250px;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {

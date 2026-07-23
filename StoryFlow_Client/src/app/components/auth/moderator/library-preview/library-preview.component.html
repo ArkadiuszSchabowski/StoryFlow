@@ -112,11 +112,11 @@
 
         <button
           mat-raised-button
-          class="story-card-button"
+          class="button-app-reverse-color button-standard"
           (click)="NavigateToTextDisplay(story.id)"
           [disabled]="getIcon(story.id) === 'lock'"
         >
-          {{ getIcon(story.id) === "lock" ? "ODBLOKUJ QUIZ" : "START" }}
+          {{ getIcon(story.id) === "lock" ? "POTRZEBUJESZ BILETU" : "START" }}
         </button>
       </div>
     </div>
