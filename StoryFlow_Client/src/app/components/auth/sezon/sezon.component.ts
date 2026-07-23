@@ -20,9 +20,10 @@ import { GetUserDto } from 'src/app/models/get-user-dto';
 import { StoryFilter } from 'src/app/models/story-filter-dto';
 
 @Component({
-  selector: 'app-sezon',
-  templateUrl: './sezon.component.html',
-  styleUrls: ['./sezon.component.scss'],
+    selector: 'app-sezon',
+    templateUrl: './sezon.component.html',
+    styleUrls: ['./sezon.component.scss'],
+    standalone: false
 })
 export class SezonComponent implements OnInit {
   seasonId: number = 0;

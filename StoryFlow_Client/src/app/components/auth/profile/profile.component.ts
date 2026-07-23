@@ -3,9 +3,10 @@ import { UserService } from 'src/app/_services/user.service';
 import { GetUserDto } from 'src/app/models/get-user-dto';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss'],
+    selector: 'app-profile',
+    templateUrl: './profile.component.html',
+    styleUrls: ['./profile.component.scss'],
+    standalone: false
 })
 export class ProfileComponent implements OnInit {
   profile: GetUserDto | undefined;

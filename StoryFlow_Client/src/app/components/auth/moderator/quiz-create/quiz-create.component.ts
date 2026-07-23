@@ -9,9 +9,10 @@ import { GenerateQuizResponseDto } from 'src/app/models/generate-quiz-response';
 import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
 
 @Component({
-  selector: 'app-quiz-create',
-  templateUrl: './quiz-create.component.html',
-  styleUrls: ['./quiz-create.component.scss'],
+    selector: 'app-quiz-create',
+    templateUrl: './quiz-create.component.html',
+    styleUrls: ['./quiz-create.component.scss'],
+    standalone: false
 })
 export class QuizCreateComponent implements OnInit {
   stories: GetStoryViewDto[] = [];

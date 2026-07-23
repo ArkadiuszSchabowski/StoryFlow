@@ -7,9 +7,10 @@ import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
 import { GetUserDto } from 'src/app/models/get-user-dto';
 
 @Component({
-  selector: 'app-sezon-selection',
-  templateUrl: './sezon-selection.component.html',
-  styleUrls: ['./sezon-selection.component.scss'],
+    selector: 'app-sezon-selection',
+    templateUrl: './sezon-selection.component.html',
+    styleUrls: ['./sezon-selection.component.scss'],
+    standalone: false
 })
 export class SezonSelectionComponent implements OnInit {
   seasons: any;

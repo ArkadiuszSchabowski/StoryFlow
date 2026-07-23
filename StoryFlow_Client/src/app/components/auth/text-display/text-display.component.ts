@@ -17,9 +17,10 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { NavbarService } from 'src/app/_services/navbar.service';
 
 @Component({
-  selector: 'app-text-display',
-  templateUrl: './text-display.component.html',
-  styleUrls: ['./text-display.component.scss'],
+    selector: 'app-text-display',
+    templateUrl: './text-display.component.html',
+    styleUrls: ['./text-display.component.scss'],
+    standalone: false
 })
 export class TextDisplayComponent implements OnInit {
   storyId: number = 0;

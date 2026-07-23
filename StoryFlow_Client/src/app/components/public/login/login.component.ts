@@ -10,9 +10,10 @@ import { UserService } from 'src/app/_services/user.service';
 import { LoginDto } from 'src/app/models/login-dto';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    standalone: false
 })
 export class LoginComponent implements OnInit {
   hidePassword = signal(true);
