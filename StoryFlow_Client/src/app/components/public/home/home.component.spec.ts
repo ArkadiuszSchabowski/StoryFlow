@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { LottieComponent, provideLottieOptions } from 'ngx-lottie';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -11,8 +12,7 @@ describe('HomeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent],
-      imports: [LottieComponent],
+      imports: [HomeComponent, MatButtonModule, LottieComponent],
       providers: [
         provideLottieOptions({
           player: () => import('lottie-web'),

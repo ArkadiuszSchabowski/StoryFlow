@@ -2,10 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/public/home/home.component';
 import { ProfileComponent } from './components/auth/profile/profile.component';
-import { LoginComponent } from './components/public/login/login.component';
-import { RegisterComponent } from './components/public/register/register.component';
 import { TextDisplayComponent } from './components/auth/text-display/text-display.component';
-import { ErrorPageComponent } from './components/system/error-page/error-page.component';
 import { StoryCreateComponent } from './components/auth/moderator/story-create/story-create.component';
 import { QuizCreateComponent } from './components/auth/moderator/quiz-create/quiz-create.component';
 import { SezonComponent } from './components/auth/sezon/sezon.component';
@@ -18,11 +15,23 @@ const routes: Routes = [
     component: HomeComponent,
     title: 'StoryFlow - Nauka angielskiego z kotką Luną',
   },
-  { path: 'login', component: LoginComponent, title: 'Logowanie - StoryFlow' },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./components/public/login/login.component').then(m => m.LoginComponent),
+    title: 'Logowanie - StoryFlow',
+  },
   {
     path: 'register',
-    component: RegisterComponent,
+    loadComponent: () =>
+      import('./components/public/register/register.component').then(m => m.RegisterComponent),
     title: 'Rejestracja - StoryFlow',
+  },
+  {
+    path: 'error-page',
+    loadComponent: () =>
+      import('./components/public/error-page/error-page.component').then(m => m.ErrorPageComponent),
+    title: 'Błąd - StoryFlow',
   },
   {
     path: 'sezon-selection',
@@ -33,11 +42,6 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent,
     title: 'Profil użytkownika - StoryFlow',
-  },
-  {
-    path: 'error-page',
-    component: ErrorPageComponent,
-    title: 'Błąd - StoryFlow',
   },
   {
     path: 'create-story',

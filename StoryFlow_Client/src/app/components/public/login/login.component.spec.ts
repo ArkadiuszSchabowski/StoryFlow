@@ -7,6 +7,11 @@ import { MaterialModule } from 'src/app/modules/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -17,8 +22,7 @@ describe('LoginComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [LoginComponent],
-    imports: [BrowserAnimationsModule, MaterialModule, ReactiveFormsModule],
+    imports: [LoginComponent, BrowserAnimationsModule, ReactiveFormsModule, MatButtonModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule ],
     providers: [{ provide: ToastrService, useClass: MockToastrService }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 });
     fixture = TestBed.createComponent(LoginComponent);

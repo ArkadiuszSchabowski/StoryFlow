@@ -1,14 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
+import { LottieComponent } from 'ngx-lottie';
 import { LoaderService } from 'src/app/_services/loader.service';
 import { NavbarService } from 'src/app/_services/navbar.service';
 import { StoryService } from 'src/app/_services/story.service';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss'],
-    standalone: false
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
+  standalone: true,
+  imports: [CommonModule, LottieComponent, MatButtonModule],
 })
 export class HomeComponent implements OnInit {
   constructor(
@@ -18,7 +22,19 @@ export class HomeComponent implements OnInit {
     private navbarService: NavbarService,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => this.prefetchLoaderAssets());
+    } else {
+      setTimeout(() => this.prefetchLoaderAssets(), 500);
+    }
+  }
+
+  private prefetchLoaderAssets(): void {
+    fetch('assets/kitty/kitty.json').catch(() => {});
+
+    import('lottie-web').catch(() => {});
+  }
 
   navigateToWelcomeStory() {
     const WELCOME_STORY_ID: number = 79;
@@ -40,7 +56,7 @@ export class HomeComponent implements OnInit {
           this.navbarService.unblockButtons();
         }, remaining);
       },
-      error: (error) => {
+      error: () => {
         this.loaderService.hide();
         this.navbarService.unblockButtons();
       },
