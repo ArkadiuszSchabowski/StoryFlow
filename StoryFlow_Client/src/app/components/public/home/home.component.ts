@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
     if ('requestIdleCallback' in window) {
       requestIdleCallback(() => this.prefetchLoaderAssets());
     } else {
-      setTimeout(() => this.prefetchLoaderAssets(), 2000);
+      setTimeout(() => this.prefetchLoaderAssets(), 10);
     }
   }
 
