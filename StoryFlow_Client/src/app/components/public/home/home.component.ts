@@ -23,11 +23,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(() => this.prefetchLoaderAssets());
-    } else {
-      setTimeout(() => this.prefetchLoaderAssets(), 2000);
-    }
+    this.prefetchLoaderAssets();
   }
 
   private prefetchLoaderAssets(): void {
