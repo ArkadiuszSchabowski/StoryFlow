@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ErrorPageComponent } from './error-page.component';
+import { MatButtonModule } from '@angular/material/button';
 
 describe('ErrorPageComponent', () => {
   let component: ErrorPageComponent;
@@ -8,7 +9,7 @@ describe('ErrorPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ErrorPageComponent]
+      imports: [ErrorPageComponent, MatButtonModule]
     });
     fixture = TestBed.createComponent(ErrorPageComponent);
     component = fixture.componentInstance;

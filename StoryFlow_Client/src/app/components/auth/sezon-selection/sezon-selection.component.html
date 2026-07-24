@@ -14,7 +14,7 @@
     </div>
   </div>
     <h1 id="h1-title">Wybierz sezon</h1>
-  <div id="season" *ngIf="profile.stars">
+  <div id="season" *ngIf="profile.stars !== null && profile.stars !== undefined">
     <div
       class="season-div"
       *ngFor="let season of seasons"

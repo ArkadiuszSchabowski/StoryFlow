@@ -11,8 +11,9 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { MaterialModule } from './modules/material/material.module';
-import { PublicModule } from './modules/public/public.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { playerFactory } from './config/lottie.config';
+import { provideLottieOptions } from 'ngx-lottie';
 
 @NgModule({
   declarations: [
@@ -28,10 +29,9 @@ import { AuthModule } from './modules/auth/auth.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    PublicModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({}),
   ],
-  providers: [provideHttpClient(withInterceptorsFromDi())],
+  providers: [provideHttpClient(withInterceptorsFromDi()), provideLottieOptions({ player: playerFactory })],
 })
 export class AppModule {}

@@ -5,7 +5,7 @@ import { ProfileComponent } from './components/auth/profile/profile.component';
 import { LoginComponent } from './components/public/login/login.component';
 import { RegisterComponent } from './components/public/register/register.component';
 import { TextDisplayComponent } from './components/auth/text-display/text-display.component';
-import { ErrorPageComponent } from './components/system/error-page/error-page.component';
+import { ErrorPageComponent } from './components/public/error-page/error-page.component';
 import { StoryCreateComponent } from './components/auth/moderator/story-create/story-create.component';
 import { QuizCreateComponent } from './components/auth/moderator/quiz-create/quiz-create.component';
 import { SezonComponent } from './components/auth/sezon/sezon.component';
