@@ -4,20 +4,3 @@
 #action-button {
   margin: 50px 0 30px 0;
 }
-
-.button-app {
-  font-weight: bolder;
-  color: white !important;
-  background-color: mat.m2-get-color-from-palette(theme.$accent) !important;
-  border-radius: 12px;
-}
-
-.button-app:hover {
-  background-color: #26a69a !important;
-}
-
-.button-standard {
-  width: 200px;
-  height: 40px;
-  font-size: 18px;
-}
