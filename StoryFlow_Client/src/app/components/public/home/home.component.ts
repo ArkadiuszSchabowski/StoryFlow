@@ -26,17 +26,11 @@ export class HomeComponent implements OnInit {
     this.prefetchLoaderAssetsWhenIdle();
   }
 
-  private prefetchLoaderAssetsWhenIdle(): void {
-    const prefetch = () => {
+  prefetchLoaderAssetsWhenIdle(): void {
+    setTimeout(() => {
       fetch('assets/kitty/kitty.json').catch(() => {});
       import('lottie-web').catch(() => {});
-    };
-
-    if ('requestIdleCallback' in window) {
-      (window as any).requestIdleCallback(prefetch, { timeout: 3000 });
-    } else {
-      setTimeout(prefetch, 2000);
-    }
+    }, 2000);
   }
 
   navigateToWelcomeStory() {

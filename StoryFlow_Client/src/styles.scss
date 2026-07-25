@@ -31,9 +31,10 @@ body {
   color: white;
   background-color: #0a192f;
 }
+
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -221,30 +222,6 @@ mat-form-field.card-input {
   -webkit-font-feature-settings: "liga";
   font-feature-settings: "liga";
   -webkit-font-smoothing: antialiased;
-}
-
-@font-face {
-  font-display: swap;
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 300;
-  src: url(/assets/fonts/roboto-v51-latin_latin-ext-300.woff2) format("woff2");
-}
-
-@font-face {
-  font-display: swap;
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  src: url(/assets/fonts/roboto-v51-latin_latin-ext-regular.woff2) format("woff2");
-}
-
-@font-face {
-  font-display: swap;
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 500;
-  src: url(/assets/fonts/roboto-v51-latin_latin-ext-500.woff2) format("woff2");
 }
 
 @media (min-width: 600px) {
