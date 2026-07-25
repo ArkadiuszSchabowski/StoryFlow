@@ -6,6 +6,7 @@
         class="mobile-button"
         *ngIf="!(authService.currentUserSource$ | async)"
         [disabled]="!(navbarService.navbarPublicButton$ | async)"
+        aria-label="Strona główna"
       >
         <mat-icon>home</mat-icon>
       </button>
@@ -14,6 +15,7 @@
         class="mobile-button"
         *ngIf="!(authService.currentUserSource$ | async)"
         [disabled]="!(navbarService.navbarPublicButton$ | async)"
+        aria-label="Zaloguj się"
       >
         <mat-icon>key</mat-icon>
       </button>
@@ -22,6 +24,7 @@
         class="mobile-button"
         *ngIf="authService.currentUserSource$ | async"
         [disabled]="!(navbarService.navbarPublicButton$ | async)"
+        aria-label="Wybór sezonu"
       >
         <mat-icon>public</mat-icon>
       </button>
@@ -29,6 +32,7 @@
         class="mobile-button"
         *ngIf="authService.isModerator$ | async"
         [disabled]="!(navbarService.navbarPublicButton$ | async)"
+        aria-label="Panel moderatora"
       >
         <div
           mat-button
@@ -44,6 +48,7 @@
         class="mobile-button"
         *ngIf="authService.isAdmin$ | async"
         [disabled]="!(navbarService.navbarPublicButton$ | async)"
+        aria-label="Panel administratora"
       >
         <div
           mat-button
@@ -59,6 +64,7 @@
         class="mobile-button"
         *ngIf="authService.currentUserSource$ | async"
         [disabled]="!(navbarService.navbarPublicButton$ | async)"
+        aria-label="Profil użytkownika"
       >
         <div
           mat-button
@@ -80,12 +86,14 @@
         class="desktop-button"
         *ngIf="!(authService.currentUserSource$ | async)"
         [disabled]="!(navbarService.navbarPublicButton$ | async)"
+        aria-label="Strona główna"
       ></button>
       <button
         routerLink="/login"
         class="desktop-button"
         *ngIf="!(authService.currentUserSource$ | async)"
         [disabled]="!(navbarService.navbarPublicButton$ | async)"
+        aria-label="Zaloguj się"
       >
         ZALOGUJ
       </button>
@@ -94,6 +102,7 @@
         class="desktop-button"
         *ngIf="authService.currentUserSource$ | async"
         [disabled]="!(navbarService.navbarPublicButton$ | async)"
+        aria-label="Wybór sezonu"
       >
         MOJA PODRÓŻ
       </button>
@@ -103,6 +112,7 @@
         [disabled]="!(navbarService.navbarPublicButton$ | async)"
         [matMenuTriggerFor]="moderatorMenu"
         #moderatorTrigger="matMenuTrigger"
+        aria-label="Panel moderatora"
       >
         <div class="desktop-button-body">
           MODERATOR
@@ -115,6 +125,7 @@
         [disabled]="!(navbarService.navbarPublicButton$ | async)"
         [matMenuTriggerFor]="administratorMenu"
         #administratorTrigger="matMenuTrigger"
+        aria-label="Panel administratora"
       >
         <div class="desktop-button-body">
           ADMINISTRATOR
@@ -127,6 +138,7 @@
         [disabled]="!(navbarService.navbarPublicButton$ | async)"
         [matMenuTriggerFor]="profileMenu"
         #profileTrigger="matMenuTrigger"
+        aria-label="Profil użytkownika"
       >
         <div class="desktop-button-body">
           PROFIL
@@ -137,18 +149,32 @@
   </div>
 </mat-toolbar>
 <mat-menu #profileMenu="matMenu" class="mat-menu-desktop">
-  <button mat-menu-item routerLink="/profile">
+  <button mat-menu-item routerLink="/profile" aria-label="Informacje profilowe">
     INFORMACJE
   </button>
-  <button mat-menu-item (click)="logout()">WYLOGUJ</button>
+  <button mat-menu-item (click)="logout()" aria-label="Wyloguj się">
+    WYLOGUJ
+  </button>
 </mat-menu>
 <mat-menu #moderatorMenu="matMenu" class="mat-menu-desktop">
-  <button mat-menu-item routerLink="/library">PODGLĄD HISTORII</button>
-  <button mat-menu-item routerLink="/create-story">NOWA HISTORIA</button>
-  <button mat-menu-item routerLink="/create-quiz">NOWY QUIZ</button>
+  <button mat-menu-item routerLink="/library" aria-label="Podgląd historii">
+    PODGLĄD HISTORII
+  </button>
+  <button mat-menu-item routerLink="/create-story" aria-label="Nowa historia">
+    NOWA HISTORIA
+  </button>
+  <button mat-menu-item routerLink="/create-quiz" aria-label="Nowy quiz">
+    NOWY QUIZ
+  </button>
 </mat-menu>
 <mat-menu #administratorMenu="matMenu" class="mat-menu-desktop">
-  <button mat-menu-item routerLink="/library">PODGLĄD HISTORII</button>
-  <button mat-menu-item routerLink="/create-story">NOWA HISTORIA</button>
-  <button mat-menu-item routerLink="/create-quiz">NOWY QUIZ</button>
+  <button mat-menu-item routerLink="/library" aria-label="Podgląd historii">
+    PODGLĄD HISTORII
+  </button>
+  <button mat-menu-item routerLink="/create-story" aria-label="Nowa historia">
+    NOWA HISTORIA
+  </button>
+  <button mat-menu-item routerLink="/create-quiz" aria-label="Nowy quiz">
+    NOWY QUIZ
+  </button>
 </mat-menu>
