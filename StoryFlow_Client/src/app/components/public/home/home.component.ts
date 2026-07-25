@@ -23,13 +23,20 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.prefetchLoaderAssets();
+    this.prefetchLoaderAssetsWhenIdle();
   }
 
-  private prefetchLoaderAssets(): void {
-    fetch('assets/kitty/kitty.json').catch(() => {});
+  private prefetchLoaderAssetsWhenIdle(): void {
+    const prefetch = () => {
+      fetch('assets/kitty/kitty.json').catch(() => {});
+      import('lottie-web').catch(() => {});
+    };
 
-    import('lottie-web').catch(() => {});
+    if ('requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(prefetch, { timeout: 3000 });
+    } else {
+      setTimeout(prefetch, 2000);
+    }
   }
 
   navigateToWelcomeStory() {
