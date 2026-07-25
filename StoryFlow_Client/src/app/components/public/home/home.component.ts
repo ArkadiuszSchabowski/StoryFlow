@@ -22,14 +22,7 @@ export class HomeComponent implements OnInit {
     private navbarService: NavbarService,
   ) {}
 
-  ngOnInit(): void {
-    this.fetchLoaderAssets();
-  }
-
-    fetchLoaderAssets(): void {
-    fetch('assets/kitty/kitty.json').catch(() => {});
-    import('lottie-web').catch(() => {});
-  }
+  ngOnInit(): void {}
 
   navigateToWelcomeStory() {
     const WELCOME_STORY_ID: number = 79;
