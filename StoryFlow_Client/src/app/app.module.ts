@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
+  withFetch,
 } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -20,6 +21,9 @@ import { provideLottieOptions } from 'ngx-lottie';
     BrowserAnimationsModule,
     ToastrModule.forRoot({}),
   ],
-  providers: [provideHttpClient(withInterceptorsFromDi()), provideLottieOptions({ player: playerFactory })],
+  providers: [
+    provideHttpClient(withInterceptorsFromDi(), withFetch()),
+    provideLottieOptions({ player: playerFactory }),
+  ],
 })
 export class AppModule {}
