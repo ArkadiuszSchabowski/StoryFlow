@@ -16,8 +16,7 @@ describe('StoryCreateComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [StoryCreateComponent],
-    imports: [BrowserAnimationsModule, MaterialModule, ReactiveFormsModule],
+    imports: [StoryCreateComponent, BrowserAnimationsModule, MaterialModule, ReactiveFormsModule],
     providers: [{ provide: ToastrService, useClass: MockToastrService }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 });
     fixture = TestBed.createComponent(StoryCreateComponent);

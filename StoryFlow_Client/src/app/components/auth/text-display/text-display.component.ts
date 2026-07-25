@@ -15,12 +15,25 @@ import { LoaderService } from 'src/app/_services/loader.service';
 import { QuizResult } from 'src/app/models/quiz-result';
 import { AuthService } from 'src/app/_services/auth.service';
 import { NavbarService } from 'src/app/_services/navbar.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { LottieComponent } from 'ngx-lottie';
 
 @Component({
-    selector: 'app-text-display',
-    templateUrl: './text-display.component.html',
-    styleUrls: ['./text-display.component.scss'],
-    standalone: false
+  selector: 'app-text-display',
+  templateUrl: './text-display.component.html',
+  styleUrls: ['./text-display.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatIconModule,
+    LottieComponent
+  ],
 })
 export class TextDisplayComponent implements OnInit {
   storyId: number = 0;

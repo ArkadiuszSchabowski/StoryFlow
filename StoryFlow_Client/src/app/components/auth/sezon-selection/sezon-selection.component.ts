@@ -1,4 +1,8 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StoryService } from 'src/app/_services/story.service';
@@ -7,10 +11,17 @@ import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
 import { GetUserDto } from 'src/app/models/get-user-dto';
 
 @Component({
-    selector: 'app-sezon-selection',
-    templateUrl: './sezon-selection.component.html',
-    styleUrls: ['./sezon-selection.component.scss'],
-    standalone: false
+  selector: 'app-sezon-selection',
+  templateUrl: './sezon-selection.component.html',
+  styleUrls: ['./sezon-selection.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatIconModule
+  ],
 })
 export class SezonSelectionComponent implements OnInit {
   seasons: any;
@@ -33,7 +44,7 @@ export class SezonSelectionComponent implements OnInit {
     this.userService.getProfile().subscribe({
       next: (response) => {
         this.profile = response;
-        console.log(this.profile)
+        console.log(this.profile);
       },
       error: () => {},
     });

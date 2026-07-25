@@ -1,5 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StoryService } from 'src/app/_services/story.service';
@@ -19,10 +23,11 @@ import { GetUserDto } from 'src/app/models/get-user-dto';
 import { StoryFilter } from 'src/app/models/story-filter-dto';
 
 @Component({
-    selector: 'app-library-preview',
-    templateUrl: './library-preview.component.html',
-    styleUrls: ['./library-preview.component.scss'],
-    standalone: false
+  selector: 'app-library-preview',
+  templateUrl: './library-preview.component.html',
+  styleUrls: ['./library-preview.component.scss'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatIconModule, MatSelectModule],
 })
 export class LibraryPreviewComponent implements OnInit {
   stories: GetStoryViewDto[] = [];
@@ -63,7 +68,6 @@ export class LibraryPreviewComponent implements OnInit {
   }
 
   get() {
-      
     this.openedStoryId = null;
     this.dto = {
       languageLevel: this.form.value.languageLevel,

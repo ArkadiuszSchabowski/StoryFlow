@@ -22,8 +22,7 @@ describe('TextDisplayComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TextDisplayComponent],
-      imports: [],
+      imports: [TextDisplayComponent],
       providers: [
         { provide: ActivatedRoute, useClass: MockActivatedRoute },
         provideHttpClient(withInterceptorsFromDi()),

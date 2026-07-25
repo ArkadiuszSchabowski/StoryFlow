@@ -24,7 +24,7 @@ describe('SezonComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SezonComponent],
+      imports: [SezonComponent],
       providers: [
         { provide: ActivatedRoute, useClass: MockActivatedRoute },
         { provide: ToastrService, useClass: MockToastrService },

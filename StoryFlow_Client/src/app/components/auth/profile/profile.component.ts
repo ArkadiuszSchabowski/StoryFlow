@@ -1,12 +1,21 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 import { UserService } from 'src/app/_services/user.service';
 import { GetUserDto } from 'src/app/models/get-user-dto';
 
 @Component({
-    selector: 'app-profile',
-    templateUrl: './profile.component.html',
-    styleUrls: ['./profile.component.scss'],
-    standalone: false
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatIconModule
+  ],
 })
 export class ProfileComponent implements OnInit {
   profile: GetUserDto | undefined;
