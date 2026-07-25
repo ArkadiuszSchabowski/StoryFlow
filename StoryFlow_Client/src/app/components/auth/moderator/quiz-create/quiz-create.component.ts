@@ -1,5 +1,8 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
 import { ToastrService } from 'ngx-toastr';
 import { QuizService } from 'src/app/_services/quiz.service';
 import { StoryService } from 'src/app/_services/story.service';
@@ -9,10 +12,11 @@ import { GenerateQuizResponseDto } from 'src/app/models/generate-quiz-response';
 import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
 
 @Component({
-    selector: 'app-quiz-create',
-    templateUrl: './quiz-create.component.html',
-    styleUrls: ['./quiz-create.component.scss'],
-    standalone: false
+  selector: 'app-quiz-create',
+  templateUrl: './quiz-create.component.html',
+  styleUrls: ['./quiz-create.component.scss'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatSelectModule],
 })
 export class QuizCreateComponent implements OnInit {
   stories: GetStoryViewDto[] = [];
@@ -76,37 +80,34 @@ export class QuizCreateComponent implements OnInit {
         this.generateQuizResponse = response;
         this.isResponse = true;
       },
-      error: (error) => {
-      },
+      error: (error) => {},
     });
   }
 
-public add() {
-  if (!this.generateQuizResponse) {
-    return;
-  }
+  public add() {
+    if (!this.generateQuizResponse) {
+      return;
+    }
 
-  const dto: AddQuizDto = {
-    storyId: this.storyId,
-    questions: this.generateQuizResponse.questions.map((q) => ({
-      questionText: q.question,
-      answers: q.answers.map((answer, index) => ({
-        key: String.fromCharCode(65 + index), // A, B, C, D
-        text: answer,
-        isCorrect: index === q.correctAnswerIndex,
+    const dto: AddQuizDto = {
+      storyId: this.storyId,
+      questions: this.generateQuizResponse.questions.map((q) => ({
+        questionText: q.question,
+        answers: q.answers.map((answer, index) => ({
+          key: String.fromCharCode(65 + index), // A, B, C, D
+          text: answer,
+          isCorrect: index === q.correctAnswerIndex,
+        })),
       })),
-    })),
-  };
+    };
 
-  this.quizService.add(dto).subscribe({
-    next: () => {
-      this.toastr.success('Quiz został dodany.');
-      this.addForm.reset();
-      this.getAll();
-    },
-    error: (error) => {
-
-    },
-  });
-}
+    this.quizService.add(dto).subscribe({
+      next: () => {
+        this.toastr.success('Quiz został dodany.');
+        this.addForm.reset();
+        this.getAll();
+      },
+      error: (error) => {},
+    });
+  }
 }

@@ -1,5 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { ToastrService } from 'ngx-toastr';
 import { StoryService } from 'src/app/_services/story.service';
 import {
@@ -11,10 +16,11 @@ import { AddStoryDto } from 'src/app/models/add-story-dto';
 import { GenerateStoryDto } from 'src/app/models/generate-story-dto';
 
 @Component({
-    selector: 'app-story-create',
-    templateUrl: './story-create.component.html',
-    styleUrls: ['./story-create.component.scss'],
-    standalone: false
+  selector: 'app-story-create',
+  templateUrl: './story-create.component.html',
+  styleUrls: ['./story-create.component.scss'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatSelectModule, MatFormFieldModule, MatInputModule],
 })
 export class StoryCreateComponent {
   categories = CATEGORIES;

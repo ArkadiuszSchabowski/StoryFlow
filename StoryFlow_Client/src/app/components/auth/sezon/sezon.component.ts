@@ -1,5 +1,8 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LoaderService } from 'src/app/_services/loader.service';
@@ -20,10 +23,11 @@ import { GetUserDto } from 'src/app/models/get-user-dto';
 import { StoryFilter } from 'src/app/models/story-filter-dto';
 
 @Component({
-    selector: 'app-sezon',
-    templateUrl: './sezon.component.html',
-    styleUrls: ['./sezon.component.scss'],
-    standalone: false
+  selector: 'app-sezon',
+  templateUrl: './sezon.component.html',
+  styleUrls: ['./sezon.component.scss'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatIconModule],
 })
 export class SezonComponent implements OnInit {
   seasonId: number = 0;

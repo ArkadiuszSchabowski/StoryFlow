@@ -12,7 +12,7 @@ describe('SezonSelectionComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SezonSelectionComponent],
+      imports: [SezonSelectionComponent],
       providers: [provideHttpClient(), provideHttpClientTesting(), { provide: ToastrService, useClass: MockToastrService }],
     });
     fixture = TestBed.createComponent(SezonSelectionComponent);

@@ -10,8 +10,7 @@ describe('ProfileComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [ProfileComponent],
-    imports: [MaterialModule],
+    imports: [ProfileComponent, MaterialModule],
     providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 });
     fixture = TestBed.createComponent(ProfileComponent);

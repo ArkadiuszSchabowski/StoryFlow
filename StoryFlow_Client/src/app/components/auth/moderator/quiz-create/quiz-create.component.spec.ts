@@ -12,7 +12,7 @@ describe('QuizCreateComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [QuizCreateComponent],
+      imports: [QuizCreateComponent],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
