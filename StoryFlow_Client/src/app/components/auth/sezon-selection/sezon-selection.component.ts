@@ -44,7 +44,6 @@ export class SezonSelectionComponent implements OnInit {
     this.userService.getProfile().subscribe({
       next: (response) => {
         this.profile = response;
-        console.log(this.profile);
       },
       error: () => {},
     });

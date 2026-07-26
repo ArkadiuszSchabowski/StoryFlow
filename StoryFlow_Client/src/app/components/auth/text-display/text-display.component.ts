@@ -32,7 +32,7 @@ import { LottieComponent } from 'ngx-lottie';
     ReactiveFormsModule,
     MatButtonModule,
     MatIconModule,
-    LottieComponent
+    LottieComponent,
   ],
 })
 export class TextDisplayComponent implements OnInit {
@@ -49,7 +49,7 @@ export class TextDisplayComponent implements OnInit {
 
   currentQuestionIndex = 0;
 
-  isNextButtonDisabled = true;
+  answerSubmitted = false;
   isQuizFinishied = false;
   quizResult: QuizResult | null = null;
 
@@ -85,7 +85,7 @@ export class TextDisplayComponent implements OnInit {
   }
 
   checkAnswer() {
-    this.isNextButtonDisabled = false;
+    this.answerSubmitted = true;
 
     const questionId = this.quiz!.questions[this.currentQuestionIndex].id;
     const answerId = this.selectedAnswers[questionId];
@@ -113,7 +113,7 @@ export class TextDisplayComponent implements OnInit {
 
     if (this.currentQuestionIndex < this.quiz.questions.length - 1) {
       this.currentQuestionIndex++;
-      this.isNextButtonDisabled = true;
+      this.answerSubmitted = false;
     } else {
       this.send();
     }
@@ -127,8 +127,15 @@ export class TextDisplayComponent implements OnInit {
     this.router.navigateByUrl('/sezon-selection');
   }
 
-  navigateToTextStory(id: number) {
-    window.location.href = `/text/${id}?showLoader=false`;
+  resetState(): void {
+    this.loaderService.hide();
+    this.isQuiz = false;
+    this.quizSubmission = { storyId: 0, answers: [] };
+    this.selectedAnswers = {};
+    this.currentQuestionIndex = 0;
+    this.answerSubmitted = false;
+    this.isQuizFinishied = false;
+    this.quizResult = null;
   }
 
   navigateToRegister() {

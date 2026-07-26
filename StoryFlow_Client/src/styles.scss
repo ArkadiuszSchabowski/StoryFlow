@@ -129,6 +129,7 @@ mat-form-field.card-input {
   color: white !important;
   background-color: mat.m2-get-color-from-palette($accent) !important;
   border-radius: 12px;
+  cursor: pointer;
 }
 
 .button-app:hover {
@@ -163,7 +164,7 @@ mat-form-field.card-input {
   background-color: #8c8b8b !important;
 }
 
-.disabled:hover {
+.disabled:not(.correct):not(.wrong):hover {
   background-color: #8c8b8b !important;
 }
 

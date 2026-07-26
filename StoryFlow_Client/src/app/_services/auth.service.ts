@@ -10,8 +10,17 @@ export class AuthService {
   currentUserSource$ = this.currentUserSource.asObservable();
   private isBrowser: boolean;
 
+  private authReadySource = new BehaviorSubject<boolean>(false);
+  authReady$ = this.authReadySource.asObservable();
+
   constructor(@Inject(PLATFORM_ID) platformId: Object) {
     this.isBrowser = isPlatformBrowser(platformId);
+
+    if (this.isBrowser) {
+      const token = localStorage.getItem('token');
+      this.currentUserSource.next(token);
+      this.authReadySource.next(true);
+    }
   }
 
   public isModerator$ = this.currentUserSource$.pipe(

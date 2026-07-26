@@ -1,153 +1,171 @@
-<mat-toolbar id="toolbar-container" class="toolbar">
-  <div id="mobile-navbar">
-    <div id="mobile-navbar-buttons">
-      <button
-        routerLink="/"
-        class="mobile-button"
-        *ngIf="!(authService.currentUserSource$ | async)"
-        [disabled]="!(navbarService.navbarPublicButton$ | async)"
-        aria-label="Strona główna"
-      >
-        <mat-icon>home</mat-icon>
-      </button>
-      <button
-        routerLink="/login"
-        class="mobile-button"
-        *ngIf="!(authService.currentUserSource$ | async)"
-        [disabled]="!(navbarService.navbarPublicButton$ | async)"
-        aria-label="Zaloguj się"
-      >
-        <mat-icon>key</mat-icon>
-      </button>
-      <button
-        routerLink="/sezon-selection"
-        class="mobile-button"
-        *ngIf="authService.currentUserSource$ | async"
-        [disabled]="!(navbarService.navbarPublicButton$ | async)"
-        aria-label="Wybór sezonu"
-      >
-        <mat-icon>public</mat-icon>
-      </button>
-      <button
-        class="mobile-button"
-        *ngIf="authService.isModerator$ | async"
-        [disabled]="!(navbarService.navbarPublicButton$ | async)"
-        aria-label="Panel moderatora"
-      >
-        <div
-          mat-button
-          class="mobile-button-body"
-          [matMenuTriggerFor]="moderatorMenu"
-          #moderatorTrigger="matMenuTrigger"
-        >
-          <mat-icon>security</mat-icon>
-          <mat-icon>arrow_drop_down</mat-icon>
-        </div>
-      </button>
-      <button
-        class="mobile-button"
-        *ngIf="authService.isAdmin$ | async"
-        [disabled]="!(navbarService.navbarPublicButton$ | async)"
-        aria-label="Panel administratora"
-      >
-        <div
-          mat-button
-          class="mobile-button-body"
-          [matMenuTriggerFor]="administratorMenu"
-          #administratorTrigger="matMenuTrigger"
-        >
-          <mat-icon>security</mat-icon>
-          <mat-icon>arrow_drop_down</mat-icon>
-        </div>
-      </button>
-      <button
-        class="mobile-button"
-        *ngIf="authService.currentUserSource$ | async"
-        [disabled]="!(navbarService.navbarPublicButton$ | async)"
-        aria-label="Profil użytkownika"
-      >
-        <div
-          mat-button
-          class="mobile-button-body"
-          [matMenuTriggerFor]="profileMenu"
-          #profileTrigger="matMenuTrigger"
-        >
-          <mat-icon>account_circle</mat-icon>
-          <mat-icon>arrow_drop_down</mat-icon>
-        </div>
-      </button>
+@if (authService.authReady$ | async) {
+  <mat-toolbar id="toolbar-container" class="toolbar">
+    <div id="mobile-navbar">
+      <div id="mobile-navbar-buttons">
+        @if (!(authService.currentUserSource$ | async)) {
+          <button
+            routerLink="/"
+            class="mobile-button"
+            [disabled]="!(navbarService.navbarPublicButton$ | async)"
+            aria-label="Strona główna"
+          >
+            <mat-icon>home</mat-icon>
+          </button>
+          <button
+            routerLink="/login"
+            class="mobile-button"
+            [disabled]="!(navbarService.navbarPublicButton$ | async)"
+            aria-label="Zaloguj się"
+          >
+            <mat-icon>key</mat-icon>
+          </button>
+        }
+        @if (authService.currentUserSource$ | async) {
+          <button
+            routerLink="/sezon-selection"
+            class="mobile-button"
+            [disabled]="!(navbarService.navbarPublicButton$ | async)"
+            aria-label="Wybór sezonu"
+          >
+            <mat-icon>public</mat-icon>
+          </button>
+        }
+        @if (authService.isModerator$ | async) {
+          <button
+            class="mobile-button"
+            [disabled]="!(navbarService.navbarPublicButton$ | async)"
+            aria-label="Panel moderatora"
+          >
+            <div
+              mat-button
+              class="mobile-button-body"
+              [matMenuTriggerFor]="moderatorMenu"
+              #moderatorTrigger="matMenuTrigger"
+            >
+              <mat-icon>security</mat-icon>
+              <mat-icon>arrow_drop_down</mat-icon>
+            </div>
+          </button>
+        }
+        @if (authService.isAdmin$ | async) {
+          <button
+            class="mobile-button"
+            [disabled]="!(navbarService.navbarPublicButton$ | async)"
+            aria-label="Panel administratora"
+          >
+            <div
+              mat-button
+              class="mobile-button-body"
+              [matMenuTriggerFor]="administratorMenu"
+              #administratorTrigger="matMenuTrigger"
+            >
+              <mat-icon>security</mat-icon>
+              <mat-icon>arrow_drop_down</mat-icon>
+            </div>
+          </button>
+        }
+        @if (authService.currentUserSource$ | async) {
+          <button
+            class="mobile-button"
+            [disabled]="!(navbarService.navbarPublicButton$ | async)"
+            aria-label="Profil użytkownika"
+          >
+            <div
+              mat-button
+              class="mobile-button-body"
+              [matMenuTriggerFor]="profileMenu"
+              #profileTrigger="matMenuTrigger"
+            >
+              <mat-icon>account_circle</mat-icon>
+              <mat-icon>arrow_drop_down</mat-icon>
+            </div>
+          </button>
+        }
+      </div>
     </div>
-  </div>
-  <div id="desktop-navbar">
-    <div id="desktop-navbar-buttons">
-      <button
-        routerLink="/"
-        id="desktop-button-logo"
-        class="desktop-button"
-        *ngIf="!(authService.currentUserSource$ | async)"
-        [disabled]="!(navbarService.navbarPublicButton$ | async)"
-        aria-label="Strona główna"
-      ></button>
-      <button
-        routerLink="/login"
-        class="desktop-button"
-        *ngIf="!(authService.currentUserSource$ | async)"
-        [disabled]="!(navbarService.navbarPublicButton$ | async)"
-        aria-label="Zaloguj się"
-      >
-        ZALOGUJ
-      </button>
-      <button
-        routerLink="/sezon-selection"
-        class="desktop-button"
-        *ngIf="authService.currentUserSource$ | async"
-        [disabled]="!(navbarService.navbarPublicButton$ | async)"
-        aria-label="Wybór sezonu"
-      >
-        MOJA PODRÓŻ
-      </button>
-      <button
-        class="desktop-button"
-        *ngIf="authService.isModerator$ | async"
-        [disabled]="!(navbarService.navbarPublicButton$ | async)"
-        [matMenuTriggerFor]="moderatorMenu"
-        #moderatorTrigger="matMenuTrigger"
-        aria-label="Panel moderatora"
-      >
-        <div class="desktop-button-body">
-          MODERATOR
-          <mat-icon class="desktop-icon-drop-down">arrow_drop_down</mat-icon>
-        </div>
-      </button>
-      <button
-        class="desktop-button"
-        *ngIf="authService.isAdmin$ | async"
-        [disabled]="!(navbarService.navbarPublicButton$ | async)"
-        [matMenuTriggerFor]="administratorMenu"
-        #administratorTrigger="matMenuTrigger"
-        aria-label="Panel administratora"
-      >
-        <div class="desktop-button-body">
-          ADMINISTRATOR
-          <mat-icon class="desktop-icon-drop-down">arrow_drop_down</mat-icon>
-        </div>
-      </button>
-      <button
-        class="desktop-button"
-        *ngIf="authService.currentUserSource$ | async"
-        [disabled]="!(navbarService.navbarPublicButton$ | async)"
-        [matMenuTriggerFor]="profileMenu"
-        #profileTrigger="matMenuTrigger"
-        aria-label="Profil użytkownika"
-      >
-        <div class="desktop-button-body">
-          PROFIL
-          <mat-icon class="desktop-icon-drop-down">arrow_drop_down</mat-icon>
-        </div>
-      </button>
+
+    <div id="desktop-navbar">
+      <div id="desktop-navbar-buttons">
+        @if (!(authService.currentUserSource$ | async)) {
+          <button
+            routerLink="/"
+            id="desktop-button-logo"
+            class="desktop-button"
+            [disabled]="!(navbarService.navbarPublicButton$ | async)"
+            aria-label="Strona główna"
+          ></button>
+          <button
+            routerLink="/login"
+            class="desktop-button"
+            [disabled]="!(navbarService.navbarPublicButton$ | async)"
+            aria-label="Zaloguj się"
+          >
+            ZALOGUJ
+          </button>
+        }
+        @if (authService.currentUserSource$ | async) {
+          <button
+            routerLink="/sezon-selection"
+            class="desktop-button"
+            [disabled]="!(navbarService.navbarPublicButton$ | async)"
+            aria-label="Wybór sezonu"
+          >
+            MOJA PODRÓŻ
+          </button>
+        }
+        @if (authService.isModerator$ | async) {
+          <button
+            class="desktop-button"
+            [disabled]="!(navbarService.navbarPublicButton$ | async)"
+            [matMenuTriggerFor]="moderatorMenu"
+            #moderatorTrigger="matMenuTrigger"
+            aria-label="Panel moderatora"
+          >
+            <div class="desktop-button-body">
+              MODERATOR
+              <mat-icon class="desktop-icon-drop-down"
+                >arrow_drop_down</mat-icon
+              >
+            </div>
+          </button>
+        }
+        @if (authService.isAdmin$ | async) {
+          <button
+            class="desktop-button"
+            [disabled]="!(navbarService.navbarPublicButton$ | async)"
+            [matMenuTriggerFor]="administratorMenu"
+            #administratorTrigger="matMenuTrigger"
+            aria-label="Panel administratora"
+          >
+            <div class="desktop-button-body">
+              ADMINISTRATOR
+              <mat-icon class="desktop-icon-drop-down"
+                >arrow_drop_down</mat-icon
+              >
+            </div>
+          </button>
+        }
+        @if (authService.currentUserSource$ | async) {
+          <button
+            class="desktop-button"
+            [disabled]="!(navbarService.navbarPublicButton$ | async)"
+            [matMenuTriggerFor]="profileMenu"
+            #profileTrigger="matMenuTrigger"
+            aria-label="Profil użytkownika"
+          >
+            <div class="desktop-button-body">
+              PROFIL
+              <mat-icon class="desktop-icon-drop-down"
+                >arrow_drop_down</mat-icon
+              >
+            </div>
+          </button>
+        }
+      </div>
     </div>
-  </div>
-</mat-toolbar>
+  </mat-toolbar>
+}
+
 <mat-menu #profileMenu="matMenu" class="mat-menu-desktop">
   <button mat-menu-item routerLink="/profile" aria-label="Informacje profilowe">
     INFORMACJE

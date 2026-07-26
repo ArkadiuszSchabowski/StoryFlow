@@ -7,7 +7,6 @@ import { AuthService } from './auth.service';
 import { tap } from 'rxjs';
 import { RegisterUserDto } from '../models/register-user-dto';
 import { GetUserDto } from '../models/get-user-dto';
-import { LoaderService } from './loader.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +17,6 @@ export class UserService {
   constructor(
     private http: HttpClient,
     private authService: AuthService,
-    private loaderService: LoaderService,
   ) {}
 
   getProfile() {

@@ -67,6 +67,7 @@
 }
 
 #desktop-button-logo {
+  display: none;
   background-image: url(../../../../assets/shared/logo.webp);
   background-size: 15%;
   background-repeat: no-repeat;
@@ -147,6 +148,10 @@
     display: flex;
   }
 
+  #desktop-button-logo {
+    display: flex;
+  }
+
   .desktop-button {
     display: flex;
   }
@@ -160,6 +165,10 @@
     padding: 0 100px;
   }
   #desktop-navbar {
+    display: flex;
+  }
+
+  #desktop-button-logo {
     display: flex;
   }
 

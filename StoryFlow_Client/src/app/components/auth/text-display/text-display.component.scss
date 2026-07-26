@@ -87,17 +87,11 @@
   padding-top: 20px;
 }
 
-.button-selected {
-  width: 320px;
-  height: 60px;
-  padding: 5px;
-}
-
 .question-text {
   padding: 20px 0;
 }
 
-.answer {
+#answer-button {
   padding: 5px 0;
 }
 
@@ -179,12 +173,12 @@
   font-size: 20px;
 }
 
-.selected {
-  background-color: orange;
-}
-
-.disabled:not(.wrong):not(.correct):hover {
-  background-color: #8c8b8b;
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
 }
 
 .wrong {
@@ -195,12 +189,19 @@
   background-color: green !important;
 }
 
-.item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: auto;
+.button-app-quiz {
+  font-weight: bolder;
+  border-radius: 12px;
+  color: white;
+  background-color: mat.m2-get-color-from-palette(theme.$accent);
+  cursor: pointer;
+  width: 320px;
+  height: 60px;
+  padding: 5px;
+}
+
+.button-app-quiz:hover{
+  background-color: #26a69a;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {

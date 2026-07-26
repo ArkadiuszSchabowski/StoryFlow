@@ -1,224 +1,242 @@
-<div
-  id="loader-container"
-  class="container loader-ticket-container"
-  *ngIf="
-    (loaderService.loading$ | async) &&
-    (authService.currentUserSource$ | async) &&
-    !isQuizFinishied
-  "
->
-  <div id="loader-ticket-text">
-    Twój bilet jest teraz w użyciu. Odpowiedz na wszystkie pytania, aby otrzymać
-    punkty za historię. Jeśli uzyskasz minimum 50% punktów to bilet wróci do
-    Ciebie!...
+@if (
+  (loaderService.loading$ | async) &&
+  (authService.currentUserSource$ | async) &&
+  !isQuizFinishied
+) {
+  <div id="loader-container" class="container loader-ticket-container">
+    <div id="loader-ticket-text">
+      Twój bilet jest teraz w użyciu. Odpowiedz na wszystkie pytania, aby
+      otrzymać punkty za historię. Jeśli uzyskasz minimum 50% punktów to bilet
+      wróci do Ciebie!...
+    </div>
+    <div id="loader-ticket-logo" class="image-standard"></div>
+    <button
+      mat-raised-button
+      id="loader-button"
+      class="button-app button-standard"
+      (click)="hideLoader()"
+    >
+      Dalej
+    </button>
   </div>
-  <div id="loader-ticket-logo" class="image-standard"></div>
-  <button
-    mat-raised-button
-    id="loader-button"
-    class="button-app button-standard"
-    (click)="hideLoader()"
-  >
-    Dalej
-  </button>
-</div>
+}
 
-<div
-  id="text-display-container"
-  *ngIf="story && !(loaderService.loading$ | async) && !isQuizFinishied"
->
-  <div id="text-display-subcontainer" *ngIf="!isQuiz">
-    <div id="story-information">
-      Kategoria: {{ showCategory(story.storyCategory) }}, Długość historii:
-      {{ showSize(story.storySize) }}, Poziom językowy:
-      {{ showLanguageLevel(story.languageLevel) }}
-    </div>
-
-    <div id="title-container">
-      <div>
-        <button
-          mat-raised-button
-          color="accent"
-          class="action-button"
-          (click)="changeTitleLanguage(story)"
-        >
-          <div><mat-icon>repeat</mat-icon></div>
-        </button>
-      </div>
-      <h1 id="h1-title">{{ story.visibleTitleMeaning }}</h1>
-    </div>
-
-    <div id="description-container">
-      <div>
-        <button
-          mat-raised-button
-          color="accent"
-          class="action-button"
-          (click)="changeDescriptionLanguage(story)"
-        >
-          <div><mat-icon>repeat</mat-icon></div>
-        </button>
-      </div>
-      <h3>{{ story.visibleDescriptionMeaning }}</h3>
-    </div>
-
-    <div id="sentence-container">
-      <div class="sentence-item" *ngFor="let sentence of story.sentences">
-        <div>
-          <button
-            mat-raised-button
-            color="accent"
-            class="action-button"
-            (click)="changeSentenceLanguage(sentence)"
-          >
-            <div><mat-icon>repeat</mat-icon></div>
-          </button>
+@if (story && !(loaderService.loading$ | async) && !isQuizFinishied) {
+  <div id="text-display-container">
+    @if (!isQuiz) {
+      <div id="text-display-subcontainer">
+        <div id="story-information">
+          Kategoria: {{ showCategory(story.storyCategory) }}, Długość historii:
+          {{ showSize(story.storySize) }}, Poziom językowy:
+          {{ showLanguageLevel(story.languageLevel) }}
         </div>
-        <div>{{ sentence.visibleSentenceMeaning }}</div>
-      </div>
-    </div>
-    <div class="submit-button-container">
-      <button
-        mat-raised-button
-        class="button-app button-standard"
-        type="submit"
-        (click)="gotoQuiz()"
-      >
-        QUIZ
-      </button>
-    </div>
-  </div>
 
-  <div id="quiz-container-wrapper" *ngIf="isQuiz && !isQuizFinishied && story">
-    <div id="quiz-container" class="container" *ngIf="quiz">
-      <h1 class="title">Quiz - {{ story.englishTitle }}</h1>
-
-      <form (ngSubmit)="checkAnswer()">
-        <div class="question-card" *ngIf="currentQuestion">
-          <h3 class="question-text">
-            {{ currentQuestionIndex + 1 }}. {{ currentQuestion.questionText }}
-          </h3>
-
-          <div
-            id="answer-button"
-            class="answer"
-            *ngFor="let answer of currentQuestion.answers"
-          >
+        <div id="title-container">
+          <div>
             <button
-              [ngClass]="{
-                disabled: !isNextButtonDisabled,
-                selected: selectedAnswers[currentQuestion.id] === answer.id,
-                correct: answer.isCorrect && !isNextButtonDisabled,
-                wrong:
-                  selectedAnswers[currentQuestion.id] === answer.id &&
-                  !answer.isCorrect &&
-                  !isNextButtonDisabled,
-              }"
-              [disabled]="!isNextButtonDisabled"
-              type="submit"
-              class="button-app button-selected"
-              (click)="selectedAnswers[currentQuestion.id] = answer.id"
+              mat-raised-button
+              color="accent"
+              class="action-button"
+              (click)="changeTitleLanguage(story)"
             >
-              {{ answer.text }}
+              <div><mat-icon>repeat</mat-icon></div>
             </button>
           </div>
+          <h1 id="h1-title">{{ story.visibleTitleMeaning }}</h1>
+        </div>
+
+        <div id="description-container">
+          <div>
+            <button
+              mat-raised-button
+              color="accent"
+              class="action-button"
+              (click)="changeDescriptionLanguage(story)"
+            >
+              <div><mat-icon>repeat</mat-icon></div>
+            </button>
+          </div>
+          <h3>{{ story.visibleDescriptionMeaning }}</h3>
+        </div>
+
+        <div id="sentence-container">
+          @for (sentence of story.sentences; track sentence) {
+            <div class="sentence-item">
+              <div>
+                <button
+                  mat-raised-button
+                  color="accent"
+                  class="action-button"
+                  (click)="changeSentenceLanguage(sentence)"
+                >
+                  <div><mat-icon>repeat</mat-icon></div>
+                </button>
+              </div>
+              <div>{{ sentence.visibleSentenceMeaning }}</div>
+            </div>
+          }
+        </div>
+        <div class="submit-button-container">
           <button
-            [ngClass]="{
-              disabled: isNextButtonDisabled,
-            }"
-            [disabled]="isNextButtonDisabled"
-            class="disabled button-app button-standard"
-            id="next-button"
-            (click)="showNextQuestion()"
+            mat-raised-button
+            class="button-app button-standard"
+            (click)="gotoQuiz()"
           >
-            {{
-              currentQuestionIndex === quiz.questions.length - 1
-                ? "Pokaż wynik"
-                : "Dalej"
-            }}
+            QUIZ
           </button>
         </div>
-      </form>
+      </div>
+    }
+
+    @if (isQuiz && !isQuizFinishied && story) {
+      <div id="quiz-container-wrapper">
+        @if (quiz) {
+          <div id="quiz-container" class="container">
+            <h1 class="title">Quiz - {{ story.englishTitle }}</h1>
+
+            <form (ngSubmit)="checkAnswer()">
+              @if (currentQuestion) {
+                <div class="question-card">
+                  <h3 class="question-text">
+                    {{ currentQuestionIndex + 1 }}.
+                    {{ currentQuestion.questionText }}
+                  </h3>
+
+                  @for (answer of currentQuestion.answers; track answer.id) {
+                    <div id="answer-button">
+                      <button
+                        [ngClass]="{
+                          disabled: answerSubmitted,
+                          correct: answer.isCorrect && answerSubmitted,
+                          wrong:
+                            selectedAnswers[currentQuestion.id] === answer.id &&
+                            !answer.isCorrect &&
+                            answerSubmitted,
+                        }"
+                        [disabled]="answerSubmitted"
+                        type="submit"
+                        class="button-app-quiz"
+                        (click)="
+                          selectedAnswers[currentQuestion.id] = answer.id
+                        "
+                      >
+                        {{ answer.text }}
+                      </button>
+                    </div>
+                  }
+
+                  <button
+                    [ngClass]="{
+                      disabled: !answerSubmitted,
+                    }"
+                    [disabled]="!answerSubmitted"
+                    class="disabled button-app button-standard"
+                    id="next-button"
+                    (click)="showNextQuestion()"
+                  >
+                    {{
+                      currentQuestionIndex === quiz.questions.length - 1
+                        ? "Pokaż wynik"
+                        : "Dalej"
+                    }}
+                  </button>
+                </div>
+              }
+            </form>
+          </div>
+        }
+      </div>
+    }
+  </div>
+}
+
+@if (isQuizFinishied && (loaderService.loading$ | async)) {
+  <div id="loader-container" class="container">
+    <div id="loader-text">Chwileczkę, podliczamy punkty..</div>
+    <div class="loader-logo">
+      <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>
     </div>
   </div>
-</div>
+}
 
-<div
-  id="loader-container"
-  class="container"
-  *ngIf="isQuizFinishied && (loaderService.loading$ | async)"
->
-  <div id="loader-text">Chwileczkę, podliczamy punkty..</div>
-  <div class="loader-logo">
-    <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>
-  </div>
-</div>
+@if (isQuizFinishied && !(loaderService.loading$ | async) && story) {
+  <div class="container">
+    <div class="item">Gratulacje! Ukończyłeś quiz!</div>
 
-<div
-  *ngIf="isQuizFinishied && !(loaderService.loading$ | async) && story"
-  class="container"
->
-  <div class="item">Gratulacje! Ukończyłeś quiz!</div>
-  <div class="item" *ngIf="quizResult" && story>
-    Zdobyte punkty za odpowiedzi:
-    {{
-      quizResult.points - (story.storyPoint!.bonusPointsForStoryLength ?? 0)
-    }}&nbsp;<mat-icon class="mat-icon-star-color">star</mat-icon>/
-    {{
-      (story.storyPoint!.maxPoints ?? 0) -
-        (story.storyPoint!.bonusPointsForStoryLength ?? 0)
-    }}&nbsp;<mat-icon class="mat-icon-star-color">star</mat-icon>
-  </div>
-  <div class="item">
-    Bonus za długość historii:
-    {{ story.storyPoint!.bonusPointsForStoryLength }}&nbsp;<mat-icon
-      class="mat-icon-star-color"
-      >star</mat-icon
-    >
-  </div>
+    @if (quizResult && story) {
+      <div class="item">
+        Zdobyte punkty za odpowiedzi:
+        {{
+          quizResult.points -
+            (story.storyPoint!.bonusPointsForStoryLength ?? 0)
+        }}&nbsp;<mat-icon class="mat-icon-star-color">star</mat-icon>/
+        {{
+          (story.storyPoint!.maxPoints ?? 0) -
+            (story.storyPoint!.bonusPointsForStoryLength ?? 0)
+        }}&nbsp;<mat-icon class="mat-icon-star-color">star</mat-icon>
+      </div>
+    }
 
-  <div class="item" *ngIf="quizResult">
-    Wynik quizu: {{ quizResult.points }}&nbsp;<mat-icon
-      class="mat-icon-star-color"
-      >star</mat-icon
-    >
-    / {{ story.storyPoint!.maxPoints! }}&nbsp;<mat-icon
-      class="mat-icon-star-color"
-      >star</mat-icon
-    >
+    <div class="item">
+      Bonus za długość historii:
+      {{ story.storyPoint!.bonusPointsForStoryLength }}&nbsp;<mat-icon
+        class="mat-icon-star-color"
+        >star</mat-icon
+      >
+    </div>
+
+    @if (quizResult) {
+      <div class="item">
+        Wynik quizu: {{ quizResult.points }}&nbsp;<mat-icon
+          class="mat-icon-star-color"
+          >star</mat-icon
+        >
+        / {{ story.storyPoint!.maxPoints! }}&nbsp;<mat-icon
+          class="mat-icon-star-color"
+          >star</mat-icon
+        >
+      </div>
+    }
+
+    @if (quizResult) {
+      <div class="item">
+        Wynik procentowy quizu:
+        {{ roundToTwoDecimals(quizResult.scorePercentage) }}&nbsp;%
+      </div>
+    }
+
+    <div id="logo-result" class="image-standard"></div>
+
+    @if (!(authService.currentUserSource$ | async)) {
+      <div>Zapisz swój wynik i odblokuj kolejne historie.</div>
+    }
+
+    <div class="button-container">
+      @if (!(authService.currentUserSource$ | async)) {
+        <button
+          id="register-button"
+          class="button-app button-standard"
+          (click)="navigateToRegister()"
+        >
+          Utwórz konto
+        </button>
+      }
+      @if (authService.currentUserSource$ | async) {
+        <button
+          id="again-button"
+          class="button-app button-standard"
+          (click)="resetState()"
+        >
+          Spróbuj ponownie
+        </button>
+        <button
+          id="back-button"
+          class="button-app button-standard"
+          (click)="navigateToTextSelection()"
+        >
+          Kolejne wyzwanie
+        </button>
+      }
+    </div>
   </div>
-  <div class="item" *ngIf="quizResult">
-    Wynik procentowy quizu:
-    {{ roundToTwoDecimals(quizResult.scorePercentage) }}&nbsp;%
-  </div>
-  <div id="logo-result" class="image-standard"></div>
-  <div *ngIf="!(authService.currentUserSource$ | async)">
-    Zapisz swój wynik i odblokuj kolejne historie.
-  </div>
-  <div class="button-container">
-    <button
-      *ngIf="!(authService.currentUserSource$ | async)"
-      id="register-button"
-      class="button-app button-standard"
-      (click)="navigateToRegister()"
-    >
-      Utwórz konto
-    </button>
-    <button
-      *ngIf="authService.currentUserSource$ | async"
-      id="again-button"
-      class="button-app button-standard"
-      (click)="navigateToTextStory(story!.id)"
-    >
-      Spróbuj ponownie
-    </button>
-    <button
-      *ngIf="authService.currentUserSource$ | async"
-      id="back-button"
-      class="button-app button-standard"
-      (click)="navigateToTextSelection()"
-    >
-      Kolejne wyzwanie
-    </button>
-  </div>
-</div>
+}
