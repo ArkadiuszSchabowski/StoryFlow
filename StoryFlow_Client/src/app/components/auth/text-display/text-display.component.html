@@ -105,14 +105,13 @@
                   @for (answer of currentQuestion.answers; track answer.id) {
                     <div id="answer-button">
                       <button
-                        [ngClass]="{
-                          disabled: answerSubmitted,
-                          correct: answer.isCorrect && answerSubmitted,
-                          wrong:
-                            selectedAnswers[currentQuestion.id] === answer.id &&
-                            !answer.isCorrect &&
-                            answerSubmitted,
-                        }"
+                        [class.disabled]="answerSubmitted"
+                        [class.correct]="answer.isCorrect && answerSubmitted"
+                        [class.wrong]="
+                          selectedAnswers[currentQuestion.id] === answer.id &&
+                          !answer.isCorrect &&
+                          answerSubmitted
+                        "
                         [disabled]="answerSubmitted"
                         type="submit"
                         class="button-app-quiz"
@@ -126,9 +125,7 @@
                   }
 
                   <button
-                    [ngClass]="{
-                      disabled: !answerSubmitted,
-                    }"
+                    [class.disabled]="!answerSubmitted"
                     [disabled]="!answerSubmitted"
                     class="disabled button-app button-standard"
                     id="next-button"

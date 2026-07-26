@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,7 +15,7 @@ import { NavbarService } from 'src/app/_services/navbar.service';
   styleUrls: ['./navbar.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
+    AsyncPipe,
     MatButtonModule,
     MatToolbarModule,
     MatMenuModule,
