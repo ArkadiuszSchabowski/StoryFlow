@@ -1,61 +1,70 @@
 <h1 id="h1-title">Tworzenie quizu</h1>
-<div id="story-create-container" *ngIf="stories.length">
-  <div id="story-container">
-    <form id="filter-container" [formGroup]="form" (ngSubmit)="generateQuiz()">
-      <mat-form-field class="filter-field-create">
-        <mat-label>Wybierz historię:</mat-label>
-        <mat-select id="story" formControlName="story">
-          <mat-option *ngFor="let story of stories" [value]="story.id">{{
-            story.englishTitle
-          }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div class="submit-button-container">
-        <button
-          mat-raised-button
-          id="submit-button-generate"
-          class="button-app-reverse-color button-standard"
-          type="submit"
-        >
-          Generuj
-        </button>
+@if (stories.length) {
+  <div id="story-create-container">
+    <div id="story-container">
+      <form id="filter-container" [formGroup]="form" (ngSubmit)="generateQuiz()">
+        <mat-form-field class="filter-field-create">
+          <mat-label>Wybierz historię:</mat-label>
+          <mat-select id="story" formControlName="story">
+            @for (story of stories; track story.id) {
+              <mat-option [value]="story.id">{{
+                story.englishTitle
+              }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <div class="submit-button-container">
+          <button
+            mat-raised-button
+            id="submit-button-generate"
+            class="button-app-reverse-color button-standard"
+            type="submit"
+          >
+            Generuj
+          </button>
+        </div>
+      </form>
+    </div>
+    @if (selectedStory && isResponse) {
+      <div class="question-container">
+        <form [formGroup]="addForm" id="add-form" (ngSubmit)="add()">
+          <div class="question-container-english-story">
+            {{ selectedStory.englishStory }}
+          </div>
+
+          @for (question of generateQuizResponse!.questions; track question) {
+            <div class="question-container-questions">
+              <h3 class="question-container-question">{{ question.question }}</h3>
+
+              <ul>
+                @for (answer of question.answers; track answer) {
+                  <li>
+                    {{ answer }}
+                  </li>
+                }
+              </ul>
+
+              <p class="question-container-correct-answer">
+                Correct answer: {{ question.answers[question.correctAnswerIndex] }}
+              </p>
+            </div>
+          }
+          <button
+            mat-raised-button
+            id="submit-button-create"
+            class="button-app button-standard"
+            type="submit"
+          >
+            Dodaj
+          </button>
+        </form>
       </div>
-    </form>
+    }
   </div>
-  <div *ngIf="selectedStory && isResponse" class="question-container">
-    <form [formGroup]="addForm" id="add-form" (ngSubmit)="add()">
-      <div class="question-container-english-story">
-        {{ selectedStory.englishStory }}
-      </div>
-
-      <div
-        *ngFor="let question of generateQuizResponse!.questions"
-        class="question-container-questions"
-      >
-        <h3 class="question-container-question">{{ question.question }}</h3>
-
-        <ul>
-          <li *ngFor="let answer of question.answers">
-            {{ answer }}
-          </li>
-        </ul>
-
-        <p class="question-container-correct-answer">
-          Correct answer: {{ question.answers[question.correctAnswerIndex] }}
-        </p>
-      </div>
-      <button
-        mat-raised-button
-        id="submit-button-create"
-          class="button-app button-standard"
-        type="submit"
-      >
-        Dodaj
-      </button>
-    </form>
+}
+@if (stories.length == 0) {
+  <div class="container" id="information-no-quiz">
+    Wszystkie historię mają już swoje quizy. Dodaj kolejną historię, aby mieć
+    opcję dodania quizu.
   </div>
-</div>
-<div *ngIf="stories.length == 0" class="container" id="information-no-quiz">
-  Wszystkie historię mają już swoje quizy. Dodaj kolejną historię, aby mieć
-  opcję dodania quizu.
-</div>
+}

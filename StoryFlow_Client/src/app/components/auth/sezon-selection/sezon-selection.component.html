@@ -1,45 +1,52 @@
-<div id="season-container" *ngIf="profile">
-  <div id="profile-statistic">
-    <div class="profile-statistic-item">
-      Zdobyte gwiazdki:&nbsp;{{ profile.stars }}&nbsp;<mat-icon
-        class="mat-icon-star-color"
-        >star</mat-icon
-      >
-    </div>
-    <div class="profile-statistic-item">
-      Dostępne bilety:&nbsp;{{ profile.tickets }}&nbsp;<mat-icon
-        class="mat-icon-star-color"
-        >sell</mat-icon
-      >
-    </div>
-  </div>
-    <h1 id="h1-title">Wybierz sezon</h1>
-  <div id="season" *ngIf="profile.stars !== null && profile.stars !== undefined">
-    <div
-      class="season-div"
-      *ngFor="let season of seasons"
-      [ngClass]="{
-        locked: profile.stars < season.pointsRequiredToUnlock,
-      }"
-    >
-      <div class="season-item">Sezon: {{ season.seasonNumber }}</div>
-      <div class="season-item">{{ season.name }}</div>
-
-      <button *ngIf="profile.stars > season.pointsRequiredToUnlock"
-        mat-raised-button
-        id="submit-button"
-        class="button-app-reverse-color button-standard"
-        (click)="goToSeason(season.id)"
-      >
-        START
-      </button>
-
-      <div class="season-item" *ngIf="season.pointsRequiredToUnlock && (profile.stars) < season.pointsRequiredToUnlock">
-        Odblokowanie: {{ season.pointsRequiredToUnlock }}&nbsp;<mat-icon
+@if (profile) {
+  <div id="season-container">
+    <div id="profile-statistic">
+      <div class="profile-statistic-item">
+        Zdobyte gwiazdki:&nbsp;{{ profile.stars }}&nbsp;<mat-icon
           class="mat-icon-star-color"
           >star</mat-icon
         >
       </div>
+      <div class="profile-statistic-item">
+        Dostępne bilety:&nbsp;{{ profile.tickets }}&nbsp;<mat-icon
+          class="mat-icon-star-color"
+          >sell</mat-icon
+        >
+      </div>
     </div>
+    <h1 id="h1-title">Wybierz sezon</h1>
+    @if (profile.stars !== null && profile.stars !== undefined) {
+      <div id="season">
+        @for (season of seasons; track season.id) {
+          <div
+            class="season-div"
+            [class.locked]="profile.stars < season.pointsRequiredToUnlock"
+          >
+            <div class="season-item">Sezon: {{ season.seasonNumber }}</div>
+            <div class="season-item">{{ season.name }}</div>
+
+            @if (profile.stars > season.pointsRequiredToUnlock) {
+              <button
+                mat-raised-button
+                id="submit-button"
+                class="button-app-reverse-color button-standard"
+                (click)="goToSeason(season.id)"
+              >
+                START
+              </button>
+            }
+
+            @if (season.pointsRequiredToUnlock && (profile.stars) < season.pointsRequiredToUnlock) {
+              <div class="season-item">
+                Odblokowanie: {{ season.pointsRequiredToUnlock }}&nbsp;<mat-icon
+                  class="mat-icon-star-color"
+                  >star</mat-icon
+                >
+              </div>
+            }
+          </div>
+        }
+      </div>
+    }
   </div>
-</div>
+}

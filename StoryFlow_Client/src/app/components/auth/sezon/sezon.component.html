@@ -1,114 +1,121 @@
 <div id="story-container">
-  <div id="profile-statistic" *ngIf="profile">
-    <div class="profile-statistic-item">
-      Zdobyte gwiazdki:&nbsp;{{ profile.stars }}&nbsp;<mat-icon
-        class="mat-icon-star-color"
-        >star</mat-icon
-      >
-    </div>
-    <div class="profile-statistic-item">
-      Dostępne bilety:&nbsp;{{ profile.tickets }}&nbsp;<mat-icon
-        class="mat-icon-star-color"
-        >sell</mat-icon
-      >
-    </div>
-  </div>
-  <h1 id="h1-title">Wybierz historię</h1>
-  <div *ngFor="let story of stories" class="story-wrapper">
-    <div *ngIf="story.storyPoint"
-      class="story-preview-button"
-      (click)="toggleStory(story.id)"
-      [ngClass]="{ locked: getIcon(story.id) === 'lock' }"
-    >
-      <div class="story-preview-button-category">
-        {{ showCategory(story.storyCategory) }}
-      </div>
-      <div class="story-preview-button-icon">
-        <span *ngIf="getIcon(story.id) === 'replay'; else iconTemplate">
-          Odblokuj bilet za 50%
-        </span>
-
-        <ng-template #iconTemplate>
-          <mat-icon>{{ getIcon(story.id) }}</mat-icon>
-        </ng-template>
-      </div>
-      <div class="story-preview-button-title">
-        {{ story.polishTitle }}
-      </div>
-
-      <div class="story-previev-button-level-and-size">
-        <div>
-          {{ showLanguageLevelShort(story.languageLevel) }} -
-          {{ showSize(story.storySize) }}
-        </div>
-      </div>
-
-      <div class="score-item">
-        {{ story.userStories?.[0]?.bestResult ?? 0 }}&nbsp;
-        <mat-icon class="mat-icon-star-color">star</mat-icon>
-        / {{ story.storyPoint.maxPoints }}&nbsp;
-        <mat-icon class="mat-icon-star-color">star</mat-icon>
-      </div>
-      <div class="score-item score-percentage">
-        {{
-          roundToTwoDecimals(story.userStories?.[0]?.percentageScore ?? 0)
-        }}&nbsp;%
-      </div>
-    </div>
-
-    <div
-      class="story-card"
-      *ngIf="story.storyPoint && openedStoryId === story.id"
-      [ngClass]="{ locked: getIcon(story.id) === 'lock' }"
-    >
-      <div class="story-card-button-close">
-        <button class="button-close" (click)="toggleStory(story.id)">
-          <mat-icon>close</mat-icon>
-        </button>
-      </div>
-      <div class="story-card-description">
-        {{ story.polishDescription }}
-      </div>
-
-      <div id="score-card">
-        <div class="score-item">
-          Punkty za pytanie:
-          {{ story.numberOfQuestions }} *
-          {{ story.storyPoint.pointsPerAnswer }}&nbsp;
-          <mat-icon class="mat-icon-star-color">star</mat-icon>
-        </div>
-
-        <div class="score-item">
-          Bonus długości historii:
-          {{ story.storyPoint.bonusPointsForStoryLength }}&nbsp;
-          <mat-icon class="mat-icon-star-color">star</mat-icon>
-        </div>
-
-        <div class="score-item">
-          Maksymalna ilość punktów:
-          {{ story.storyPoint.maxPoints }}&nbsp;<mat-icon
-            class="mat-icon-star-color"
-            >star</mat-icon
-          >
-        </div>
-
-        <div class="score-item score-item-hint">
-          {{
-            getIcon(story.id) === "lock"
-              ? "Twój bilet jest zablokowany. Spróbuj innego dostępnego quizu i zdobądź co najmniej 50%, aby go odzyskać."
-              : ""
-          }}
-        </div>
-
-        <button
-          mat-raised-button
-          class="button-app-reverse-color button-standard"
-          (click)="NavigateToTextDisplay(story.id)"
-          [disabled]="getIcon(story.id) === 'lock'"
+  @if (profile) {
+    <div id="profile-statistic">
+      <div class="profile-statistic-item">
+        Zdobyte gwiazdki:&nbsp;{{ profile.stars }}&nbsp;<mat-icon
+          class="mat-icon-star-color"
+          >star</mat-icon
         >
-          {{ getIcon(story.id) === "lock" ? "POTRZEBUJESZ BILETU" : "START" }}
-        </button>
+      </div>
+      <div class="profile-statistic-item">
+        Dostępne bilety:&nbsp;{{ profile.tickets }}&nbsp;<mat-icon
+          class="mat-icon-star-color"
+          >sell</mat-icon
+        >
       </div>
     </div>
-  </div>
+  }
+  <h1 id="h1-title">Wybierz historię</h1>
+  @for (story of stories; track story.id) {
+    <div class="story-wrapper">
+      @if (story.storyPoint) {
+        <div
+          class="story-preview-button"
+          (click)="toggleStory(story.id)"
+          [class.locked]="getIcon(story.id) === 'lock'"
+        >
+          <div class="story-preview-button-category">
+            {{ showCategory(story.storyCategory) }}
+          </div>
+          <div class="story-preview-button-icon">
+            @if (getIcon(story.id) === 'replay') {
+              <span>
+                Odblokuj bilet za 50%
+              </span>
+            } @else {
+              <mat-icon>{{ getIcon(story.id) }}</mat-icon>
+            }
+          </div>
+          <div class="story-preview-button-title">
+            {{ story.polishTitle }}
+          </div>
+
+          <div class="story-previev-button-level-and-size">
+            <div>
+              {{ showLanguageLevelShort(story.languageLevel) }} -
+              {{ showSize(story.storySize) }}
+            </div>
+          </div>
+
+          <div class="score-item">
+            {{ story.userStories?.[0]?.bestResult ?? 0 }}&nbsp;
+            <mat-icon class="mat-icon-star-color">star</mat-icon>
+            / {{ story.storyPoint.maxPoints }}&nbsp;
+            <mat-icon class="mat-icon-star-color">star</mat-icon>
+          </div>
+          <div class="score-item score-percentage">
+            {{
+              roundToTwoDecimals(story.userStories?.[0]?.percentageScore ?? 0)
+            }}&nbsp;%
+          </div>
+        </div>
+      }
+
+      @if (story.storyPoint && openedStoryId === story.id) {
+        <div
+          class="story-card"
+          [class.locked]="getIcon(story.id) === 'lock'"
+        >
+          <div class="story-card-button-close">
+            <button class="button-close" (click)="toggleStory(story.id)">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          <div class="story-card-description">
+            {{ story.polishDescription }}
+          </div>
+
+          <div id="score-card">
+            <div class="score-item">
+              Punkty za pytanie:
+              {{ story.numberOfQuestions }} *
+              {{ story.storyPoint.pointsPerAnswer }}&nbsp;
+              <mat-icon class="mat-icon-star-color">star</mat-icon>
+            </div>
+
+            <div class="score-item">
+              Bonus długości historii:
+              {{ story.storyPoint.bonusPointsForStoryLength }}&nbsp;
+              <mat-icon class="mat-icon-star-color">star</mat-icon>
+            </div>
+
+            <div class="score-item">
+              Maksymalna ilość punktów:
+              {{ story.storyPoint.maxPoints }}&nbsp;<mat-icon
+                class="mat-icon-star-color"
+                >star</mat-icon
+              >
+            </div>
+
+            <div class="score-item score-item-hint">
+              {{
+                getIcon(story.id) === "lock"
+                  ? "Twój bilet jest zablokowany. Spróbuj innego dostępnego quizu i zdobądź co najmniej 50%, aby go odzyskać."
+                  : ""
+              }}
+            </div>
+
+            <button
+              mat-raised-button
+              class="button-app-reverse-color button-standard"
+              (click)="NavigateToTextDisplay(story.id)"
+              [disabled]="getIcon(story.id) === 'lock'"
+            >
+              {{ getIcon(story.id) === "lock" ? "POTRZEBUJESZ BILETU" : "START" }}
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  }
 </div>

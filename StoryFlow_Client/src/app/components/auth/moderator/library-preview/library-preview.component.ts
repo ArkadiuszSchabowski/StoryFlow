@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,7 +27,7 @@ import { StoryFilter } from 'src/app/models/story-filter-dto';
   templateUrl: './library-preview.component.html',
   styleUrls: ['./library-preview.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatIconModule, MatSelectModule],
+  imports: [FormsModule, ReactiveFormsModule, MatButtonModule, MatIconModule, MatSelectModule],
 })
 export class LibraryPreviewComponent implements OnInit {
   stories: GetStoryViewDto[] = [];

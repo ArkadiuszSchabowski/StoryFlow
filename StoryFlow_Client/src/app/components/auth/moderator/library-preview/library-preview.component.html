@@ -5,120 +5,130 @@
       <mat-form-field class="filter-field">
         <mat-label>Kategoria:</mat-label>
         <mat-select id="category" formControlName="category">
-          <mat-option
-            *ngFor="let category of categories"
-            [value]="category.value"
-            >{{ category.viewValue }}</mat-option
-          >
+          @for (category of categories; track category.value) {
+            <mat-option [value]="category.value">{{
+              category.viewValue
+            }}</mat-option>
+          }
         </mat-select>
       </mat-form-field>
       <mat-form-field class="filter-field">
         <mat-label>Poziom językowy:</mat-label>
         <mat-select id="languageLevel" formControlName="languageLevel">
-          <mat-option
-            *ngFor="let level of languageLevels"
-            [value]="level.value"
-            >{{ level.viewValue }}</mat-option
-          >
+          @for (level of languageLevels; track level.value) {
+            <mat-option [value]="level.value">{{
+              level.viewValue
+            }}</mat-option>
+          }
         </mat-select>
       </mat-form-field>
       <mat-form-field class="filter-field">
         <mat-label>Długość historii:</mat-label>
         <mat-select id="size" formControlName="size">
-          <mat-option *ngFor="let size of sizes" [value]="size.value">{{
-            size.viewValue
-          }}</mat-option>
+          @for (size of sizes; track size.value) {
+            <mat-option [value]="size.value">{{
+              size.viewValue
+            }}</mat-option>
+          }
         </mat-select>
       </mat-form-field>
     </form>
   </div>
 </div>
 <div id="story-container">
-  <div id="no-story-information" class="subtitle" *ngIf="stories.length === 0">
-    Nie znaleziono historii pasujących do wybranych filtrów. Spróbuj innych
-    filtrów.
-  </div>
-  <div *ngFor="let story of stories" class="story-wrapper">
-    <div class="story-preview-button" (click)="toggleStory(story.id)">
-      <div class="story-preview-button-category">
-        {{ showCategory(story.storyCategory) }}
-      </div>
-      <div class="story-preview-button-icon">
-        <mat-icon>{{ getIcon(story.id) }}</mat-icon>
-      </div>
-      <div class="story-preview-button-title">
-        {{ story.polishTitle }}
-      </div>
-
-      <div class="story-previev-button-level-and-size">
-        <div>
-          {{ showLanguageLevelShort(story.languageLevel) }} -
-          {{ showSize(story.storySize) }}
-        </div>
-      </div>
-
-      <div class="score-item" *ngIf="story.storyPoint">
-        {{ story?.userStories?.[0]?.bestResult ?? 0 }}
-        <mat-icon class="mat-icon-star-color">star</mat-icon>
-        / {{ story.storyPoint.maxPoints }}
-        <mat-icon class="mat-icon-star-color">star</mat-icon>
-      </div>
-      <div class="score-item score-percentage" *ngIf="story.storyPoint">
-        {{
-          roundToTwoDecimals(story?.userStories?.[0]?.percentageScore ?? 0)
-        }}&nbsp;%
-      </div>
+  @if (stories.length === 0) {
+    <div id="no-story-information" class="subtitle">
+      Nie znaleziono historii pasujących do wybranych filtrów. Spróbuj innych
+      filtrów.
     </div>
+  }
+  @for (story of stories; track story.id) {
+    <div class="story-wrapper">
+      <div class="story-preview-button" (click)="toggleStory(story.id)">
+        <div class="story-preview-button-category">
+          {{ showCategory(story.storyCategory) }}
+        </div>
+        <div class="story-preview-button-icon">
+          <mat-icon>{{ getIcon(story.id) }}</mat-icon>
+        </div>
+        <div class="story-preview-button-title">
+          {{ story.polishTitle }}
+        </div>
 
-    <div
-      class="story-card"
-      *ngIf="story.storyPoint && openedStoryId === story.id"
-    >
-      <div class="story-card-button-close">
-        <button class="button-close" (click)="toggleStory(story.id)">
-          <mat-icon>close</mat-icon>
-        </button>
+        <div class="story-previev-button-level-and-size">
+          <div>
+            {{ showLanguageLevelShort(story.languageLevel) }} -
+            {{ showSize(story.storySize) }}
+          </div>
+        </div>
+
+        @if (story.storyPoint) {
+          <div class="score-item">
+            {{ story.userStories?.[0]?.bestResult ?? 0 }}
+            <mat-icon class="mat-icon-star-color">star</mat-icon>
+            / {{ story.storyPoint.maxPoints }}
+            <mat-icon class="mat-icon-star-color">star</mat-icon>
+          </div>
+        }
+        @if (story.storyPoint) {
+          <div class="score-item score-percentage">
+            {{
+              roundToTwoDecimals(story.userStories?.[0]?.percentageScore ?? 0)
+            }}&nbsp;%
+          </div>
+        }
       </div>
-      <div class="story-card-description">
-        {{ story.polishDescription }}
-      </div>
 
-      <div id="score-card">
-        <div class="score-item">
-          Punkty za pytanie:
-          {{ story.numberOfQuestions }} * {{ story.storyPoint.pointsPerAnswer }}
-          <mat-icon class="mat-icon-star-color">star</mat-icon>
+      @if (story.storyPoint && openedStoryId === story.id) {
+        <div class="story-card">
+          <div class="story-card-button-close">
+            <button class="button-close" (click)="toggleStory(story.id)">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          <div class="story-card-description">
+            {{ story.polishDescription }}
+          </div>
+
+          <div id="score-card">
+            <div class="score-item">
+              Punkty za pytanie:
+              {{ story.numberOfQuestions }} *
+              {{ story.storyPoint.pointsPerAnswer }}
+              <mat-icon class="mat-icon-star-color">star</mat-icon>
+            </div>
+
+            <div class="score-item">
+              Bonus długości historii:
+              {{ story.storyPoint.bonusPointsForStoryLength }}
+              <mat-icon class="mat-icon-star-color">star</mat-icon>
+            </div>
+
+            <div class="score-item">
+              Maksymalna ilość punktów:
+              {{ story.storyPoint.maxPoints }}
+              <mat-icon class="mat-icon-star-color">star</mat-icon>
+            </div>
+
+            <div class="score-item score-item-hint">
+              {{
+                getIcon(story.id) === "lock"
+                  ? "Twój bilet jest zablokowany. Spróbuj innego dostępnego quizu i zdobądź co najmniej 50%, aby go odzyskać."
+                  : ""
+              }}
+            </div>
+
+            <button
+              mat-raised-button
+              class="button-app-reverse-color button-standard"
+              (click)="NavigateToTextDisplay(story.id)"
+              [disabled]="getIcon(story.id) === 'lock'"
+            >
+              {{ getIcon(story.id) === "lock" ? "POTRZEBUJESZ BILETU" : "START" }}
+            </button>
+          </div>
         </div>
-
-        <div class="score-item">
-          Bonus długości historii:
-          {{ story.storyPoint.bonusPointsForStoryLength }}
-          <mat-icon class="mat-icon-star-color">star</mat-icon>
-        </div>
-
-        <div class="score-item">
-          Maksymalna ilość punktów:
-          {{ story.storyPoint.maxPoints }}
-          <mat-icon class="mat-icon-star-color">star</mat-icon>
-        </div>
-
-        <div class="score-item score-item-hint">
-          {{
-            getIcon(story.id) === "lock"
-              ? "Twój bilet jest zablokowany. Spróbuj innego dostępnego quizu i zdobądź co najmniej 50%, aby go odzyskać."
-              : ""
-          }}
-        </div>
-
-        <button
-          mat-raised-button
-          class="button-app-reverse-color button-standard"
-          (click)="NavigateToTextDisplay(story.id)"
-          [disabled]="getIcon(story.id) === 'lock'"
-        >
-          {{ getIcon(story.id) === "lock" ? "POTRZEBUJESZ BILETU" : "START" }}
-        </button>
-      </div>
+      }
     </div>
-  </div>
+  }
 </div>

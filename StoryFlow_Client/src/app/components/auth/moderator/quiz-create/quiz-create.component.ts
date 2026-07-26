@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,7 +15,7 @@ import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
   templateUrl: './quiz-create.component.html',
   styleUrls: ['./quiz-create.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatSelectModule],
+  imports: [FormsModule, ReactiveFormsModule, MatButtonModule, MatSelectModule],
 })
 export class QuizCreateComponent implements OnInit {
   stories: GetStoryViewDto[] = [];

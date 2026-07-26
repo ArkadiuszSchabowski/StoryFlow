@@ -1,46 +1,48 @@
-<div class="container" *ngIf="profile">
-  <div id="profile-information">
-    <h1 id="profile-information-label" class="title">Profil użytkownika</h1>
-    <div id="email" class="profile-information-item">
-      <div class="profile-information-key">Adres e-mail:</div>
-      <div class="profile-information-value">{{ profile.email }}</div>
-    </div>
-
-    <div id="last-name" class="profile-information-item">
-      <div class="profile-information-key">Nick:</div>
-      <div class="profile-information-value">{{ profile.nick }}</div>
-    </div>
-    
-    <div id="first-name" class="profile-information-item">
-      <div class="profile-information-key">Imię:</div>
-      <div class="profile-information-value">{{ profile.firstName }}</div>
-    </div>
-
-
-    <div id="gender" class="profile-information-item">
-      <div class="profile-information-key">Płeć:</div>
-      <div class="profile-information-value">
-        {{ profile!.gender === 0 ? "Kobieta" : "Mężczyzna" }}
+@if(profile){
+  <div class="container">
+    <div id="profile-information">
+      <h1 id="profile-information-label" class="title">Profil użytkownika</h1>
+      <div id="email" class="profile-information-item">
+        <div class="profile-information-key">Adres e-mail:</div>
+        <div class="profile-information-value">{{ profile.email }}</div>
       </div>
-    </div>
-
-    <div id="date-of-birth" class="profile-information-item">
-      <div class="profile-information-key">Data urodzenia:</div>
-      <div class="profile-information-value">{{ profile.dateOfBirth }}</div>
-    </div>
-
-    <div id="stars" class="profile-information-item">
-      <div class="profile-information-key">Wynik:</div>
-      <div class="profile-information-value">
-        {{ profile!.stars }}&nbsp;<mat-icon class="mat-icon-star-color">star</mat-icon>
+  
+      <div id="last-name" class="profile-information-item">
+        <div class="profile-information-key">Nick:</div>
+        <div class="profile-information-value">{{ profile.nick }}</div>
       </div>
-    </div>
-
-    <div id="tickets" class="profile-information-item">
-      <div class="profile-information-key">Ilość biletów:</div>
-      <div class="profile-information-value">
-        {{ profile!.tickets }}&nbsp;<mat-icon class="mat-icon-star-color">sell</mat-icon>
+      
+      <div id="first-name" class="profile-information-item">
+        <div class="profile-information-key">Imię:</div>
+        <div class="profile-information-value">{{ profile.firstName }}</div>
+      </div>
+  
+  
+      <div id="gender" class="profile-information-item">
+        <div class="profile-information-key">Płeć:</div>
+        <div class="profile-information-value">
+          {{ profile.gender === 0 ? "Kobieta" : "Mężczyzna" }}
+        </div>
+      </div>
+  
+      <div id="date-of-birth" class="profile-information-item">
+        <div class="profile-information-key">Data urodzenia:</div>
+        <div class="profile-information-value">{{ profile.dateOfBirth }}</div>
+      </div>
+  
+      <div id="stars" class="profile-information-item">
+        <div class="profile-information-key">Wynik:</div>
+        <div class="profile-information-value">
+          {{ profile.stars }}&nbsp;<mat-icon class="mat-icon-star-color">star</mat-icon>
+        </div>
+      </div>
+  
+      <div id="tickets" class="profile-information-item">
+        <div class="profile-information-key">Ilość biletów:</div>
+        <div class="profile-information-value">
+          {{ profile.tickets }}&nbsp;<mat-icon class="mat-icon-star-color">sell</mat-icon>
+        </div>
       </div>
     </div>
   </div>
-</div>
+}

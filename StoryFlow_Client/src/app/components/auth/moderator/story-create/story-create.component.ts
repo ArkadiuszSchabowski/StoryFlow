@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,7 +19,7 @@ import { GenerateStoryDto } from 'src/app/models/generate-story-dto';
   templateUrl: './story-create.component.html',
   styleUrls: ['./story-create.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatSelectModule, MatFormFieldModule, MatInputModule],
+  imports: [FormsModule, ReactiveFormsModule, MatButtonModule, MatSelectModule, MatFormFieldModule, MatInputModule],
 })
 export class StoryCreateComponent {
   categories = CATEGORIES;

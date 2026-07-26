@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,7 +26,7 @@ import { StoryFilter } from 'src/app/models/story-filter-dto';
   templateUrl: './sezon.component.html',
   styleUrls: ['./sezon.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatIconModule],
+  imports: [FormsModule, ReactiveFormsModule, MatButtonModule, MatIconModule],
 })
 export class SezonComponent implements OnInit {
   seasonId: number = 0;

@@ -7,29 +7,25 @@
           <mat-form-field class="filter-field-create">
             <mat-label>Kategoria:</mat-label>
             <mat-select id="storyCategory" formControlName="storyCategory">
-              <mat-option
-                *ngFor="let category of categories"
-                [value]="category.value"
-                >{{ category.viewValue }}</mat-option
-              >
+              @for (category of categories; track category.value) {
+                <mat-option [value]="category.value">{{ category.viewValue }}</mat-option>
+              }
             </mat-select>
           </mat-form-field>
           <mat-form-field class="filter-field-create">
             <mat-label>Poziom językowy:</mat-label>
             <mat-select id="languageLevel" formControlName="languageLevel">
-              <mat-option
-                *ngFor="let level of languageLevels"
-                [value]="level.value"
-                >{{ level.viewValue }}</mat-option
-              >
+              @for (level of languageLevels; track level.value) {
+                <mat-option [value]="level.value">{{ level.viewValue }}</mat-option>
+              }
             </mat-select>
           </mat-form-field>
           <mat-form-field class="filter-field-create">
             <mat-label>Długość:</mat-label>
             <mat-select id="storySize" formControlName="storySize">
-              <mat-option *ngFor="let size of sizes" [value]="size.value">{{
-                size.viewValue
-              }}</mat-option>
+              @for (size of sizes; track size.value) {
+                <mat-option [value]="size.value">{{ size.viewValue }}</mat-option>
+              }
             </mat-select>
           </mat-form-field>
         </div>
