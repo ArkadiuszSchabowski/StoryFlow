@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { StoryService } from 'src/app/_services/story.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   standalone: true,
-  imports: [CommonModule, LottieComponent, MatButtonModule],
+  imports: [AsyncPipe, LottieComponent, MatButtonModule],
 })
 export class HomeComponent implements OnInit {
   constructor(

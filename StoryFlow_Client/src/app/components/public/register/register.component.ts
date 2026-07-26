@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, signal } from '@angular/core';
+import { AsyncPipe, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import {
   FormBuilder,
   FormsModule,
@@ -32,7 +32,7 @@ import { RegisterUserDto } from 'src/app/models/register-user-dto';
   styleUrls: ['./register.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
+    AsyncPipe,
     FormsModule,
     ReactiveFormsModule,
     LottieComponent,
@@ -43,10 +43,11 @@ import { RegisterUserDto } from 'src/app/models/register-user-dto';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
   ],
 })
 export class RegisterComponent implements OnInit {
+  private isBrowser: boolean;
   hidePassword = signal(true);
   hideRepeatPassword = signal(true);
 
@@ -84,12 +85,17 @@ export class RegisterComponent implements OnInit {
     private quizService: QuizService,
     private router: Router,
     private authService: AuthService,
-  ) {}
+    @Inject(PLATFORM_ID) platformId: Object,
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   ngOnInit(): void {
     this.loaderService.hide();
 
-    this.pendingQuiz = localStorage.getItem('pendingQuiz');
+    if (this.isBrowser) {
+      this.pendingQuiz = localStorage.getItem('pendingQuiz');
+    }
   }
 
   changePasswordVisibility(event: MouseEvent) {
@@ -191,7 +197,9 @@ export class RegisterComponent implements OnInit {
 
     this.quizService.sendAnswers(quiz).subscribe({
       next: () => {
-        localStorage.removeItem('pendingQuiz');
+        if (this.isBrowser) {
+          localStorage.removeItem('pendingQuiz');
+        }
       },
       error: (error) => console.log(error),
     });

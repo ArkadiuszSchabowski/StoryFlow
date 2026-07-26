@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit, signal } from '@angular/core';
 import {
   FormBuilder,
@@ -27,7 +27,7 @@ import { LoginDto } from 'src/app/models/login-dto';
   styleUrls: ['./login.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
+    AsyncPipe,
     FormsModule,
     ReactiveFormsModule,
     LottieComponent,

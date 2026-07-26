@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
@@ -8,7 +7,7 @@ import { Router } from '@angular/router';
     templateUrl: './error-page.component.html',
     styleUrls: ['./error-page.component.scss'],
     standalone: true,
-    imports: [CommonModule, MatButtonModule]
+    imports: [MatButtonModule]
 })
 export class ErrorPageComponent {
 

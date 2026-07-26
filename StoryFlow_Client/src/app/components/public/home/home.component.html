@@ -1,50 +1,52 @@
-<div
-  id="home-container"
-  class="container"
-  *ngIf="!(loaderService.loading$ | async)"
->
-  <div id="home-row">
-    <div id="desktop-logo" class="image-standard"></div>
-    <div id="home-text">
-      <h1 id="home-title" class="title">
-        Nauka angielskiego z kotką Luną - odkrywaj świat angielskich przygód!
-      </h1>
-      <div id="home-subtitle" class="subtitle">
-        <div class="home-subtitle-row">
-          <button
-            mat-raised-button
-            id="button-start"
-            class="button-app button-upper"
-            (click)="navigateToWelcomeStory()"
-          >
-            Rozpocznij naukę
-          </button>
+@if (!(loaderService.loading$ | async)) {
+  <div id="home-container" class="container">
+    <div id="home-row">
+      <div id="desktop-logo" class="image-standard"></div>
+      <div id="home-text">
+        <h1 id="home-title" class="title">
+          Nauka angielskiego z kotką Luną - odkrywaj świat angielskich przygód!
+        </h1>
+        <div id="home-subtitle" class="subtitle">
+          <div class="home-subtitle-row">
+            <button
+              mat-raised-button
+              id="button-start"
+              class="button-app button-upper"
+              (click)="navigateToWelcomeStory()"
+            >
+              Rozpocznij naukę
+            </button>
+          </div>
+          <div class="home-subtitle-row">
+            ✓ Pierwsza historia bez rejestracji
+          </div>
+          <div class="home-subtitle-row">
+            ✓ Kolejne historie czekają na odkrycie
+          </div>
+          <div class="home-subtitle-row">✓ Nauka angielskiego przez zabawę</div>
         </div>
-        <div class="home-subtitle-row">✓ Pierwsza historia bez rejestracji</div>
-        <div class="home-subtitle-row">
-          ✓ Kolejne historie czekają na odkrycie
-        </div>
-        <div class="home-subtitle-row">✓ Nauka angielskiego przez zabawę</div>
       </div>
     </div>
+    <img
+      id="mobile-logo"
+      class="image-standard"
+      src="assets/kitty/kitty1.webp"
+      alt="Kotka Luna"
+      fetchpriority="high"
+      width="438"
+      height="525"
+    />
   </div>
-  <img
-    id="mobile-logo"
-    class="image-standard"
-    src="assets/kitty/kitty1.webp"
-    alt="Kotka Luna"
-    fetchpriority="high"
-    width="438"
-    height="525"
-  />
-</div>
+}
+
+@if (loaderService.loading$ | async) {
 <div
   id="loader-container"
   class="container"
-  *ngIf="loaderService.loading$ | async"
 >
   <div id="loader-text">Chwileczkę, przygotowujemy coś dla Ciebie..</div>
   <div class="loader-logo">
     <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>
   </div>
 </div>
+}

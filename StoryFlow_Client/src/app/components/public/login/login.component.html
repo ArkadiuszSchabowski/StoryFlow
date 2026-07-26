@@ -1,84 +1,80 @@
-<div
-  id="login-container"
-  class="container"
-  *ngIf="!(loaderService.loading$ | async)"
->
-  <form [formGroup]="form" (ngSubmit)="login()" autocomplete="off">
-    <mat-card class="login-card">
-      <h1 id="card-title">Zaloguj się do StoryFlow</h1>
-      <mat-card-content>
-        <mat-form-field class="card-input" appearance="outline">
-          <mat-label>E-mail</mat-label>
-          <input class="input" matInput name="email" formControlName="email" />
-          <mat-error
-            *ngIf="
-              form.get('email')?.hasError('required') &&
-              form.get('email')?.touched
-            "
-          >
-            Email jest wymagany.
-          </mat-error>
+@if (!(loaderService.loading$ | async)) {
+  <div id="login-container" class="container">
+    <form [formGroup]="form" (ngSubmit)="login()" autocomplete="off">
+      <mat-card class="login-card">
+        <h1 id="card-title">Zaloguj się do StoryFlow</h1>
+        <mat-card-content>
+          <mat-form-field class="card-input" appearance="outline">
+            <mat-label>E-mail</mat-label>
+            <input
+              class="input"
+              matInput
+              name="email"
+              formControlName="email"
+            />
+            @if (
+              form.get("email")?.hasError("required") &&
+              form.get("email")?.touched
+            ) {
+              <mat-error>Email jest wymagany.</mat-error>
+            }
 
-          <mat-error
-            *ngIf="
-              form.get('email')?.hasError('email') && form.get('email')?.touched
-            "
-          >
-            Niepoprawny adres e-mail.
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="card-input" appearance="outline">
-          <mat-label>Hasło</mat-label>
-          <input
-            class="input"
-            matInput
-            [type]="hidePassword() ? 'password' : 'text'"
-            name="password"
-            formControlName="password"
-          />
-          <button
-            type="button"
-            class="password-button"
-            mat-icon-button
-            matSuffix
-            (click)="changePasswordVisibility($event)"
-            [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hidePassword()"
-          >
-            <mat-icon>{{
-              hidePassword() ? "visibility_off" : "visibility"
-            }}</mat-icon>
-          </button>
-          <mat-error
-            *ngIf="
-              form.get('password')?.hasError('required') &&
-              form.get('password')?.touched
-            "
-          >
-            Hasło jest wymagane.
-          </mat-error>
-        </mat-form-field>
-        <div id="submit-button-container">
-          <button
-            mat-raised-button
-            id="submit-login-button"
-            class="button-app button-standard"
-            type="submit"
-          >
-            Zaloguj się
-          </button>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </form>
-</div>
-<div
-  id="loader-container"
-  class="container"
-  *ngIf="loaderService.loading$ | async"
->
-  <div id="loader-text">Zaraz zaczynamy...</div>
-  <div class="loader-logo">
-    <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>
+            @if (
+              form.get("email")?.hasError("email") && form.get("email")?.touched
+            ) {
+              <mat-error>Niepoprawny adres e-mail.</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="card-input" appearance="outline">
+            <mat-label>Hasło</mat-label>
+            <input
+              class="input"
+              matInput
+              [type]="hidePassword() ? 'password' : 'text'"
+              name="password"
+              formControlName="password"
+            />
+            <button
+              type="button"
+              class="password-button"
+              mat-icon-button
+              matSuffix
+              (click)="changePasswordVisibility($event)"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidePassword()"
+            >
+              <mat-icon>{{
+                hidePassword() ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </button>
+            @if (
+              form.get("password")?.hasError("required") &&
+              form.get("password")?.touched
+            ) {
+              <mat-error> Hasło jest wymagane. </mat-error>
+            }
+          </mat-form-field>
+          <div id="submit-button-container">
+            <button
+              mat-raised-button
+              id="submit-login-button"
+              class="button-app button-standard"
+              type="submit"
+            >
+              Zaloguj się
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </form>
   </div>
-</div>
+}
+
+@if (loaderService.loading$ | async) {
+  <div id="loader-container" class="container">
+    <div id="loader-text">Zaraz zaczynamy...</div>
+    <div class="loader-logo">
+      <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>
+    </div>
+  </div>
+}

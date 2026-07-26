@@ -1,230 +1,203 @@
-<div
-  id="register-container"
-  class="container"
-  *ngIf="!(loaderService.loading$ | async)"
->
-  <form [formGroup]="form" (ngSubmit)="register()" autocomplete="off">
-    <mat-card class="register-card">
-      <h1 id="card-title">
-        Zarejestruj się w StoryFlow
-      </h1>
+@if (!(loaderService.loading$ | async)) {
+  <div id="register-container" class="container">
+    <form [formGroup]="form" (ngSubmit)="register()" autocomplete="off">
+      <mat-card class="register-card">
+        <h1 id="card-title">Zarejestruj się w StoryFlow</h1>
 
-      <mat-card-content>
-        <mat-form-field class="card-input" appearance="outline">
-          <mat-label>Adres e-mail</mat-label>
-          <input matInput formControlName="email" />
+        <mat-card-content>
+          <mat-form-field class="card-input" appearance="outline">
+            <mat-label>Adres e-mail</mat-label>
+            <input matInput formControlName="email" />
 
-          <mat-error
-            *ngIf="
+            @if (
               form.get('email')?.hasError('required') &&
               form.get('email')?.touched
-            "
-          >
-            Adres e-mail jest wymagany.
-          </mat-error>
+            ) {
+              <mat-error>Adres e-mail jest wymagany.</mat-error>
+            }
 
-          <mat-error
-            *ngIf="
+            @if (
               form.get('email')?.hasError('email') && form.get('email')?.touched
-            "
-          >
-            Wpisz poprawny adres e-mail.
-          </mat-error>
-        </mat-form-field>
+            ) {
+              <mat-error>Wpisz poprawny adres e-mail.</mat-error>
+            }
+          </mat-form-field>
 
-        <mat-form-field class="card-input" appearance="outline">
-          <mat-label>Nick</mat-label>
-          <input matInput formControlName="nick" />
+          <mat-form-field class="card-input" appearance="outline">
+            <mat-label>Nick</mat-label>
+            <input matInput formControlName="nick" />
 
-          <mat-error
-            *ngIf="
+            @if (
               form.get('nick')?.hasError('required') &&
               form.get('nick')?.touched
-            "
-          >
-            Nick jest wymagany.
-          </mat-error>
+            ) {
+              <mat-error>Nick jest wymagany.</mat-error>
+            }
 
-          <mat-error
-            *ngIf="
+            @if (
               (form.get('nick')?.hasError('minlength') &&
                 form.get('nick')?.touched) ||
               (form.get('nick')?.hasError('maxlength') &&
                 form.get('nick')?.touched)
-            "
-          >
-            Nick od 3 do 25 znaków.
-          </mat-error>
-        </mat-form-field>
+            ) {
+              <mat-error>Nick od 3 do 25 znaków.</mat-error>
+            }
+          </mat-form-field>
 
-                <mat-form-field class="card-input" appearance="outline">
-          <mat-label>Imię</mat-label>
-          <input matInput formControlName="firstName" />
+          <mat-form-field class="card-input" appearance="outline">
+            <mat-label>Imię</mat-label>
+            <input matInput formControlName="firstName" />
 
-          <mat-error
-            *ngIf="
+            @if (
               form.get('firstName')?.hasError('required') &&
               form.get('firstName')?.touched
-            "
-          >
-            Imię jest wymagane.
-          </mat-error>
-          <mat-error
-            *ngIf="
+            ) {
+              <mat-error>Imię jest wymagane.</mat-error>
+            }
+            @if (
               (form.get('firstName')?.hasError('minlength') &&
                 form.get('firstName')?.touched) ||
               (form.get('firstName')?.hasError('maxlength') &&
                 form.get('firstName')?.touched)
-            "
-          >
-            Imię: od 3 do 25 znaków.
-          </mat-error>
-        </mat-form-field>
+            ) {
+              <mat-error>Imię: od 3 do 25 znaków.</mat-error>
+            }
+          </mat-form-field>
 
-        <mat-form-field class="card-input" appearance="outline">
-          <mat-label>Płeć</mat-label>
-          <mat-select name="gender" formControlName="gender">
-            <mat-option *ngFor="let gender of genders" [value]="gender.value">{{
-              gender.viewValue
-            }}</mat-option>
-          </mat-select>
-          <mat-error
-            *ngIf="
+          <mat-form-field class="card-input" appearance="outline">
+            <mat-label>Płeć</mat-label>
+            <mat-select name="gender" formControlName="gender">
+              @for (gender of genders; track gender.value) {
+                <mat-option [value]="gender.value">{{
+                  gender.viewValue
+                }}</mat-option>
+              }
+            </mat-select>
+            @if (
               form.get('gender')?.hasError('required') &&
               form.get('gender')?.touched
-            "
-          >
-            Wybierz płeć.
-          </mat-error>
-        </mat-form-field>
+            ) {
+              <mat-error>Wybierz płeć.</mat-error>
+            }
+          </mat-form-field>
 
-        <mat-form-field class="card-input" appearance="outline">
-          <mat-label>Data urodzenia  (MM/DD/RRRR)</mat-label>
-          <input
-            matInput
-            [matDatepicker]="picker"
-            name="dateOfBirth"
-            formControlName="dateOfBirth"
-          />
-          <mat-datepicker-toggle
-            matIconSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #picker  [startAt]="form.dateOfBirth"></mat-datepicker>
-          <mat-error
-            *ngIf="
+          <mat-form-field class="card-input" appearance="outline">
+            <mat-label>Data urodzenia (MM/DD/RRRR)</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              name="dateOfBirth"
+              formControlName="dateOfBirth"
+            />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker [startAt]="form.dateOfBirth"></mat-datepicker>
+            @if (
               form.get('dateOfBirth')?.hasError('required') &&
               form.get('dateOfBirth')?.touched
-            "
-          >
-            Nieprawidłowa data urodzenia.
-          </mat-error>
-        </mat-form-field>
+            ) {
+              <mat-error>Nieprawidłowa data urodzenia.</mat-error>
+            }
+          </mat-form-field>
 
-        <mat-form-field class="card-input" appearance="outline">
-          <mat-label>Hasło</mat-label>
-          <input
-            matInput
-            [type]="hidePassword() ? 'password' : 'text'"
-            formControlName="password"
-          />
+          <mat-form-field class="card-input" appearance="outline">
+            <mat-label>Hasło</mat-label>
+            <input
+              matInput
+              [type]="hidePassword() ? 'password' : 'text'"
+              formControlName="password"
+            />
 
-          <button
-            type="button"
-            class="password-button"
-            mat-icon-button
-            matSuffix
-            (click)="changePasswordVisibility($event)"
-            [attr.aria-label]="'Pokaż lub ukryj hasło'"
-          >
-            <mat-icon>
-              {{ hidePassword() ? "visibility_off" : "visibility" }}
-            </mat-icon>
-          </button>
+            <button
+              type="button"
+              class="password-button"
+              mat-icon-button
+              matSuffix
+              (click)="changePasswordVisibility($event)"
+              [attr.aria-label]="'Pokaż lub ukryj hasło'"
+            >
+              <mat-icon>
+                {{ hidePassword() ? "visibility_off" : "visibility" }}
+              </mat-icon>
+            </button>
 
-          <mat-error
-            *ngIf="
+            @if (
               form.get('password')?.hasError('required') &&
               form.get('password')?.touched
-            "
-          >
-            Hasło jest wymagane.
-          </mat-error>
+            ) {
+              <mat-error>Hasło jest wymagane.</mat-error>
+            }
 
-          <mat-error
-            *ngIf="
+            @if (
               (form.get('password')?.hasError('minlength') &&
                 form.get('password')?.touched) ||
               (form.get('password')?.hasError('maxlength') &&
                 form.get('password')?.touched)
-            "
-          >
-            Hasło musi mieć 5-25 znaków.
-          </mat-error>
-        </mat-form-field>
+            ) {
+              <mat-error>Hasło musi mieć 5-25 znaków.</mat-error>
+            }
+          </mat-form-field>
 
-        <mat-form-field class="card-input" appearance="outline">
-          <mat-label>Powtórz hasło</mat-label>
-          <input
-            matInput
-            [type]="hideRepeatPassword() ? 'password' : 'text'"
-            formControlName="repeatPassword"
-          />
+          <mat-form-field class="card-input" appearance="outline">
+            <mat-label>Powtórz hasło</mat-label>
+            <input
+              matInput
+              [type]="hideRepeatPassword() ? 'password' : 'text'"
+              formControlName="repeatPassword"
+            />
 
-          <button
-            type="button"
-            class="password-button"
-            mat-icon-button
-            matSuffix
-            (click)="changeRepeatPasswordVisibility($event)"
-            [attr.aria-label]="'Pokaż lub ukryj powtórzone hasło'"
-          >
-            <mat-icon>
-              {{ hideRepeatPassword() ? "visibility_off" : "visibility" }}
-            </mat-icon>
-          </button>
+            <button
+              type="button"
+              class="password-button"
+              mat-icon-button
+              matSuffix
+              (click)="changeRepeatPasswordVisibility($event)"
+              [attr.aria-label]="'Pokaż lub ukryj powtórzone hasło'"
+            >
+              <mat-icon>
+                {{ hideRepeatPassword() ? "visibility_off" : "visibility" }}
+              </mat-icon>
+            </button>
 
-          <mat-error
-            *ngIf="
+            @if (
               form.get('repeatPassword')?.hasError('required') &&
               form.get('repeatPassword')?.touched
-            "
-          >
-            Powtórz hasło.
-          </mat-error>
+            ) {
+              <mat-error>Powtórz hasło.</mat-error>
+            }
 
-          <mat-error
-            *ngIf="
+            @if (
               (form.get('repeatPassword')?.hasError('minlength') &&
                 form.get('repeatPassword')?.touched) ||
               (form.get('repeatPassword')?.hasError('maxlength') &&
                 form.get('repeatPassword')?.touched)
-            "
-          >
-            Hasło musi mieć 5-25 znaków.
-          </mat-error>
-        </mat-form-field>
+            ) {
+              <mat-error>Hasło musi mieć 5-25 znaków.</mat-error>
+            }
+          </mat-form-field>
 
-        <div id="submit-button-container">
-          <button
-            mat-raised-button
-            class="button-app button-standard"
-            type="submit"
-          >
-            Zarejestruj się
-          </button>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </form>
-</div>
-<div
-  id="loader-container"
-  class="container"
-  *ngIf="loaderService.loading$ | async"
->
-  <div id="loader-text">Zaraz zaczynamy...</div>
-  <div class="loader-logo">
-    <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>
+          <div id="submit-button-container">
+            <button
+              mat-raised-button
+              class="button-app button-standard"
+              type="submit"
+            >
+              Zarejestruj się
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </form>
   </div>
-</div>
+}
+
+@if (loaderService.loading$ | async) {
+  <div id="loader-container" class="container">
+    <div id="loader-text">Zaraz zaczynamy...</div>
+    <div class="loader-logo">
+      <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>
+    </div>
+  </div>
+}
