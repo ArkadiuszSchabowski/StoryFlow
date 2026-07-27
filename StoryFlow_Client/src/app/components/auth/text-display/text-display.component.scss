@@ -19,7 +19,6 @@
 #text-display-container {
   display: flex;
   flex-direction: column;
-  height: auto;
   width: 100%;
   padding: 20px 20px;
   background-color: #0a192f;
@@ -209,10 +208,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    min-width: calc(100vh - 64px);
     height: auto;
-    min-height: 400px;
     background-color: #0a192f;
   }
   #title-container,
@@ -267,9 +263,6 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    min-width: 100vh;
-    height: auto;
-    min-height: 400px;
     background-color: #0a192f;
   }
   #title-container,
