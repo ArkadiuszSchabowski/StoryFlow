@@ -1,0 +1,93 @@
+@use "@angular/material" as mat;
+@use "src/styles" as theme;
+
+h1 {
+  padding-bottom: 20px;
+}
+
+h2 {
+  text-align: center;
+  padding-bottom: 10px;
+  color: mat.m2-get-color-from-palette(theme.$accent, 300);
+}
+
+#faq-container {
+  display: flex;
+  width: 100%;
+  height: auto;
+  padding: 20px;
+}
+
+.faq-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  padding: 20px 0;
+}
+
+.faq-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+}
+
+.answer-item {
+  padding-bottom: 20px;
+  border-bottom: 2px solid mat.m2-get-color-from-palette(theme.$accent, 400);
+}
+
+.faq-item {
+  &--open {
+    .faq-item__icon {
+      transform: rotate(45deg);
+    }
+  }
+}
+
+.faq-item__trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 1rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  color: white;
+
+  &:hover {
+    color: #e0e0e0;
+  }
+}
+
+.faq-item__icon {
+  flex-shrink: 0;
+  margin-left: 1rem;
+  font-size: 1.25rem;
+  transition: transform 0.2s ease;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  #faq-container {
+    justify-content: center;
+  }
+  .faq-item {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #faq-container {
+    justify-content: center;
+  }
+  .faq-item {
+    justify-content: center;
+    align-items: center;
+  }
+}
