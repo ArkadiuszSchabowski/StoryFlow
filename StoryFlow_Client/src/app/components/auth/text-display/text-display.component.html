@@ -22,7 +22,7 @@
 }
 
 @if (story && !(loaderService.loading$ | async) && !isQuizFinishied) {
-  <div id="text-display-container">
+  <div id="text-display-container" class="container">
     @if (!isQuiz) {
       <div id="text-display-subcontainer">
         <div id="story-information">
