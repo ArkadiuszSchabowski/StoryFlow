@@ -9,6 +9,14 @@ const routes: Routes = [
     title: 'StoryFlow - Nauka angielskiego z kotką Luną',
   },
   {
+    path: 'faq',
+    loadComponent: () =>
+      import('./components/public/faq/faq.component').then(
+        (m) => m.FaqComponent,
+      ),
+    title: 'Faq - StoryFlow',
+  },
+  {
     path: 'login',
     loadComponent: () =>
       import('./components/public/login/login.component').then(
