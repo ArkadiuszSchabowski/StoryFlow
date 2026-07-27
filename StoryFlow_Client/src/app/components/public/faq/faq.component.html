@@ -15,7 +15,7 @@
               [attr.aria-controls]="section.id + '-' + item.question"
               (click)="toggle(section.id, item.question)"
             >
-              <span>{{ item.question }}</span>
+              <span class="item-question">{{ item.question }}</span>
               <span class="faq-item__icon" aria-hidden="true">+</span>
             </button>
           </h3>
