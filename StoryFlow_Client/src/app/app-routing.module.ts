@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/public/home/home.component';
+import { guestGuard } from './guards/guest.guard';
+import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
     title: 'StoryFlow - Nauka angielskiego z kotką Luną',
+    canActivate: [guestGuard],
   },
   {
     path: 'faq',
@@ -15,6 +18,7 @@ const routes: Routes = [
         (m) => m.FaqComponent,
       ),
     title: 'Faq - StoryFlow',
+    canActivate: [guestGuard],
   },
   {
     path: 'login',
@@ -23,6 +27,7 @@ const routes: Routes = [
         (m) => m.LoginComponent,
       ),
     title: 'Logowanie - StoryFlow',
+    canActivate: [guestGuard],
   },
   {
     path: 'register',
@@ -31,6 +36,7 @@ const routes: Routes = [
         (m) => m.RegisterComponent,
       ),
     title: 'Rejestracja - StoryFlow',
+    canActivate: [guestGuard],
   },
   {
     path: 'error-page',
@@ -39,6 +45,7 @@ const routes: Routes = [
         (m) => m.ErrorPageComponent,
       ),
     title: 'Błąd - StoryFlow',
+    canActivate: [guestGuard],
   },
   {
     path: 'sezon-selection',
@@ -47,6 +54,7 @@ const routes: Routes = [
         (m) => m.SezonSelectionComponent,
       ),
     title: 'Wybór sezonu - StoryFlow',
+    canActivate: [authGuard],
   },
   {
     path: 'profile',
@@ -55,6 +63,7 @@ const routes: Routes = [
         (m) => m.ProfileComponent,
       ),
     title: 'Profil użytkownika - StoryFlow',
+    canActivate: [authGuard],
   },
   {
     path: 'create-story',
@@ -63,6 +72,7 @@ const routes: Routes = [
         (m) => m.StoryCreateComponent,
       ),
     title: 'Tworzenie historii - StoryFlow',
+    canActivate: [authGuard],
   },
   {
     path: 'create-quiz',
@@ -71,6 +81,7 @@ const routes: Routes = [
         (m) => m.QuizCreateComponent,
       ),
     title: 'Tworzenie quizu - StoryFlow',
+    canActivate: [authGuard],
   },
   {
     path: 'library',
@@ -79,6 +90,7 @@ const routes: Routes = [
         (m) => m.LibraryPreviewComponent,
       ),
     title: 'Biblioteka historii - StoryFlow',
+    canActivate: [authGuard],
   },
   {
     path: 'sezon/:id',
@@ -87,6 +99,7 @@ const routes: Routes = [
         (m) => m.SezonComponent,
       ),
     title: 'Podgląd sezonu - StoryFlow',
+    canActivate: [authGuard],
   },
   {
     path: 'text/:id',

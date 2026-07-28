@@ -6,7 +6,7 @@ import { BehaviorSubject, map } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private currentUserSource = new BehaviorSubject<string | null>(null);
+  currentUserSource = new BehaviorSubject<string | null>(null);
   currentUserSource$ = this.currentUserSource.asObservable();
   private isBrowser: boolean;
 
