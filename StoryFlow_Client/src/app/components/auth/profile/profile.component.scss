@@ -1,6 +1,11 @@
 @use "@angular/material" as mat;
 @use "src/styles" as theme;
 
+#profile-container {
+  display: flex;
+  min-height: 640px;
+}
+
 #profile-information {
   display: flex;
   flex-direction: column;
