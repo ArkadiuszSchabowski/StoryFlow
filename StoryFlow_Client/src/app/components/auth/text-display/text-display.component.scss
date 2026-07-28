@@ -21,7 +21,7 @@
   flex-direction: column;
   width: 100%;
   padding: 20px 20px;
-  background-color: #0a192f;
+  background-color: mat.m2-get-color-from-palette(theme.$primary);
 }
 
 #title-container,
@@ -199,7 +199,7 @@
   padding: 5px;
 }
 
-.button-app-quiz:hover{
+.button-app-quiz:hover {
   background-color: #26a69a;
 }
 
@@ -209,7 +209,6 @@
     flex-direction: column;
     align-items: center;
     height: auto;
-    background-color: #0a192f;
   }
   #title-container,
   #description-container,
@@ -263,7 +262,6 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    background-color: #0a192f;
   }
   #title-container,
   #description-container,

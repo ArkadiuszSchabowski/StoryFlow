@@ -37,16 +37,64 @@
       height="525"
     />
   </div>
+  <div id="h2-h3-container" class="container">
+    <section class="content-section">
+      <h2 id="h2-english-with-luna">Nauka angielskiego z kotką Luną - jak to działa?</h2>
+
+      <div class="content-block">
+        <h3>Interaktywne historie zamiast nudnych lekcji</h3>
+        <p>
+          StoryFlow zamienia naukę angielskiego w podróż przez wciągające
+          przygody z kotką Luną. Zamiast zakuwać listy słówek, poznajesz język w
+          naturalnym kontekście - tak, jak dzieje się to podczas czytania dobrej
+          książki.
+        </p>
+      </div>
+
+      <div class="content-block">
+        <h3>Pierwsza historia za darmo, bez rejestracji</h3>
+        <p>
+          Możesz sprawdzić, jak wygląda nauka z Luną, zanim jeszcze założysz
+          konto. Pierwsza przygoda jest w pełni darmowa - wystarczy wejść i
+          zacząć czytać.
+        </p>
+      </div>
+
+      <div class="content-block">
+        <h3>Nauka dopasowana do Twojego poziomu</h3>
+        <p>
+          Niezależnie od tego, czy dopiero zaczynasz przygodę z angielskim, czy
+          wracasz do niego po dłuższej przerwie, historie z Luną dopasowują się
+          do Twoich umiejętności i rosną razem z Tobą.
+        </p>
+      </div>
+
+      <div class="content-block">
+        <h3>Codzienna dawka angielskiego, która wciąga</h3>
+        <p>
+          Krótkie, angażujące epizody sprawiają, że nauka staje się nawykiem, a
+          nie obowiązkiem. Każda kolejna historia to nowa okazja, by utrwalić
+          słówka i zwroty w praktyce.
+        </p>
+      </div>
+
+      <div class="content-block">
+        <h3>Dla każdego, kto chce uczyć się języka przez zabawę</h3>
+        <p>
+          StoryFlow jest dla dzieci, dorosłych i wszystkich pomiędzy - dla
+          każdego, kto woli uczyć się przez historię i emocje niż przez
+          tradycyjne ćwiczenia gramatyczne.
+        </p>
+      </div>
+    </section>
+  </div>
 }
 
 @if (loaderService.loading$ | async) {
-<div
-  id="loader-container"
-  class="container"
->
-  <div id="loader-text">Chwileczkę, przygotowujemy coś dla Ciebie..</div>
-  <div class="loader-logo">
-    <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>
+  <div id="loader-container" class="container">
+    <div id="loader-text">Chwileczkę, przygotowujemy coś dla Ciebie..</div>
+    <div class="loader-logo">
+      <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>
+    </div>
   </div>
-</div>
 }

@@ -3,8 +3,8 @@
 @include mat.elevation-classes();
 @include mat.app-background();
 
-$primary: mat.m2-define-palette(mat.$m2-teal-palette, 700);
-$accent: mat.m2-define-palette(mat.$m2-teal-palette, 500);
+$primary: mat.m2-define-palette(mat.$m2-grey-palette, 900);
+$accent: mat.m2-define-palette(mat.$m2-teal-palette, 700);
 $warn: mat.m2-define-palette(mat.$m2-red-palette);
 
 $StoryFlow_Client-theme: mat.m2-define-light-theme(
@@ -29,7 +29,7 @@ html,
 body {
   height: 100%;
   color: white;
-  background-color: #0a192f;
+  background-color: mat.m2-get-color-from-palette($primary);
 }
 
 body {
@@ -121,7 +121,7 @@ mat-form-field.card-input {
   max-width: 100%;
   height: calc(100% - 56px);
   min-height: 600px;
-  background-color: #0a192f;
+  background-color: mat.m2-get-color-from-palette($primary);
 }
 
 .button-app {
