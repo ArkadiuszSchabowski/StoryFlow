@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/public/home/home.component';
 import { guestGuard } from './guards/guest.guard';
 import { authGuard } from './guards/auth.guard';
+import { moderatorGuard } from './guards/moderator.guard';
 
 const routes: Routes = [
   {
@@ -66,13 +67,22 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'sezon/:id',
+    loadComponent: () =>
+      import('./components/auth/sezon/sezon.component').then(
+        (m) => m.SezonComponent,
+      ),
+    title: 'Podgląd sezonu - StoryFlow',
+    canActivate: [authGuard],
+  },
+  {
     path: 'create-story',
     loadComponent: () =>
       import('./components/auth/moderator/story-create/story-create.component').then(
         (m) => m.StoryCreateComponent,
       ),
     title: 'Tworzenie historii - StoryFlow',
-    canActivate: [authGuard],
+    canActivate: [moderatorGuard],
   },
   {
     path: 'create-quiz',
@@ -81,7 +91,7 @@ const routes: Routes = [
         (m) => m.QuizCreateComponent,
       ),
     title: 'Tworzenie quizu - StoryFlow',
-    canActivate: [authGuard],
+    canActivate: [moderatorGuard],
   },
   {
     path: 'library',
@@ -90,16 +100,7 @@ const routes: Routes = [
         (m) => m.LibraryPreviewComponent,
       ),
     title: 'Biblioteka historii - StoryFlow',
-    canActivate: [authGuard],
-  },
-  {
-    path: 'sezon/:id',
-    loadComponent: () =>
-      import('./components/auth/sezon/sezon.component').then(
-        (m) => m.SezonComponent,
-      ),
-    title: 'Podgląd sezonu - StoryFlow',
-    canActivate: [authGuard],
+    canActivate: [moderatorGuard],
   },
   {
     path: 'text/:id',
