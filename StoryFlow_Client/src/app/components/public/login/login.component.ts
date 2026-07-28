@@ -1,5 +1,5 @@
-import { AsyncPipe } from '@angular/common';
-import { Component, OnInit, signal } from '@angular/core';
+import { AsyncPipe, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import {
   FormBuilder,
   FormsModule,
@@ -40,6 +40,7 @@ import { LoginDto } from 'src/app/models/login-dto';
 })
 export class LoginComponent implements OnInit {
   hidePassword = signal(true);
+  isBrowser: boolean;
   form: any = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
@@ -48,6 +49,7 @@ export class LoginComponent implements OnInit {
   pendingQuiz: string | null = null;
 
   constructor(
+    @Inject(PLATFORM_ID) platformId: Object,
     private fb: FormBuilder,
     private router: Router,
     private toastr: ToastrService,
@@ -56,12 +58,16 @@ export class LoginComponent implements OnInit {
     public loaderService: LoaderService,
     private navbarService: NavbarService,
     private quizService: QuizService,
-  ) {}
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   ngOnInit(): void {
     this.loaderService.hide();
 
-    this.pendingQuiz = localStorage.getItem('pendingQuiz');
+    if (this.isBrowser) {
+      this.pendingQuiz = localStorage.getItem('pendingQuiz');
+    }
   }
 
   changePasswordVisibility(event: MouseEvent) {
