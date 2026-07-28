@@ -62,6 +62,25 @@
   padding: 5px 0;
 }
 
+#h2-h3-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: auto;
+  color: mat.m2-get-color-from-palette(theme.$primary, 900);
+  background-color: white;
+}
+
+#h2-english-with-luna {
+  padding: 20px 0 30px 0;
+}
+
+.content-block {
+  padding: 0 20px 30px 20px;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   #home-subtitle {
     font-size: 22px;
@@ -72,6 +91,9 @@
   }
   #mobile-logo {
     display: none;
+  }
+  .content-block {
+    padding: 0 100px 30px 100px;
   }
 }
 
@@ -85,5 +107,8 @@
   }
   #mobile-logo {
     display: none;
+  }
+  .content-block {
+    padding: 0 350px 30px 350px;
   }
 }
