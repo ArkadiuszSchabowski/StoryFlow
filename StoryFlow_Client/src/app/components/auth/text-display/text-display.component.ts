@@ -20,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { LottieComponent } from 'ngx-lottie';
 import { AsyncPipe } from '@angular/common';
+import { filter, take } from 'rxjs';
 
 @Component({
   selector: 'app-text-display',
@@ -73,7 +74,15 @@ export class TextDisplayComponent implements OnInit {
 
   ngOnInit(): void {
     this.showLoader();
-    this.getStoryIdFromRoute();
+
+    this.authService.authReady$
+      .pipe(
+        filter((ready) => ready),
+        take(1),
+      )
+      .subscribe(() => {
+        this.getStoryIdFromRoute();
+      });
   }
 
   getStoryIdFromRoute() {
@@ -168,6 +177,9 @@ export class TextDisplayComponent implements OnInit {
           error: (error) => {
             if (error.status == 401) {
               this.router.navigateByUrl(`error-page`);
+            }
+            if (error.status == 404) {
+              this.router.navigateByUrl(`sezon-selection`);
             }
           },
         });

@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/public/home/home.component';
+import { guestGuard } from './guards/guest.guard';
+import { authGuard } from './guards/auth.guard';
+import { moderatorGuard } from './guards/moderator.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
     title: 'StoryFlow - Nauka angielskiego z kotką Luną',
+    canActivate: [guestGuard],
   },
   {
     path: 'faq',
@@ -15,6 +19,7 @@ const routes: Routes = [
         (m) => m.FaqComponent,
       ),
     title: 'Faq - StoryFlow',
+    canActivate: [guestGuard],
   },
   {
     path: 'login',
@@ -23,6 +28,7 @@ const routes: Routes = [
         (m) => m.LoginComponent,
       ),
     title: 'Logowanie - StoryFlow',
+    canActivate: [guestGuard],
   },
   {
     path: 'register',
@@ -31,6 +37,7 @@ const routes: Routes = [
         (m) => m.RegisterComponent,
       ),
     title: 'Rejestracja - StoryFlow',
+    canActivate: [guestGuard],
   },
   {
     path: 'error-page',
@@ -39,6 +46,7 @@ const routes: Routes = [
         (m) => m.ErrorPageComponent,
       ),
     title: 'Błąd - StoryFlow',
+    canActivate: [guestGuard],
   },
   {
     path: 'sezon-selection',
@@ -47,6 +55,7 @@ const routes: Routes = [
         (m) => m.SezonSelectionComponent,
       ),
     title: 'Wybór sezonu - StoryFlow',
+    canActivate: [authGuard],
   },
   {
     path: 'profile',
@@ -55,30 +64,7 @@ const routes: Routes = [
         (m) => m.ProfileComponent,
       ),
     title: 'Profil użytkownika - StoryFlow',
-  },
-  {
-    path: 'create-story',
-    loadComponent: () =>
-      import('./components/auth/moderator/story-create/story-create.component').then(
-        (m) => m.StoryCreateComponent,
-      ),
-    title: 'Tworzenie historii - StoryFlow',
-  },
-  {
-    path: 'create-quiz',
-    loadComponent: () =>
-      import('./components/auth/moderator/quiz-create/quiz-create.component').then(
-        (m) => m.QuizCreateComponent,
-      ),
-    title: 'Tworzenie quizu - StoryFlow',
-  },
-  {
-    path: 'library',
-    loadComponent: () =>
-      import('./components/auth/moderator/library-preview/library-preview.component').then(
-        (m) => m.LibraryPreviewComponent,
-      ),
-    title: 'Biblioteka historii - StoryFlow',
+    canActivate: [authGuard],
   },
   {
     path: 'sezon/:id',
@@ -87,6 +73,34 @@ const routes: Routes = [
         (m) => m.SezonComponent,
       ),
     title: 'Podgląd sezonu - StoryFlow',
+    canActivate: [authGuard],
+  },
+  {
+    path: 'create-story',
+    loadComponent: () =>
+      import('./components/auth/moderator/story-create/story-create.component').then(
+        (m) => m.StoryCreateComponent,
+      ),
+    title: 'Tworzenie historii - StoryFlow',
+    canActivate: [moderatorGuard],
+  },
+  {
+    path: 'create-quiz',
+    loadComponent: () =>
+      import('./components/auth/moderator/quiz-create/quiz-create.component').then(
+        (m) => m.QuizCreateComponent,
+      ),
+    title: 'Tworzenie quizu - StoryFlow',
+    canActivate: [moderatorGuard],
+  },
+  {
+    path: 'library',
+    loadComponent: () =>
+      import('./components/auth/moderator/library-preview/library-preview.component').then(
+        (m) => m.LibraryPreviewComponent,
+      ),
+    title: 'Biblioteka historii - StoryFlow',
+    canActivate: [moderatorGuard],
   },
   {
     path: 'text/:id',
