@@ -13,15 +13,6 @@ const routes: Routes = [
     canActivate: [guestGuard],
   },
   {
-    path: 'faq',
-    loadComponent: () =>
-      import('./components/public/faq/faq.component').then(
-        (m) => m.FaqComponent,
-      ),
-    title: 'Faq - StoryFlow',
-    canActivate: [guestGuard],
-  },
-  {
     path: 'login',
     loadComponent: () =>
       import('./components/public/login/login.component').then(
@@ -101,6 +92,14 @@ const routes: Routes = [
       ),
     title: 'Biblioteka historii - StoryFlow',
     canActivate: [moderatorGuard],
+  },
+  {
+    path: 'faq',
+    loadComponent: () =>
+      import('./components/public/faq/faq.component').then(
+        (m) => m.FaqComponent,
+      ),
+    title: 'Faq - StoryFlow',
   },
   {
     path: 'text/:id',
