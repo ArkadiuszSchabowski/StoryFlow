@@ -11,7 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LottieComponent } from 'ngx-lottie';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -36,6 +36,7 @@ import { LoginDto } from 'src/app/models/login-dto';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    RouterLink
   ],
 })
 export class LoginComponent implements OnInit {

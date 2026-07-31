@@ -34,8 +34,18 @@ mat-card.login-card {
   background-color: mat.m2-get-color-from-palette(theme.$accent);
 }
 
+#submit-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #submit-login-button {
-  margin: 40px 20px 20px 20px;
+  margin: 20px;
+}
+
+#button-app-go-to-register {
+border: 2px solid mat.m2-get-color-from-palette(theme.$accent);
 }
 
 #loader-text {
@@ -52,7 +62,6 @@ mat-card.login-card {
   padding-bottom: 10px;
 }
 
-
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   mat-card.login-card {
     width: 450px;
@@ -63,5 +72,4 @@ mat-card.login-card {
   mat-card.login-card {
     width: 450px;
   }
-
 }

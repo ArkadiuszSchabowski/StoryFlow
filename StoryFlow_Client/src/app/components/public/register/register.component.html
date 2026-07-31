@@ -10,14 +10,14 @@
             <input matInput formControlName="email" />
 
             @if (
-              form.get('email')?.hasError('required') &&
-              form.get('email')?.touched
+              form.get("email")?.hasError("required") &&
+              form.get("email")?.touched
             ) {
               <mat-error>Adres e-mail jest wymagany.</mat-error>
             }
 
             @if (
-              form.get('email')?.hasError('email') && form.get('email')?.touched
+              form.get("email")?.hasError("email") && form.get("email")?.touched
             ) {
               <mat-error>Wpisz poprawny adres e-mail.</mat-error>
             }
@@ -28,17 +28,17 @@
             <input matInput formControlName="nick" />
 
             @if (
-              form.get('nick')?.hasError('required') &&
-              form.get('nick')?.touched
+              form.get("nick")?.hasError("required") &&
+              form.get("nick")?.touched
             ) {
               <mat-error>Nick jest wymagany.</mat-error>
             }
 
             @if (
-              (form.get('nick')?.hasError('minlength') &&
-                form.get('nick')?.touched) ||
-              (form.get('nick')?.hasError('maxlength') &&
-                form.get('nick')?.touched)
+              (form.get("nick")?.hasError("minlength") &&
+                form.get("nick")?.touched) ||
+              (form.get("nick")?.hasError("maxlength") &&
+                form.get("nick")?.touched)
             ) {
               <mat-error>Nick od 3 do 25 znaków.</mat-error>
             }
@@ -49,16 +49,16 @@
             <input matInput formControlName="firstName" />
 
             @if (
-              form.get('firstName')?.hasError('required') &&
-              form.get('firstName')?.touched
+              form.get("firstName")?.hasError("required") &&
+              form.get("firstName")?.touched
             ) {
               <mat-error>Imię jest wymagane.</mat-error>
             }
             @if (
-              (form.get('firstName')?.hasError('minlength') &&
-                form.get('firstName')?.touched) ||
-              (form.get('firstName')?.hasError('maxlength') &&
-                form.get('firstName')?.touched)
+              (form.get("firstName")?.hasError("minlength") &&
+                form.get("firstName")?.touched) ||
+              (form.get("firstName")?.hasError("maxlength") &&
+                form.get("firstName")?.touched)
             ) {
               <mat-error>Imię: od 3 do 25 znaków.</mat-error>
             }
@@ -74,8 +74,8 @@
               }
             </mat-select>
             @if (
-              form.get('gender')?.hasError('required') &&
-              form.get('gender')?.touched
+              form.get("gender")?.hasError("required") &&
+              form.get("gender")?.touched
             ) {
               <mat-error>Wybierz płeć.</mat-error>
             }
@@ -93,10 +93,13 @@
               matIconSuffix
               [for]="picker"
             ></mat-datepicker-toggle>
-            <mat-datepicker #picker [startAt]="form.dateOfBirth"></mat-datepicker>
+            <mat-datepicker
+              #picker
+              [startAt]="form.dateOfBirth"
+            ></mat-datepicker>
             @if (
-              form.get('dateOfBirth')?.hasError('required') &&
-              form.get('dateOfBirth')?.touched
+              form.get("dateOfBirth")?.hasError("required") &&
+              form.get("dateOfBirth")?.touched
             ) {
               <mat-error>Nieprawidłowa data urodzenia.</mat-error>
             }
@@ -124,17 +127,17 @@
             </button>
 
             @if (
-              form.get('password')?.hasError('required') &&
-              form.get('password')?.touched
+              form.get("password")?.hasError("required") &&
+              form.get("password")?.touched
             ) {
               <mat-error>Hasło jest wymagane.</mat-error>
             }
 
             @if (
-              (form.get('password')?.hasError('minlength') &&
-                form.get('password')?.touched) ||
-              (form.get('password')?.hasError('maxlength') &&
-                form.get('password')?.touched)
+              (form.get("password")?.hasError("minlength") &&
+                form.get("password")?.touched) ||
+              (form.get("password")?.hasError("maxlength") &&
+                form.get("password")?.touched)
             ) {
               <mat-error>Hasło musi mieć 5-25 znaków.</mat-error>
             }
@@ -162,17 +165,17 @@
             </button>
 
             @if (
-              form.get('repeatPassword')?.hasError('required') &&
-              form.get('repeatPassword')?.touched
+              form.get("repeatPassword")?.hasError("required") &&
+              form.get("repeatPassword")?.touched
             ) {
               <mat-error>Powtórz hasło.</mat-error>
             }
 
             @if (
-              (form.get('repeatPassword')?.hasError('minlength') &&
-                form.get('repeatPassword')?.touched) ||
-              (form.get('repeatPassword')?.hasError('maxlength') &&
-                form.get('repeatPassword')?.touched)
+              (form.get("repeatPassword")?.hasError("minlength") &&
+                form.get("repeatPassword")?.touched) ||
+              (form.get("repeatPassword")?.hasError("maxlength") &&
+                form.get("repeatPassword")?.touched)
             ) {
               <mat-error>Hasło musi mieć 5-25 znaków.</mat-error>
             }
@@ -180,11 +183,21 @@
 
           <div id="submit-button-container">
             <button
+              id="submit-register-button"
               mat-raised-button
-              class="button-app button-standard"
+              class="button-app button-upper"
               type="submit"
             >
               Zarejestruj się
+            </button>
+            <button
+              id="button-app-go-to-login"
+              mat-raised-button
+              class="button-standard button-app-reverse-color"
+              routerLink="/login"
+              type="button"
+            >
+              Mam już konto
             </button>
           </div>
         </mat-card-content>
