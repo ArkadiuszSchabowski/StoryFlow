@@ -18,6 +18,7 @@ mat-card.register-card {
 #register-container {
   display: flex;
   min-height: 930px;
+  margin: 20px 0;
 }
 
 #card-title {
@@ -38,6 +39,20 @@ mat-card.register-card {
   font-size: 20px;
   padding-top: 20px;
   padding-bottom: 30px;
+}
+
+#submit-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#submit-register-button {
+  margin-bottom: 20px;
+}
+
+#button-app-go-to-login {
+border: 2px solid mat.m2-get-color-from-palette(theme.$accent);
 }
 
 #loader-container {

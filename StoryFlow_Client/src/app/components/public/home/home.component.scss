@@ -78,6 +78,11 @@
   margin-bottom: 30px;
 }
 
+#button-go-to-login{
+  margin-bottom: 30px;
+  margin-left: 10px;
+}
+
 #loader-container {
   padding: 50px 20px 0 20px;
 }
@@ -136,6 +141,10 @@
 }
 
 .home-subtitle-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 5px 0;
 }
 
