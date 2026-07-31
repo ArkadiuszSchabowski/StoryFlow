@@ -1,7 +1,14 @@
 @if (!(loaderService.loading$ | async)) {
   <div id="home-container" class="container">
     <div id="home-row">
-      <div id="desktop-logo" class="image-standard"></div>
+      <img
+        id="desktop-logo"
+        class="image-standard"
+        src="assets/kitty/kitty.webp"
+        alt="Kotka Luna z aplikacji StoryFlow do nauki angielskiego"
+        width="1024"
+        height="1536"
+      />
       <div id="home-text">
         <h1 id="home-title" class="title">
           Nauka angielskiego z kotką Luną - odkrywaj świat angielskich przygód!
@@ -31,7 +38,7 @@
       id="mobile-logo"
       class="image-standard"
       src="assets/kitty/kitty1.webp"
-      alt="Kotka Luna"
+      alt="Kotka Luna z aplikacji StoryFlow do nauki angielskiego"
       fetchpriority="high"
       width="438"
       height="525"
@@ -40,18 +47,19 @@
   <div id="h2-h3-container">
     <section class="content-section">
       <h2 id="h2-english-with-luna">Jak uczyć się angielskiego z Luną?</h2>
-              <img
-          id="home-logo"
-          class="image-standard"
-          src="assets/home/home.webp"
-          alt="Kotka Luna"
-          fetchpriority="high"
-          width="438"
-          height="525"
-        />
+      <img
+        id="home-logo"
+        class="image-standard"
+        src="assets/home/home.webp"
+        alt="Materiały do nauki angielskiego - książki, słowniczek i flagi Wielkiej Brytanii"
+        width="700"
+        height="467"
+      />
       <div id="content-block-1" class="content-block">
-        <div class="content-block-text">
-          <h3>Interaktywne historie zamiast nudnych lekcji</h3>
+        <div id="content-block-title-and-text-1" class="content-block-title-and-text">
+          <h3 class="content-block-title">
+            Interaktywne historie zamiast nudnych lekcji
+          </h3>
           <p>
             StoryFlow zamienia naukę angielskiego w podróż przez wciągające
             przygody z kotką Luną. Zamiast zakuwać listy słówek, poznajesz język
@@ -63,16 +71,17 @@
           id="home-logo-1"
           class="image-standard"
           src="assets/home/home1.webp"
-          alt="Kotka Luna"
-          fetchpriority="high"
-          width="438"
-          height="525"
+          alt="Interaktywna historia do nauki angielskiego w aplikacji StoryFlow"
+          width="700"
+          height="700"
         />
       </div>
 
-      <div id="content-block-2" class="content-block reverse color">
-        <div class="content-block-text">
-          <h3>Pierwsza historia za darmo, bez rejestracji</h3>
+      <div id="content-block-2" class="content-block">
+        <div id="content-block-title-and-text-2" class="content-block-title-and-text">
+          <h3 class="content-block-title">
+            Pierwsza historia za darmo, bez rejestracji
+          </h3>
           <p>
             Możesz sprawdzić, jak wygląda nauka z Luną, zanim jeszcze założysz
             konto. Pierwsza przygoda jest w pełni darmowa - wystarczy wejść i
@@ -83,16 +92,17 @@
           id="home-logo-2"
           class="image-standard"
           src="assets/home/home2.webp"
-          alt="Kotka Luna"
-          fetchpriority="high"
-          width="438"
-          height="525"
+          alt="Kotka Luna zachęcająca do rozpoczęcia pierwszej darmowej historii"
+          width="700"
+          height="467"
         />
       </div>
 
       <div id="content-block-3" class="content-block">
-        <div class="content-block-text">
-          <h3>Nauka dopasowana do Twojego poziomu</h3>
+        <div id="content-block-title-and-text-3" class="content-block-title-and-text">
+          <h3 class="content-block-title">
+            Nauka dopasowana do Twojego poziomu
+          </h3>
           <p>
             Niezależnie od tego, czy dopiero zaczynasz przygodę z angielskim,
             czy wracasz do niego po dłuższej przerwie, historie z Luną
@@ -103,16 +113,17 @@
           id="home-logo-3"
           class="image-standard"
           src="assets/home/home3.webp"
-          alt="Kotka Luna"
-          fetchpriority="high"
-          width="438"
-          height="525"
+          alt="Książka z kłódką - poziomy trudności dopasowane do umiejętności"
+          width="700"
+          height="467"
         />
       </div>
 
       <div id="content-block-4" class="content-block">
-        <div class="content-block-text">
-          <h3>Codzienna dawka angielskiego, która wciąga</h3>
+        <div id="content-block-title-and-text-4" class="content-block-title-and-text">
+          <h3 class="content-block-title">
+            Codzienna dawka angielskiego, która wciąga
+          </h3>
           <p>
             Krótkie, angażujące epizody sprawiają, że nauka staje się nawykiem,
             a nie obowiązkiem. Każda kolejna historia to nowa okazja, by
@@ -123,16 +134,17 @@
           id="home-logo-4"
           class="image-standard"
           src="assets/home/home4.webp"
-          alt="Kotka Luna"
-          fetchpriority="high"
-          width="438"
-          height="525"
+          alt="Codzienne odcinki historii budujące nawyk nauki angielskiego"
+          width="700"
+          height="700"
         />
       </div>
 
       <div id="content-block-5" class="content-block">
-        <div class="content-block-text">
-          <h3>Dla każdego, kto chce uczyć się języka przez zabawę</h3>
+        <div id="content-block-title-and-text-5" class="content-block-title-and-text">
+          <h3 class="content-block-title">
+            Dla każdego, kto chce uczyć się języka przez zabawę
+          </h3>
           <p>
             StoryFlow jest dla dzieci, dorosłych i wszystkich pomiędzy - dla
             każdego, kto woli uczyć się przez historię i emocje niż przez
@@ -143,10 +155,9 @@
           id="home-logo-5"
           class="image-standard"
           src="assets/home/home5.webp"
-          alt="Kotka Luna"
-          fetchpriority="high"
-          width="438"
-          height="525"
+          alt="Sylwetki osób czytających - nauka angielskiego dla każdego"
+          width="700"
+          height="700"
         />
       </div>
     </section>

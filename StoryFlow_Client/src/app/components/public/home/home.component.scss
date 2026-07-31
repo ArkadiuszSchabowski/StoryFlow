@@ -22,18 +22,16 @@
   padding: 20px 10px 0 10px;
 }
 
-#home-logo{
-  display: flex;
+#home-logo {
   width: 100%;
   height: auto;
-  padding: 120px 0;
+  padding: 100px 0;
 }
 
 #mobile-logo,
 #home-logo-1,
 #home-logo-4,
 #home-logo-5 {
-  display: flex;
   min-width: 250px;
   width: 250px;
   height: auto;
@@ -41,7 +39,6 @@
 
 #home-logo-2,
 #home-logo-3 {
-  display: flex;
   min-width: 400px;
   width: 400px;
   height: auto;
@@ -53,23 +50,27 @@
 }
 
 #home-logo-1,
-#home-logo-2,
 #home-logo-3,
 #home-logo-4 {
   padding-top: 150px;
   padding-bottom: 50px;
 }
 
+#home-logo-2 {
+  padding-top: 150px;
+  padding-bottom: 100px;
+}
+
 #home-logo-5 {
   padding-top: 150px;
+  padding-bottom: 50px;
 }
 
 #desktop-logo {
   display: none;
-  width: 400px;
-  min-width: 400px;
-  height: 400px;
-  background-image: url(../../../../assets/kitty/kitty.webp);
+  width: 300px;
+  min-width: 300px;
+  height: auto;
 }
 
 #home-row {
@@ -99,38 +100,22 @@
   align-items: center;
   text-align: center;
   width: 100%;
-  height: 500%;
+  min-width: 320px;
   padding: 150px 20px;
-}
-
-#content-block-1 {
-  display: flex;
-  padding: 100px 0 0 0;
-}
-
-#content-block-2 {
-  display: flex;
-  padding: 100px 0 0 0;
-}
-
-#content-block-3 {
-  display: flex;
-  padding: 100px 0 0 0;
-}
-
-#content-block-4 {
-  display: flex;
-  padding: 100px 0 0 0;
-}
-
-#content-block-5 {
-  display: flex;
-  padding: 100px 0 0 0;
 }
 
 #h2-english-with-luna {
   padding: 20px 0 10px 0;
   font-size: 26px;
+}
+
+#content-block-1,
+#content-block-2,
+#content-block-3,
+#content-block-4,
+#content-block-5 {
+  display: flex;
+  padding: 100px 0 0 0;
 }
 
 .content-block {
@@ -142,27 +127,32 @@
   font-size: 20px;
 }
 
-h3{
-  padding-bottom: 40px;
-  font-size: 26px;
+.content-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-width: 350px;
+  height: auto;
 }
 
-.reverse-color {
-  display: flex;
+.content-block-title {
+  padding-bottom: 40px;
+  font-size: 26px;
 }
 
 .home-subtitle-row {
   padding: 5px 0;
 }
 
-.content-section {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: auto;
-}
-
 @media screen and (min-width: 768px) and (max-width: 1199px) {
+    #h2-h3-container {
+      display: flex;
+      flex-wrap: wrap;
+      min-width: 400px;
+  }
+
   #home-subtitle {
     font-size: 22px;
     padding: 50px;
@@ -173,18 +163,65 @@ h3{
   #mobile-logo {
     display: none;
   }
+  #home-logo {
+    width: 80%;
+  }
 
   #h2-h3-container {
-    padding: 0 100px;
+    padding: 0 50px;
   }
 
   .content-block {
     padding-left: 100px;
     padding-right: 100px;
   }
+
+  #content-block-1,
+  #content-block-3,
+  #content-block-5 {
+    display: flex;
+    flex-direction: row;
+  }
+
+  #content-block-2,
+  #content-block-4 {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  #content-block-title-and-text-2,
+  #content-block-title-and-text-4 {
+    padding-left: 50px;
+  }
+
+  #content-block-title-and-text-1,
+  #content-block-title-and-text-3,
+  #content-block-title-and-text-5 {
+    padding-right: 50px;
+  }
+
+  #home-logo-1,
+  #home-logo-4,
+  #home-logo-5 {
+    min-width: 350px;
+    width: 350px;
+  }
+
+  #home-logo-2 {
+    min-width: 400px;
+    width: 400px;
+  }
+
+    #home-logo-3 {
+    min-width: 350px;
+    width: 350px;
+  }
 }
 
 @media screen and (min-width: 1200px) {
+  #home-title{
+    padding-left: 50px;
+  }
   #home-subtitle {
     font-size: 26px;
     padding: 50px;
@@ -195,11 +232,44 @@ h3{
   #mobile-logo {
     display: none;
   }
+  #home-logo {
+    width: 60%;
+  }
   #h2-h3-container {
-    padding: 0 250px;
+    padding: 0 200px;
   }
   .content-block {
-    padding-left: 100px;
-    padding-right: 100px;
+    flex-direction: row;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  #content-block-2,
+  #content-block-4 {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  #content-block-title-and-text-2,
+  #content-block-title-and-text-4 {
+    padding-left: 50px;
+  }
+
+  #content-block-title-and-text-1,
+  #content-block-title-and-text-3,
+  #content-block-title-and-text-5 {
+    padding-right: 50px;
+  }
+  #home-logo-1,
+  #home-logo-4,
+  #home-logo-5 {
+    min-width: 350px;
+    width: 350px;
+  }
+
+  #home-logo-2,
+  #home-logo-3 {
+    min-width: 500px;
+    width: 500px;
   }
 }
