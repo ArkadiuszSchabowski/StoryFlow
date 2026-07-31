@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
 import { FAQ } from 'src/app/constants/faq';
 
 @Component({
@@ -6,10 +7,23 @@ import { FAQ } from 'src/app/constants/faq';
   templateUrl: './faq.component.html',
   styleUrl: './faq.component.scss',
 })
-export class FaqComponent {
+export class FaqComponent implements OnInit {
   readonly faq = FAQ;
-
   private openItems = new Set<string>();
+
+  constructor(private meta: Meta) {}
+
+  ngOnInit(): void {
+    this.setDescription();
+  }
+
+  setDescription() {
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        'Najczęściej zadawane pytania o StoryFlow - jak działa aplikacja, quizy i historie do nauki angielskiego.',
+    });
+  }
 
   toggle(sectionId: string, question: string): void {
     const key = this.getKey(sectionId, question);
