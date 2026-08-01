@@ -52,7 +52,7 @@ mat-card.register-card {
 }
 
 #button-app-go-to-login {
-border: 2px solid mat.m2-get-color-from-palette(theme.$accent);
+  border: 2px solid mat.m2-get-color-from-palette(theme.$accent);
 }
 
 #loader-container {
@@ -65,12 +65,29 @@ border: 2px solid mat.m2-get-color-from-palette(theme.$accent);
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   mat-card.register-card {
-    width: 450px;
+    width: 350px;
   }
 }
 
 @media screen and (min-width: 1200px) {
+
   mat-card.register-card {
-    width: 450px;
+    width: 1000px;
+    min-width: 1000px;
+    padding: 20px 0;
+  }
+
+  #register-container{
+    min-height: 300px;
+    padding-bottom: 40px;
+  }
+
+  .mat-form-field-row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .card-input {
+    margin: 0 20px 10px 20px;
   }
 }
