@@ -5,181 +5,186 @@
         <h1 id="card-title">Zarejestruj się w StoryFlow</h1>
 
         <mat-card-content>
-          <mat-form-field class="card-input" appearance="outline">
-            <mat-label>Adres e-mail</mat-label>
-            <input matInput formControlName="email" />
+          <div class="mat-form-field-row">
+            <mat-form-field class="card-input" appearance="outline">
+              <mat-label>Adres e-mail</mat-label>
+              <input matInput formControlName="email" />
 
-            @if (
-              form.get("email")?.hasError("required") &&
-              form.get("email")?.touched
-            ) {
-              <mat-error>Adres e-mail jest wymagany.</mat-error>
-            }
-
-            @if (
-              form.get("email")?.hasError("email") && form.get("email")?.touched
-            ) {
-              <mat-error>Wpisz poprawny adres e-mail.</mat-error>
-            }
-          </mat-form-field>
-
-          <mat-form-field class="card-input" appearance="outline">
-            <mat-label>Nick</mat-label>
-            <input matInput formControlName="nick" />
-
-            @if (
-              form.get("nick")?.hasError("required") &&
-              form.get("nick")?.touched
-            ) {
-              <mat-error>Nick jest wymagany.</mat-error>
-            }
-
-            @if (
-              (form.get("nick")?.hasError("minlength") &&
-                form.get("nick")?.touched) ||
-              (form.get("nick")?.hasError("maxlength") &&
-                form.get("nick")?.touched)
-            ) {
-              <mat-error>Nick od 3 do 25 znaków.</mat-error>
-            }
-          </mat-form-field>
-
-          <mat-form-field class="card-input" appearance="outline">
-            <mat-label>Imię</mat-label>
-            <input matInput formControlName="firstName" />
-
-            @if (
-              form.get("firstName")?.hasError("required") &&
-              form.get("firstName")?.touched
-            ) {
-              <mat-error>Imię jest wymagane.</mat-error>
-            }
-            @if (
-              (form.get("firstName")?.hasError("minlength") &&
-                form.get("firstName")?.touched) ||
-              (form.get("firstName")?.hasError("maxlength") &&
-                form.get("firstName")?.touched)
-            ) {
-              <mat-error>Imię: od 3 do 25 znaków.</mat-error>
-            }
-          </mat-form-field>
-
-          <mat-form-field class="card-input" appearance="outline">
-            <mat-label>Płeć</mat-label>
-            <mat-select name="gender" formControlName="gender">
-              @for (gender of genders; track gender.value) {
-                <mat-option [value]="gender.value">{{
-                  gender.viewValue
-                }}</mat-option>
+              @if (
+                form.get("email")?.hasError("required") &&
+                form.get("email")?.touched
+              ) {
+                <mat-error>Adres e-mail jest wymagany.</mat-error>
               }
-            </mat-select>
-            @if (
-              form.get("gender")?.hasError("required") &&
-              form.get("gender")?.touched
-            ) {
-              <mat-error>Wybierz płeć.</mat-error>
-            }
-          </mat-form-field>
 
-          <mat-form-field class="card-input" appearance="outline">
-            <mat-label>Data urodzenia (MM/DD/RRRR)</mat-label>
-            <input
-              matInput
-              [matDatepicker]="picker"
-              name="dateOfBirth"
-              formControlName="dateOfBirth"
-            />
-            <mat-datepicker-toggle
-              matIconSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker
-              #picker
-              [startAt]="form.dateOfBirth"
-            ></mat-datepicker>
-            @if (
-              form.get("dateOfBirth")?.hasError("required") &&
-              form.get("dateOfBirth")?.touched
-            ) {
-              <mat-error>Nieprawidłowa data urodzenia.</mat-error>
-            }
-          </mat-form-field>
+              @if (
+                form.get("email")?.hasError("email") &&
+                form.get("email")?.touched
+              ) {
+                <mat-error>Wpisz poprawny adres e-mail.</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field class="card-input" appearance="outline">
+              <mat-label>Nick</mat-label>
+              <input matInput formControlName="nick" />
 
-          <mat-form-field class="card-input" appearance="outline">
-            <mat-label>Hasło</mat-label>
-            <input
-              matInput
-              [type]="hidePassword() ? 'password' : 'text'"
-              formControlName="password"
-            />
+              @if (
+                form.get("nick")?.hasError("required") &&
+                form.get("nick")?.touched
+              ) {
+                <mat-error>Nick jest wymagany.</mat-error>
+              }
 
-            <button
-              type="button"
-              class="password-button"
-              mat-icon-button
-              matSuffix
-              (click)="changePasswordVisibility($event)"
-              [attr.aria-label]="'Pokaż lub ukryj hasło'"
-            >
-              <mat-icon>
-                {{ hidePassword() ? "visibility_off" : "visibility" }}
-              </mat-icon>
-            </button>
+              @if (
+                (form.get("nick")?.hasError("minlength") &&
+                  form.get("nick")?.touched) ||
+                (form.get("nick")?.hasError("maxlength") &&
+                  form.get("nick")?.touched)
+              ) {
+                <mat-error>Nick od 3 do 25 znaków.</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field class="card-input" appearance="outline">
+              <mat-label>Imię</mat-label>
+              <input matInput formControlName="firstName" />
 
-            @if (
-              form.get("password")?.hasError("required") &&
-              form.get("password")?.touched
-            ) {
-              <mat-error>Hasło jest wymagane.</mat-error>
-            }
+              @if (
+                form.get("firstName")?.hasError("required") &&
+                form.get("firstName")?.touched
+              ) {
+                <mat-error>Imię jest wymagane.</mat-error>
+              }
+              @if (
+                (form.get("firstName")?.hasError("minlength") &&
+                  form.get("firstName")?.touched) ||
+                (form.get("firstName")?.hasError("maxlength") &&
+                  form.get("firstName")?.touched)
+              ) {
+                <mat-error>Imię: od 3 do 25 znaków.</mat-error>
+              }
+            </mat-form-field>
+          </div>
 
-            @if (
-              (form.get("password")?.hasError("minlength") &&
-                form.get("password")?.touched) ||
-              (form.get("password")?.hasError("maxlength") &&
-                form.get("password")?.touched)
-            ) {
-              <mat-error>Hasło musi mieć 5-25 znaków.</mat-error>
-            }
-          </mat-form-field>
+          <div class="mat-form-field-row">
+            <mat-form-field class="card-input" appearance="outline">
+              <mat-label>Płeć</mat-label>
+              <mat-select name="gender" formControlName="gender">
+                @for (gender of genders; track gender.value) {
+                  <mat-option [value]="gender.value">{{
+                    gender.viewValue
+                  }}</mat-option>
+                }
+              </mat-select>
+              @if (
+                form.get("gender")?.hasError("required") &&
+                form.get("gender")?.touched
+              ) {
+                <mat-error>Wybierz płeć.</mat-error>
+              }
+            </mat-form-field>
 
-          <mat-form-field class="card-input" appearance="outline">
-            <mat-label>Powtórz hasło</mat-label>
-            <input
-              matInput
-              [type]="hideRepeatPassword() ? 'password' : 'text'"
-              formControlName="repeatPassword"
-            />
+            <mat-form-field class="card-input" appearance="outline">
+              <mat-label>Data urodzenia (MM/DD/RRRR)</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                name="dateOfBirth"
+                formControlName="dateOfBirth"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker
+                #picker
+                [startAt]="form.dateOfBirth"
+              ></mat-datepicker>
+              @if (
+                form.get("dateOfBirth")?.hasError("required") &&
+                form.get("dateOfBirth")?.touched
+              ) {
+                <mat-error>Nieprawidłowa data urodzenia.</mat-error>
+              }
+            </mat-form-field>
+          </div>
 
-            <button
-              type="button"
-              class="password-button"
-              mat-icon-button
-              matSuffix
-              (click)="changeRepeatPasswordVisibility($event)"
-              [attr.aria-label]="'Pokaż lub ukryj powtórzone hasło'"
-            >
-              <mat-icon>
-                {{ hideRepeatPassword() ? "visibility_off" : "visibility" }}
-              </mat-icon>
-            </button>
+          <div class="mat-form-field-row">
+            <mat-form-field class="card-input" appearance="outline">
+              <mat-label>Hasło</mat-label>
+              <input
+                matInput
+                [type]="hidePassword() ? 'password' : 'text'"
+                formControlName="password"
+              />
 
-            @if (
-              form.get("repeatPassword")?.hasError("required") &&
-              form.get("repeatPassword")?.touched
-            ) {
-              <mat-error>Powtórz hasło.</mat-error>
-            }
+              <button
+                type="button"
+                class="password-button"
+                mat-icon-button
+                matSuffix
+                (click)="changePasswordVisibility($event)"
+                [attr.aria-label]="'Pokaż lub ukryj hasło'"
+              >
+                <mat-icon>
+                  {{ hidePassword() ? "visibility_off" : "visibility" }}
+                </mat-icon>
+              </button>
 
-            @if (
-              (form.get("repeatPassword")?.hasError("minlength") &&
-                form.get("repeatPassword")?.touched) ||
-              (form.get("repeatPassword")?.hasError("maxlength") &&
-                form.get("repeatPassword")?.touched)
-            ) {
-              <mat-error>Hasło musi mieć 5-25 znaków.</mat-error>
-            }
-          </mat-form-field>
+              @if (
+                form.get("password")?.hasError("required") &&
+                form.get("password")?.touched
+              ) {
+                <mat-error>Hasło jest wymagane.</mat-error>
+              }
+
+              @if (
+                (form.get("password")?.hasError("minlength") &&
+                  form.get("password")?.touched) ||
+                (form.get("password")?.hasError("maxlength") &&
+                  form.get("password")?.touched)
+              ) {
+                <mat-error>Hasło musi mieć 5-25 znaków.</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field class="card-input" appearance="outline">
+              <mat-label>Powtórz hasło</mat-label>
+              <input
+                matInput
+                [type]="hideRepeatPassword() ? 'password' : 'text'"
+                formControlName="repeatPassword"
+              />
+
+              <button
+                type="button"
+                class="password-button"
+                mat-icon-button
+                matSuffix
+                (click)="changeRepeatPasswordVisibility($event)"
+                [attr.aria-label]="'Pokaż lub ukryj powtórzone hasło'"
+              >
+                <mat-icon>
+                  {{ hideRepeatPassword() ? "visibility_off" : "visibility" }}
+                </mat-icon>
+              </button>
+
+              @if (
+                form.get("repeatPassword")?.hasError("required") &&
+                form.get("repeatPassword")?.touched
+              ) {
+                <mat-error>Powtórz hasło.</mat-error>
+              }
+
+              @if (
+                (form.get("repeatPassword")?.hasError("minlength") &&
+                  form.get("repeatPassword")?.touched) ||
+                (form.get("repeatPassword")?.hasError("maxlength") &&
+                  form.get("repeatPassword")?.touched)
+              ) {
+                <mat-error>Hasło musi mieć 5-25 znaków.</mat-error>
+              }
+            </mat-form-field>
+          </div>
 
           <div id="submit-button-container">
             <button
