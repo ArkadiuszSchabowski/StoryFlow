@@ -129,6 +129,7 @@ export class RegisterComponent implements OnInit {
 
     this.userService.register(dto).subscribe({
       next: () => {
+        window.scrollTo(0, 0);
         this.login();
       },
       error: (error) => {
@@ -144,6 +145,8 @@ export class RegisterComponent implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
+
+    window.scrollTo(0, 0);
 
     const dto: LoginDto = {
       email: this.form.get('email')?.value,

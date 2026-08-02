@@ -36,7 +36,7 @@ import { LoginDto } from 'src/app/models/login-dto';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    RouterLink
+    RouterLink,
   ],
 })
 export class LoginComponent implements OnInit {
@@ -81,6 +81,8 @@ export class LoginComponent implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
+
+    window.scrollTo(0, 0);
 
     const dto: LoginDto = {
       email: this.form.get('email')?.value,
