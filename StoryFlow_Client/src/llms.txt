@@ -1,0 +1,21 @@
+# StoryFlow
+
+> Nauka angielskiego z kotką Luną - interaktywne historie zamiast nudnych lekcji. Pierwsza przygoda w pełni darmowa, bez rejestracji, dla dzieci i dorosłych.
+
+StoryFlow zamienia naukę angielskiego w podróż przez wciągające przygody z kotką Luną. Zamiast zakuwać listy słówek, użytkownik poznaje język w naturalnym kontekście - tak, jak podczas czytania dobrej książki. Historie dopasowują się do poziomu umiejętności użytkownika i rosną razem z nim, oferując krótkie, angażujące epizody, które budują codzienny nawyk nauki.
+
+## Główne strony
+
+- [Strona główna](https://www.storyflow.pl/): Wprowadzenie do StoryFlow - nauka angielskiego przez interaktywne historie z kotką Luną, pierwsza historia dostępna bez rejestracji
+- [Logowanie](https://www.storyflow.pl/login): Logowanie do istniejącego konta
+- [Rejestracja](https://www.storyflow.pl/register): Założenie nowego konta w StoryFlow
+
+## Historie
+
+- [Przykładowa historia](https://www.storyflow.pl/text/79): Interaktywna historia do nauki angielskiego z kotką Luną
+
+## Zasoby dodatkowe
+
+- [Blog](https://www.storyflow.pl/blog): Artykuły o nauce angielskiego przez historie i metodę StoryFlow
+- [Jak nauczyć dziecko angielskiego](https://www.storyflow.pl/blog/jak-nauczyc-dziecko-angielskiego): Poradnik o nauce angielskiego u dzieci
+- [FAQ](https://www.storyflow.pl/faq): Najczęściej zadawane pytania dotyczące działania StoryFlow, poziomów nauki i kont użytkowników
