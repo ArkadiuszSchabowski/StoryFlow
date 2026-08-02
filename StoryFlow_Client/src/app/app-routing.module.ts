@@ -96,7 +96,7 @@ const routes: Routes = [
   {
     path: 'faq',
     loadComponent: () =>
-      import('./components/public/faq/faq.component').then(
+      import('./components/shared/faq/faq.component').then(
         (m) => m.FaqComponent,
       ),
     title: 'Faq - StoryFlow',
@@ -104,7 +104,7 @@ const routes: Routes = [
   {
     path: 'text/:id',
     loadComponent: () =>
-      import('./components/auth/text-display/text-display.component').then(
+      import('./components/shared/text-display/text-display.component').then(
         (m) => m.TextDisplayComponent,
       ),
     title: 'Historia - StoryFlow',
