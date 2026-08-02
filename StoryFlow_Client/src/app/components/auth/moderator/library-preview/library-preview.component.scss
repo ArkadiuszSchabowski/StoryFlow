@@ -28,7 +28,7 @@
   flex-wrap: wrap;
   width: 100%;
   height: auto;
-  padding: 40px 100px 200px 100px;
+  padding: 40px 100px 80px 100px;
 }
 
 #no-story-information {
@@ -191,7 +191,7 @@ button:disabled {
   #story-container {
     min-height: calc(100vh - 160px);
     justify-content: flex-start;
-    padding: 30px 50px 200px 50px;
+    padding: 30px 50px 80px 50px;
   }
   #filter-container {
     flex-direction: row;
@@ -205,7 +205,7 @@ button:disabled {
   #story-container {
     min-height: calc(100vh - 160px);
     justify-content: flex-start;
-    padding: 30px 50px 200px 50px;
+    padding: 30px 50px 80px 50px;
   }
   #filter-container {
     flex-direction: row;

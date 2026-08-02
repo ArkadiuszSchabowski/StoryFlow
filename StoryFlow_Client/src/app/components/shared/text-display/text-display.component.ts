@@ -124,6 +124,7 @@ export class TextDisplayComponent implements OnInit {
       this.currentQuestionIndex++;
       this.answerSubmitted = false;
     } else {
+      window.scrollTo(0, 0);
       this.send();
     }
   }
@@ -153,6 +154,7 @@ export class TextDisplayComponent implements OnInit {
 
   gotoQuiz() {
     this.isQuiz = true;
+    window.scrollTo(0, 0);
   }
 
   get(id: number) {
