@@ -124,7 +124,8 @@ mat-form-field.card-input {
   width: 100%;
   min-width: 320px;
   max-width: 100%;
-  min-height: calc(100% - 56px);
+  min-height: calc(100vh - 56px);
+  padding: 20px;
   background-color: mat.m2-get-color-from-palette($primary);
 }
 
