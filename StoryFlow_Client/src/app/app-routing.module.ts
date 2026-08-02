@@ -4,6 +4,7 @@ import { HomeComponent } from './components/public/home/home.component';
 import { guestGuard } from './guards/guest.guard';
 import { authGuard } from './guards/auth.guard';
 import { moderatorGuard } from './guards/moderator.guard';
+import { blogTitleResolver } from './constants/blog-title-resolver';
 
 const routes: Routes = [
   {
@@ -102,6 +103,22 @@ const routes: Routes = [
     title: 'Faq - StoryFlow',
   },
   {
+    path: 'blog',
+    loadComponent: () =>
+      import('./components/shared/blog/blog-home/blog-home.component').then(
+        (m) => m.BlogHomeComponent,
+      ),
+    title: 'Blog - StoryFlow',
+  },
+  {
+    path: 'blog/:slug',
+    loadComponent: () =>
+      import('./components/shared/blog/blog-content/blog-content.component').then(
+        (m) => m.BlogContentComponent,
+      ),
+    title: blogTitleResolver,
+  },
+  {
     path: 'text/:id',
     loadComponent: () =>
       import('./components/shared/text-display/text-display.component').then(
@@ -113,7 +130,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'top',
+      anchorScrolling: 'enabled',
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
