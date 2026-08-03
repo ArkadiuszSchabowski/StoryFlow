@@ -5,32 +5,30 @@
     kotką Luną.
   </h2>
   <div id="blog-cards">
-    <mat-card class="mat-card-blog">
-      <mat-card-content class="mat-card-content-blog">
-        <img
-          class="mat-card-image image-standard"
-          src="assets/blog/1.webp"
-          alt=""
-        />
-        <div class="blog-card-information">
-          <div class="blog-card-date">08.02.2026</div>
-          <h3 class="blog-card-title">
-            Jak nauczyć dziecko angielskiego przez czytanie
-          </h3>
-          <div class="blog-card-subtitle">
-            Czytanie to jeden z najskuteczniejszych sposobów na naukę języka u
-            dzieci. Sprawdź, jak wprowadzić angielskie historie do codziennej
-            zabawy bez presji i nudnych ćwiczeń. Pokazujemy praktyczne
-            wskazówki, które możesz zastosować już dziś.
+    @for (blogPost of blogPosts; track blogPost.id) {
+      <mat-card class="mat-card-blog">
+        <mat-card-content class="mat-card-content-blog">
+          <img
+            class="mat-card-image image-standard"
+            src="assets/blog/1.webp"
+            alt=""
+          />
+          <div class="blog-card-information">
+            <div class="blog-card-date">
+              {{ blogPost.publishedAt | date: "yyyy-MM-dd" : "UTC" }}
+            </div>
+            <h3 class="blog-card-meta-title">
+              {{ blogPost.metaTitleContent }}
+            </h3>
+            <h4 class="blog-card-title">
+              {{ blogPost.h2Title }}
+            </h4>
+            <a class="link" [routerLink]="'/blog/' + blogPost.slug">
+              Czytaj więcej
+            </a>
           </div>
-          <a
-            class="link"
-            routerLink="/blog/jak-nauczyc-dziecko-angielskiego"
-          >
-            Czytaj więcej
-          </a>
-        </div>
-      </mat-card-content>
-    </mat-card>
+        </mat-card-content>
+      </mat-card>
+    }
   </div>
 </div>
