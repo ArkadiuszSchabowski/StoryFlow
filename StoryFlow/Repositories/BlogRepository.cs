@@ -21,7 +21,7 @@ namespace StoryFlow.Repositories
 
         public async Task<BlogPost?> GetBySlug(string slug)
         {
-            return await _context.BlogPosts.Include(x => x.Sections).FirstOrDefaultAsync(x => x.Slug == slug);
+            return await _context.BlogPosts.Include(x => x.Sections.OrderBy(s => s.Order)).FirstOrDefaultAsync(x => x.Slug == slug);
         }
     }
 }
