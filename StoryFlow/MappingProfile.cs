@@ -25,6 +25,8 @@ namespace StoryFlow
             CreateMap<Hobby, GetHobbyDto>();
             CreateMap<UserStory, GetUserStoryDto>();
             CreateMap<UserSentence, GetUserSentenceDto>();
+            CreateMap<BlogPost, GetBlogPostDto>();
+            CreateMap<BlogPostSection, GetBlogPostSectionDto>();
             CreateMap<RegisterUserDto, User>();
             CreateMap<StorySeason, GetStorySeasonDto>();
 

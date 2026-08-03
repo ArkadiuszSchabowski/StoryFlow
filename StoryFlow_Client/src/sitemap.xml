@@ -4,7 +4,7 @@
     <loc>https://www.storyflow.pl/</loc>
   </url>
 
-    <url>
+  <url>
     <loc>https://www.storyflow.pl/faq</loc>
   </url>
 
@@ -12,11 +12,16 @@
     <loc>https://www.storyflow.pl/text/79</loc>
   </url>
 
-    <url>
+  <url>
     <loc>https://www.storyflow.pl/blog</loc>
   </url>
 
-    <url>
+  <url>
     <loc>https://www.storyflow.pl/blog/jak-nauczyc-dziecko-angielskiego</loc>
   </url>
+
+  <url>
+    <loc>https://www.storyflow.pl/blog/jak-bohater-historii-motywuje-dziecko-do-nauki-angielskiego</loc>
+  </url>
+
 </urlset>

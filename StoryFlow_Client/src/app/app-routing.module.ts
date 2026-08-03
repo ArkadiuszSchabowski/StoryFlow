@@ -100,7 +100,7 @@ const routes: Routes = [
       import('./components/shared/faq/faq.component').then(
         (m) => m.FaqComponent,
       ),
-    title: 'Faq - StoryFlow',
+    title: 'StoryFlow - Faq',
   },
   {
     path: 'blog',
@@ -108,7 +108,7 @@ const routes: Routes = [
       import('./components/shared/blog/blog-home/blog-home.component').then(
         (m) => m.BlogHomeComponent,
       ),
-    title: 'Blog - StoryFlow',
+    title: 'StoryFlow - Blog',
   },
   {
     path: 'blog/:slug',
@@ -116,7 +116,6 @@ const routes: Routes = [
       import('./components/shared/blog/blog-content/blog-content.component').then(
         (m) => m.BlogContentComponent,
       ),
-    title: blogTitleResolver,
   },
   {
     path: 'text/:id',

@@ -64,6 +64,8 @@ builder.Services.AddScoped<IUserStoryRepository, UserStoryRepository>();
 builder.Services.AddScoped<IUpdateStars, UserRepository>();
 builder.Services.AddScoped<IAnswerRepository, AnswerRepository>();
 builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
+builder.Services.AddScoped<IBlogService, BlogService>();
+builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 
 builder.Services.AddScoped<HttpClient>();
 

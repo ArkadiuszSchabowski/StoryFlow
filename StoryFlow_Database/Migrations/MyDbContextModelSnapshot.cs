@@ -51,6 +51,83 @@ namespace StoryFlow_Database.Migrations
                     b.ToTable("Answers");
                 });
 
+            modelBuilder.Entity("StoryFlow_Database.Entities.BlogPost", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("H2Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MetaTitleContent")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("MetaTitleDescription")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("OrderInBlog")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("PublishedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Summary")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UrlText")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Slug")
+                        .IsUnique();
+
+                    b.ToTable("BlogPosts");
+                });
+
+            modelBuilder.Entity("StoryFlow_Database.Entities.BlogPostSection", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BlogPostId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("H3Title")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("Order")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogPostId");
+
+                    b.ToTable("BlogPostSections");
+                });
+
             modelBuilder.Entity("StoryFlow_Database.Entities.Hobby", b =>
                 {
                     b.Property<int>("Id")
@@ -401,6 +478,17 @@ namespace StoryFlow_Database.Migrations
                     b.Navigation("Question");
                 });
 
+            modelBuilder.Entity("StoryFlow_Database.Entities.BlogPostSection", b =>
+                {
+                    b.HasOne("StoryFlow_Database.Entities.BlogPost", "BlogPost")
+                        .WithMany("Sections")
+                        .HasForeignKey("BlogPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BlogPost");
+                });
+
             modelBuilder.Entity("StoryFlow_Database.Entities.Question", b =>
                 {
                     b.HasOne("StoryFlow_Database.Entities.Quiz", "Quiz")
@@ -520,6 +608,11 @@ namespace StoryFlow_Database.Migrations
                     b.Navigation("Story");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("StoryFlow_Database.Entities.BlogPost", b =>
+                {
+                    b.Navigation("Sections");
                 });
 
             modelBuilder.Entity("StoryFlow_Database.Entities.Hobby", b =>

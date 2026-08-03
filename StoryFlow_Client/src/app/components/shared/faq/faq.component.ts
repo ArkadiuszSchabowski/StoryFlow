@@ -21,7 +21,7 @@ export class FaqComponent implements OnInit {
     this.meta.updateTag({
       name: 'description',
       content:
-        'FAQ StoryFlow: sprawdź, jak działa nauka angielskiego przez czytanie historii z kotką Luną oraz czy aplikacja jest odpowiednia dla dzieci i dorosłych.'
+        'Odpowiedzi na najczęstsze pytania o StoryFlow: jak wygląda nauka angielskiego z kotką Luną, dla kogo jest aplikacja i jak dobrać poziom trudności.'
     });
   }
 

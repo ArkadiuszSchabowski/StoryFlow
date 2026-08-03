@@ -1,12 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StoryFlow_Database.Entities;
-using StoryFlow_Shared.Enums;
 
 namespace StoryFlow_Database
 {
     public class MyDbContext : DbContext
     {
-
         public DbSet<Hobby> Hobbies { get; set; }
         public DbSet<Sentence> Sentences { get; set; }
         public DbSet<Story> Stories { get; set; }
@@ -20,6 +18,8 @@ namespace StoryFlow_Database
         public DbSet<Answer> Answers { get; set; }
         public DbSet<StoryPoint> StoryPoints { get; set; }
         public DbSet<StorySeason> StorySeazons { get; set; }
+        public DbSet<BlogPost> BlogPosts { get; set; }
+        public DbSet<BlogPostSection> BlogPostSections { get; set; }
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
         {
 
@@ -83,6 +83,15 @@ namespace StoryFlow_Database
                 .HasMany(q => q.Answers)
                 .WithOne(a => a.Question)
                 .HasForeignKey(a => a.QuestionId);
+
+            modelBuilder.Entity<BlogPost>()
+                .HasMany(b => b.Sections)
+                .WithOne(bps => bps.BlogPost)
+                .HasForeignKey(bps => bps.BlogPostId);
+
+            modelBuilder.Entity<BlogPost>()
+                .HasIndex(b => b.Slug)
+                .IsUnique();
         }
     }
 }
