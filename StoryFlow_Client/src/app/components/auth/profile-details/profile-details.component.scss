@@ -1,0 +1,59 @@
+@use "@angular/material" as mat;
+@use "src/styles" as theme;
+
+#profile-container {
+  display: flex;
+  justify-content: flex-start;
+  padding: 20px 0;
+}
+
+#profile-information {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  max-width: 90%;
+  height: auto;
+  min-width: 300px;
+  padding: 20px;
+  margin-top: 30px;
+  border-radius: 25px;
+  background-color: mat.m2-get-color-from-palette(theme.$accent);
+  border: 2px solid white;
+}
+
+#profile-information-label {
+  margin-top: 30px;
+  padding-bottom: 20px;
+}
+
+#button-logout{
+  margin-top: 40px;
+}
+
+.profile-information-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  flex-direction: row;
+  padding: 5px 0;
+}
+
+.profile-information-key {
+  display: flex;
+  width: 40%;
+  height: 100%;
+}
+
+.profile-information-value {
+  display: flex;
+  flex-wrap: wrap;
+  overflow-wrap: anywhere;
+  align-items: center;
+  width: 60%;
+  min-width: 0;
+  height: auto;
+}

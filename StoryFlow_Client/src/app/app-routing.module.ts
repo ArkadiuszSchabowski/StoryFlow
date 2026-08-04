@@ -55,8 +55,28 @@ const routes: Routes = [
       import('./components/auth/profile/profile.component').then(
         (m) => m.ProfileComponent,
       ),
-    title: 'Profil użytkownika - StoryFlow',
+    title: 'Menu profilowe - StoryFlow',
     canActivate: [authGuard],
+    children: [
+      {
+        path: 'profile-details',
+        loadComponent: () =>
+          import('./components/auth/profile-details/profile-details.component').then(
+            (m) => m.ProfileDetailsComponent,
+          ),
+        title: 'Informacje profilowe - StoryFlow',
+        canActivate: [authGuard],
+      },
+      {
+        path: 'personalization',
+        loadComponent: () =>
+          import('./components/auth/personalization/personalization.component').then(
+            (m) => m.PersonalizationComponent,
+          ),
+        title: 'Personalizacja - StoryFlow',
+        canActivate: [authGuard],
+      },
+    ],
   },
   {
     path: 'sezon/:id',

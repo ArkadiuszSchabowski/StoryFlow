@@ -238,6 +238,14 @@ mat-form-field.card-input {
   cursor: pointer;
 }
 
+.light-mode{
+  color: orange;
+}
+
+.dark-mode{
+  color: mat.m2-get-color-from-palette($accent);
+}
+
 @media (min-width: 600px) {
   .container {
     min-height: calc(100vh - 64px);

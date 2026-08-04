@@ -1,0 +1,41 @@
+@use "@angular/material" as mat;
+@use "src/styles" as theme;
+
+#personalization-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#mat-card-personalization {
+  margin-top: 50px;
+  text-align: center;
+  font-weight: bold;
+  color: mat.m2-get-color-from-palette(theme.$accent);
+  border: 2px solid mat.m2-get-color-from-palette(theme.$accent);
+}
+
+#profile-information-label{
+  margin-top: 30px;
+}
+
+#mode-select-label {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+#submit-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 150px;
+}
+::ng-deep label.mdc-label{
+  color: mat.m2-get-color-from-palette(theme.$accent) !important;
+}
+
+mat-card {
+  display: flex;
+  width: 300px;
+  height: 300px;
+  border: 2px solid white;
+}

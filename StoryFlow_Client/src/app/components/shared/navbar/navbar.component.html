@@ -1,5 +1,8 @@
 @if (authService.authReady$ | async) {
-  <mat-toolbar id="toolbar-container" class="toolbar">
+  <mat-toolbar id="toolbar-container" class="toolbar"   [ngClass]="{
+    'light-mode': (themeService.theme$ | async),
+    'dark-mode': !(themeService.theme$ | async)
+  }">
     <div id="mobile-navbar">
       <div id="mobile-navbar-buttons">
         @if (!(authService.currentUserSource$ | async)) {
@@ -68,16 +71,14 @@
           <button
             class="mobile-button"
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
-            aria-label="Profil użytkownika"
+            aria-label="Profil użytkownika - informacje profilowe"
           >
             <div
+              routerLink="/profile/profile-details"
               mat-button
               class="mobile-button-body"
-              [matMenuTriggerFor]="profileMenu"
-              #profileTrigger="matMenuTrigger"
             >
               <mat-icon>account_circle</mat-icon>
-              <mat-icon>arrow_drop_down</mat-icon>
             </div>
           </button>
         }
@@ -147,18 +148,12 @@
         }
         @if (authService.currentUserSource$ | async) {
           <button
+            routerLink="/profile/profile-details"
             class="desktop-button"
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
-            [matMenuTriggerFor]="profileMenu"
-            #profileTrigger="matMenuTrigger"
-            aria-label="Profil użytkownika"
+            aria-label="Profil użytkownika - informacje profilowe"
           >
-            <div class="desktop-button-body">
-              PROFIL
-              <mat-icon class="desktop-icon-drop-down"
-                >arrow_drop_down</mat-icon
-              >
-            </div>
+            <div class="desktop-button-body">PROFIL</div>
           </button>
         }
       </div>
@@ -169,9 +164,6 @@
 <mat-menu #profileMenu="matMenu" class="mat-menu-desktop">
   <button mat-menu-item routerLink="/profile" aria-label="Informacje profilowe">
     INFORMACJE
-  </button>
-  <button mat-menu-item (click)="logout()" aria-label="Wyloguj się">
-    WYLOGUJ
   </button>
 </mat-menu>
 <mat-menu #moderatorMenu="matMenu" class="mat-menu-desktop">
