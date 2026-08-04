@@ -20,9 +20,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { LottieComponent } from 'ngx-lottie';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { filter, take } from 'rxjs';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { ThemeService } from 'src/app/_services/theme.service';
 
 @Component({
   selector: 'app-text-display',
@@ -31,6 +32,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
   standalone: true,
   imports: [
     AsyncPipe,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
@@ -75,6 +77,7 @@ export class TextDisplayComponent implements OnInit {
     public authService: AuthService,
     public loaderService: LoaderService,
     private navbarService: NavbarService,
+    public themeService: ThemeService
   ) {}
 
   ngOnInit(): void {

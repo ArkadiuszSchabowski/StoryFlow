@@ -1,14 +1,27 @@
 @if (authService.authReady$ | async) {
-  <mat-toolbar id="toolbar-container" class="toolbar"   [ngClass]="{
-    'light-mode': (themeService.theme$ | async),
-    'dark-mode': !(themeService.theme$ | async)
-  }">
+  <mat-toolbar
+    id="toolbar-container"
+    [ngClass]="{
+      'light-mode-background light-mode-border-bottom':
+        (themeService.theme$ | async),
+      'dark-mode-background dark-mode-border-bottom': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
     <div id="mobile-navbar">
       <div id="mobile-navbar-buttons">
         @if (!(authService.currentUserSource$ | async)) {
           <button
             routerLink="/"
             class="mobile-button"
+            [ngClass]="{
+              'light-mode-background light-mode-text':
+                (themeService.theme$ | async),
+              'dark-mode-background dark-mode-text': !(
+                themeService.theme$ | async
+              ),
+            }"
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
             aria-label="Strona główna"
           >
@@ -17,6 +30,13 @@
           <button
             routerLink="/login"
             class="mobile-button"
+            [ngClass]="{
+              'light-mode-background light-mode-text':
+                (themeService.theme$ | async),
+              'dark-mode-background dark-mode-text': !(
+                themeService.theme$ | async
+              ),
+            }"
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
             aria-label="Zaloguj się"
           >
@@ -27,6 +47,13 @@
           <button
             routerLink="/sezon-selection"
             class="mobile-button"
+            [ngClass]="{
+              'light-mode-background light-mode-text':
+                (themeService.theme$ | async),
+              'dark-mode-background dark-mode-text': !(
+                themeService.theme$ | async
+              ),
+            }"
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
             aria-label="Wybór sezonu"
           >
@@ -36,12 +63,26 @@
         @if (authService.isModerator$ | async) {
           <button
             class="mobile-button"
+            [ngClass]="{
+              'light-mode-background light-mode-text':
+                (themeService.theme$ | async),
+              'dark-mode-background dark-mode-text': !(
+                themeService.theme$ | async
+              ),
+            }"
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
             aria-label="Panel moderatora"
           >
             <div
               mat-button
               class="mobile-button-body"
+              [ngClass]="{
+                'light-mode-background light-mode-text':
+                  (themeService.theme$ | async),
+                'dark-mode-background dark-mode-text': !(
+                  themeService.theme$ | async
+                ),
+              }"
               [matMenuTriggerFor]="moderatorMenu"
               #moderatorTrigger="matMenuTrigger"
             >
@@ -53,12 +94,26 @@
         @if (authService.isAdmin$ | async) {
           <button
             class="mobile-button"
+            [ngClass]="{
+              'light-mode-background light-mode-text':
+                (themeService.theme$ | async),
+              'dark-mode-background dark-mode-text': !(
+                themeService.theme$ | async
+              ),
+            }"
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
             aria-label="Panel administratora"
           >
             <div
               mat-button
               class="mobile-button-body"
+              [ngClass]="{
+                'light-mode-background light-mode-text':
+                  (themeService.theme$ | async),
+                'dark-mode-background dark-mode-text': !(
+                  themeService.theme$ | async
+                ),
+              }"
               [matMenuTriggerFor]="administratorMenu"
               #administratorTrigger="matMenuTrigger"
             >
@@ -70,6 +125,13 @@
         @if (authService.currentUserSource$ | async) {
           <button
             class="mobile-button"
+            [ngClass]="{
+              'light-mode-background light-mode-text':
+                (themeService.theme$ | async),
+              'dark-mode-background dark-mode-text': !(
+                themeService.theme$ | async
+              ),
+            }"
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
             aria-label="Profil użytkownika - informacje profilowe"
           >
@@ -92,12 +154,26 @@
             routerLink="/"
             id="desktop-button-logo"
             class="desktop-button"
+            [ngClass]="{
+              'light-mode-background light-mode-text':
+                (themeService.theme$ | async),
+              'dark-mode-background dark-mode-text': !(
+                themeService.theme$ | async
+              ),
+            }"
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
             aria-label="Strona główna"
           ></button>
           <button
             routerLink="/login"
             class="desktop-button"
+            [ngClass]="{
+              'light-mode-background light-mode-text':
+                (themeService.theme$ | async),
+              'dark-mode-background dark-mode-text': !(
+                themeService.theme$ | async
+              ),
+            }"
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
             aria-label="Zaloguj się"
           >
@@ -108,6 +184,13 @@
           <button
             routerLink="/sezon-selection"
             class="desktop-button"
+            [ngClass]="{
+              'light-mode-background light-mode-text':
+                (themeService.theme$ | async),
+              'dark-mode-background dark-mode-text': !(
+                themeService.theme$ | async
+              ),
+            }"
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
             aria-label="Wybór sezonu"
           >
@@ -117,6 +200,13 @@
         @if (authService.isModerator$ | async) {
           <button
             class="desktop-button"
+            [ngClass]="{
+              'light-mode-background light-mode-text':
+                (themeService.theme$ | async),
+              'dark-mode-background dark-mode-text': !(
+                themeService.theme$ | async
+              ),
+            }"
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
             [matMenuTriggerFor]="moderatorMenu"
             #moderatorTrigger="matMenuTrigger"
@@ -133,6 +223,13 @@
         @if (authService.isAdmin$ | async) {
           <button
             class="desktop-button"
+            [ngClass]="{
+              'light-mode-background light-mode-text':
+                (themeService.theme$ | async),
+              'dark-mode-background dark-mode-text': !(
+                themeService.theme$ | async
+              ),
+            }"
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
             [matMenuTriggerFor]="administratorMenu"
             #administratorTrigger="matMenuTrigger"
@@ -150,6 +247,13 @@
           <button
             routerLink="/profile/profile-details"
             class="desktop-button"
+            [ngClass]="{
+              'light-mode-background light-mode-text':
+                (themeService.theme$ | async),
+              'dark-mode-background dark-mode-text': !(
+                themeService.theme$ | async
+              ),
+            }"
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
             aria-label="Profil użytkownika - informacje profilowe"
           >
@@ -161,7 +265,14 @@
   </mat-toolbar>
 }
 
-<mat-menu #profileMenu="matMenu" class="mat-menu-desktop">
+<mat-menu
+  #profileMenu="matMenu"
+  class="mat-menu-desktop"
+  [ngClass]="{
+    'light-mode-background light-mode-text': (themeService.theme$ | async),
+    'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
+  }"
+>
   <button mat-menu-item routerLink="/profile" aria-label="Informacje profilowe">
     INFORMACJE
   </button>
@@ -177,7 +288,10 @@
     NOWY QUIZ
   </button>
 </mat-menu>
-<mat-menu #administratorMenu="matMenu" class="mat-menu-desktop">
+<mat-menu
+  #administratorMenu="matMenu"
+  class="mat-menu-desktop"
+>
   <button mat-menu-item routerLink="/library" aria-label="Podgląd historii">
     PODGLĄD HISTORII
   </button>

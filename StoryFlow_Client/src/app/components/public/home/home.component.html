@@ -1,5 +1,15 @@
 @if (!(loaderService.loading$ | async)) {
-  <div id="home-container" class="container">
+  <div
+    id="home-container"
+    class="container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
     <div id="home-row">
       <img
         id="desktop-logo"
@@ -19,14 +29,25 @@
               mat-raised-button
               id="button-start"
               class="button-app button-upper"
+              [ngClass]="{
+                'light-mode-background light-mode-text':
+                  (themeService.theme$ | async),
+                'dark-mode-background dark-mode-text': !(
+                  themeService.theme$ | async
+                ),
+              }"
               (click)="navigateToWelcomeStory()"
             >
               Rozpocznij
             </button>
             <button
-            id="button-go-to-login"
+              id="button-go-to-login"
               mat-raised-button
               class="button-app-reverse-color button-standard"
+              [ngClass]="{
+                'light-mode-border': (themeService.theme$ | async),
+                'dark-mode-border': !(themeService.theme$ | async),
+              }"
               routerLink="/login"
             >
               Mam już konto
@@ -52,7 +73,16 @@
       height="525"
     />
   </div>
-  <div id="h2-h3-container">
+  <div
+    id="h2-h3-container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
     <section class="content-section">
       <h2 id="h2-english-with-luna">Jak uczyć się angielskiego z Luną?</h2>
       <img
@@ -188,7 +218,17 @@
 }
 
 @if (loaderService.loading$ | async) {
-  <div id="loader-container" class="container">
+  <div
+    id="loader-container"
+    class="container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
     <div id="loader-text">Chwileczkę, przygotowujemy coś dla Ciebie..</div>
     <div class="loader-logo">
       <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>

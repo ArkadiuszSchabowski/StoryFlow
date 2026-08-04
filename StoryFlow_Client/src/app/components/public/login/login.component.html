@@ -1,8 +1,34 @@
 @if (!(loaderService.loading$ | async)) {
-  <div id="login-container" class="container">
-    <form [formGroup]="form" (ngSubmit)="login()" autocomplete="off" id="login-form">
+  <div
+    id="login-container"
+    class="container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
+    <form
+      [formGroup]="form"
+      (ngSubmit)="login()"
+      autocomplete="off"
+      id="login-form"
+    >
       <mat-card class="login-card">
-        <h1 id="card-title">Zaloguj się do StoryFlow</h1>
+        <h1
+          id="card-title"
+          [ngClass]="{
+            'light-mode-background light-mode-text':
+              (themeService.theme$ | async),
+            'dark-mode-background dark-mode-text': !(
+              themeService.theme$ | async
+            ),
+          }"
+        >
+          Zaloguj się do StoryFlow
+        </h1>
         <mat-card-content class="card-content auth-card-content">
           <mat-form-field class="card-input" appearance="outline">
             <mat-label>E-mail</mat-label>
@@ -37,6 +63,10 @@
             <button
               type="button"
               class="password-button"
+              [ngClass]="{
+                'light-mode-background': (themeService.theme$ | async),
+                'dark-mode-background': !(themeService.theme$ | async),
+              }"
               mat-icon-button
               matSuffix
               (click)="changePasswordVisibility($event)"
@@ -59,6 +89,13 @@
               mat-raised-button
               id="submit-login-button"
               class="button-app button-upper"
+              [ngClass]="{
+                'light-mode-background light-mode-text':
+                  (themeService.theme$ | async),
+                'dark-mode-background dark-mode-text': !(
+                  themeService.theme$ | async
+                ),
+              }"
               type="submit"
             >
               Zaloguj się
@@ -67,6 +104,10 @@
               id="button-app-go-to-register"
               mat-raised-button
               class="button-standard button-app-reverse-color"
+              [ngClass]="{
+                'light-mode-border': (themeService.theme$ | async),
+                'dark-mode-border': !(themeService.theme$ | async),
+              }"
               routerLink="/register"
               type="button"
             >
@@ -80,7 +121,17 @@
 }
 
 @if (loaderService.loading$ | async) {
-  <div id="loader-container" class="container">
+  <div
+    id="loader-container"
+    class="container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
     <div id="loader-text">Zaraz zaczynamy...</div>
     <div class="loader-logo">
       <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>

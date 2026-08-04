@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -6,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { ToastrService } from 'ngx-toastr';
 import { StoryService } from 'src/app/_services/story.service';
+import { ThemeService } from 'src/app/_services/theme.service';
 import {
   CATEGORIES,
   LANGUAGELEVELS,
@@ -19,7 +21,15 @@ import { GenerateStoryDto } from 'src/app/models/generate-story-dto';
   templateUrl: './story-create.component.html',
   styleUrls: ['./story-create.component.scss'],
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, MatButtonModule, MatSelectModule, MatFormFieldModule, MatInputModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+  ],
 })
 export class StoryCreateComponent {
   categories = CATEGORIES;
@@ -30,6 +40,7 @@ export class StoryCreateComponent {
     private fb: FormBuilder,
     private storyService: StoryService,
     private toastr: ToastrService,
+    public themeService: ThemeService,
   ) {}
 
   generateForm: any = this.fb.group({

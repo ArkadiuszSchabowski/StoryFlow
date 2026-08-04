@@ -29,7 +29,6 @@ html,
 body {
   height: 100%;
   color: white;
-  background-color: mat.m2-get-color-from-palette($primary);
 }
 
 body {
@@ -88,7 +87,6 @@ mat-card-content.auth-card-content {
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-color: white;
 }
 
 mat-form-field.card-input {
@@ -98,7 +96,6 @@ mat-form-field.card-input {
 .title,
 .subtitle {
   text-align: center;
-  color: white;
 }
 
 .title {
@@ -112,8 +109,6 @@ mat-form-field.card-input {
 
 .password-button {
   margin-right: 10px;
-  background-color: mat.m2-get-color-from-palette($accent);
-  color: white;
 }
 
 .container {
@@ -126,13 +121,11 @@ mat-form-field.card-input {
   max-width: 100%;
   min-height: calc(100vh - 56px);
   padding: 20px;
-  background-color: mat.m2-get-color-from-palette($primary);
 }
 
 .button-app {
   font-weight: bolder;
   color: white !important;
-  background-color: mat.m2-get-color-from-palette($accent) !important;
   border-radius: 12px;
   cursor: pointer;
 }
@@ -232,18 +225,65 @@ mat-form-field.card-input {
 }
 
 .link {
-  color: white;
   font-weight: bolder;
   text-decoration: underline;
   cursor: pointer;
 }
 
-.light-mode{
-  color: orange;
+.light-mode-border-black {
+  border: 2px solid mat.m2-get-color-from-palette($primary, 900) !important;
 }
 
-.dark-mode{
-  color: mat.m2-get-color-from-palette($accent);
+.dark-mode-border-white {
+  border: 2px solid white !important
+}
+
+.light-mode-border {
+  border: 2px solid mat.m2-get-color-from-palette($accent, 300) !important;
+}
+
+.dark-mode-border {
+  border: 2px solid mat.m2-get-color-from-palette($accent, 700) !important;
+}
+
+.light-mode-border-top {
+  border-top: 2px solid mat.m2-get-color-from-palette($primary, 900) !important;
+}
+
+.dark-mode-border-top {
+  border-top: 2px solid white !important;
+}
+
+.light-mode-border-bottom {
+  border-bottom: 2px solid mat.m2-get-color-from-palette($primary, 900) !important;
+}
+
+.dark-mode-border-bottom {
+  border-bottom: 2px solid white;
+}
+
+.light-mode-text {
+  color: mat.m2-get-color-from-palette($primary, 900) !important;
+}
+
+.dark-mode-text {
+  color: white !important;
+}
+
+.light-mode-background {
+  background-color: mat.m2-get-color-from-palette($accent, 300) !important;
+}
+
+.dark-mode-background {
+  background-color: mat.m2-get-color-from-palette($accent, 700) !important;
+}
+
+.light-mode-background-primary {
+  background-color: mat.m2-get-color-from-palette($primary, 400) !important;
+}
+
+.dark-mode-background-primary {
+  background-color: mat.m2-get-color-from-palette($primary);
 }
 
 @media (min-width: 600px) {

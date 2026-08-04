@@ -1,11 +1,37 @@
-
 @if (profile) {
-  <div id="profile-container" class="container">
-
-    <h1 id="profile-information-label" class="title">Profil użytkownika - informacje profilowe</h1>
-    <div id="profile-information">
+  <div
+    id="profile-container"
+    class="container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
+    <h1
+      id="profile-information-label"
+      class="title"
+      [ngClass]="{
+        'light-mode-background-primary light-mode-text':
+          (themeService.theme$ | async),
+        'dark-mode-background-primary dark-mode-text': !(
+          themeService.theme$ | async
+        ),
+      }"
+    >
+      Profil użytkownika - informacje profilowe
+    </h1>
+    <div
+      id="profile-information"
+      [ngClass]="{
+        'light-mode-background light-mode-text': (themeService.theme$ | async),
+        'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
+      }"
+    >
       <div id="email" class="profile-information-item">
-        <div class="profile-information-key">Adres e-mail:</div>
+        <div class="profile-information-key">E-mail:</div>
         <div class="profile-information-value">{{ profile.email }}</div>
       </div>
 
@@ -49,7 +75,17 @@
         </div>
       </div>
     </div>
-    <button id="button-logout" mat-raised-button class="button-app-reverse-color button-standard" (click)="logout()" aria-label="Wyloguj się">
+    <button
+      id="button-logout"
+      mat-raised-button
+      class="button-app button-standard"
+      [ngClass]="{
+        'light-mode-background light-mode-text': (themeService.theme$ | async),
+        'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
+      }"
+      (click)="logout()"
+      aria-label="Wyloguj się"
+    >
       WYLOGUJ
     </button>
   </div>

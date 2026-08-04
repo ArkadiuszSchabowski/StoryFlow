@@ -1,8 +1,36 @@
-<h1 id="h1-title">Tworzenie quizu</h1>
 @if (stories.length) {
-  <div id="story-create-container">
-    <div id="story-container">
-      <form id="filter-container" [formGroup]="form" (ngSubmit)="generateQuiz()">
+  <div
+    id="story-create-container"
+    class="container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
+    <h1
+      id="h1-title"
+      [ngClass]="{
+        'light-mode-background light-mode-text': (themeService.theme$ | async),
+        'dark-mode-backgrounddark-mode-text': !(themeService.theme$ | async),
+      }"
+    >
+      Tworzenie quizu
+    </h1>
+    <div
+      id="story-container"
+      [ngClass]="{
+        'light-mode-background light-mode-text light-mode-border-bottom': (themeService.theme$ | async),
+        'dark-mode-background dark-mode-text dark-mode-border-bottom': !(themeService.theme$ | async),
+      }"
+    >
+      <form
+        id="filter-container"
+        [formGroup]="form"
+        (ngSubmit)="generateQuiz()"
+      >
         <mat-form-field class="filter-field-create">
           <mat-label>Wybierz historię:</mat-label>
           <mat-select id="story" formControlName="story">
@@ -26,7 +54,16 @@
       </form>
     </div>
     @if (selectedStory && isResponse) {
-      <div class="question-container">
+      <div
+        class="question-container"
+        [ngClass]="{
+          'light-mode-background-primary light-mode-text':
+            (themeService.theme$ | async),
+          'dark-mode-background-primary dark-mode-text': !(
+            themeService.theme$ | async
+          ),
+        }"
+      >
         <form [formGroup]="addForm" id="add-form" (ngSubmit)="add()">
           <div class="question-container-english-story">
             {{ selectedStory.englishStory }}
@@ -34,7 +71,9 @@
 
           @for (question of generateQuizResponse!.questions; track question) {
             <div class="question-container-questions">
-              <h3 class="question-container-question">{{ question.question }}</h3>
+              <h3 class="question-container-question">
+                {{ question.question }}
+              </h3>
 
               <ul>
                 @for (answer of question.answers; track answer) {
@@ -45,7 +84,8 @@
               </ul>
 
               <p class="question-container-correct-answer">
-                Correct answer: {{ question.answers[question.correctAnswerIndex] }}
+                Correct answer:
+                {{ question.answers[question.correctAnswerIndex] }}
               </p>
             </div>
           }
@@ -53,6 +93,13 @@
             mat-raised-button
             id="submit-button-create"
             class="button-app button-standard"
+            [ngClass]="{
+              'light-mode-background light-mode-text':
+                (themeService.theme$ | async),
+              'dark-mode-background dark-mode-text': !(
+                themeService.theme$ | async
+              ),
+            }"
             type="submit"
           >
             Dodaj
@@ -63,7 +110,17 @@
   </div>
 }
 @if (stories.length == 0) {
-  <div class="container" id="information-no-quiz">
+  <div
+    class="container"
+    id="information-no-quiz"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
     Wszystkie historię mają już swoje quizy. Dodaj kolejną historię, aby mieć
     opcję dodania quizu.
   </div>

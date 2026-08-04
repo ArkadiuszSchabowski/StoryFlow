@@ -1,4 +1,14 @@
-<div id="blog-container" class="container">
+<div
+  id="blog-container"
+  class="container"
+  [ngClass]="{
+    'light-mode-background-primary light-mode-text':
+      (themeService.theme$ | async),
+    'dark-mode-background-primary dark-mode-text': !(
+      themeService.theme$ | async
+    ),
+  }"
+>
   <h1 id="blog-title">Blog - nauka angielskiego z StoryFlow</h1>
   <h2 id="blog-subtitle">
     Poradniki i artykuły o nauce angielskiego przez czytanie, quizy i historie z
@@ -6,7 +16,14 @@
   </h2>
   <div id="blog-cards">
     @for (blogPost of blogPosts; track blogPost.id) {
-      <mat-card class="mat-card-blog">
+      <mat-card
+        class="mat-card-blog"
+        [ngClass]="{
+          'light-mode-background light-mode-text':
+            (themeService.theme$ | async),
+          'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
+        }"
+      >
         <mat-card-content class="mat-card-content-blog">
           <img
             class="mat-card-image image-standard"
@@ -23,7 +40,14 @@
             <h4 class="blog-card-title">
               {{ blogPost.h2Title }}
             </h4>
-            <a class="link" [routerLink]="'/blog/' + blogPost.slug">
+            <a
+              class="link"
+              [ngClass]="{
+                'light-mode-text': (themeService.theme$ | async),
+                'dark-mode-text': !(themeService.theme$ | async),
+              }"
+              [routerLink]="'/blog/' + blogPost.slug"
+            >
               Czytaj więcej
             </a>
           </div>

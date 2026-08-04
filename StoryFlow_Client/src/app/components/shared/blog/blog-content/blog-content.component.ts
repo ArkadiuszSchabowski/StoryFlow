@@ -1,12 +1,13 @@
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BlogService } from 'src/app/_services/blog.service';
+import { ThemeService } from 'src/app/_services/theme.service';
 
 @Component({
   selector: 'app-blog-content',
-  imports: [RouterLink, DatePipe],
+  imports: [CommonModule, RouterLink, DatePipe],
   templateUrl: './blog-content.component.html',
   styleUrl: './blog-content.component.scss',
 })
@@ -19,6 +20,7 @@ export class BlogContentComponent implements OnInit {
     private blogService: BlogService,
     private meta: Meta,
     private title: Title,
+    public themeService: ThemeService,
   ) {}
 
   ngOnInit(): void {

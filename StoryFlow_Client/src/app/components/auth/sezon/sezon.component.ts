@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -6,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LoaderService } from 'src/app/_services/loader.service';
 import { StoryService } from 'src/app/_services/story.service';
+import { ThemeService } from 'src/app/_services/theme.service';
 import { UserService } from 'src/app/_services/user.service';
 import {
   CATEGORIES_WITH_PLACEHOLDER,
@@ -26,7 +28,7 @@ import { StoryFilter } from 'src/app/models/story-filter-dto';
   templateUrl: './sezon.component.html',
   styleUrls: ['./sezon.component.scss'],
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatIconModule],
 })
 export class SezonComponent implements OnInit {
   seasonId: number = 0;
@@ -58,6 +60,7 @@ export class SezonComponent implements OnInit {
     private toastr: ToastrService,
     private userService: UserService,
     private loaderService: LoaderService,
+    public themeService: ThemeService
   ) {}
 
   ngOnInit(): void {

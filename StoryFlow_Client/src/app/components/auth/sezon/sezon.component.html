@@ -1,6 +1,21 @@
-<div id="story-container">
+<div
+  id="story-container"
+  [ngClass]="{
+    'light-mode-background-primary light-mode-text':
+      (themeService.theme$ | async),
+    'dark-mode-background-primary dark-mode-text': !(
+      themeService.theme$ | async
+    ),
+  }"
+>
   @if (profile) {
-    <div id="profile-statistic">
+    <div
+      id="profile-statistic"
+      [ngClass]="{
+        'light-mode-background light-mode-text light-mode-border-bottom': (themeService.theme$ | async),
+        'dark-mode-background dark-mode-text dark-mode-border-bottom': !(themeService.theme$ | async),
+      }"
+    >
       <div class="profile-statistic-item">
         Zdobyte gwiazdki:&nbsp;{{ profile.stars }}&nbsp;<mat-icon
           class="mat-icon-star-color"
@@ -28,10 +43,8 @@
             {{ showCategory(story.storyCategory) }}
           </div>
           <div class="story-preview-button-icon">
-            @if (getIcon(story.id) === 'replay') {
-              <span>
-                Odblokuj bilet za 50%
-              </span>
+            @if (getIcon(story.id) === "replay") {
+              <span> Odblokuj bilet za 50% </span>
             } @else {
               <mat-icon>{{ getIcon(story.id) }}</mat-icon>
             }
@@ -62,10 +75,7 @@
       }
 
       @if (story.storyPoint && openedStoryId === story.id) {
-        <div
-          class="story-card"
-          [class.locked]="getIcon(story.id) === 'lock'"
-        >
+        <div class="story-card" [class.locked]="getIcon(story.id) === 'lock'">
           <div class="story-card-button-close">
             <button class="button-close" (click)="toggleStory(story.id)">
               <mat-icon>close</mat-icon>
@@ -111,7 +121,9 @@
               (click)="NavigateToTextDisplay(story.id)"
               [disabled]="getIcon(story.id) === 'lock'"
             >
-              {{ getIcon(story.id) === "lock" ? "POTRZEBUJESZ BILETU" : "START" }}
+              {{
+                getIcon(story.id) === "lock" ? "POTRZEBUJESZ BILETU" : "START"
+              }}
             </button>
           </div>
         </div>

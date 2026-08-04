@@ -4,7 +4,6 @@
 #profile-container {
   display: flex;
   justify-content: flex-start;
-  padding: 20px 0;
 }
 
 #profile-information {
@@ -12,14 +11,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: auto;
-  max-width: 90%;
+  width: 300px;
   height: auto;
   min-width: 300px;
   padding: 20px;
   margin-top: 30px;
   border-radius: 25px;
-  background-color: mat.m2-get-color-from-palette(theme.$accent);
   border: 2px solid white;
 }
 

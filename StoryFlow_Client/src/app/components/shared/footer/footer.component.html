@@ -1,10 +1,30 @@
-<div id="footer-container">
+<div
+  id="footer-container"
+  [ngClass]="{
+    'light-mode-background light-mode-text light-mode-border-top': (themeService.theme$ | async),
+    'dark-mode-background dark-mode-text dark-mode-border-top': !(themeService.theme$ | async),
+  }"
+>
   <div id="footer-text"><h4>Przydatne linki:</h4></div>
   <nav aria-label="footer" id="footer-links">
-    <a class="footer-link link" routerLink="/blog">Blog - nauka angielskiego przez historie</a>
-    <a class="footer-link link" routerLink="/faq"
+    <a
+      class="footer-link link"
+      [ngClass]="{
+        'light-mode-background light-mode-text': (themeService.theme$ | async),
+        'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
+      }"
+      routerLink="/blog"
+      >Blog - nauka angielskiego przez historie</a
+    >
+    <a
+      class="footer-link link"
+      [ngClass]="{
+        'light-mode-background light-mode-text': (themeService.theme$ | async),
+        'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
+      }"
+      routerLink="/faq"
       >FAQ - najczęściej zadawane pytania</a
     >
   </nav>
-  <div id="copyright-notice"> © 2026 StoryFlow. Wszelkie prawa zastrzeżone.</div>
+  <div id="copyright-notice">© 2026 StoryFlow. Wszelkie prawa zastrzeżone.</div>
 </div>

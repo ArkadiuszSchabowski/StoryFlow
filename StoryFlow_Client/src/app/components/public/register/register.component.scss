@@ -30,8 +30,6 @@ mat-card.register-card {
   margin-bottom: 30px;
   font-size: 24px;
   font-weight: 400;
-  color: white;
-  background-color: mat.m2-get-color-from-palette(theme.$accent);
 }
 
 #loader-text {
@@ -48,10 +46,6 @@ mat-card.register-card {
 
 #submit-register-button {
   margin-bottom: 20px;
-}
-
-#button-app-go-to-login {
-  border: 2px solid mat.m2-get-color-from-palette(theme.$accent);
 }
 
 #loader-container {

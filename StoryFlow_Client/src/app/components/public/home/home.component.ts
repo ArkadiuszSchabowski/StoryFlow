@@ -1,4 +1,4 @@
-import { AsyncPipe} from '@angular/common';
+import { AsyncPipe, CommonModule} from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
@@ -6,13 +6,14 @@ import { LottieComponent } from 'ngx-lottie';
 import { LoaderService } from 'src/app/_services/loader.service';
 import { NavbarService } from 'src/app/_services/navbar.service';
 import { StoryService } from 'src/app/_services/story.service';
+import { ThemeService } from 'src/app/_services/theme.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   standalone: true,
-  imports: [AsyncPipe, LottieComponent, MatButtonModule, RouterLink],
+  imports: [AsyncPipe, CommonModule, LottieComponent, MatButtonModule, RouterLink],
 })
 export class HomeComponent implements OnInit {
   constructor(
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
     private router: Router,
     public loaderService: LoaderService,
     private navbarService: NavbarService,
+    public themeService: ThemeService
   ) {}
 
   ngOnInit(): void {}

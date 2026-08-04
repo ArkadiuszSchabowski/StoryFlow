@@ -1,9 +1,21 @@
-<div id="profile-container" class="container">
+<div
+  id="profile-container"
+  class="container"
+  [ngClass]="{
+    'light-mode-background-primary light-mode-text': (themeService.theme$ | async),
+    'dark-mode-background-primary dark-mode-text': !(themeService.theme$ | async),
+  }"
+>
   <div id="profile-navigation-navbar">
     <div id="desktop-navbar-buttons">
       <button
         routerLink="/profile/profile-details"
         class="desktop-button"
+        [ngClass]="{
+          'light-mode-background light-mode-text':
+            (themeService.theme$ | async),
+          'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
+        }"
         aria-label="Mój profil"
       >
         Informacje profilowe
@@ -11,6 +23,11 @@
       <button
         routerLink="/profile/personalization"
         class="desktop-button"
+        [ngClass]="{
+          'light-mode-background light-mode-text':
+            (themeService.theme$ | async),
+          'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
+        }"
         aria-label="Personalizacja"
       >
         Personalizacja

@@ -21,13 +21,6 @@
   flex-direction: column;
   width: 100%;
   padding: 20px 20px;
-  background-color: mat.m2-get-color-from-palette(theme.$primary);
-}
-
-#title-container,
-#description-container,
-.sentence-item {
-  color: white;
 }
 
 #title-container,
@@ -55,7 +48,6 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  color: white;
   font-size: 18px;
   padding-bottom: 20px;
 }
@@ -111,11 +103,6 @@
   padding: 50px 20px 0 20px;
 }
 
-.loader-ticket-container {
-  display: flex;
-  margin-bottom: 20px;
-}
-
 #logo-result {
   display: flex;
   height: 300px;
@@ -124,8 +111,6 @@
 
 #loader-button {
   margin-top: 10px;
-  color: white;
-  background-color: mat.m2-get-color-from-palette(theme.$accent);
 }
 
 .question-card {
@@ -193,8 +178,6 @@
 .button-app-quiz {
   font-weight: bolder;
   border-radius: 12px;
-  color: white;
-  background-color: mat.m2-get-color-from-palette(theme.$accent);
   cursor: pointer;
   width: 320px;
   height: 60px;
@@ -213,9 +196,6 @@
   padding: 0 10px;
   margin: 10px 8px;
   height: 40px;
-  color: white;
-  background-color: mat.m2-get-color-from-palette(theme.$accent);
-  border: 2px solid white;
   border-radius: 25px;
   font-weight: bold;
 }

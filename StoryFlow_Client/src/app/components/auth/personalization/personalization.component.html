@@ -1,29 +1,50 @@
-<div id="personalization-container" class="container">
-<h1
-  id="profile-information-label"
-  class="title"
+<div
+  id="personalization-container"
+  class="container"
+  [ngClass]="{
+    'light-mode-background-primary': (themeService.theme$ | async),
+    'dark-mode-background-primary': !(themeService.theme$ | async),
+  }"
 >
-  Profil użytkownika - personalizacja
-</h1>
+  <h1 id="profile-information-label" class="title">
+    Profil użytkownika - personalizacja
+  </h1>
   <form
     [formGroup]="form"
     (ngSubmit)="submit()"
     autocomplete="off"
     id="submit-form"
   >
-    <mat-card id="mat-card-personalization">
+    <mat-card
+      id="mat-card-personalization"
+      [ngClass]="{
+        'light-mode-background light-mode-text': (themeService.theme$ | async),
+        'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
+      }"
+    >
       <mat-card-content>
-        <mat-radio-group aria-label="Wybierz tryb">
+        <mat-radio-group aria-label="Wybierz tryb" formControlName="theme">
           <div id="mode-select-label">Wybierz tryb</div>
           <mat-radio-button value="1">Tryb jasny</mat-radio-button>
           <mat-radio-button value="2">Tryb ciemny</mat-radio-button>
         </mat-radio-group>
       </mat-card-content>
-      <div id="submit-button-container">
-        <button mat-raised-button class="button-app button-standard" type="submit">
-          Zapisz
-        </button>
-      </div>
     </mat-card>
+    <div id="submit-button-container">
+      <button
+        mat-raised-button
+        class="button-app button-standard"
+        [ngClass]="{
+          'light-mode-background light-mode-text':
+            (themeService.theme$ | async),
+          'dark-mode-background dark-mode-text': !(
+            themeService.theme$ | async
+          ),
+        }"
+        type="submit"
+      >
+        Zapisz
+      </button>
+    </div>
   </form>
 </div>

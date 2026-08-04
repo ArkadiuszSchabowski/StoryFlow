@@ -1,7 +1,21 @@
-<div id="text-selection-container">
+<div
+  id="text-selection-container"
+  [ngClass]="{
+    'light-mode-background light-mode-text': (themeService.theme$ | async),
+    'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
+  }"
+>
   <h1 id="h1-title">Biblioteka historii</h1>
   <div>
-    <form id="filter-container" [formGroup]="form" (ngSubmit)="get()">
+    <form
+      id="filter-container"
+      [formGroup]="form"
+      (ngSubmit)="get()"
+      [ngClass]="{
+        'light-mode-background light-mode-text light-mode-border-bottom': (themeService.theme$ | async),
+        'dark-mode-background dark-mode-text dark-mode-border-bottom': !(themeService.theme$ | async),
+      }"
+    >
       <mat-form-field class="filter-field">
         <mat-label>Kategoria:</mat-label>
         <mat-select id="category" formControlName="category">
@@ -31,9 +45,24 @@
     </form>
   </div>
 </div>
-<div id="story-container">
+<div
+  id="story-container"
+  [ngClass]="{
+    'light-mode-background-primary light-mode-text':
+      (themeService.theme$ | async),
+    'dark-mode-background-primary dark-mode-text': !(
+      themeService.theme$ | async
+    ),
+  }"
+>
   @if (profile) {
-    <div id="profile-statistic">
+    <div
+      id="profile-statistic"
+      [ngClass]="{
+        'light-mode-background light-mode-text light-mode-border-bottom': (themeService.theme$ | async),
+        'dark-mode-background dark-mode-text dark-mode-border-bottom': !(themeService.theme$ | async),
+      }"
+    >
       <div class="profile-statistic-item">
         Zdobyte gwiazdki:&nbsp;{{ profile.stars }}&nbsp;<mat-icon
           class="mat-icon-star-color"

@@ -5,6 +5,6 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class ThemeService {
-    themeSubject = new BehaviorSubject<boolean>(false);
+    themeSubject = new BehaviorSubject<boolean>(true);
     theme$ = this.themeSubject.asObservable();
 }
