@@ -18,6 +18,27 @@ export function showCategory(category: any) {
       return 'Nieznany';
   }
 }
+
+export function showCategoryIcon(category: any): string {
+  switch (category) {
+    case 0:
+      return 'pets';
+    case 1:
+      return 'favorite';
+    case 2:
+      return 'wifi';
+    case 3:
+      return 'sports_soccer';
+    case 4:
+      return 'palette';
+    case 5:
+      return 'account_balance';
+    case 6:
+      return 'music_note';
+    default:
+      return 'help_outline';  
+  }
+}
   
   export function showSize(size: any) {
     switch (size) {

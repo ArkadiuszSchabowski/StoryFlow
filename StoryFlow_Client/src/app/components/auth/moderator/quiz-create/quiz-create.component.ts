@@ -102,6 +102,7 @@ export class QuizCreateComponent implements OnInit {
 
     this.quizService.add(dto).subscribe({
       next: () => {
+        window.scrollTo(0, 0);
         this.toastr.success('Quiz został dodany.');
         this.addForm.reset();
         this.getAll();
