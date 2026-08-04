@@ -8,6 +8,7 @@ import { QuizSubmissionDto } from 'src/app/models/quiz-submission-dto';
 import { QuizService } from 'src/app/_services/quiz.service';
 import {
   showCategory,
+  showCategoryIcon,
   showLanguageLevel,
   showSize,
 } from 'src/app/helpers/formatter';
@@ -61,6 +62,7 @@ export class TextDisplayComponent implements OnInit {
   showLanguageLevel = showLanguageLevel;
   showSize = showSize;
   showCategory = showCategory;
+  showCategoryIcon = showCategoryIcon;
 
   constructor(
     private router: Router,

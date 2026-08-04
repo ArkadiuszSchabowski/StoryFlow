@@ -26,9 +26,17 @@
     @if (!isQuiz) {
       <div id="text-display-subcontainer">
         <div id="story-information">
-          Kategoria: {{ showCategory(story.storyCategory) }}, Długość historii:
-          {{ showSize(story.storySize) }}, Poziom językowy:
-          {{ showLanguageLevel(story.languageLevel) }}
+          <div class="story-information-item">
+            <mat-icon class="story-information-item-mat-icon">{{ showCategoryIcon(story.storyCategory) }}</mat-icon>
+            {{ showCategory(story.storyCategory) }}
+          </div>
+          <div class="story-information-item">
+            <mat-icon class="story-information-item-mat-icon">schedule</mat-icon>{{ showSize(story.storySize) }}
+          </div>
+          <div class="story-information-item">
+            <mat-icon class="story-information-item-mat-icon">school</mat-icon
+            >{{ showLanguageLevel(story.languageLevel) }}
+          </div>
         </div>
 
         <div id="title-container">

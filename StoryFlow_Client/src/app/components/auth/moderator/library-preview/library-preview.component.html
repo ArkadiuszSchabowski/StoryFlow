@@ -16,9 +16,7 @@
         <mat-label>Poziom językowy:</mat-label>
         <mat-select id="languageLevel" formControlName="languageLevel">
           @for (level of languageLevels; track level.value) {
-            <mat-option [value]="level.value">{{
-              level.viewValue
-            }}</mat-option>
+            <mat-option [value]="level.value">{{ level.viewValue }}</mat-option>
           }
         </mat-select>
       </mat-form-field>
@@ -26,9 +24,7 @@
         <mat-label>Długość historii:</mat-label>
         <mat-select id="size" formControlName="size">
           @for (size of sizes; track size.value) {
-            <mat-option [value]="size.value">{{
-              size.viewValue
-            }}</mat-option>
+            <mat-option [value]="size.value">{{ size.viewValue }}</mat-option>
           }
         </mat-select>
       </mat-form-field>
@@ -36,6 +32,22 @@
   </div>
 </div>
 <div id="story-container">
+  @if (profile) {
+    <div id="profile-statistic">
+      <div class="profile-statistic-item">
+        Zdobyte gwiazdki:&nbsp;{{ profile.stars }}&nbsp;<mat-icon
+          class="mat-icon-star-color"
+          >star</mat-icon
+        >
+      </div>
+      <div class="profile-statistic-item">
+        Dostępne bilety:&nbsp;{{ profile.tickets }}&nbsp;<mat-icon
+          class="mat-icon-star-color"
+          >sell</mat-icon
+        >
+      </div>
+    </div>
+  }
   @if (stories.length === 0) {
     <div id="no-story-information" class="subtitle">
       Nie znaleziono historii pasujących do wybranych filtrów. Spróbuj innych
@@ -49,7 +61,11 @@
           {{ showCategory(story.storyCategory) }}
         </div>
         <div class="story-preview-button-icon">
-          <mat-icon>{{ getIcon(story.id) }}</mat-icon>
+          @if (getIcon(story.id) === "replay") {
+            <span> Odblokuj bilet za 50% </span>
+          } @else {
+            <mat-icon>{{ getIcon(story.id) }}</mat-icon>
+          }
         </div>
         <div class="story-preview-button-title">
           {{ story.polishTitle }}
@@ -124,7 +140,9 @@
               (click)="NavigateToTextDisplay(story.id)"
               [disabled]="getIcon(story.id) === 'lock'"
             >
-              {{ getIcon(story.id) === "lock" ? "POTRZEBUJESZ BILETU" : "START" }}
+              {{
+                getIcon(story.id) === "lock" ? "POTRZEBUJESZ BILETU" : "START"
+              }}
             </button>
           </div>
         </div>

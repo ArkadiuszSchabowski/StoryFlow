@@ -52,6 +52,8 @@
 }
 
 #story-information {
+  display: flex;
+  flex-direction: row;
   color: white;
   font-size: 18px;
   padding-bottom: 20px;
@@ -200,6 +202,25 @@
 
 .button-app-quiz:hover {
   background-color: #26a69a;
+}
+
+.story-information-item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  padding: 0 10px;
+  margin: 0 8px;
+  height: 40px;
+  color: white;
+  background-color: mat.m2-get-color-from-palette(theme.$accent);
+  border: 2px solid white;
+  border-radius: 25px;
+  font-weight: bold;
+}
+
+.story-information-item-mat-icon{
+ margin-right: 5px;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
