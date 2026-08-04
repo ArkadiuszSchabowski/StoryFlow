@@ -100,6 +100,7 @@
       <div id="quiz-container-wrapper">
         @if (quiz) {
           <div id="quiz-container" class="container">
+            <mat-progress-bar color="accent" [value]="quizProgress"></mat-progress-bar>
             <h1 class="title">Quiz - {{ story.englishTitle }}</h1>
 
             <form (ngSubmit)="checkAnswer()">

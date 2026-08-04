@@ -22,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { LottieComponent } from 'ngx-lottie';
 import { AsyncPipe } from '@angular/common';
 import { filter, take } from 'rxjs';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-text-display',
@@ -35,12 +36,14 @@ import { filter, take } from 'rxjs';
     MatButtonModule,
     MatIconModule,
     LottieComponent,
+    MatProgressBarModule
   ],
 })
 export class TextDisplayComponent implements OnInit {
   storyId: number = 0;
   story: GetStoryViewDto | null = null;
   isQuiz = false;
+  quizProgress: number = 25;
 
   quiz: GetQuizDto | null = null;
   quizSubmission: QuizSubmissionDto | null = {
@@ -125,6 +128,7 @@ export class TextDisplayComponent implements OnInit {
     if (this.currentQuestionIndex < this.quiz.questions.length - 1) {
       this.currentQuestionIndex++;
       this.answerSubmitted = false;
+      this.quizProgress += 25;
     } else {
       window.scrollTo(0, 0);
       this.send();
@@ -207,6 +211,7 @@ export class TextDisplayComponent implements OnInit {
 
   send(): void {
     this.isQuizFinishied = true;
+    this.quizProgress = 25;
     this.navbarService.blockButtons();
     this.loaderService.show();
 
