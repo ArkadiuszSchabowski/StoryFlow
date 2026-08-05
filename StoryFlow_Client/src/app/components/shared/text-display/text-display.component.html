@@ -245,7 +245,11 @@
                     mat-raised-button
                     [class.disabled]="!answerSubmitted"
                     [disabled]="!answerSubmitted"
-                    class="disabled button-app button-standard"
+                    class="button-app-reverse-color button-standard"
+                    [ngClass]="{
+                      'white-background':
+                        (themeService.theme$ | async) && answerSubmitted
+                    }"
                     id="next-button"
                     (click)="showNextQuestion()"
                   >
@@ -286,6 +290,7 @@
 
 @if (isQuizFinishied && !(loaderService.loading$ | async) && story) {
   <div
+    id="finish-quiz-container"
     class="container"
     [ngClass]="{
       'light-mode-background-primary light-mode-text':
@@ -365,7 +370,7 @@
       }
       @if (authService.currentUserSource$ | async) {
         <button
-        mat-raised-button
+          mat-raised-button
           id="again-button"
           class="button-app button-standard"
           [ngClass]="{
@@ -380,7 +385,7 @@
           Spróbuj ponownie
         </button>
         <button
-        mat-raised-button
+          mat-raised-button
           id="back-button"
           class="button-app button-standard"
           [ngClass]="{

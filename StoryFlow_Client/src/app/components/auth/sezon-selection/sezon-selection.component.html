@@ -13,8 +13,11 @@
     <div
       id="profile-statistic"
       [ngClass]="{
-        'light-mode-background light-mode-text light-mode-border-bottom': (themeService.theme$ | async),
-        'dark-mode-background dark-mode-text dark-mode-border-bottom': !(themeService.theme$ | async),
+        'light-mode-background light-mode-text light-mode-border-bottom':
+          (themeService.theme$ | async),
+        'dark-mode-background dark-mode-text dark-mode-border-bottom': !(
+          themeService.theme$ | async
+        ),
       }"
     >
       <div class="profile-statistic-item">
@@ -36,7 +39,19 @@
         @for (season of seasons; track season.id) {
           <div
             class="season-div"
-            [class.locked]="profile.stars < season.pointsRequiredToUnlock"
+            [ngClass]="{
+              'light-mode-background light-mode-text light-mode-border-black':
+                (themeService.theme$ | async),
+              'dark-mode-background dark-mode-text dark-mode-border-white': !(
+                themeService.theme$ | async
+              ),
+              'locked-light-background':
+                (themeService.theme$ | async) &&
+                profile.stars < season.pointsRequiredToUnlock,
+              'locked-dark-background':
+                !(themeService.theme$ | async) &&
+                profile.stars < season.pointsRequiredToUnlock,
+            }"
           >
             <div class="season-item">Sezon: {{ season.seasonNumber }}</div>
             <div class="season-item">{{ season.name }}</div>

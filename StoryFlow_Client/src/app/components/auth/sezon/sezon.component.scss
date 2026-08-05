@@ -94,12 +94,11 @@ button.story-card-button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: white;
+  text-align: center;
   padding: 25px;
-  height: 250px;
+  height: 280px;
   width: 250px;
   border-radius: 50px;
-  border: 2px solid white;
   margin: 40px 40px;
 }
 .story-preview-button-title {
@@ -189,13 +188,12 @@ button:disabled {
   padding: 0 25px;
 }
 
-.locked {
-  background-color: #8c8b8b;
-  color: white;
+.button-standard {
+  width: 250px;
 }
 
-.button-standard{
-  width: 250px;
+#button-story-start {
+  font-weight: bold;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {

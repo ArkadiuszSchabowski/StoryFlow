@@ -12,8 +12,11 @@
       [formGroup]="form"
       (ngSubmit)="get()"
       [ngClass]="{
-        'light-mode-background light-mode-text light-mode-border-bottom': (themeService.theme$ | async),
-        'dark-mode-background dark-mode-text dark-mode-border-bottom': !(themeService.theme$ | async),
+        'light-mode-background light-mode-text light-mode-border-bottom':
+          (themeService.theme$ | async),
+        'dark-mode-background dark-mode-text dark-mode-border-bottom': !(
+          themeService.theme$ | async
+        ),
       }"
     >
       <mat-form-field class="filter-field">
@@ -45,8 +48,34 @@
     </form>
   </div>
 </div>
+@if (profile) {
+  <div
+    id="profile-statistic"
+    [ngClass]="{
+      'light-mode-background light-mode-text light-mode-border-bottom':
+        (themeService.theme$ | async),
+      'dark-mode-background dark-mode-text dark-mode-border-bottom': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
+    <div class="profile-statistic-item">
+      Zdobyte gwiazdki:&nbsp;{{ profile.stars }}&nbsp;<mat-icon
+        class="mat-icon-star-color"
+        >star</mat-icon
+      >
+    </div>
+    <div class="profile-statistic-item">
+      Dostępne bilety:&nbsp;{{ profile.tickets }}&nbsp;<mat-icon
+        class="mat-icon-star-color"
+        >sell</mat-icon
+      >
+    </div>
+  </div>
+}
 <div
   id="story-container"
+  class="container"
   [ngClass]="{
     'light-mode-background-primary light-mode-text':
       (themeService.theme$ | async),
@@ -55,28 +84,6 @@
     ),
   }"
 >
-  @if (profile) {
-    <div
-      id="profile-statistic"
-      [ngClass]="{
-        'light-mode-background light-mode-text light-mode-border-bottom': (themeService.theme$ | async),
-        'dark-mode-background dark-mode-text dark-mode-border-bottom': !(themeService.theme$ | async),
-      }"
-    >
-      <div class="profile-statistic-item">
-        Zdobyte gwiazdki:&nbsp;{{ profile.stars }}&nbsp;<mat-icon
-          class="mat-icon-star-color"
-          >star</mat-icon
-        >
-      </div>
-      <div class="profile-statistic-item">
-        Dostępne bilety:&nbsp;{{ profile.tickets }}&nbsp;<mat-icon
-          class="mat-icon-star-color"
-          >sell</mat-icon
-        >
-      </div>
-    </div>
-  }
   @if (stories.length === 0) {
     <div id="no-story-information" class="subtitle">
       Nie znaleziono historii pasujących do wybranych filtrów. Spróbuj innych
@@ -85,49 +92,93 @@
   }
   @for (story of stories; track story.id) {
     <div class="story-wrapper">
-      <div class="story-preview-button" (click)="toggleStory(story.id)">
-        <div class="story-preview-button-category">
-          {{ showCategory(story.storyCategory) }}
-        </div>
-        <div class="story-preview-button-icon">
-          @if (getIcon(story.id) === "replay") {
-            <span> Odblokuj bilet za 50% </span>
-          } @else {
-            <mat-icon>{{ getIcon(story.id) }}</mat-icon>
+      @if (profile) {
+        <div
+          class="story-preview-button"
+          [ngClass]="{
+            'light-mode-background dark-mode-text light-mode-border-black':
+              (themeService.theme$ | async),
+            'dark-mode-background dark-mode-text dark-mode-border-white': !(
+              themeService.theme$ | async
+            ),
+            'locked-light-background':
+              (themeService.theme$ | async) &&
+              profile.tickets === 0 &&
+              getIcon(story.id) === 'lock',
+            'locked-dark-background':
+              !(themeService.theme$ | async) &&
+              profile.tickets === 0 &&
+              getIcon(story.id) === 'lock',
+          }"
+          (click)="toggleStory(story.id)"
+        >
+          <div class="story-preview-button-category">
+            {{ showCategory(story.storyCategory) }}
+          </div>
+          <div
+            class="story-preview-button-icon background-white light-mode-text"
+          >
+            @if (getIcon(story.id) === "replay") {
+              <span> Odblokuj bilet za 50% </span>
+            } @else {
+              <mat-icon>{{ getIcon(story.id) }}</mat-icon>
+            }
+          </div>
+          <div class="story-preview-button-title">
+            {{ story.polishTitle }}
+          </div>
+
+          <div class="story-previev-button-level-and-size">
+            <div>
+              {{ showLanguageLevelShort(story.languageLevel) }} -
+              {{ showSize(story.storySize) }}
+            </div>
+          </div>
+
+          @if (story.storyPoint) {
+            <div class="score-item">
+              {{ story.userStories?.[0]?.bestResult ?? 0 }}
+              <mat-icon class="mat-icon-star-color">star</mat-icon>
+              / {{ story.storyPoint.maxPoints }}
+              <mat-icon class="mat-icon-star-color">star</mat-icon>
+            </div>
+          }
+          @if (story.storyPoint) {
+            <div class="score-item score-percentage">
+              {{
+                roundToTwoDecimals(
+                  story.userStories?.[0]?.percentageScore ?? 0
+                )
+              }}&nbsp;%
+            </div>
           }
         </div>
-        <div class="story-preview-button-title">
-          {{ story.polishTitle }}
-        </div>
+      }
 
-        <div class="story-previev-button-level-and-size">
-          <div>
-            {{ showLanguageLevelShort(story.languageLevel) }} -
-            {{ showSize(story.storySize) }}
-          </div>
-        </div>
-
-        @if (story.storyPoint) {
-          <div class="score-item">
-            {{ story.userStories?.[0]?.bestResult ?? 0 }}
-            <mat-icon class="mat-icon-star-color">star</mat-icon>
-            / {{ story.storyPoint.maxPoints }}
-            <mat-icon class="mat-icon-star-color">star</mat-icon>
-          </div>
-        }
-        @if (story.storyPoint) {
-          <div class="score-item score-percentage">
-            {{
-              roundToTwoDecimals(story.userStories?.[0]?.percentageScore ?? 0)
-            }}&nbsp;%
-          </div>
-        }
-      </div>
-
-      @if (story.storyPoint && openedStoryId === story.id) {
-        <div class="story-card">
+      @if (story.storyPoint && openedStoryId === story.id && profile) {
+        <div
+          class="story-card"
+          [ngClass]="{
+            'light-mode-background light-mode-text light-mode-border-black':
+              (themeService.theme$ | async),
+            'dark-mode-background dark-mode-text dark-mode-border-white': !(
+              themeService.theme$ | async
+            ),
+            'locked-light-background':
+              (themeService.theme$ | async) &&
+              profile.tickets === 0 &&
+              getIcon(story.id) === 'lock',
+            'locked-dark-background':
+              !(themeService.theme$ | async) &&
+              profile.tickets === 0 &&
+              getIcon(story.id) === 'lock',
+          }"
+        >
           <div class="story-card-button-close">
-            <button class="button-close" (click)="toggleStory(story.id)">
+            <button
+              class="button-close background-white light-mode-text"
+              (click)="toggleStory(story.id)"
+            >
               <mat-icon>close</mat-icon>
             </button>
           </div>
@@ -165,9 +216,13 @@
 
             <button
               mat-raised-button
-              class="button-app-reverse-color button-standard"
+              id="button-story-start"
+              class="button-standard background-white light-mode-text"
               (click)="NavigateToTextDisplay(story.id)"
               [disabled]="getIcon(story.id) === 'lock'"
+              [ngClass]="{
+                'my-disabled': getIcon(story.id) === 'lock',
+              }"
             >
               {{
                 getIcon(story.id) === "lock" ? "POTRZEBUJESZ BILETU" : "START"

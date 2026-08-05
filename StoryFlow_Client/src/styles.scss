@@ -160,6 +160,7 @@ mat-form-field.card-input {
 }
 
 .disabled {
+  color: black !important;
   background-color: #8c8b8b !important;
 }
 
@@ -235,7 +236,7 @@ mat-form-field.card-input {
 }
 
 .dark-mode-border-white {
-  border: 2px solid white !important
+  border: 2px solid white !important;
 }
 
 .light-mode-border {
@@ -270,6 +271,14 @@ mat-form-field.card-input {
   color: white !important;
 }
 
+.background-white{
+  background-color: white !important;
+}
+
+.background-dark{
+  background-color: mat.m2-get-color-from-palette($primary, 900) !important;
+}
+
 .light-mode-background {
   background-color: mat.m2-get-color-from-palette($accent, 300) !important;
 }
@@ -284,6 +293,19 @@ mat-form-field.card-input {
 
 .dark-mode-background-primary {
   background-color: mat.m2-get-color-from-palette($primary);
+}
+
+.locked-light-background {
+  background-color: #ea3636 !important;
+}
+
+.locked-dark-background {
+  background-color: #8c8b8b !important;
+}
+
+.my-disabled{
+  background-color: #d6d6d6 !important;
+  opacity: 1 !important;
 }
 
 @media (min-width: 600px) {

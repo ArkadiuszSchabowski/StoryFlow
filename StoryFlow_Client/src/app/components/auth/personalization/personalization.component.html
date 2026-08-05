@@ -2,24 +2,18 @@
   id="personalization-container"
   class="container"
   [ngClass]="{
-    'light-mode-background-primary': (themeService.theme$ | async),
-    'dark-mode-background-primary': !(themeService.theme$ | async),
+    'light-mode-background-primary light-mode-text':
+      (themeService.theme$ | async),
+    'dark-mode-background-primary dark-mode-text': !(
+      themeService.theme$ | async
+    ),
   }"
 >
-  <h1
-    id="profile-information-label"
-    class="title"
-    [ngClass]="{
-      'light-mode-background-primary light-mode-text':
-        (themeService.theme$ | async),
-      'dark-mode-background-primary dark-mode-text': !(
-        themeService.theme$ | async
-      ),
-    }"
-  >
+  <h1 id="profile-information-label" class="title">
     Profil użytkownika - personalizacja
   </h1>
   <form
+    id="personalization-form"
     [formGroup]="form"
     (ngSubmit)="submit()"
     autocomplete="off"
@@ -27,31 +21,47 @@
   >
     <mat-card
       id="mat-card-personalization"
+      class="light-mode-text"
       [ngClass]="{
-        'light-mode-background light-mode-text': (themeService.theme$ | async),
-        'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
+        'light-mode-border': (themeService.theme$ | async),
+        'dark-mode-border': !(themeService.theme$ | async),
       }"
     >
-      <mat-card-content>
-        <mat-radio-group aria-label="Wybierz tryb" formControlName="theme">
-          <div id="mode-select-label">Wybierz tryb</div>
+      <div
+        id="mode-select-label"
+        [ngClass]="{
+          'light-mode-background light-mode-text': (themeService.theme$ | async),
+          'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
+        }"
+      >
+        Wybierz tryb
+      </div>
+      <mat-card-content id="mat-card-content-personalization">
+        <mat-radio-group
+          aria-label="Wybierz tryb"
+          formControlName="theme"
+          id="mat-radio-group"
+        >
           <mat-radio-button value="1">Tryb jasny</mat-radio-button>
           <mat-radio-button value="2">Tryb ciemny</mat-radio-button>
         </mat-radio-group>
       </mat-card-content>
+      <div id="submit-button-container">
+        <button
+          mat-raised-button
+          class="button-app button-standard"
+          [ngClass]="{
+            'light-mode-background light-mode-text':
+              (themeService.theme$ | async),
+            'dark-mode-background dark-mode-text': !(
+              themeService.theme$ | async
+            ),
+          }"
+          type="submit"
+        >
+          Zapisz
+        </button>
+      </div>
     </mat-card>
-    <div id="submit-button-container">
-      <button
-        mat-raised-button
-        class="button-app-reverse-color button-standard"
-        [ngClass]="{
-          'light-mode-border': (themeService.theme$ | async),
-          'dark-mode-border': !(themeService.theme$ | async),
-        }"
-        type="submit"
-      >
-        Zapisz
-      </button>
-    </div>
   </form>
 </div>
