@@ -54,21 +54,6 @@ input[type="password"]::-ms-clear {
 .mat-mdc-menu-item {
   text-align: center;
 }
-::ng-deep.mat-mdc-menu-item {
-  color: mat.m2-get-color-from-palette($accent) !important;
-  background-color: white !important;
-  border-left: 10px solid mat.m2-get-color-from-palette($accent) !important;
-  border-right: 10px solid mat.m2-get-color-from-palette($accent) !important;
-  border-top: 5px solid mat.m2-get-color-from-palette($accent) !important;
-  border-bottom: 5px solid mat.m2-get-color-from-palette($accent) !important;
-  font-weight: bolder !important;
-  padding: 0 10px !important;
-}
-
-::ng-deep.mat-mdc-menu-item:hover {
-  color: white !important;
-  background-color: #26a69a !important;
-}
 
 ::ng-deep.mat-menu-desktop {
   margin-top: 2px !important;
@@ -283,8 +268,16 @@ mat-form-field.card-input {
   background-color: mat.m2-get-color-from-palette($accent, 300) !important;
 }
 
+button.light-mode-background:hover{
+    background-color: mat.m2-get-color-from-palette($accent, 200) !important;
+}
+
 .dark-mode-background {
   background-color: mat.m2-get-color-from-palette($accent, 700) !important;
+}
+
+button.dark-mode-background:hover{
+    background-color: mat.m2-get-color-from-palette($accent, 600) !important;
 }
 
 .light-mode-background-primary {
