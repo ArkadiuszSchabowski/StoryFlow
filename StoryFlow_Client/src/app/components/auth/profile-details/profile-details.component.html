@@ -75,18 +75,5 @@
         </div>
       </div>
     </div>
-    <button
-      id="button-logout"
-      mat-raised-button
-      class="button-app button-standard"
-      [ngClass]="{
-        'light-mode-background light-mode-text': (themeService.theme$ | async),
-        'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
-      }"
-      (click)="logout()"
-      aria-label="Wyloguj się"
-    >
-      WYLOGUJ
-    </button>
   </div>
 }

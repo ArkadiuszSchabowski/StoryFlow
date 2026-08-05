@@ -14,7 +14,7 @@
       id="h1-title"
       [ngClass]="{
         'light-mode-background light-mode-text': (themeService.theme$ | async),
-        'dark-mode-backgrounddark-mode-text': !(themeService.theme$ | async),
+        'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
       }"
     >
       Tworzenie quizu
@@ -22,8 +22,11 @@
     <div
       id="story-container"
       [ngClass]="{
-        'light-mode-background light-mode-text light-mode-border-bottom': (themeService.theme$ | async),
-        'dark-mode-background dark-mode-text dark-mode-border-bottom': !(themeService.theme$ | async),
+        'light-mode-background light-mode-text light-mode-border-bottom':
+          (themeService.theme$ | async),
+        'dark-mode-background dark-mode-text dark-mode-border-bottom': !(
+          themeService.theme$ | async
+        ),
       }"
     >
       <form
@@ -92,13 +95,10 @@
           <button
             mat-raised-button
             id="submit-button-create"
-            class="button-app button-standard"
+            class="button-app-reverse-color button-standard"
             [ngClass]="{
-              'light-mode-background light-mode-text':
-                (themeService.theme$ | async),
-              'dark-mode-background dark-mode-text': !(
-                themeService.theme$ | async
-              ),
+              'light-mode-border': (themeService.theme$ | async),
+              'dark-mode-border': !(themeService.theme$ | async),
             }"
             type="submit"
           >

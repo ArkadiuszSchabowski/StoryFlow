@@ -64,14 +64,22 @@
   height: 100%;
 }
 
-#desktop-button-logo {
+.light-mode-desktop-button-logo {
+  display: none;
+  background-image: url(../../../../assets/shared/logo2.webp);
+  background-size: 90px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.dark-mode-desktop-button-logo {
   display: none;
   background-image: url(../../../../assets/shared/logo.webp);
   background-size: 90px;
   background-repeat: no-repeat;
   background-position: center;
-  //TO DO - color
 }
+
 
 .desktop-button {
   display: none;

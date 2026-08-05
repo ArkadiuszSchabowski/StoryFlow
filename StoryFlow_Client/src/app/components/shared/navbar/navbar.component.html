@@ -62,6 +62,7 @@
         }
         @if (authService.isModerator$ | async) {
           <button
+            routerLink="/moderator"
             class="mobile-button"
             [ngClass]="{
               'light-mode-background light-mode-text':
@@ -83,16 +84,14 @@
                   themeService.theme$ | async
                 ),
               }"
-              [matMenuTriggerFor]="moderatorMenu"
-              #moderatorTrigger="matMenuTrigger"
             >
               <mat-icon>security</mat-icon>
-              <mat-icon>arrow_drop_down</mat-icon>
             </div>
           </button>
         }
         @if (authService.isAdmin$ | async) {
           <button
+            routerLink="/administrator"
             class="mobile-button"
             [ngClass]="{
               'light-mode-background light-mode-text':
@@ -114,11 +113,8 @@
                   themeService.theme$ | async
                 ),
               }"
-              [matMenuTriggerFor]="administratorMenu"
-              #administratorTrigger="matMenuTrigger"
             >
               <mat-icon>security</mat-icon>
-              <mat-icon>arrow_drop_down</mat-icon>
             </div>
           </button>
         }
@@ -135,11 +131,7 @@
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
             aria-label="Profil użytkownika - informacje profilowe"
           >
-            <div
-              routerLink="/profile/profile-details"
-              mat-button
-              class="mobile-button-body"
-            >
+            <div routerLink="/profile" mat-button class="mobile-button-body">
               <mat-icon>account_circle</mat-icon>
             </div>
           </button>
@@ -152,14 +144,12 @@
         @if (!(authService.currentUserSource$ | async)) {
           <button
             routerLink="/"
-            id="desktop-button-logo"
             class="desktop-button"
             [ngClass]="{
-              'light-mode-background light-mode-text':
+              'light-mode-background light-mode-text light-mode-desktop-button-logo':
                 (themeService.theme$ | async),
-              'dark-mode-background dark-mode-text': !(
-                themeService.theme$ | async
-              ),
+              'dark-mode-background dark-mode-text dark-mode-desktop-button-logo':
+                !(themeService.theme$ | async),
             }"
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
             aria-label="Strona główna"
@@ -208,20 +198,15 @@
               ),
             }"
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
-            [matMenuTriggerFor]="moderatorMenu"
-            #moderatorTrigger="matMenuTrigger"
+            routerLink="/moderator"
             aria-label="Panel moderatora"
           >
-            <div class="desktop-button-body">
-              MODERATOR
-              <mat-icon class="desktop-icon-drop-down"
-                >arrow_drop_down</mat-icon
-              >
-            </div>
+            <div class="desktop-button-body">MODERATOR</div>
           </button>
         }
         @if (authService.isAdmin$ | async) {
           <button
+            routerLink="/administrator"
             class="desktop-button"
             [ngClass]="{
               'light-mode-background light-mode-text':
@@ -231,21 +216,14 @@
               ),
             }"
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
-            [matMenuTriggerFor]="administratorMenu"
-            #administratorTrigger="matMenuTrigger"
             aria-label="Panel administratora"
           >
-            <div class="desktop-button-body">
-              ADMINISTRATOR
-              <mat-icon class="desktop-icon-drop-down"
-                >arrow_drop_down</mat-icon
-              >
-            </div>
+            <div class="desktop-button-body">ADMINISTRATOR</div>
           </button>
         }
         @if (authService.currentUserSource$ | async) {
           <button
-            routerLink="/profile/profile-details"
+            routerLink="/profile"
             class="desktop-button"
             [ngClass]="{
               'light-mode-background light-mode-text':
@@ -264,41 +242,3 @@
     </div>
   </mat-toolbar>
 }
-
-<mat-menu
-  #profileMenu="matMenu"
-  class="mat-menu-desktop"
-  [ngClass]="{
-    'light-mode-background light-mode-text': (themeService.theme$ | async),
-    'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
-  }"
->
-  <button mat-menu-item routerLink="/profile" aria-label="Informacje profilowe">
-    INFORMACJE
-  </button>
-</mat-menu>
-<mat-menu #moderatorMenu="matMenu" class="mat-menu-desktop">
-  <button mat-menu-item routerLink="/library" aria-label="Podgląd historii">
-    PODGLĄD HISTORII
-  </button>
-  <button mat-menu-item routerLink="/create-story" aria-label="Nowa historia">
-    NOWA HISTORIA
-  </button>
-  <button mat-menu-item routerLink="/create-quiz" aria-label="Nowy quiz">
-    NOWY QUIZ
-  </button>
-</mat-menu>
-<mat-menu
-  #administratorMenu="matMenu"
-  class="mat-menu-desktop"
->
-  <button mat-menu-item routerLink="/library" aria-label="Podgląd historii">
-    PODGLĄD HISTORII
-  </button>
-  <button mat-menu-item routerLink="/create-story" aria-label="Nowa historia">
-    NOWA HISTORIA
-  </button>
-  <button mat-menu-item routerLink="/create-quiz" aria-label="Nowy quiz">
-    NOWY QUIZ
-  </button>
-</mat-menu>

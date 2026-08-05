@@ -12,7 +12,7 @@
   <div id="profile-navigation-navbar">
     <div id="desktop-navbar-buttons">
       <button
-        routerLink="/profile/profile-details"
+        routerLink="/library"
         class="desktop-button"
         [ngClass]="{
           'light-mode-background light-mode-text light-mode-border-bottom':
@@ -21,12 +21,12 @@
             themeService.theme$ | async
           ),
         }"
-        aria-label="Mój profil"
+        aria-label="Poczekalnia historii"
       >
-        Informacje profilowe
+        Poczekalnia historii
       </button>
       <button
-        routerLink="/profile/personalization"
+        routerLink="/create-story"
         class="desktop-button"
         [ngClass]="{
           'light-mode-background light-mode-text light-mode-border-bottom':
@@ -35,13 +35,13 @@
             themeService.theme$ | async
           ),
         }"
-        aria-label="Personalizacja"
+        aria-label="Nowa historia"
       >
-        Personalizacja
+        Nowa historia
       </button>
-            <button
+      <button
+        routerLink="/create-quiz"
         class="desktop-button"
-        (click)="logout()"
         [ngClass]="{
           'light-mode-background light-mode-text light-mode-border-bottom':
             (themeService.theme$ | async),
@@ -49,9 +49,9 @@
             themeService.theme$ | async
           ),
         }"
-        aria-label="Personalizacja"
+        aria-label="Nowy quiz"
       >
-        Wyloguj
+        Nowy quiz
       </button>
     </div>
   </div>
