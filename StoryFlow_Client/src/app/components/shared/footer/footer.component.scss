@@ -10,8 +10,6 @@
   min-width: 320px;
   height: auto;
   padding: 20px 20px 40px 20px;
-  background-color: mat.m2-get-color-from-palette(theme.$accent);
-  border-top: 2px solid white;
   bottom: 0;
   left: 0;
 }
@@ -31,6 +29,7 @@
 
 #copyright-notice {
   padding-top: 20px;
+  font-weight: bold;
 }
 
 .footer-link {

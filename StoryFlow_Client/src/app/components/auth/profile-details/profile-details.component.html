@@ -1,0 +1,79 @@
+@if (profile) {
+  <div
+    id="profile-container"
+    class="container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
+    <h1
+      id="profile-information-label"
+      class="title"
+      [ngClass]="{
+        'light-mode-background-primary light-mode-text':
+          (themeService.theme$ | async),
+        'dark-mode-background-primary dark-mode-text': !(
+          themeService.theme$ | async
+        ),
+      }"
+    >
+      Profil użytkownika - informacje profilowe
+    </h1>
+    <div
+      id="profile-information"
+      [ngClass]="{
+        'light-mode-background light-mode-text': (themeService.theme$ | async),
+        'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
+      }"
+    >
+      <div id="email" class="profile-information-item">
+        <div class="profile-information-key">E-mail:</div>
+        <div class="profile-information-value">{{ profile.email }}</div>
+      </div>
+
+      <div id="last-name" class="profile-information-item">
+        <div class="profile-information-key">Nick:</div>
+        <div class="profile-information-value">{{ profile.nick }}</div>
+      </div>
+
+      <div id="first-name" class="profile-information-item">
+        <div class="profile-information-key">Imię:</div>
+        <div class="profile-information-value">{{ profile.firstName }}</div>
+      </div>
+
+      <div id="gender" class="profile-information-item">
+        <div class="profile-information-key">Płeć:</div>
+        <div class="profile-information-value">
+          {{ profile.gender === 0 ? "Kobieta" : "Mężczyzna" }}
+        </div>
+      </div>
+
+      <div id="date-of-birth" class="profile-information-item">
+        <div class="profile-information-key">Data urodzenia:</div>
+        <div class="profile-information-value">{{ profile.dateOfBirth }}</div>
+      </div>
+
+      <div id="stars" class="profile-information-item">
+        <div class="profile-information-key">Wynik:</div>
+        <div class="profile-information-value">
+          {{ profile.stars }}&nbsp;<mat-icon class="mat-icon-star-color"
+            >star</mat-icon
+          >
+        </div>
+      </div>
+
+      <div id="tickets" class="profile-information-item">
+        <div class="profile-information-key">Ilość biletów:</div>
+        <div class="profile-information-value">
+          {{ profile.tickets }}&nbsp;<mat-icon class="mat-icon-star-color"
+            >sell</mat-icon
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+}

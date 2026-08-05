@@ -1,8 +1,29 @@
 @if (!(loaderService.loading$ | async)) {
-  <div id="register-container" class="container">
+  <div
+    id="register-container"
+    class="container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
     <form [formGroup]="form" (ngSubmit)="register()" autocomplete="off">
       <mat-card class="register-card">
-        <h1 id="card-title">Zarejestruj się w StoryFlow</h1>
+        <h1
+          id="card-title"
+          [ngClass]="{
+            'light-mode-background light-mode-text':
+              (themeService.theme$ | async),
+            'dark-mode-background dark-mode-text': !(
+              themeService.theme$ | async
+            ),
+          }"
+        >
+          Zarejestruj się w StoryFlow
+        </h1>
 
         <mat-card-content class="auth-card-content">
           <div class="mat-form-field-row">
@@ -120,6 +141,13 @@
               <button
                 type="button"
                 class="password-button"
+                [ngClass]="{
+                  'light-mode-background light-mode-text':
+                    (themeService.theme$ | async),
+                  'dark-mode-background dark-mode-text': !(
+                    themeService.theme$ | async
+                  ),
+                }"
                 mat-icon-button
                 matSuffix
                 (click)="changePasswordVisibility($event)"
@@ -158,6 +186,13 @@
               <button
                 type="button"
                 class="password-button"
+                [ngClass]="{
+                  'light-mode-background light-mode-text':
+                    (themeService.theme$ | async),
+                  'dark-mode-background dark-mode-text': !(
+                    themeService.theme$ | async
+                  ),
+                }"
                 mat-icon-button
                 matSuffix
                 (click)="changeRepeatPasswordVisibility($event)"
@@ -191,6 +226,13 @@
               id="submit-register-button"
               mat-raised-button
               class="button-app button-upper"
+              [ngClass]="{
+                'light-mode-background light-mode-text':
+                  (themeService.theme$ | async),
+                'dark-mode-background dark-mode-text': !(
+                  themeService.theme$ | async
+                ),
+              }"
               type="submit"
             >
               Zarejestruj się
@@ -199,6 +241,10 @@
               id="button-app-go-to-login"
               mat-raised-button
               class="button-standard button-app-reverse-color"
+              [ngClass]="{
+                'light-mode-border': (themeService.theme$ | async),
+                'dark-mode-border': !(themeService.theme$ | async),
+              }"
               routerLink="/login"
               type="button"
             >

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -5,6 +6,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ToastrService } from 'ngx-toastr';
 import { QuizService } from 'src/app/_services/quiz.service';
 import { StoryService } from 'src/app/_services/story.service';
+import { ThemeService } from 'src/app/_services/theme.service';
 import { AddQuizDto } from 'src/app/models/add-quiz-dto';
 import { GenerateQuizDto } from 'src/app/models/generate-quiz-dto';
 import { GenerateQuizResponseDto } from 'src/app/models/generate-quiz-response';
@@ -15,7 +17,7 @@ import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
   templateUrl: './quiz-create.component.html',
   styleUrls: ['./quiz-create.component.scss'],
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, MatButtonModule, MatSelectModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatSelectModule],
 })
 export class QuizCreateComponent implements OnInit {
   stories: GetStoryViewDto[] = [];
@@ -41,6 +43,7 @@ export class QuizCreateComponent implements OnInit {
     private storyService: StoryService,
     private quizService: QuizService,
     private toastr: ToastrService,
+    public themeService: ThemeService
   ) {}
 
   ngOnInit(): void {

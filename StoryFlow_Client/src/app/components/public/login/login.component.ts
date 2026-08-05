@@ -1,4 +1,4 @@
-import { AsyncPipe, isPlatformBrowser } from '@angular/common';
+import { AsyncPipe, CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import {
   FormBuilder,
@@ -18,6 +18,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { LoaderService } from 'src/app/_services/loader.service';
 import { NavbarService } from 'src/app/_services/navbar.service';
 import { QuizService } from 'src/app/_services/quiz.service';
+import { ThemeService } from 'src/app/_services/theme.service';
 import { UserService } from 'src/app/_services/user.service';
 import { LoginDto } from 'src/app/models/login-dto';
 
@@ -28,6 +29,7 @@ import { LoginDto } from 'src/app/models/login-dto';
   standalone: true,
   imports: [
     AsyncPipe,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     LottieComponent,
@@ -59,6 +61,7 @@ export class LoginComponent implements OnInit {
     public loaderService: LoaderService,
     private navbarService: NavbarService,
     private quizService: QuizService,
+    public themeService: ThemeService
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }

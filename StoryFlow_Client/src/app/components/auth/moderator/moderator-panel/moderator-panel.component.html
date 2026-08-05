@@ -1,0 +1,58 @@
+<div
+  id="profile-container"
+  class="container"
+  [ngClass]="{
+    'light-mode-background-primary light-mode-text':
+      (themeService.theme$ | async),
+    'dark-mode-background-primary dark-mode-text': !(
+      themeService.theme$ | async
+    ),
+  }"
+>
+  <div id="profile-navigation-navbar">
+    <div id="desktop-navbar-buttons">
+      <button
+        routerLink="/library"
+        class="desktop-button"
+        [ngClass]="{
+          'light-mode-background light-mode-text light-mode-border-bottom':
+            (themeService.theme$ | async),
+          'dark-mode-background dark-mode-text dark-mode-border-bottom': !(
+            themeService.theme$ | async
+          ),
+        }"
+        aria-label="Poczekalnia historii"
+      >
+        Poczekalnia historii
+      </button>
+      <button
+        routerLink="/create-story"
+        class="desktop-button"
+        [ngClass]="{
+          'light-mode-background light-mode-text light-mode-border-bottom':
+            (themeService.theme$ | async),
+          'dark-mode-background dark-mode-text dark-mode-border-bottom': !(
+            themeService.theme$ | async
+          ),
+        }"
+        aria-label="Nowa historia"
+      >
+        Nowa historia
+      </button>
+      <button
+        routerLink="/create-quiz"
+        class="desktop-button"
+        [ngClass]="{
+          'light-mode-background light-mode-text light-mode-border-bottom':
+            (themeService.theme$ | async),
+          'dark-mode-background dark-mode-text dark-mode-border-bottom': !(
+            themeService.theme$ | async
+          ),
+        }"
+        aria-label="Nowy quiz"
+      >
+        Nowy quiz
+      </button>
+    </div>
+  </div>
+</div>

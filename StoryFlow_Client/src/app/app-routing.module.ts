@@ -55,7 +55,25 @@ const routes: Routes = [
       import('./components/auth/profile/profile.component').then(
         (m) => m.ProfileComponent,
       ),
-    title: 'Profil użytkownika - StoryFlow',
+    title: 'Menu profilowe - StoryFlow',
+    canActivate: [authGuard],
+  },
+  {
+    path: 'profile/profile-details',
+    loadComponent: () =>
+      import('./components/auth/profile-details/profile-details.component').then(
+        (m) => m.ProfileDetailsComponent,
+      ),
+    title: 'Informacje profilowe - StoryFlow',
+    canActivate: [authGuard],
+  },
+  {
+    path: 'profile/personalization',
+    loadComponent: () =>
+      import('./components/auth/personalization/personalization.component').then(
+        (m) => m.PersonalizationComponent,
+      ),
+    title: 'Personalizacja - StoryFlow',
     canActivate: [authGuard],
   },
   {
@@ -66,6 +84,24 @@ const routes: Routes = [
       ),
     title: 'Podgląd sezonu - StoryFlow',
     canActivate: [authGuard],
+  },
+    {
+    path: 'administrator',
+    loadComponent: () =>
+      import('./components/auth/administrator/administrator-panel/administrator-panel.component').then(
+        (m) => m.AdministratorPanelComponent,
+      ),
+    title: 'Panel administratora - StoryFlow',
+    canActivate: [moderatorGuard],
+  },
+  {
+    path: 'moderator',
+    loadComponent: () =>
+      import('./components/auth/moderator/moderator-panel/moderator-panel.component').then(
+        (m) => m.ModeratorPanelComponent,
+      ),
+    title: 'Panel moderatora - StoryFlow',
+    canActivate: [moderatorGuard],
   },
   {
     path: 'create-story',

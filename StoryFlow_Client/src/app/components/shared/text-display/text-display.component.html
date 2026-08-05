@@ -3,7 +3,17 @@
   (authService.currentUserSource$ | async) &&
   !isQuizFinishied
 ) {
-  <div id="loader-container" class="container loader-ticket-container">
+  <div
+    id="loader-container"
+    class="container loader-ticket-container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
     <div id="loader-ticket-text">
       Twój bilet jest teraz w użyciu. Odpowiedz na wszystkie pytania, aby
       otrzymać punkty za historię. Jeśli uzyskasz minimum 50% punktów to bilet
@@ -14,6 +24,10 @@
       mat-raised-button
       id="loader-button"
       class="button-app button-standard"
+      [ngClass]="{
+        'light-mode-background light-mode-text': (themeService.theme$ | async),
+        'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
+      }"
       (click)="hideLoader()"
     >
       Dalej
@@ -22,18 +36,66 @@
 }
 
 @if (story && !(loaderService.loading$ | async) && !isQuizFinishied) {
-  <div id="text-display-container" class="container">
+  <div
+    id="text-display-container"
+    class="container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
     @if (!isQuiz) {
       <div id="text-display-subcontainer">
         <div id="story-information">
-          <div class="story-information-item">
-            <mat-icon class="story-information-item-mat-icon">{{ showCategoryIcon(story.storyCategory) }}</mat-icon>
+          <div
+            class="story-information-item"
+            [ngClass]="{
+              'light-mode-background light-mode-text light-mode-border-black':
+                (themeService.theme$ | async),
+              'dark-mode-background dark-mode-text dark-mode-border-white': !(
+                themeService.theme$ | async
+              ),
+            }"
+          >
+            <mat-icon
+              class="story-information-item-mat-icon"
+              [ngClass]="{
+                'light-mode-background light-mode-text':
+                  (themeService.theme$ | async),
+                'dark-mode-background dark-mode-text': !(
+                  themeService.theme$ | async
+                ),
+              }"
+              >{{ showCategoryIcon(story.storyCategory) }}</mat-icon
+            >
             {{ showCategory(story.storyCategory) }}
           </div>
-          <div class="story-information-item">
-            <mat-icon class="story-information-item-mat-icon">schedule</mat-icon>{{ showSize(story.storySize) }}
+          <div
+            class="story-information-item"
+            [ngClass]="{
+              'light-mode-background light-mode-text light-mode-border-black':
+                (themeService.theme$ | async),
+              'dark-mode-background dark-mode-text dark-mode-border-white': !(
+                themeService.theme$ | async
+              ),
+            }"
+          >
+            <mat-icon class="story-information-item-mat-icon">schedule</mat-icon
+            >{{ showSize(story.storySize) }}
           </div>
-          <div class="story-information-item">
+          <div
+            class="story-information-item"
+            [ngClass]="{
+              'light-mode-background light-mode-text light-mode-border-black':
+                (themeService.theme$ | async),
+              'dark-mode-background dark-mode-text dark-mode-border-white': !(
+                themeService.theme$ | async
+              ),
+            }"
+          >
             <mat-icon class="story-information-item-mat-icon">school</mat-icon
             >{{ showLanguageLevel(story.languageLevel) }}
           </div>
@@ -43,8 +105,14 @@
           <div>
             <button
               mat-raised-button
-              color="accent"
               class="action-button"
+              [ngClass]="{
+                'light-mode-background light-mode-text':
+                  (themeService.theme$ | async),
+                'dark-mode-background dark-mode-text': !(
+                  themeService.theme$ | async
+                ),
+              }"
               (click)="changeTitleLanguage(story)"
             >
               <div><mat-icon>repeat</mat-icon></div>
@@ -57,8 +125,14 @@
           <div>
             <button
               mat-raised-button
-              color="accent"
               class="action-button"
+              [ngClass]="{
+                'light-mode-background light-mode-text':
+                  (themeService.theme$ | async),
+                'dark-mode-background dark-mode-text': !(
+                  themeService.theme$ | async
+                ),
+              }"
               (click)="changeDescriptionLanguage(story)"
             >
               <div><mat-icon>repeat</mat-icon></div>
@@ -73,8 +147,14 @@
               <div>
                 <button
                   mat-raised-button
-                  color="accent"
                   class="action-button"
+                  [ngClass]="{
+                    'light-mode-background light-mode-text':
+                      (themeService.theme$ | async),
+                    'dark-mode-background dark-mode-text': !(
+                      themeService.theme$ | async
+                    ),
+                  }"
                   (click)="changeSentenceLanguage(sentence)"
                 >
                   <div><mat-icon>repeat</mat-icon></div>
@@ -88,6 +168,13 @@
           <button
             mat-raised-button
             class="button-app button-standard"
+            [ngClass]="{
+              'light-mode-background light-mode-text':
+                (themeService.theme$ | async),
+              'dark-mode-background dark-mode-text': !(
+                themeService.theme$ | async
+              ),
+            }"
             (click)="gotoQuiz()"
           >
             QUIZ
@@ -99,8 +186,21 @@
     @if (isQuiz && !isQuizFinishied && story) {
       <div id="quiz-container-wrapper">
         @if (quiz) {
-          <div id="quiz-container" class="container">
-            <mat-progress-bar color="accent" [value]="quizProgress"></mat-progress-bar>
+          <div
+            id="quiz-container"
+            class="container"
+            [ngClass]="{
+              'light-mode-background-primary light-mode-text':
+                (themeService.theme$ | async),
+              'dark-mode-background-primary dark-mode-text': !(
+                themeService.theme$ | async
+              ),
+            }"
+          >
+            <mat-progress-bar
+              color="accent"
+              [value]="quizProgress"
+            ></mat-progress-bar>
             <h1 class="title">Quiz - {{ story.englishTitle }}</h1>
 
             <form (ngSubmit)="checkAnswer()">
@@ -114,6 +214,7 @@
                   @for (answer of currentQuestion.answers; track answer.id) {
                     <div id="answer-button">
                       <button
+                        mat-raised-button
                         [class.disabled]="answerSubmitted"
                         [class.correct]="answer.isCorrect && answerSubmitted"
                         [class.wrong]="
@@ -124,6 +225,13 @@
                         [disabled]="answerSubmitted"
                         type="submit"
                         class="button-app-quiz"
+                        [ngClass]="{
+                          'light-mode-background light-mode-text':
+                            (themeService.theme$ | async),
+                          'dark-mode-background dark-mode-text': !(
+                            themeService.theme$ | async
+                          ),
+                        }"
                         (click)="
                           selectedAnswers[currentQuestion.id] = answer.id
                         "
@@ -134,9 +242,14 @@
                   }
 
                   <button
+                    mat-raised-button
                     [class.disabled]="!answerSubmitted"
                     [disabled]="!answerSubmitted"
-                    class="disabled button-app button-standard"
+                    class="button-app-reverse-color button-standard"
+                    [ngClass]="{
+                      'white-background':
+                        (themeService.theme$ | async) && answerSubmitted
+                    }"
                     id="next-button"
                     (click)="showNextQuestion()"
                   >
@@ -157,7 +270,17 @@
 }
 
 @if (isQuizFinishied && (loaderService.loading$ | async)) {
-  <div id="loader-container" class="container">
+  <div
+    id="loader-container"
+    class="container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
     <div id="loader-text">Chwileczkę, podliczamy punkty..</div>
     <div class="loader-logo">
       <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>
@@ -166,7 +289,17 @@
 }
 
 @if (isQuizFinishied && !(loaderService.loading$ | async) && story) {
-  <div class="container">
+  <div
+    id="finish-quiz-container"
+    class="container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
     <div class="item">Gratulacje! Ukończyłeś quiz!</div>
 
     @if (quizResult && story) {
@@ -220,8 +353,16 @@
     <div class="button-container">
       @if (!(authService.currentUserSource$ | async)) {
         <button
+          mat-raised-button
           id="register-button"
           class="button-app button-standard"
+          [ngClass]="{
+            'light-mode-background light-mode-text':
+              (themeService.theme$ | async),
+            'dark-mode-background dark-mode-text': !(
+              themeService.theme$ | async
+            ),
+          }"
           (click)="navigateToRegister()"
         >
           Utwórz konto
@@ -229,15 +370,31 @@
       }
       @if (authService.currentUserSource$ | async) {
         <button
+          mat-raised-button
           id="again-button"
           class="button-app button-standard"
+          [ngClass]="{
+            'light-mode-background light-mode-text':
+              (themeService.theme$ | async),
+            'dark-mode-background dark-mode-text': !(
+              themeService.theme$ | async
+            ),
+          }"
           (click)="resetState()"
         >
           Spróbuj ponownie
         </button>
         <button
+          mat-raised-button
           id="back-button"
           class="button-app button-standard"
+          [ngClass]="{
+            'light-mode-background light-mode-text':
+              (themeService.theme$ | async),
+            'dark-mode-background dark-mode-text': !(
+              themeService.theme$ | async
+            ),
+          }"
           (click)="navigateToTextSelection()"
         >
           Kolejne wyzwanie

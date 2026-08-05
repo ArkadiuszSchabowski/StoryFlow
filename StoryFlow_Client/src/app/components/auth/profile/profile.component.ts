@@ -1,35 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatIconModule } from '@angular/material/icon';
-import { UserService } from 'src/app/_services/user.service';
-import { GetUserDto } from 'src/app/models/get-user-dto';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/_services/auth.service';
+import { NavbarService } from 'src/app/_services/navbar.service';
+import { ThemeService } from 'src/app/_services/theme.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
   standalone: true,
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    MatIconModule
-  ],
+  imports: [CommonModule, RouterLink],
 })
-export class ProfileComponent implements OnInit {
-  profile: GetUserDto | undefined;
+export class ProfileComponent {
+  constructor(
+    public themeService: ThemeService,
+    private router: Router,
+    private toastr: ToastrService,
+    public authService: AuthService,
+    public navbarService: NavbarService,
+  ) {}
 
-  constructor(private userService: UserService) {}
-
-  ngOnInit(): void {
-    this.getProfile();
-  }
-
-  getProfile() {
-    this.userService.getProfile().subscribe({
-      next: (response) => {
-        this.profile = response;
-      },
-      error: () => {},
-    });
+  logout() {
+    this.authService.logout();
+    this.navbarService.unblockButtons();
+    this.toastr.success('Wylogowano pomyślnie.');
+    this.router.navigateByUrl('');
   }
 }

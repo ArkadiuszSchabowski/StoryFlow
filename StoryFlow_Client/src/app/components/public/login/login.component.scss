@@ -31,7 +31,6 @@ mat-card.login-card{
   font-size: 24px;
   color: white;
   font-weight: 400;
-  background-color: mat.m2-get-color-from-palette(theme.$accent);
 }
 
 #submit-button-container {
@@ -42,10 +41,6 @@ mat-card.login-card{
 
 #submit-login-button {
   margin: 20px;
-}
-
-#button-app-go-to-register {
-border: 2px solid mat.m2-get-color-from-palette(theme.$accent);
 }
 
 #loader-text {

@@ -34,7 +34,7 @@
 #desktop-navbar-buttons {
   display: flex;
   flex-direction: row;
-  width: 95%;
+  width: 100%;
   height: 100%;
   align-items: center;
   justify-content: space-between;
@@ -53,8 +53,6 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  color: white;
-  background-color: mat.m2-get-color-from-palette(theme.$accent);
   border: none;
 }
 
@@ -66,13 +64,22 @@
   height: 100%;
 }
 
-#desktop-button-logo {
+.light-mode-desktop-button-logo {
+  display: none;
+  background-image: url(../../../../assets/shared/logo2.webp);
+  background-size: 90px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.dark-mode-desktop-button-logo {
   display: none;
   background-image: url(../../../../assets/shared/logo.webp);
   background-size: 90px;
   background-repeat: no-repeat;
   background-position: center;
 }
+
 
 .desktop-button {
   display: none;
@@ -81,12 +88,10 @@
   align-items: center;
   text-align: center;
   cursor: pointer;
-  color: white;
   font-weight: bolder;
   font-size: 18px;
   width: 100%;
   height: 100%;
-  background-color: mat.m2-get-color-from-palette(theme.$accent);
   border: none;
 }
 
@@ -119,12 +124,6 @@
 .mat-mdc-focus-indicator:hover {
   color: white !important;
   background-color: #26a69a !important;
-}
-
-.toolbar {
-  color: black;
-  background-color: mat.m2-get-color-from-palette(theme.$accent);
-  border-bottom: 2px solid white;
 }
 
 .logo {

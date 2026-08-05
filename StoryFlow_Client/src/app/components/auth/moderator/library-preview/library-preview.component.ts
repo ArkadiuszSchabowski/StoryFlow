@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,6 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StoryService } from 'src/app/_services/story.service';
+import { ThemeService } from 'src/app/_services/theme.service';
 import { UserService } from 'src/app/_services/user.service';
 import {
   CATEGORIES_WITH_PLACEHOLDER,
@@ -27,7 +28,14 @@ import { StoryFilter } from 'src/app/models/story-filter-dto';
   templateUrl: './library-preview.component.html',
   styleUrls: ['./library-preview.component.scss'],
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, MatButtonModule, MatIconModule, MatSelectModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSelectModule,
+  ],
 })
 export class LibraryPreviewComponent implements OnInit {
   stories: GetStoryViewDto[] = [];
@@ -56,6 +64,7 @@ export class LibraryPreviewComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private userService: UserService,
+    public themeService: ThemeService,
   ) {}
 
   ngOnInit(): void {

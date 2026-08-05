@@ -1,6 +1,32 @@
-<div id="create-story-container">
-  <h1 id="h1-title">Tworzenie historii</h1>
-  <div id="generate-story-container">
+<div
+  id="create-story-container"
+  [ngClass]="{
+    'light-mode-background-primary light-mode-text':
+      (themeService.theme$ | async),
+    'dark-mode-background-primary dark-mode-text': !(
+      themeService.theme$ | async
+    ),
+  }"
+>
+  <h1
+    id="h1-title"
+    [ngClass]="{
+      'light-mode-background light-mode-text': (themeService.theme$ | async),
+      'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
+    }"
+  >
+    Tworzenie historii
+  </h1>
+  <div
+    id="generate-story-container"
+    [ngClass]="{
+      'light-mode-background light-mode-text light-mode-border-bottom':
+        (themeService.theme$ | async),
+      'dark-mode-background dark-mode-text dark-mode-border-bottom': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
     <form [formGroup]="generateForm" (ngSubmit)="generate()" id="form">
       <div id="filter-story-container">
         <div class="filter-story-container-upper-row">
@@ -8,7 +34,9 @@
             <mat-label>Kategoria:</mat-label>
             <mat-select id="storyCategory" formControlName="storyCategory">
               @for (category of categories; track category.value) {
-                <mat-option [value]="category.value">{{ category.viewValue }}</mat-option>
+                <mat-option [value]="category.value">{{
+                  category.viewValue
+                }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -16,7 +44,9 @@
             <mat-label>Poziom językowy:</mat-label>
             <mat-select id="languageLevel" formControlName="languageLevel">
               @for (level of languageLevels; track level.value) {
-                <mat-option [value]="level.value">{{ level.viewValue }}</mat-option>
+                <mat-option [value]="level.value">{{
+                  level.viewValue
+                }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -24,14 +54,16 @@
             <mat-label>Długość:</mat-label>
             <mat-select id="storySize" formControlName="storySize">
               @for (size of sizes; track size.value) {
-                <mat-option [value]="size.value">{{ size.viewValue }}</mat-option>
+                <mat-option [value]="size.value">{{
+                  size.viewValue
+                }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
         </div>
         <div class="filter-story-container-bottom-row">
           <mat-form-field class="additional-instructions">
-            <mat-label>Dodatkowe informacje dla sztucznej inteligencji:</mat-label>
+            <mat-label>Dodatkowe informacje dla AI:</mat-label>
             <textarea
               matInput
               cdkAutosizeMinRows="1"
@@ -54,7 +86,18 @@
       </div>
     </form>
   </div>
-  <form [formGroup]="addForm" id="add-form" (ngSubmit)="add()">
+  <form
+    [formGroup]="addForm"
+    id="add-form"
+    (ngSubmit)="add()"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
     <mat-form-field>
       <mat-label>Polski tytuł</mat-label>
       <textarea
@@ -137,7 +180,11 @@
       <button
         mat-raised-button
         id="submit-button-create"
-        class="button-app button-standard"
+        class="button-app-reverse-color button-standard"
+        [ngClass]="{
+          'light-mode-border': (themeService.theme$ | async),
+          'dark-mode-border': !(themeService.theme$ | async),
+        }"
         type="submit"
       >
         Dodaj

@@ -1,7 +1,19 @@
 @if (blogPost) {
-  <div id="blog-content-container" class="container">
+  <div
+    id="blog-content-container"
+    class="container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
     <div class="blog-content-information">
-      <div id="blog-content-date">{{ blogPost.publishedAt | date: "yyyy-MM-dd" : "UTC" }}</div>
+      <div id="blog-content-date">
+        {{ blogPost.publishedAt | date: "yyyy-MM-dd" : "UTC" }}
+      </div>
       <h1 id="blog-content-title">
         {{ blogPost.metaTitleContent }}
       </h1>
@@ -30,8 +42,14 @@
           </p>
         }
         @if (blogPost.url) {
-          <a class="link" [routerLink]="blogPost.url"
-            >{{blogPost.urlText}}</a
+          <a
+            class="link"
+            [ngClass]="{
+              'light-mode-text': (themeService.theme$ | async),
+              'dark-mode-text': !(themeService.theme$ | async),
+            }"
+            [routerLink]="blogPost.url"
+            >{{ blogPost.urlText }}</a
           >
         }
       </div>

@@ -1,17 +1,20 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
+import { ThemeService } from 'src/app/_services/theme.service';
 import { FAQ } from 'src/app/constants/faq';
 
 @Component({
   selector: 'app-faq',
   templateUrl: './faq.component.html',
   styleUrl: './faq.component.scss',
+  imports: [CommonModule]
 })
 export class FaqComponent implements OnInit {
   readonly faq = FAQ;
   private openItems = new Set<string>();
 
-  constructor(private meta: Meta) {}
+  constructor(private meta: Meta, public themeService: ThemeService) {}
 
   ngOnInit(): void {
     this.setDescription();

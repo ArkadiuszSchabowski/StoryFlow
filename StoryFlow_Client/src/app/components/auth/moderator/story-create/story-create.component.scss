@@ -15,7 +15,6 @@ mat-form-field.additional-instructions {
   width: 100%;
   min-width: 300px;
   height: auto;
-  margin-bottom: 40px;
 }
 
 #h1-title {
@@ -28,7 +27,6 @@ mat-form-field.additional-instructions {
   font-size: 24px;
   font-weight: 400;
   padding: 20px 0 10px 0;
-  background-color: mat.m2-get-color-from-palette(theme.$accent);
 }
 
 #generate-story-container {
@@ -40,7 +38,6 @@ mat-form-field.additional-instructions {
   height: 100%;
   padding-top: 20px;
   margin-bottom: 40px;
-  background-color: mat.m2-get-color-from-palette(theme.$accent);
 }
 
 #form {

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -5,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StoryService } from 'src/app/_services/story.service';
+import { ThemeService } from 'src/app/_services/theme.service';
 import { UserService } from 'src/app/_services/user.service';
 import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
 import { GetUserDto } from 'src/app/models/get-user-dto';
@@ -15,6 +17,7 @@ import { GetUserDto } from 'src/app/models/get-user-dto';
   styleUrls: ['./sezon-selection.component.scss'],
   standalone: true,
   imports: [
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
@@ -31,6 +34,7 @@ export class SezonSelectionComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private userService: UserService,
+    public themeService: ThemeService
   ) {}
 
   ngOnInit(): void {

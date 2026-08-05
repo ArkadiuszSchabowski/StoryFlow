@@ -1,4 +1,4 @@
-import { AsyncPipe, isPlatformBrowser } from '@angular/common';
+import { AsyncPipe, CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import {
   FormBuilder,
@@ -21,6 +21,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { LoaderService } from 'src/app/_services/loader.service';
 import { NavbarService } from 'src/app/_services/navbar.service';
 import { QuizService } from 'src/app/_services/quiz.service';
+import { ThemeService } from 'src/app/_services/theme.service';
 import { UserService } from 'src/app/_services/user.service';
 import { GENDERS } from 'src/app/constants/select-options';
 import { LoginDto } from 'src/app/models/login-dto';
@@ -33,6 +34,7 @@ import { RegisterUserDto } from 'src/app/models/register-user-dto';
   standalone: true,
   imports: [
     AsyncPipe,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterLink,
@@ -86,6 +88,7 @@ export class RegisterComponent implements OnInit {
     private quizService: QuizService,
     private router: Router,
     private authService: AuthService,
+    public themeService: ThemeService,
     @Inject(PLATFORM_ID) platformId: Object,
   ) {
     this.isBrowser = isPlatformBrowser(platformId);

@@ -1,4 +1,14 @@
-<div id="faq-container" class="container">
+<div
+  id="faq-container"
+  class="container"
+  [ngClass]="{
+    'light-mode-background-primary light-mode-text':
+      (themeService.theme$ | async),
+    'dark-mode-background-primary dark-mode-text': !(
+      themeService.theme$ | async
+    ),
+  }"
+>
   <h1>FAQ - Nauka angielskiego z StoryFlow</h1>
 
   @for (section of faq; track section.id) {
@@ -6,7 +16,10 @@
       <h2 [id]="section.id">{{ section.title }}</h2>
 
       @for (item of section.items; track item.question) {
-        <div class="faq-item" [class.faq-item--open]="isOpen(section.id, item.question)">
+        <div
+          class="faq-item"
+          [class.faq-item--open]="isOpen(section.id, item.question)"
+        >
           <h3 class="faq-item__heading">
             <button
               type="button"
@@ -23,6 +36,13 @@
           @if (isOpen(section.id, item.question)) {
             <div
               class="answer-item"
+              [ngClass]="{
+                'light-mode-border-bottom':
+                  (themeService.theme$ | async),
+                'dark-mode-border-bottom': !(
+                  themeService.theme$ | async
+                ),
+              }"
               [id]="section.id + '-' + item.question"
               role="region"
             >
