@@ -74,19 +74,7 @@
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
             aria-label="Panel moderatora"
           >
-            <div
-              mat-button
-              class="mobile-button-body"
-              [ngClass]="{
-                'light-mode-background light-mode-text':
-                  (themeService.theme$ | async),
-                'dark-mode-background dark-mode-text': !(
-                  themeService.theme$ | async
-                ),
-              }"
-            >
-              <mat-icon>security</mat-icon>
-            </div>
+            <mat-icon>security</mat-icon>
           </button>
         }
         @if (authService.isAdmin$ | async) {
@@ -103,23 +91,12 @@
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
             aria-label="Panel administratora"
           >
-            <div
-              mat-button
-              class="mobile-button-body"
-              [ngClass]="{
-                'light-mode-background light-mode-text':
-                  (themeService.theme$ | async),
-                'dark-mode-background dark-mode-text': !(
-                  themeService.theme$ | async
-                ),
-              }"
-            >
-              <mat-icon>security</mat-icon>
-            </div>
+            <mat-icon>security</mat-icon>
           </button>
         }
         @if (authService.currentUserSource$ | async) {
           <button
+            routerLink="/profile"
             class="mobile-button"
             [ngClass]="{
               'light-mode-background light-mode-text':
@@ -131,9 +108,7 @@
             [disabled]="!(navbarService.navbarPublicButton$ | async)"
             aria-label="Profil użytkownika - informacje profilowe"
           >
-            <div routerLink="/profile" mat-button class="mobile-button-body">
-              <mat-icon>account_circle</mat-icon>
-            </div>
+            <mat-icon>account_circle</mat-icon>
           </button>
         }
       </div>
