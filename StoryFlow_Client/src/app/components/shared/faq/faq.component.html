@@ -28,7 +28,17 @@
               [attr.aria-controls]="section.id + '-' + item.question"
               (click)="toggle(section.id, item.question)"
             >
-              <span class="item-question">{{ item.question }}</span>
+              <span
+                class="item-question"
+                [ngClass]="{
+                  'light-mode-text':
+                    (themeService.theme$ | async),
+                  'dark-mode-text': !(
+                    themeService.theme$ | async
+                  ),
+                }"
+                >{{ item.question }}</span
+              >
               <span class="faq-item__icon" aria-hidden="true">+</span>
             </button>
           </h3>
@@ -37,11 +47,8 @@
             <div
               class="answer-item"
               [ngClass]="{
-                'light-mode-border-bottom':
-                  (themeService.theme$ | async),
-                'dark-mode-border-bottom': !(
-                  themeService.theme$ | async
-                ),
+                'light-mode-border-bottom': (themeService.theme$ | async),
+                'dark-mode-border-bottom': !(themeService.theme$ | async),
               }"
               [id]="section.id + '-' + item.question"
               role="region"
