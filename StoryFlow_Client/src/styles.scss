@@ -256,11 +256,11 @@ mat-form-field.card-input {
   color: white !important;
 }
 
-.background-white{
+.background-white {
   background-color: white !important;
 }
 
-.background-dark{
+.background-dark {
   background-color: mat.m2-get-color-from-palette($primary, 900) !important;
 }
 
@@ -268,16 +268,16 @@ mat-form-field.card-input {
   background-color: mat.m2-get-color-from-palette($accent, 300) !important;
 }
 
-button.light-mode-background:hover{
-    background-color: mat.m2-get-color-from-palette($accent, 200) !important;
+button.light-mode-background:hover {
+  background-color: mat.m2-get-color-from-palette($accent, 200) !important;
 }
 
 .dark-mode-background {
   background-color: mat.m2-get-color-from-palette($accent, 700) !important;
 }
 
-button.dark-mode-background:hover{
-    background-color: mat.m2-get-color-from-palette($accent, 600) !important;
+button.dark-mode-background:hover {
+  background-color: mat.m2-get-color-from-palette($accent, 600) !important;
 }
 
 .light-mode-background-primary {
@@ -296,9 +296,30 @@ button.dark-mode-background:hover{
   background-color: #8c8b8b !important;
 }
 
-.my-disabled{
+.my-disabled {
   background-color: #d6d6d6 !important;
   opacity: 1 !important;
+}
+
+.coffee-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.coffee-image{
+  margin-top: 10px;
+}
+
+.coffee-text{
+  font-size: 26px;
+  text-decoration: underline;
+  margin-bottom: 10px;
+  color: #c77b2e;
+  font-weight: bold;
 }
 
 @media (min-width: 600px) {

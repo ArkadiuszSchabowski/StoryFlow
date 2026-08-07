@@ -13,6 +13,12 @@
   padding-bottom: 20px;
 }
 
+#navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .h3-title {
   padding: 10px 0;
 }
@@ -31,6 +37,12 @@
   display: flex;
   width: 90%;
   height: auto;
+}
+
+#blog-content-date {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px 0;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {

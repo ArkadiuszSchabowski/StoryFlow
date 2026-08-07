@@ -69,6 +69,24 @@ export const FAQ: FaqSection[] = [
           bez żadnych ukrytych opłat czy subskrypcji. To dobra opcja, jeśli
           szukasz miejsca, gdzie można nauczyć się angielskiego za darmo.`,
       },
+      {
+        question: 'Czy mogę wesprzeć StoryFlow?',
+        answer: `<div class="coffee-container">
+        <div class=coffee-item>Tak! Jeśli podoba Ci się StoryFlow i chcesz pomóc mi go dalej rozwijać, możesz postawić mi wirtualną kawę. Dziękuję za wsparcie!</div>
+        <img
+        id="coffee-logo-faq"
+        class="coffee-image"
+        src="assets/faq/coffee.webp"
+        alt="Postaw wirtualną kawę twórcy StoryFlow"
+      width="150"
+      height="150"
+      />
+        <a class="coffee-text"         
+         [ngClass]="{
+         'light-mode-background-primary light-mode-text': (themeService.theme$ | async),
+         'dark-mode-background-primary dark-mode-text': !(themeService.theme$ | async)
+          }" href="https://suppi.pl/storyflow" target="_blank" rel="noopener noreferrer">Postaw kawę</a></div>`,
+      },
     ],
   },
   {
@@ -97,6 +115,19 @@ export const FAQ: FaqSection[] = [
           poprzez e-mail: storyflowlearning@gmail.com. Chętnie pomożemy w
           rozwiązaniu wszelkich trudności związanych z nauką angielskiego
           w naszej aplikacji.`,
+      },
+      {
+        question:
+          'Dlaczego strona czasem wolniej się uruchamia po dłuższej przerwie?',
+        answer: `Aplikacja StoryFlow korzysta obecnie z darmowego planu bazy
+    danych. Tego typu darmowe usługi hostingowe "usypiają" serwer po
+    okresie bezczynności, dzięki czemu po dłuższej przerwie w
+    odwiedzinach strona może wczytywać się kilka-kilkanaście sekund
+    dłużej niż zwykle — to czas potrzebny na ponowne "wybudzenie"
+    bazy danych. Kolejne odwiedziny w krótkim czasie powinny być już
+    znacznie szybsze. Wraz z rosnącą liczbą użytkowników planujemy
+    przejść na płatny plan hostingu, co całkowicie wyeliminuje ten
+    problem.`,
       },
     ],
   },

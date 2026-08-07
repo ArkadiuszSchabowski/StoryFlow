@@ -9,6 +9,27 @@
     ),
   }"
 >
+  <div id="navigation">
+        <a
+      class="footer-link link"
+      [ngClass]="{
+        'light-mode-background-primary light-mode-text': (themeService.theme$ | async),
+        'dark-mode-background-primary dark-mode-text': !(themeService.theme$ | async),
+      }"
+      routerLink="/"
+      >StoryFlow</a
+    >
+    /
+    <a
+      class="footer-link link"
+      [ngClass]="{
+        'light-mode-background-primary light-mode-text': (themeService.theme$ | async),
+        'dark-mode-background-primary dark-mode-text': !(themeService.theme$ | async),
+      }"
+      routerLink="/blog"
+      >Blog</a
+    >
+  </div>
   <h1 id="blog-title">Blog - nauka angielskiego z StoryFlow</h1>
   <h2 id="blog-subtitle">
     Poradniki i artykuły o nauce angielskiego przez czytanie, quizy i historie z

@@ -24,27 +24,22 @@
             <button
               type="button"
               class="faq-item__trigger"
+              [ngClass]="{
+                'light-mode-text': (themeService.theme$ | async),
+                'dark-mode-text': !(themeService.theme$ | async),
+              }"
               [attr.aria-expanded]="isOpen(section.id, item.question)"
               [attr.aria-controls]="section.id + '-' + item.question"
               (click)="toggle(section.id, item.question)"
             >
-              <span
-                class="item-question"
-                [ngClass]="{
-                  'light-mode-text':
-                    (themeService.theme$ | async),
-                  'dark-mode-text': !(
-                    themeService.theme$ | async
-                  ),
-                }"
-                >{{ item.question }}</span
-              >
+              <span class="item-question">{{ item.question }}</span>
               <span class="faq-item__icon" aria-hidden="true">+</span>
             </button>
           </h3>
 
           @if (isOpen(section.id, item.question)) {
-            <div
+            <p
+              [innerHTML]="item.answer"
               class="answer-item"
               [ngClass]="{
                 'light-mode-border-bottom': (themeService.theme$ | async),
@@ -52,9 +47,7 @@
               }"
               [id]="section.id + '-' + item.question"
               role="region"
-            >
-              {{ item.answer }}
-            </div>
+            ></p>
           }
         </div>
       }
