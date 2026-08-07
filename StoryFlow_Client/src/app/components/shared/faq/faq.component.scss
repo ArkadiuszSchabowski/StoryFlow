@@ -73,6 +73,9 @@ h2 {
     justify-content: center;
     align-items: center;
   }
+  .answer-item {
+    padding: 0 100px 20px 100px;
+  }
 }
 
 @media screen and (min-width: 1200px) {
@@ -82,5 +85,8 @@ h2 {
   .faq-item {
     justify-content: center;
     align-items: center;
+  }
+  .answer-item {
+    padding: 0 200px 20px 200px;
   }
 }

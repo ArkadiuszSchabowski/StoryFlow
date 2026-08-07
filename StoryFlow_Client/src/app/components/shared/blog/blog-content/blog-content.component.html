@@ -11,6 +11,47 @@
     }"
   >
     <div class="blog-content-information">
+      <div id="navigation">
+        <a
+          class="footer-link link"
+          [ngClass]="{
+            'light-mode-background-primary light-mode-text':
+              (themeService.theme$ | async),
+            'dark-mode-background-primary dark-mode-text': !(
+              themeService.theme$ | async
+            ),
+          }"
+          routerLink="/"
+          >StoryFlow</a
+        >
+        &nbsp;/&nbsp;
+        <a
+          class="footer-link link"
+          [ngClass]="{
+            'light-mode-background-primary light-mode-text':
+              (themeService.theme$ | async),
+            'dark-mode-background-primary dark-mode-text': !(
+              themeService.theme$ | async
+            ),
+          }"
+          routerLink="/blog/"
+          >Blog</a
+        >
+
+        &nbsp;/&nbsp;
+        <a
+          class="footer-link link"
+          [ngClass]="{
+            'light-mode-background-primary light-mode-text':
+              (themeService.theme$ | async),
+            'dark-mode-background-primary dark-mode-text': !(
+              themeService.theme$ | async
+            ),
+          }"
+          [routerLink]="['/blog', slug]"
+          >{{ blogPost.slug }}</a
+        >
+      </div>
       <div id="blog-content-date">
         {{ blogPost.publishedAt | date: "yyyy-MM-dd" : "UTC" }}
       </div>
