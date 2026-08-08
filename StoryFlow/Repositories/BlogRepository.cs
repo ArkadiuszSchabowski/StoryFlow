@@ -16,7 +16,12 @@ namespace StoryFlow.Repositories
 
         public async Task<ICollection<BlogPost>> Get()
         {
-            return await _context.BlogPosts.OrderByDescending(x => x.OrderInBlog).ToListAsync();
+            return await _context.BlogPosts.OrderByDescending(x => x.PublishedAt).ToListAsync();
+        }
+
+        public async Task<ICollection<BlogPost>> GetVisibleBlogPosts()
+        {
+            return await _context.BlogPosts.Where(x => x.IsVisible == true).OrderByDescending(x => x.PublishedAt).ToListAsync();
         }
 
         public async Task<BlogPost?> GetBySlug(string slug)

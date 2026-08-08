@@ -59,23 +59,21 @@ namespace StoryFlow_Database.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("H2Title")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("ImageUrl")
                         .HasColumnType("text");
 
+                    b.Property<bool?>("IsVisible")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("MetaTitleContent")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("MetaTitleDescription")
                         .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("OrderInBlog")
-                        .HasColumnType("integer");
+                        .HasMaxLength(115)
+                        .HasColumnType("character varying(115)");
 
                     b.Property<DateTime?>("PublishedAt")
                         .HasColumnType("timestamp with time zone");

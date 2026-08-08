@@ -19,11 +19,11 @@ export class BlogHomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getAll();
+    this.getVisibleBlogPosts();
   }
 
-  getAll() {
-    this.blogService.getAll().subscribe({
+  getVisibleBlogPosts() {
+    this.blogService.getVisibleBlogPosts().subscribe({
       next: (response) => {
         this.blogPosts = response;
         console.log(this.blogPosts);

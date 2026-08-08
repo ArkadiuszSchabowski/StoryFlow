@@ -10,8 +10,8 @@ export class BlogService {
 
   constructor(private http: HttpClient) {}
 
-  getAll() {
-    return this.http.get(this.apiUrl + 'blog');
+  getVisibleBlogPosts() {
+    return this.http.get(this.apiUrl + 'blog/visible');
   }
 
   getBySlug(slug: string){
