@@ -64,8 +64,10 @@
       <div id="blog-content-image-div">
         <img
           class="blog-content-image image-standard"
-          src="assets/blog/1.webp"
+          [src]="apiUrl + blogPost.imageUrl"
           alt=""
+          width="300px"
+          height="300px"
         />
       </div>
       <div id="blog-content-text">
