@@ -42,9 +42,17 @@ namespace StoryFlow.Controllers
 
         [Authorize(Roles = "Moderator,Administrator")]
         [HttpPost]
-        public async Task<ActionResult> Add([FromBody] AddBlogDto dto)
+        public async Task<ActionResult> Add([FromBody] AddBlogPostDto dto)
         {
             await _service.Add(dto);
+            return Ok();
+        }
+
+        [Authorize(Roles = "Moderator,Administrator")]
+        [HttpPost("section")]
+        public async Task<ActionResult> AddBlogPostSection([FromBody] AddBlogPostSectionDto dto)
+        {
+            await _service.AddBlogPostSection(dto);
             return Ok();
         }
     }

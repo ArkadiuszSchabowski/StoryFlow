@@ -1,5 +1,4 @@
 ﻿using StoryFlow_Database.Entities;
-using StoryFlow_Shared.Models;
 
 namespace StoryFlow.Interfaces.Repositories
 {
@@ -8,5 +7,7 @@ namespace StoryFlow.Interfaces.Repositories
         Task<ICollection<BlogPost>> Get();
         Task<ICollection<BlogPost>> GetVisibleBlogPosts();
         Task<BlogPost?> GetBySlug(string slug);
+        Task Add(BlogPost entity);
+        Task AddBlogPostSection(BlogPostSection entity);
     }
 }
