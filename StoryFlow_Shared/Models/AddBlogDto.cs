@@ -1,13 +1,13 @@
 ﻿namespace StoryFlow_Shared.Models
 {
-    public class AddBlogDto
+    public class AddBlogPostDto
     {
-        public string Slug = string.Empty;
-        public string MetaTitle { get; set; } = string.Empty;
-        public string MetaDescription { get; set; } = string.Empty;
+        public string? Slug { get; set; }
+        public string? MetaTitleContent { get; set; }
+        public string? MetaTitleDescription { get; set; }
+        public DateTime? PublishedAt { get; set; }
         public string? Summary { get; set; }
         public string? Url { get; set; }
         public string? UrlText { get; set; }
-        public DateOnly PublishedAt { get; set; }
     }
 }

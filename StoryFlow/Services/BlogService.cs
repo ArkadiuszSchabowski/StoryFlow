@@ -2,6 +2,7 @@
 using StoryFlow.Exceptions;
 using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Repositories;
+using StoryFlow_Database.Entities;
 using StoryFlow_Shared.Models;
 
 namespace StoryFlow.Services
@@ -10,16 +11,31 @@ namespace StoryFlow.Services
     {
         private readonly IMapper _mapper;
         private readonly IBlogRepository _blogRepository;
+        private readonly IBlogValidator _blogValidator;
 
-        public BlogService(IMapper mapper, IBlogRepository blogRepository)
+        public BlogService(IMapper mapper, IBlogRepository blogRepository, IBlogValidator blogValidator)
         {
             _mapper = mapper;
             _blogRepository = blogRepository;
+            _blogValidator = blogValidator;
         }
 
-        public Task Add(AddBlogDto dto)
+        public async Task Add(AddBlogPostDto dto)
         {
-            throw new NotImplementedException();
+            _blogValidator.Validate(dto);
+
+            BlogPost blogPost = _mapper.Map<BlogPost>(dto);
+
+            await _blogRepository.Add(blogPost);
+        }
+
+        public async Task AddBlogPostSection(AddBlogPostSectionDto dto)
+        {
+            _blogValidator.ValidateBlogPostSection(dto);
+
+            BlogPostSection blogPostSection = _mapper.Map<BlogPostSection>(dto);
+
+            await _blogRepository.AddBlogPostSection(blogPostSection);
         }
 
         public async Task<List<GetBlogPostDto>> Get()

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using StoryFlow_Shared.Models;
+﻿using StoryFlow_Shared.Models;
 
 namespace StoryFlow.Interfaces
 {
@@ -8,6 +7,7 @@ namespace StoryFlow.Interfaces
         Task<List<GetBlogPostDto>> Get();
         Task<List<GetBlogPostDto>> GetVisibleBlogPosts();
         Task<GetBlogPostDto> GetBySlug(string slug);
-        Task Add(AddBlogDto dto);
+        Task Add(AddBlogPostDto dto);
+        Task AddBlogPostSection(AddBlogPostSectionDto dto);
     }
 }

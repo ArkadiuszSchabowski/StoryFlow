@@ -15,6 +15,8 @@ namespace StoryFlow
             CreateMap<AddQuizDto, Quiz>();
             CreateMap<AddQuestionDto, Question>();
             CreateMap<AddAnswerDto, Answer>();
+            CreateMap<AddBlogPostDto, BlogPost>();
+            CreateMap<AddBlogPostSectionDto, BlogPostSection>();
             CreateMap<Story, GetStoryDto>();
             CreateMap<StoryPoint, GetStoryPointDto>();
             CreateMap<Quiz, GetQuizDto>();
@@ -29,7 +31,6 @@ namespace StoryFlow
             CreateMap<BlogPostSection, GetBlogPostSectionDto>();
             CreateMap<RegisterUserDto, User>();
             CreateMap<StorySeason, GetStorySeasonDto>();
-
             CreateMap<GetUserDto, User>();
         }
     }

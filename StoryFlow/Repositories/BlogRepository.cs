@@ -28,5 +28,17 @@ namespace StoryFlow.Repositories
         {
             return await _context.BlogPosts.Include(x => x.Sections.OrderBy(s => s.Order)).FirstOrDefaultAsync(x => x.Slug == slug);
         }
+
+        public async Task Add(BlogPost entity)
+        {
+            await _context.BlogPosts.AddAsync(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddBlogPostSection(BlogPostSection entity)
+        {
+            await _context.BlogPostSections.AddAsync(entity);
+            await _context.SaveChangesAsync();
+        }
     }
 }
