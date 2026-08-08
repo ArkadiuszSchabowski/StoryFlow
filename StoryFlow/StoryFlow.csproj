@@ -28,4 +28,8 @@
     <ProjectReference Include="..\StoryFlow_Database\StoryFlow_Database.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\api\images\NewFolder\" />
+  </ItemGroup>
+
 </Project>

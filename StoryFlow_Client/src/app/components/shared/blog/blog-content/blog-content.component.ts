@@ -4,6 +4,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BlogService } from 'src/app/_services/blog.service';
 import { ThemeService } from 'src/app/_services/theme.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-blog-content',
@@ -14,6 +15,7 @@ import { ThemeService } from 'src/app/_services/theme.service';
 export class BlogContentComponent implements OnInit {
   slug: string | null = null;
   blogPost: any;
+    apiUrl = environment.apiUrl;
 
   constructor(
     private route: ActivatedRoute,

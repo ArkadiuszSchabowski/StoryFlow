@@ -4,6 +4,7 @@ import { MatCard, MatCardContent } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
 import { BlogService } from 'src/app/_services/blog.service';
 import { ThemeService } from 'src/app/_services/theme.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-blog-home',
@@ -13,6 +14,8 @@ import { ThemeService } from 'src/app/_services/theme.service';
 })
 export class BlogHomeComponent implements OnInit {
   blogPosts: any;
+  apiUrl = environment.apiUrl;
+
   constructor(
     private blogService: BlogService,
     public themeService: ThemeService,
