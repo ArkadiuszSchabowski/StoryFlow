@@ -92,6 +92,12 @@ namespace StoryFlow_Database
             modelBuilder.Entity<BlogPost>()
                 .HasIndex(b => b.Slug)
                 .IsUnique();
+
+            modelBuilder.Entity<BlogPost>(entity =>
+            {
+                entity.Property(x => x.MetaTitleContent).HasMaxLength(50);
+                entity.Property(x => x.MetaTitleDescription).HasMaxLength(115);
+            });
         }
     }
 }

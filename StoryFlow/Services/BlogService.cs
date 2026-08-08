@@ -16,9 +16,24 @@ namespace StoryFlow.Services
             _mapper = mapper;
             _blogRepository = blogRepository;
         }
+
+        public Task Add(AddBlogDto dto)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<GetBlogPostDto>> Get()
         {
             var blogPosts = await _blogRepository.Get();
+
+            List<GetBlogPostDto> dto = _mapper.Map<List<GetBlogPostDto>>(blogPosts);
+
+            return dto;
+        }
+
+        public async Task<List<GetBlogPostDto>> GetVisibleBlogPosts()
+        {
+            var blogPosts = await _blogRepository.GetVisibleBlogPosts();
 
             List<GetBlogPostDto> dto = _mapper.Map<List<GetBlogPostDto>>(blogPosts);
 

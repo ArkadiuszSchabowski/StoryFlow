@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StoryFlow.Interfaces;
 using StoryFlow_Shared.Models;
 
@@ -16,9 +17,17 @@ namespace StoryFlow.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<GetUserDto>> Get()
+        public async Task<ActionResult<GetBlogPostDto>> Get()
         {
             List<GetBlogPostDto> blogPosts = await _service.Get();
+
+            return Ok(blogPosts);
+        }
+
+        [HttpGet("visible")]
+        public async Task<ActionResult<GetBlogPostDto>> GetVisibleBlogPosts()
+        {
+            List<GetBlogPostDto> blogPosts = await _service.GetVisibleBlogPosts();
 
             return Ok(blogPosts);
         }
@@ -29,6 +38,14 @@ namespace StoryFlow.Controllers
             GetBlogPostDto blogPost = await _service.GetBySlug(slug);
 
             return Ok(blogPost);
+        }
+
+        [Authorize(Roles = "Moderator,Administrator")]
+        [HttpPost]
+        public async Task<ActionResult> Add([FromBody] AddBlogDto dto)
+        {
+            await _service.Add(dto);
+            return Ok();
         }
     }
 }
