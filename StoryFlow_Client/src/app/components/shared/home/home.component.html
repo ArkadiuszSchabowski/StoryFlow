@@ -24,35 +24,37 @@
           Nauka angielskiego z kotką Luną - odkrywaj świat angielskich przygód!
         </h1>
         <div id="home-subtitle" class="subtitle">
-          <div class="home-subtitle-row">
-            <button
-              mat-raised-button
-              id="button-start"
-              class="button-app button-upper"
-              [ngClass]="{
-                'light-mode-background light-mode-text':
-                  (themeService.theme$ | async),
-                'dark-mode-background dark-mode-text': !(
-                  themeService.theme$ | async
-                ),
-              }"
-              (click)="navigateToWelcomeStory()"
-            >
-              Rozpocznij
-            </button>
-            <button
-              id="button-go-to-login"
-              mat-raised-button
-              class="button-app-reverse-color button-standard"
-              [ngClass]="{
-                'light-mode-border': (themeService.theme$ | async),
-                'dark-mode-border': !(themeService.theme$ | async),
-              }"
-              routerLink="/login"
-            >
-              Mam już konto
-            </button>
-          </div>
+          @if (!(authService.currentUserSource$ | async)) {
+            <div class="home-subtitle-row">
+              <button
+                mat-raised-button
+                id="button-start"
+                class="button-app button-upper"
+                [ngClass]="{
+                  'light-mode-background light-mode-text':
+                    (themeService.theme$ | async),
+                  'dark-mode-background dark-mode-text': !(
+                    themeService.theme$ | async
+                  ),
+                }"
+                (click)="navigateToWelcomeStory()"
+              >
+                Rozpocznij
+              </button>
+              <button
+                id="button-go-to-login"
+                mat-raised-button
+                class="button-app-reverse-color button-standard"
+                [ngClass]="{
+                  'light-mode-border': (themeService.theme$ | async),
+                  'dark-mode-border': !(themeService.theme$ | async),
+                }"
+                routerLink="/login"
+              >
+                Mam już konto
+              </button>
+            </div>
+          }
           <div class="home-subtitle-row">
             ✓ Pierwsza historia bez rejestracji
           </div>
