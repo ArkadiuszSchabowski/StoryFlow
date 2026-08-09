@@ -22,7 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { LottieComponent } from 'ngx-lottie';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { filter, take } from 'rxjs';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ThemeService } from 'src/app/_services/theme.service';
 
 @Component({
@@ -38,7 +38,7 @@ import { ThemeService } from 'src/app/_services/theme.service';
     MatButtonModule,
     MatIconModule,
     LottieComponent,
-    MatProgressBarModule
+    MatProgressBarModule,
   ],
 })
 export class TextDisplayComponent implements OnInit {
@@ -77,7 +77,7 @@ export class TextDisplayComponent implements OnInit {
     public authService: AuthService,
     public loaderService: LoaderService,
     private navbarService: NavbarService,
-    public themeService: ThemeService
+    public themeService: ThemeService,
   ) {}
 
   ngOnInit(): void {
@@ -188,6 +188,9 @@ export class TextDisplayComponent implements OnInit {
           error: (error) => {
             if (error.status == 401) {
               this.router.navigateByUrl(`error-page`);
+            }
+            if (error.status === 400) {
+              this.router.navigateByUrl('sezon-selection');
             }
             if (error.status == 404) {
               this.router.navigateByUrl(`sezon-selection`);

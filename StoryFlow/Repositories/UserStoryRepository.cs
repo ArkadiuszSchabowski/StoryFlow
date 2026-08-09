@@ -25,7 +25,7 @@ namespace StoryFlow.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<UserStory?> GetByUserAndStory(int userId, int storyId)
+        public async Task<UserStory?> GetByUserAndStory(int userId, int? storyId)
         {
             return await _context.UserStories
                 .FirstOrDefaultAsync(x => x.UserId == userId && x.StoryId == storyId);

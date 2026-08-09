@@ -1,15 +1,15 @@
 <div
   class="container"
   [ngClass]="{
-    'light-mode-background light-mode-text': (themeService.theme$ | async),
-    'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
+    'light-mode-background-primary light-mode-text': (themeService.theme$ | async),
+    'dark-mode-background-primary dark-mode-text': !(themeService.theme$ | async),
   }"
 >
   <h1 class="title">Ups! Ta historia zaginęła!</h1>
   <button
     mat-raised-button
     id="action-button"
-    class="button-app button-standard"
+    class="button-app-reverse-color button-standard"
     (click)="navigateToHome()"
   >
     Strona główna

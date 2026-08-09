@@ -30,9 +30,9 @@ namespace StoryFlow.Repositories
             return _context.Stories.Include(s => s.UserStories.Where(us => us.UserId == userId)).Include(s => s.Sentences).Include(s => s.Quiz!).Include(s => s.StoryPoint).AsQueryable();
         }
 
-        public  IQueryable<Story> GetBySeason(int userId, int seasonId)
+        public  IQueryable<Story> GetBySeason(int userId, int? seasonId)
         {
-            return _context.Stories.Include(s => s.UserStories.Where(us => us.UserId == userId)).Include(s => s.Sentences).Include(s => s.Quiz!).Include(s => s.StoryPoint).Where(s => s.StorySeasonId == seasonId).OrderBy(s => s.OrderInSeason).AsQueryable();
+            return _context.Stories.Include(s => s.UserStories.Where(us => us.UserId == userId)).Include(s => s.Sentences).Include(s => s.Quiz!).Include(s => s.StoryPoint).Include(s => s.StorySeason).Where(s => s.StorySeasonId == seasonId).OrderBy(s => s.OrderInSeason).AsQueryable();
         }
 
         public async Task<List<StorySeason>> GetStorySeasonsAsync()

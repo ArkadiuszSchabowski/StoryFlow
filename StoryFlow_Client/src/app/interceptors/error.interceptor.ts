@@ -32,6 +32,10 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           );
           break;
         case 400:
+          if(error.error){
+            toastr.error(error.error)
+            break;
+          }
           if (error.error?.errors) {
             const modelStateErrors: string[] = [];
             for (const key in error.error.errors) {

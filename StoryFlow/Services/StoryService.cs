@@ -186,7 +186,7 @@ namespace StoryFlow.Services
             }
 
             List<GetStorySeasonDto> dto = _mapper.Map<List<GetStorySeasonDto>>(seasonsVisibleForUser);
-            
+
             return dto;
         }
 
@@ -257,6 +257,7 @@ namespace StoryFlow.Services
 
         public async Task<GetStoryDto> Get(int storyId, string? userIdClaim)
         {
+            //TO DO - Sprawdzic czy user ma wymagana liczbe gwiazdek aby zobaczyc historie
             if (!int.TryParse(userIdClaim, out var userId))
             {
                 throw new UnauthorizedException("Użytkownik nie ma uprawnień do wykonania tej operacji.");
@@ -276,6 +277,21 @@ namespace StoryFlow.Services
             if (story == null)
             {
                 throw new NotFoundException("Nie znaleziono historii.");
+            }
+
+            var storySeason = _storyRepository.GetBySeason(userId, story.StorySeasonId);
+
+            var result = await storySeason.FirstOrDefaultAsync();
+
+            if (result != null)
+            {
+                if (result.StorySeason != null)
+                {
+                    if (user.Stars < result.StorySeason.PointsRequiredToUnlock)
+                    {
+                        throw new BadRequestException("Nie masz wystarczającej ilości gwiazdek, by podejrzeć tą historię.");
+                    }
+                }
             }
 
             UserStory? userStory = await _userStoryRepository.GetByUserAndStory(user.Id, story.Id);
