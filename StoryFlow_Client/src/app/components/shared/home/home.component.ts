@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
 import { LottieComponent } from 'ngx-lottie';
+import { AuthService } from 'src/app/_services/auth.service';
 import { LoaderService } from 'src/app/_services/loader.service';
 import { NavbarService } from 'src/app/_services/navbar.service';
 import { StoryService } from 'src/app/_services/story.service';
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit {
     private router: Router,
     public loaderService: LoaderService,
     private navbarService: NavbarService,
-    public themeService: ThemeService
+    public themeService: ThemeService,
+    public authService: AuthService
   ) {}
 
   ngOnInit(): void {}

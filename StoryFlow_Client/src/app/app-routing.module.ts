@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './components/public/home/home.component';
+import { HomeComponent } from './components/shared/home/home.component';
 import { guestGuard } from './guards/guest.guard';
 import { authGuard } from './guards/auth.guard';
 import { moderatorGuard } from './guards/moderator.guard';
-import { blogTitleResolver } from './constants/blog-title-resolver';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
     title: 'StoryFlow - Nauka angielskiego z kotką Luną',
-    canActivate: [guestGuard],
   },
   {
     path: 'login',
@@ -85,7 +83,7 @@ const routes: Routes = [
     title: 'Podgląd sezonu - StoryFlow',
     canActivate: [authGuard],
   },
-    {
+  {
     path: 'administrator',
     loadComponent: () =>
       import('./components/auth/administrator/administrator-panel/administrator-panel.component').then(
