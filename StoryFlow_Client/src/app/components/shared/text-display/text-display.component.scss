@@ -1,6 +1,10 @@
 @use "@angular/material" as mat;
 @use "src/styles" as theme;
 
+#main-container{
+  padding: 0;
+  margin: 0;
+}
 #quiz-container-wrapper,
 #text-display-subcontainer {
   display: flex;
@@ -20,7 +24,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 20px 20px;
 }
 
 #title-container,

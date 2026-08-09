@@ -53,9 +53,8 @@
       </div>
     }
     @if (stories.length === 0) {
-      <div id="no-story-information" class="subtitle">
-        Nie znaleziono historii pasujących do wybranych filtrów. Spróbuj innych
-        filtrów.
+      <div id="no-story-information" class="container">
+        <div class="subtitle">Nie masz wystarczającej ilości gwiazdek, by przejść do tego sezonu.</div>
       </div>
     }
     @for (story of stories; track story.id) {
