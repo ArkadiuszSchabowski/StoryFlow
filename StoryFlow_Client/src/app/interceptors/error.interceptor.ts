@@ -1,7 +1,12 @@
-import { HttpErrorResponse, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpInterceptorFn,
+  HttpRequest,
+} from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, of, retry, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 const RETRYABLE_STATUSES = [0, 502, 503, 504];
 
@@ -11,6 +16,7 @@ function isRetryable(req: HttpRequest<unknown>, status: number): boolean {
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const toastr = inject(ToastrService);
+  const router = inject(Router);
 
   return next(req).pipe(
     retry({
@@ -22,7 +28,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       switch (error.status) {
         case 0:
           toastr.error(
-            'Nie udało się połączyć z serwerem. Może się on właśnie uruchamiać — spróbuj ponownie za chwilę.'
+            'Nie udało się połączyć z serwerem. Może się on właśnie uruchamiać — spróbuj ponownie za chwilę.',
           );
           break;
         case 400:
@@ -38,7 +44,14 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           return throwError(() => error);
         case 401:
         case 403:
-          toastr.error(error.error?.message ?? 'Nie posiadasz uprawnień, by zobaczyć tę stronę.');
+          toastr.error(
+            error.error?.message ??
+              'Nie posiadasz uprawnień, by zobaczyć tę stronę.',
+          );
+          break;
+        case 404:
+          toastr.error('Podana strona nie została znaleziona.');
+          router.navigateByUrl('/');
           break;
         case 409:
           return throwError(() => error);
@@ -47,6 +60,6 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           break;
       }
       return throwError(() => error);
-    })
+    }),
   );
 };
