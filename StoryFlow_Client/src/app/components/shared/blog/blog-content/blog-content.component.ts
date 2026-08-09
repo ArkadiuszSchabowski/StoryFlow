@@ -2,13 +2,15 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { LottieComponent } from 'ngx-lottie';
 import { BlogService } from 'src/app/_services/blog.service';
+import { LoaderService } from 'src/app/_services/loader.service';
 import { ThemeService } from 'src/app/_services/theme.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-blog-content',
-  imports: [CommonModule, RouterLink, DatePipe],
+  imports: [CommonModule, RouterLink, DatePipe, LottieComponent],
   templateUrl: './blog-content.component.html',
   styleUrl: './blog-content.component.scss',
 })
@@ -23,6 +25,7 @@ export class BlogContentComponent implements OnInit {
     private meta: Meta,
     private title: Title,
     public themeService: ThemeService,
+    public loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
