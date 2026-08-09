@@ -36,12 +36,12 @@ namespace StoryFlow.Aggregates
             return _storyRepository.GetUserStories(userId);
         }
 
-        public IQueryable<Story> GetBySeason(int userId, int seasonId)
+        public IQueryable<Story> GetBySeason(int userId, int? seasonId)
         {
             return _storyRepository.GetBySeason(userId, seasonId);
         }
 
-        public Task<UserStory?> GetByUserAndStory(int userId, int storyId)
+        public Task<UserStory?> GetByUserAndStory(int userId, int? storyId)
         {
             return _userStoryRepository.GetByUserAndStory(userId, storyId);
         }

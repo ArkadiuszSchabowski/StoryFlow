@@ -12,7 +12,7 @@
   @if (
     (loaderService.loading$ | async) &&
     (authService.currentUserSource$ | async) &&
-    !isQuizFinishied
+    !isQuizFinishied && story
   ) {
     <div
       id="loader-container"

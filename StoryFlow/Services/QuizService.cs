@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using StoryFlow.Exceptions;
 using StoryFlow.Helpers;
@@ -162,6 +163,21 @@ namespace StoryFlow.Services
             if (user == null)
             {
                 throw new NotFoundException("Nie znaleziono użytkownika.");
+            }
+
+            var storySeason = _storyRepository.GetBySeason(userId, story.StorySeasonId);
+
+            var result = await storySeason.FirstOrDefaultAsync();
+
+            if (result != null)
+            {
+                if (result.StorySeason != null)
+                {
+                    if (user.Stars < result.StorySeason.PointsRequiredToUnlock)
+                    {
+                        throw new BadRequestException("Nie masz wystarczającej ilości gwiazdek, by odpowiedzieć w tym quizie.");
+                    }
+                }
             }
 
             QuizResult quizResult = new QuizResult();
