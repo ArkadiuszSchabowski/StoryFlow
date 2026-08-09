@@ -4,6 +4,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LottieComponent } from 'ngx-lottie';
 import { ToastrService } from 'ngx-toastr';
 import { LoaderService } from 'src/app/_services/loader.service';
 import { StoryService } from 'src/app/_services/story.service';
@@ -28,7 +29,7 @@ import { StoryFilter } from 'src/app/models/story-filter-dto';
   templateUrl: './sezon.component.html',
   styleUrls: ['./sezon.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatIconModule, LottieComponent],
 })
 export class SezonComponent implements OnInit {
   seasonId: number = 0;
@@ -59,8 +60,8 @@ export class SezonComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private userService: UserService,
-    private loaderService: LoaderService,
-    public themeService: ThemeService
+    public loaderService: LoaderService,
+    public themeService: ThemeService,
   ) {}
 
   ngOnInit(): void {

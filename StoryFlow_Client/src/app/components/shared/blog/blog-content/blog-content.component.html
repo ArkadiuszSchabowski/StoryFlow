@@ -1,3 +1,21 @@
+@if(!blogPost){
+    <div
+    class="container-empty container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
+    <div class="container-empty-text">Ładowanie artykułu...</div>
+    <div class="loader-logo">
+      <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>
+    </div>
+  </div>
+}
+
 @if (blogPost) {
   <div
     id="blog-content-container"

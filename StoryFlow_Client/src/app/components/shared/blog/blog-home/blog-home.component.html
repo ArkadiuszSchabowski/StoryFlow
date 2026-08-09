@@ -1,89 +1,109 @@
-<div
-  id="blog-container"
-  class="container"
-  [ngClass]="{
-    'light-mode-background-primary light-mode-text':
-      (themeService.theme$ | async),
-    'dark-mode-background-primary dark-mode-text': !(
-      themeService.theme$ | async
-    ),
-  }"
->
-  <div id="navigation">
-    <a
-      class="footer-link link"
-      [ngClass]="{
-        'light-mode-background-primary light-mode-text':
-          (themeService.theme$ | async),
-        'dark-mode-background-primary dark-mode-text': !(
-          themeService.theme$ | async
-        ),
-      }"
-      routerLink="/"
-      >StoryFlow</a
-    >
-    /
-    <a
-      class="footer-link link"
-      [ngClass]="{
-        'light-mode-background-primary light-mode-text':
-          (themeService.theme$ | async),
-        'dark-mode-background-primary dark-mode-text': !(
-          themeService.theme$ | async
-        ),
-      }"
-      routerLink="/blog"
-      >Blog</a
-    >
+@if(!blogPosts){
+    <div
+    class="container-empty container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
+    <div class="container-empty-text">Ładowanie bloga...</div>
+    <div class="loader-logo">
+      <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>
+    </div>
   </div>
-  <h1 id="blog-title">Blog - nauka angielskiego z StoryFlow</h1>
-  <h2 id="blog-subtitle">
-    Poradniki i artykuły o nauce angielskiego przez czytanie, quizy i historie z
-    kotką Luną.
-  </h2>
-  <div id="blog-cards">
-    @for (blogPost of blogPosts; track blogPost.id) {
-      <mat-card
-        class="mat-card-blog"
+}
+
+@if (blogPosts) {
+  <div
+    id="blog-container"
+    class="container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
+    <div id="navigation">
+      <a
+        class="footer-link link"
         [ngClass]="{
-          'light-mode-background light-mode-text light-mode-border-black':
+          'light-mode-background-primary light-mode-text':
             (themeService.theme$ | async),
-          'dark-mode-background dark-mode-text dark-mode-border-white': !(
+          'dark-mode-background-primary dark-mode-text': !(
             themeService.theme$ | async
           ),
         }"
+        routerLink="/"
+        >StoryFlow</a
       >
-        <mat-card-content class="mat-card-content-blog">
-          <img
-            class="mat-card-image image-standard"
-            [src]="apiUrl + blogPost.imageUrl"
-            alt=""
-            width="300px"
-            height="300px"
-          />
-          <div class="blog-card-information">
-            <div class="blog-card-date">
-              {{ blogPost.publishedAt | date: "yyyy-MM-dd" : "UTC" }}
+      /
+      <a
+        class="footer-link link"
+        [ngClass]="{
+          'light-mode-background-primary light-mode-text':
+            (themeService.theme$ | async),
+          'dark-mode-background-primary dark-mode-text': !(
+            themeService.theme$ | async
+          ),
+        }"
+        routerLink="/blog"
+        >Blog</a
+      >
+    </div>
+    <h1 id="blog-title">Blog - nauka angielskiego z StoryFlow</h1>
+    <h2 id="blog-subtitle">
+      Poradniki i artykuły o nauce angielskiego przez czytanie, quizy i historie
+      z kotką Luną.
+    </h2>
+    <div id="blog-cards">
+      @for (blogPost of blogPosts; track blogPost.id) {
+        <mat-card
+          class="mat-card-blog"
+          [ngClass]="{
+            'light-mode-background light-mode-text light-mode-border-black':
+              (themeService.theme$ | async),
+            'dark-mode-background dark-mode-text dark-mode-border-white': !(
+              themeService.theme$ | async
+            ),
+          }"
+        >
+          <mat-card-content class="mat-card-content-blog">
+            <img
+              class="mat-card-image image-standard"
+              [src]="apiUrl + blogPost.imageUrl"
+              alt=""
+              width="300px"
+              height="300px"
+            />
+            <div class="blog-card-information">
+              <div class="blog-card-date">
+                {{ blogPost.publishedAt | date: "yyyy-MM-dd" : "UTC" }}
+              </div>
+              <h3 class="blog-card-meta-title">
+                {{ blogPost.metaTitleContent }}
+              </h3>
+              <h4 class="blog-card-title">
+                {{ blogPost.metaTitleDescription }}
+              </h4>
+              <a
+                class="link"
+                [ngClass]="{
+                  'light-mode-text': (themeService.theme$ | async),
+                  'dark-mode-text': !(themeService.theme$ | async),
+                }"
+                [routerLink]="'/blog/' + blogPost.slug"
+              >
+                Czytaj więcej
+              </a>
             </div>
-            <h3 class="blog-card-meta-title">
-              {{ blogPost.metaTitleContent }}
-            </h3>
-            <h4 class="blog-card-title">
-              {{ blogPost.metaTitleDescription }}
-            </h4>
-            <a
-              class="link"
-              [ngClass]="{
-                'light-mode-text': (themeService.theme$ | async),
-                'dark-mode-text': !(themeService.theme$ | async),
-              }"
-              [routerLink]="'/blog/' + blogPost.slug"
-            >
-              Czytaj więcej
-            </a>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    }
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
   </div>
-</div>
+}

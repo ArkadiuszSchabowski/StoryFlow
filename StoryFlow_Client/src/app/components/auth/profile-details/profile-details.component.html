@@ -1,3 +1,21 @@
+@if(!profile){
+    <div
+    class="container-empty container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
+    <div class="container-empty-text">Ładowanie profilu...</div>
+    <div class="loader-logo">
+      <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>
+    </div>
+  </div>
+}
+
 @if (profile) {
   <div
     id="profile-container"
