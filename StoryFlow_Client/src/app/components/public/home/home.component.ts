@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
 import { LottieComponent } from 'ngx-lottie';
-import { retry } from 'rxjs';
 import { LoaderService } from 'src/app/_services/loader.service';
 import { NavbarService } from 'src/app/_services/navbar.service';
 import { StoryService } from 'src/app/_services/story.service';
@@ -36,8 +35,7 @@ export class HomeComponent implements OnInit {
     const start = Date.now();
     const minTime = 2000;
 
-    this.storyService.getWelcomeStory().pipe(
-    retry(2)).subscribe({
+    this.storyService.getWelcomeStory().subscribe({
       next: () => {
         const elapsedTime = Date.now() - start;
         const remaining = Math.max(0, minTime - elapsedTime);
