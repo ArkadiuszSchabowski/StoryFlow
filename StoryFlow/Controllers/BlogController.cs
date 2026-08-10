@@ -49,6 +49,13 @@ namespace StoryFlow.Controllers
         }
 
         [Authorize(Roles = "Moderator,Administrator")]
+        [HttpPost("generate")]
+        public async Task<ActionResult> Generate([FromBody] GenerateBlogPostDto dto)
+        {
+            return Ok(await _service.Generate(dto));
+        }
+
+        [Authorize(Roles = "Moderator,Administrator")]
         [HttpPost("section")]
         public async Task<ActionResult> AddBlogPostSection([FromBody] AddBlogPostSectionDto dto)
         {

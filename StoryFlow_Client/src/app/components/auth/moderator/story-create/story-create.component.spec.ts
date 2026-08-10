@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { StoryCreateComponent } from './story-create.component';
 import { ToastrService } from 'ngx-toastr';
-import { MaterialModule } from 'src/app/modules/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -16,7 +15,7 @@ describe('StoryCreateComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [StoryCreateComponent, BrowserAnimationsModule, MaterialModule, ReactiveFormsModule],
+    imports: [StoryCreateComponent, BrowserAnimationsModule, ReactiveFormsModule],
     providers: [{ provide: ToastrService, useClass: MockToastrService }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 });
     fixture = TestBed.createComponent(StoryCreateComponent);

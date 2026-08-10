@@ -35,9 +35,9 @@
             themeService.theme$ | async
           ),
         }"
-        aria-label="Nowa historia"
+        aria-label="Dodaj historię"
       >
-        Nowa historia
+        Dodaj historię
       </button>
       <button
         routerLink="/create-quiz"
@@ -49,9 +49,23 @@
             themeService.theme$ | async
           ),
         }"
-        aria-label="Nowy quiz"
+        aria-label="Dodaj quiz"
       >
-        Nowy quiz
+        Dodaj quiz
+      </button>
+            <button
+        routerLink="/create-blog"
+        class="desktop-button"
+        [ngClass]="{
+          'light-mode-background light-mode-text light-mode-border-bottom':
+            (themeService.theme$ | async),
+          'dark-mode-background dark-mode-text dark-mode-border-bottom': !(
+            themeService.theme$ | async
+          ),
+        }"
+        aria-label="Dodaj artykuł do bloga"
+      >
+        Dodaj artykuł do bloga
       </button>
     </div>
   </div>

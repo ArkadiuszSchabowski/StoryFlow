@@ -119,6 +119,15 @@ const routes: Routes = [
     title: 'Tworzenie quizu - StoryFlow',
     canActivate: [moderatorGuard],
   },
+    {
+    path: 'create-blog',
+    loadComponent: () =>
+      import('./components/auth/administrator/blog-create/blog-create.component').then(
+        (m) => m.BlogCreateComponent,
+      ),
+    title: 'Dodawanie artykułu do bloga - StoryFlow',
+    canActivate: [moderatorGuard],
+  },
   {
     path: 'library',
     loadComponent: () =>

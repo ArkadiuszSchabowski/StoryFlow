@@ -206,7 +206,7 @@ namespace StoryFlow.Services
                     query = query.Where(x => x.StorySize == filter.Size.Value);
             }
 
-            List<Story>? results = await query.ToListAsync();
+            List<Story>? results = await query.Where(x => x.StorySeason == null).ToListAsync();
 
             List<GetStoryDto> stories = _mapper.Map<List<GetStoryDto>>(results);
 
