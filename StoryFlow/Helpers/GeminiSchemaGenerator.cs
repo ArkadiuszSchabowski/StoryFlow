@@ -2,6 +2,27 @@
 {
     public class GeminiSchemaGenerator
     {
+        public object GenerateBlogPostSchema()
+        {
+            return new
+            {
+                type = "object",
+                properties = new
+                {
+                    slug = new { type = "string" },
+                    metaTitle = new { type = "string" },
+                    metaDescription = new { type = "string" },
+                    summary = new { type = "string" },
+                },
+                required = new[]
+                {
+                    "slug",
+                    "metaTitle",
+                    "metaDescription",
+                    "summary"
+        }
+            };
+        }
         public object GenerateStorySchema()
         {
             return new

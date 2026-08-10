@@ -1,0 +1,135 @@
+<div
+  id="create-story-container"
+  [ngClass]="{
+    'light-mode-background-primary light-mode-text':
+      (themeService.theme$ | async),
+    'dark-mode-background-primary dark-mode-text': !(
+      themeService.theme$ | async
+    ),
+  }"
+>
+  <h1
+    id="h1-title"
+    [ngClass]="{
+      'light-mode-background light-mode-text': (themeService.theme$ | async),
+      'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
+    }"
+  >
+    Dodaj artykuł do bloga
+  </h1>
+  <div
+    id="generate-story-container"
+    [ngClass]="{
+      'light-mode-background light-mode-text light-mode-border-bottom':
+        (themeService.theme$ | async),
+      'dark-mode-background dark-mode-text dark-mode-border-bottom': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
+    <form [formGroup]="generateForm" id="form" (ngSubmit)="generate()">
+      <div id="filter-story-container">
+        <div class="filter-story-container-bottom-row">
+          <mat-form-field class="additional-instructions">
+            <mat-label>Informacje dla AI:</mat-label>
+            <textarea
+              matInput
+              cdkAutosizeMinRows="1"
+              formControlName="instructions"
+              placeholder="Temat wpisu, słowa kluczowe"
+              autocomplete="off"
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="submit-button-container">
+        <button
+          mat-raised-button
+          class="button-app-reverse-color button-standard"
+          id="submit-button-generate"
+          type="submit"
+        >
+          Generuj
+        </button>
+      </div>
+    </form>
+  </div>
+  <form
+    [formGroup]="addForm"
+    id="add-form"
+    (ngSubmit)="add()"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
+    <mat-form-field>
+      <mat-label>Slug</mat-label>
+      <textarea
+        class="textarea"
+        matInput
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="20"
+        id="slug"
+        formControlName="slug"
+      ></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Tytuł (meta title)</mat-label>
+      <textarea
+        class="textarea"
+        matInput
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="20"
+        id="metaTitle"
+        formControlName="metaTitle"
+      ></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Opis (meta description)</mat-label>
+      <textarea
+        class="textarea"
+        matInput
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="20"
+        id="metaDescription"
+        formControlName="metaDescription"
+      ></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Podsumowanie</mat-label>
+      <textarea
+        class="textarea"
+        matInput
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="20"
+        id="summary"
+        formControlName="summary"
+      ></textarea>
+    </mat-form-field>
+    <div class="submit-button-container">
+      <button
+        mat-raised-button
+        id="submit-button-create"
+        class="button-app-reverse-color button-standard"
+        [ngClass]="{
+          'light-mode-border': (themeService.theme$ | async),
+          'dark-mode-border': !(themeService.theme$ | async),
+        }"
+        type="submit"
+      >
+        Dodaj
+      </button>
+    </div>
+  </form>
+</div>

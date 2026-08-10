@@ -16,18 +16,17 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardContent,
     ReactiveFormsModule,
     MatRadioModule,
-    MatFormFieldModule,
-    MatButtonModule
+    MatFormFieldModule
   ],
   templateUrl: './personalization.component.html',
   styleUrl: './personalization.component.scss',
 })
 export class PersonalizationComponent {
   form = this.fb.group({
-    theme: [this.themeService.themeSubject.value ? '1' : '2'],
+    theme: [this.themeService.themeSubject.value ? 'lightMode' : 'darkMode'],
   });
 
-  isLightMode = false;
+isLightMode = true;
 
   constructor(
     private fb: FormBuilder,
@@ -36,7 +35,14 @@ export class PersonalizationComponent {
 
   submit() {
     const selectedTheme = this.form.value.theme;
-    this.isLightMode = selectedTheme === '1';
+
+    switch (selectedTheme) {
+      case 'darkMode':
+        this.isLightMode = false;
+        break;
+      case 'lightMode':
+        this.isLightMode = true;
+    }
     this.themeService.themeSubject.next(this.isLightMode);
   }
 }
