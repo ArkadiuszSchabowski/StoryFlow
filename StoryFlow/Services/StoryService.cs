@@ -257,7 +257,6 @@ namespace StoryFlow.Services
 
         public async Task<GetStoryDto> Get(int storyId, string? userIdClaim)
         {
-            //TO DO - Sprawdzic czy user ma wymagana liczbe gwiazdek aby zobaczyc historie
             if (!int.TryParse(userIdClaim, out var userId))
             {
                 throw new UnauthorizedException("Użytkownik nie ma uprawnień do wykonania tej operacji.");

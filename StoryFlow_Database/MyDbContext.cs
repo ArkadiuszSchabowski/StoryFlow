@@ -19,6 +19,9 @@ namespace StoryFlow_Database
         public DbSet<StoryPoint> StoryPoints { get; set; }
         public DbSet<StorySeason> StorySeazons { get; set; }
         public DbSet<BlogPost> BlogPosts { get; set; }
+        public DbSet<WordLesson> WordLessons { get; set; }
+        public DbSet<Word> Words { get; set; }
+        public DbSet<WordPoint> WordPoints { get; set; }
         public DbSet<BlogPostSection> BlogPostSections { get; set; }
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
         {
@@ -98,6 +101,16 @@ namespace StoryFlow_Database
                 entity.Property(x => x.MetaTitleContent).HasMaxLength(50);
                 entity.Property(x => x.MetaTitleDescription).HasMaxLength(115);
             });
+
+            modelBuilder.Entity<WordLesson>().
+                HasMany(wl => wl.Words)
+                .WithOne(w => w.WordLesson)
+                .HasForeignKey(w => w.WordLessonId);
+
+            modelBuilder.Entity<WordLesson>()
+                .HasOne(wl => wl.WordPoint)
+                .WithOne(w => w.WordLesson)
+                .HasForeignKey<WordPoint>(w => w.WordLessonId);
         }
     }
 }

@@ -465,6 +465,79 @@ namespace StoryFlow_Database.Migrations
                     b.ToTable("UserStories");
                 });
 
+            modelBuilder.Entity("StoryFlow_Database.Entities.Word", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("EnglishWord")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PolishWord")
+                        .HasColumnType("text");
+
+                    b.Property<int>("WordLessonId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WordLessonId");
+
+                    b.ToTable("Words");
+                });
+
+            modelBuilder.Entity("StoryFlow_Database.Entities.WordLesson", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("OrderInSeason")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("PolishTitlte")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("StorySeasonId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StorySeasonId");
+
+                    b.ToTable("WordLessons");
+                });
+
+            modelBuilder.Entity("StoryFlow_Database.Entities.WordPoint", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("MaxPoints")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("PointsPerWord")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("WordLessonId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WordLessonId")
+                        .IsUnique();
+
+                    b.ToTable("WordPoints");
+                });
+
             modelBuilder.Entity("StoryFlow_Database.Entities.Answer", b =>
                 {
                     b.HasOne("StoryFlow_Database.Entities.Question", "Question")
@@ -608,6 +681,37 @@ namespace StoryFlow_Database.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("StoryFlow_Database.Entities.Word", b =>
+                {
+                    b.HasOne("StoryFlow_Database.Entities.WordLesson", "WordLesson")
+                        .WithMany("Words")
+                        .HasForeignKey("WordLessonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("WordLesson");
+                });
+
+            modelBuilder.Entity("StoryFlow_Database.Entities.WordLesson", b =>
+                {
+                    b.HasOne("StoryFlow_Database.Entities.StorySeason", "StorySeason")
+                        .WithMany("WordLessons")
+                        .HasForeignKey("StorySeasonId");
+
+                    b.Navigation("StorySeason");
+                });
+
+            modelBuilder.Entity("StoryFlow_Database.Entities.WordPoint", b =>
+                {
+                    b.HasOne("StoryFlow_Database.Entities.WordLesson", "WordLesson")
+                        .WithOne("WordPoint")
+                        .HasForeignKey("StoryFlow_Database.Entities.WordPoint", "WordLessonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("WordLesson");
+                });
+
             modelBuilder.Entity("StoryFlow_Database.Entities.BlogPost", b =>
                 {
                     b.Navigation("Sections");
@@ -652,6 +756,8 @@ namespace StoryFlow_Database.Migrations
             modelBuilder.Entity("StoryFlow_Database.Entities.StorySeason", b =>
                 {
                     b.Navigation("Stories");
+
+                    b.Navigation("WordLessons");
                 });
 
             modelBuilder.Entity("StoryFlow_Database.Entities.User", b =>
@@ -661,6 +767,13 @@ namespace StoryFlow_Database.Migrations
                     b.Navigation("UserSentences");
 
                     b.Navigation("UserStories");
+                });
+
+            modelBuilder.Entity("StoryFlow_Database.Entities.WordLesson", b =>
+                {
+                    b.Navigation("WordPoint");
+
+                    b.Navigation("Words");
                 });
 #pragma warning restore 612, 618
         }
