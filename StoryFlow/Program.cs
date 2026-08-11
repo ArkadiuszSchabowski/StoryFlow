@@ -69,6 +69,8 @@ builder.Services.AddScoped<IBlogService, BlogService>();
 builder.Services.AddScoped<IWordService, WordService>();
 builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 builder.Services.AddScoped<IBlogValidator, BlogValidator>();
+builder.Services.AddScoped<ISeasonService, SeasonService>();
+builder.Services.AddScoped<ISeasonRepository, SeasonRepository>();
 
 builder.Services.AddScoped<HttpClient>();
 

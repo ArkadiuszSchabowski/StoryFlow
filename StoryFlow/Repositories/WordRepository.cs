@@ -15,7 +15,7 @@ namespace StoryFlow.Repositories
         }
         public async Task<WordLesson?> Get(int id)
         {
-            return await _context.WordLessons.Include(w => w.WordPoint).FirstOrDefaultAsync(w => w.Id == id);
+            return await _context.WordLessons.Include(w => w.WordPoint).Include(w => w.Words).FirstOrDefaultAsync(w => w.Id == id);
         }
         public IQueryable<Story> GetBySeason(int userId, int? seasonId)
         {

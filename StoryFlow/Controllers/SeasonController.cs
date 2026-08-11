@@ -8,23 +8,23 @@ namespace StoryFlow.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class WordController : ControllerBase
+    public class SeasonController : ControllerBase
     {
-        private readonly IWordService _service;
+        private readonly ISeasonService _service;
 
-        public WordController(IWordService service)
+        public SeasonController(ISeasonService service)
         {
             _service = service;
         }
+
         [Authorize]
-        [HttpGet("lesson/{wordLessonId}")]
-        public async Task<ActionResult<GetStoryDto>> Get([FromRoute] int wordLessonId)
+        [HttpGet("{seasonId}")]
+        public async Task<ActionResult<GetStorySeasonDto>> GetBySeason([FromRoute] int seasonId)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            var wordLesson = await _service.Get(wordLessonId, userIdClaim);
-            return Ok(wordLesson);
+            GetStorySeasonDto season = await _service.GetBySeason(seasonId, userIdClaim);
+            return Ok(season);
         }
-
     }
 }

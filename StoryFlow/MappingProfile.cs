@@ -20,6 +20,7 @@ namespace StoryFlow
             CreateMap<Story, GetStoryDto>();
             CreateMap<StoryPoint, GetStoryPointDto>();
             CreateMap<Quiz, GetQuizDto>();
+            CreateMap<Word, GetWordDto>();
             CreateMap<Question, GetQuestionDto>();
             CreateMap<Answer, GetAnswerDto>();
             CreateMap<Sentence, GetSentenceDto>();
