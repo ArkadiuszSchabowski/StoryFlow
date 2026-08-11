@@ -56,16 +56,6 @@ namespace StoryFlow.Controllers
             return Ok(story);
         }
 
-        [Authorize]
-        [HttpGet("season/{seasonId}")]
-        public async Task<ActionResult<GetStoryDto>> GetBySeason([FromRoute] int seasonId)
-        {
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-            List<GetStoryDto> stories = await _service.GetBySeason(seasonId, userIdClaim);
-            return Ok(stories);
-        }
-
         [Authorize(Roles = "Moderator,Administrator")]
         [HttpPost]
         public async Task<ActionResult> Add([FromBody] AddStoryDto dto)

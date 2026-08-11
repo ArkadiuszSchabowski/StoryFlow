@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LottieComponent } from 'ngx-lottie';
 import { ToastrService } from 'ngx-toastr';
 import { LoaderService } from 'src/app/_services/loader.service';
+import { SeasonService } from 'src/app/_services/season.service';
 import { StoryService } from 'src/app/_services/story.service';
 import { ThemeService } from 'src/app/_services/theme.service';
 import { UserService } from 'src/app/_services/user.service';
@@ -56,10 +57,11 @@ export class SezonComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private storyService: StoryService,
+    private seasonService: SeasonService,
     private router: Router,
     private toastr: ToastrService,
     private userService: UserService,
+    private storyService: StoryService,
     public loaderService: LoaderService,
     public themeService: ThemeService,
   ) {}
@@ -72,25 +74,15 @@ export class SezonComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       const id = Number(params.get('id'));
       this.seasonId = id;
-      this.get(id);
+      this.getBySeason(id);
     });
   }
 
-  get(seasonId: number) {
-    this.openedStoryId = null;
-    this.dto = {
-      languageLevel: this.form.value.languageLevel,
-      category: this.form.value.category,
-      size: this.form.value.size,
-    };
-
-    this.apiCallGetBySeason(seasonId);
-  }
-
-  apiCallGetBySeason(seasonId: number) {
-    this.storyService.getBySeason(seasonId).subscribe({
+  getBySeason(seasonId: number) {
+    this.seasonService.getBySeason(seasonId).subscribe({
       next: (response) => {
-        this.stories = response;
+        console.log(response)
+        this.stories = response.stories;
       },
       error: (error) => {
         console.log(error);

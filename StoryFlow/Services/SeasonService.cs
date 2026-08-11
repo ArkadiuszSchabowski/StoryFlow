@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using StoryFlow.Exceptions;
 using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
