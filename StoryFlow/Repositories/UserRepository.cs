@@ -22,7 +22,11 @@ namespace StoryFlow.Repositories
 
         public async Task<User?> Get(int id)
         {
-            return await _context.Users.Include(u => u.UserHobbies).Include(u => u.UserStories).FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Users
+                .Include(u => u.UserHobbies)
+                .Include(u => u.UserStories)
+                .Include(u => u.UserWordLessons)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<ICollection<User>> Get()

@@ -476,6 +476,9 @@ namespace StoryFlow_Database.Migrations
                     b.Property<int>("BestResult")
                         .HasColumnType("integer");
 
+                    b.Property<double>("PercentageScore")
+                        .HasColumnType("double precision");
+
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
@@ -501,6 +504,12 @@ namespace StoryFlow_Database.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("EnglishWord")
+                        .HasColumnType("text");
+
+                    b.Property<string>("HintSentence")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImageUrl")
                         .HasColumnType("text");
 
                     b.Property<string>("PolishWord")

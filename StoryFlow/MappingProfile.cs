@@ -17,6 +17,7 @@ namespace StoryFlow
             CreateMap<AddAnswerDto, Answer>();
             CreateMap<AddBlogPostDto, BlogPost>();
             CreateMap<AddBlogPostSectionDto, BlogPostSection>();
+            CreateMap<AddUserWordLessonDto, WordLesson>();
             CreateMap<Story, GetStoryDto>();
             CreateMap<StoryPoint, GetStoryPointDto>();
             CreateMap<WordPoint, GetWordPointDto>();

@@ -217,7 +217,7 @@ namespace StoryFlow.Services
                 await _userStoryRepository.Update(userStory);
             }
 
-            user.Stars = user.UserStories.Sum(us => us.BestResult);
+            user.Stars = user.UserStories.Sum(us => us.BestResult) + user.UserWordLessons.Sum(uwl => uwl.BestResult);
 
             await _userRepository.UpdateStars(user);
 

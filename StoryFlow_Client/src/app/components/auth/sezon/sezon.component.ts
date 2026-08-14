@@ -135,11 +135,6 @@ export class SezonComponent implements OnInit {
       .flatMap((wl) => wl.userWordLessons ?? [])
       .find((uwl) => uwl.wordLessonId === wordLessonId);
 
-      console.log("userWordLesson:")
-      console.log(userWordLesson)
-      console.log("profile.tickets:")
-      console.log(this.profile?.tickets)
-
 
     if (userWordLesson == null && this.profile?.tickets == 0) {
       return 'lock';
@@ -148,15 +143,15 @@ export class SezonComponent implements OnInit {
       return 'play_arrow';
     }
 
-    // if (userWordLesson?.percentageScore < 50) {
-    //   return 'replay';
-    // }
-    // if (userWordLesson?.percentageScore >= 50 && userWordLesson?.percentageScore < 100)
-    //   return 'thumb_up';
+    if (userWordLesson?.percentageScore < 50) {
+      return 'replay';
+    }
+    if (userWordLesson?.percentageScore >= 50 && userWordLesson?.percentageScore < 100)
+      return 'thumb_up';
 
-    // if (userWordLesson?.percentageScore === 100) {
-    //   return 'emoji_events';
-    // }
+    if (userWordLesson?.percentageScore === 100) {
+      return 'emoji_events';
+    }
     return '';
   }
 

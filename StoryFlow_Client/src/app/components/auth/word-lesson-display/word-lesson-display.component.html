@@ -8,4 +8,53 @@
       themeService.theme$ | async
     ),
   }"
-></div>
+>
+  @if (wordLesson && wordLesson.words.length > 0) {
+    <form (ngSubmit)="submit(wordLesson)">
+      <div class="word-item">
+        <span class="polish-word">{{ wordLesson.words[firstImage].polishWord }}</span>
+        <img
+          class="word-image image-standard"
+          [src]="apiUrl + wordLesson.words[firstImage].imageUrl"
+          alt=""
+          width="300px"
+          height="300px"
+        />
+        <span class="polish-word">
+          {{ getSentenceParts(wordLesson.words[firstImage].hintSentence)[0] }}
+          <mat-form-field appearance="outline" class="inline-blank">
+            <input
+              matInput
+              type="text"
+              name="userAnswer"
+              [(ngModel)]="userAnswer"
+              [ngClass]="{
+                'background-white light-mode-text':
+                  (themeService.theme$ | async),
+                'background-white': !(themeService.theme$ | async),
+              }"
+            />
+          </mat-form-field>
+          {{ getSentenceParts(wordLesson.words[firstImage].hintSentence)[1] }}
+        </span>
+        <div class="submit-button-container">
+            <button
+              mat-raised-button
+              class="button-app button-standard"
+              [ngClass]="{
+                'light-mode-background light-mode-text':
+                  (themeService.theme$ | async),
+                'dark-mode-background dark-mode-text': !(
+                  themeService.theme$ | async
+                ),
+              }"
+            >
+              Dalej
+            </button>
+        </div>
+      </div>
+    </form>
+  } @else if (wordLesson) {
+    <p>Brak słów w tej lekcji.</p>
+  }
+</div>

@@ -26,5 +26,14 @@ namespace StoryFlow.Controllers
             return Ok(wordLesson);
         }
 
+        [Authorize]
+        [HttpPost("lesson/save/{wordLessonId}")]
+        public async Task SaveBestResult([FromRoute] int wordLessonId,[FromBody] int result)
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            await _service.SaveBestResult(wordLessonId, userIdClaim, result);
+        }
+
     }
 }
