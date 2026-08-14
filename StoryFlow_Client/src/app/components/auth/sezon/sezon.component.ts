@@ -21,23 +21,37 @@ import {
   showLanguageLevelShort,
   showCategory,
 } from 'src/app/helpers/formatter';
+import { GetStorySeasonDto } from 'src/app/models/get-story-season-dto';
 import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
 import { GetUserDto } from 'src/app/models/get-user-dto';
+import { GetWordLessonDto } from 'src/app/models/get-word-lesson-dto';
 import { StoryFilter } from 'src/app/models/story-filter-dto';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-sezon',
   templateUrl: './sezon.component.html',
   styleUrls: ['./sezon.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatIconModule, LottieComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatIconModule,
+    LottieComponent,
+  ],
 })
 export class SezonComponent implements OnInit {
+  apiUrl = environment.apiUrl;
   seasonId: number = 0;
-  stories: GetStoryViewDto[] = [];
+  wordLessons: GetWordLessonDto[] = [];
+  storyLessons: GetStoryViewDto[] = [];
+  seasonResponse: GetStorySeasonDto | null = null;
   dto: StoryFilter | null = null;
   icon: string = '';
   openedStoryId: number | null = null;
+  openedWordLessonId: number | null = null;
   profile: GetUserDto | undefined;
 
   categories = CATEGORIES_WITH_PLACEHOLDER;
@@ -81,8 +95,12 @@ export class SezonComponent implements OnInit {
   getBySeason(seasonId: number) {
     this.seasonService.getBySeason(seasonId).subscribe({
       next: (response) => {
-        console.log(response)
-        this.stories = response.stories;
+        this.seasonResponse = response;
+        console.log(this.seasonResponse);
+        this.wordLessons = response.wordLessons;
+        console.log(this.wordLessons);
+        this.storyLessons = response.stories;
+        console.log(this.storyLessons);
       },
       error: (error) => {
         console.log(error);
@@ -111,8 +129,39 @@ export class SezonComponent implements OnInit {
     });
   }
 
-  getIcon(storyId: number): string {
-    const userStory = this.stories
+    getIconForWordLesson(wordLessonId: number): string {
+
+    const userWordLesson = this.wordLessons
+      .flatMap((wl) => wl.userWordLessons ?? [])
+      .find((uwl) => uwl.wordLessonId === wordLessonId);
+
+      console.log("userWordLesson:")
+      console.log(userWordLesson)
+      console.log("profile.tickets:")
+      console.log(this.profile?.tickets)
+
+
+    if (userWordLesson == null && this.profile?.tickets == 0) {
+      return 'lock';
+    }
+    if (userWordLesson == null) {
+      return 'play_arrow';
+    }
+
+    // if (userWordLesson?.percentageScore < 50) {
+    //   return 'replay';
+    // }
+    // if (userWordLesson?.percentageScore >= 50 && userWordLesson?.percentageScore < 100)
+    //   return 'thumb_up';
+
+    // if (userWordLesson?.percentageScore === 100) {
+    //   return 'emoji_events';
+    // }
+    return '';
+  }
+
+  getIconForStory(storyId: number): string {
+    const userStory = this.storyLessons
       .flatMap((s) => s.userStories ?? [])
       .find((us) => us.storyId === storyId);
 
@@ -136,10 +185,20 @@ export class SezonComponent implements OnInit {
   }
 
   toggleStory(storyId: number) {
+    this.openedWordLessonId = null;
     if (this.openedStoryId === storyId) {
       this.openedStoryId = null;
     } else {
       this.openedStoryId = storyId;
+    }
+  }
+
+  toggleWordLesson(wordLessonId: number) {
+    this.openedStoryId = null;
+    if (this.openedWordLessonId === wordLessonId) {
+      this.openedWordLessonId = null;
+    } else {
+      this.openedWordLessonId = wordLessonId;
     }
   }
 
@@ -149,5 +208,9 @@ export class SezonComponent implements OnInit {
 
   NavigateToTextDisplay(id: number) {
     this.getStory(id);
+  }
+
+  navigateToWordLessonDisplay(id: number) {
+    this.router.navigateByUrl(`word-lesson/${id}`);
   }
 }

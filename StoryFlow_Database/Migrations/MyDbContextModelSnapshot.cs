@@ -465,6 +465,33 @@ namespace StoryFlow_Database.Migrations
                     b.ToTable("UserStories");
                 });
 
+            modelBuilder.Entity("StoryFlow_Database.Entities.UserWordLesson", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BestResult")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("WordLessonId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WordLessonId");
+
+                    b.HasIndex("UserId", "WordLessonId")
+                        .IsUnique();
+
+                    b.ToTable("UserWordLessons");
+                });
+
             modelBuilder.Entity("StoryFlow_Database.Entities.Word", b =>
                 {
                     b.Property<int>("Id")
@@ -496,6 +523,9 @@ namespace StoryFlow_Database.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Image")
+                        .HasColumnType("text");
 
                     b.Property<int?>("OrderInSeason")
                         .HasColumnType("integer");
@@ -681,6 +711,25 @@ namespace StoryFlow_Database.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("StoryFlow_Database.Entities.UserWordLesson", b =>
+                {
+                    b.HasOne("StoryFlow_Database.Entities.User", "User")
+                        .WithMany("UserWordLessons")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("StoryFlow_Database.Entities.WordLesson", "WordLesson")
+                        .WithMany("UserWordLessons")
+                        .HasForeignKey("WordLessonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+
+                    b.Navigation("WordLesson");
+                });
+
             modelBuilder.Entity("StoryFlow_Database.Entities.Word", b =>
                 {
                     b.HasOne("StoryFlow_Database.Entities.WordLesson", "WordLesson")
@@ -767,10 +816,14 @@ namespace StoryFlow_Database.Migrations
                     b.Navigation("UserSentences");
 
                     b.Navigation("UserStories");
+
+                    b.Navigation("UserWordLessons");
                 });
 
             modelBuilder.Entity("StoryFlow_Database.Entities.WordLesson", b =>
                 {
+                    b.Navigation("UserWordLessons");
+
                     b.Navigation("WordPoint");
 
                     b.Navigation("Words");

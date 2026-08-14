@@ -160,6 +160,14 @@ const routes: Routes = [
         (m) => m.BlogContentComponent,
       ),
   },
+    {
+    path: 'word-lesson/:id',
+    loadComponent: () =>
+      import('./components/auth/word-lesson-display/word-lesson-display.component').then(
+        (m) => m.WordLessonDisplayComponent,
+      ),
+    title: 'Słówka - StoryFlow',
+  },
   {
     path: 'text/:id',
     loadComponent: () =>

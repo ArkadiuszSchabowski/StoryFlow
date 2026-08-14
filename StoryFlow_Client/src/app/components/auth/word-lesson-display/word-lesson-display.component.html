@@ -1,0 +1,11 @@
+<div
+  id="word-lesson-container"
+  class="container"
+  [ngClass]="{
+    'light-mode-background-primary light-mode-text':
+      (themeService.theme$ | async),
+    'dark-mode-background-primary dark-mode-text': !(
+      themeService.theme$ | async
+    ),
+  }"
+></div>

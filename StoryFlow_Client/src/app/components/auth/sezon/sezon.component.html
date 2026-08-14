@@ -27,39 +27,46 @@
       ),
     }"
   >
-    @if (profile) {
-      <div
-        id="profile-statistic"
-        [ngClass]="{
-          'light-mode-background light-mode-text light-mode-border-bottom':
-            (themeService.theme$ | async),
-          'dark-mode-background dark-mode-text dark-mode-border-bottom': !(
-            themeService.theme$ | async
-          ),
-        }"
-      >
-        <div class="profile-statistic-item">
-          Zdobyte gwiazdki:&nbsp;{{ profile.stars }}&nbsp;<mat-icon
-            class="mat-icon-star-color"
-            >star</mat-icon
-          >
-        </div>
-        <div class="profile-statistic-item">
-          Dostępne bilety:&nbsp;{{ profile.tickets }}&nbsp;<mat-icon
-            class="mat-icon-star-color"
-            >sell</mat-icon
-          >
-        </div>
+    <div
+      id="profile-statistic"
+      [ngClass]="{
+        'light-mode-background light-mode-text light-mode-border-bottom':
+          (themeService.theme$ | async),
+        'dark-mode-background dark-mode-text dark-mode-border-bottom': !(
+          themeService.theme$ | async
+        ),
+      }"
+    >
+      <div class="profile-statistic-item">
+        Zdobyte gwiazdki:&nbsp;{{ profile.stars }}&nbsp;<mat-icon
+          class="mat-icon-star-color"
+          >star</mat-icon
+        >
       </div>
+      <div class="profile-statistic-item">
+        Dostępne bilety:&nbsp;{{ profile.tickets }}&nbsp;<mat-icon
+          class="mat-icon-star-color"
+          >sell</mat-icon
+        >
+      </div>
+    </div>
+    @if (seasonResponse) {
+      @if (seasonResponse.name) {
+        <h1 id="h1-title">{{ seasonResponse.name }}</h1>
+      }
     }
-    @if (stories.length === 0) {
+
+    @if (storyLessons.length === 0) {
       <div id="no-story-information" class="container">
-        <div class="subtitle">Nie masz wystarczającej ilości gwiazdek, by przejść do tego sezonu.</div>
+        <div class="subtitle">
+          Nie masz wystarczającej ilości gwiazdek, by przejść do tego sezonu.
+        </div>
       </div>
     }
-    @for (story of stories; track story.id) {
+
+    @for (wordLesson of wordLessons; track wordLesson.id) {
       <div class="story-wrapper">
-        @if (profile) {
+        @if (wordLesson.wordPoint) {
           <div
             class="story-preview-button"
             [ngClass]="{
@@ -71,56 +78,175 @@
               'locked-light-background':
                 (themeService.theme$ | async) &&
                 profile.tickets === 0 &&
-                getIcon(story.id) === 'lock',
+                getIconForWordLesson(wordLesson.id) === 'lock',
               'locked-dark-background':
                 !(themeService.theme$ | async) &&
                 profile.tickets === 0 &&
-                getIcon(story.id) === 'lock',
+                getIconForWordLesson(wordLesson.id) === 'lock',
             }"
-            (click)="toggleStory(story.id)"
+            (click)="toggleWordLesson(wordLesson.id)"
           >
-            <div class="story-preview-button-category">
-              {{ showCategory(story.storyCategory) }}
-            </div>
+            <div class="story-preview-button-type">Słownictwo</div>
             <div
-              class="story-preview-button-icon background-white light-mode-text"
+              class="story-preview-button-icon preview-button-icon background-white light-mode-text"
             >
-              @if (getIcon(story.id) === "replay") {
+              @if (getIconForWordLesson(wordLesson.id) === "replay") {
                 <span> Odblokuj bilet za 50% </span>
               } @else {
-                <mat-icon>{{ getIcon(story.id) }}</mat-icon>
+                <mat-icon>{{ getIconForWordLesson(wordLesson.id) }}</mat-icon>
               }
             </div>
-            <div class="story-preview-button-title">
-              {{ story.polishTitle }}
+            <img
+              class="vocabulary-image image-standard"
+              [src]="apiUrl + wordLesson.image"
+              alt=""
+              width="100%"
+              height="100px"
+            />
+            <div class="score-item">
+              @if (wordLesson.userWordLessons) {
+                {{ wordLesson.userWordLessons?.[0]?.bestResult ?? 0 }}
+              }
+              <mat-icon class="mat-icon-star-color">star</mat-icon>
+              / {{ wordLesson.wordPoint.maxPoints }}
+              <mat-icon class="mat-icon-star-color">star</mat-icon>
             </div>
-
-            <div class="story-previev-button-level-and-size">
-              <div>
-                {{ showLanguageLevelShort(story.languageLevel) }} -
-                {{ showSize(story.storySize) }}
-              </div>
-            </div>
-
-            @if (story.storyPoint) {
-              <div class="score-item">
-                {{ story.userStories?.[0]?.bestResult ?? 0 }}
-                <mat-icon class="mat-icon-star-color">star</mat-icon>
-                / {{ story.storyPoint.maxPoints }}
-                <mat-icon class="mat-icon-star-color">star</mat-icon>
-              </div>
-            }
-            @if (story.storyPoint) {
-              <div class="score-item score-percentage">
-                {{
-                  roundToTwoDecimals(
-                    story.userStories?.[0]?.percentageScore ?? 0
-                  )
-                }}&nbsp;%
-              </div>
-            }
           </div>
         }
+
+        @if (
+          wordLesson.wordPoint &&
+          openedWordLessonId === wordLesson.id &&
+          profile
+        ) {
+          <div
+            class="story-card"
+            [ngClass]="{
+              'light-mode-background light-mode-text light-mode-border-black':
+                (themeService.theme$ | async),
+              'dark-mode-background dark-mode-text dark-mode-border-white': !(
+                themeService.theme$ | async
+              ),
+              'locked-light-background':
+                (themeService.theme$ | async) &&
+                profile.tickets === 0 &&
+                getIconForWordLesson(wordLesson.id) === 'lock',
+              'locked-dark-background':
+                !(themeService.theme$ | async) &&
+                profile.tickets === 0 &&
+                getIconForWordLesson(wordLesson.id) === 'lock',
+            }"
+          >
+            <div class="story-card-button-close">
+              <button
+                class="button-close background-white light-mode-text"
+                (click)="toggleWordLesson(wordLesson.id)"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <div class="story-card-title">
+              {{ wordLesson.polishTitlte }}
+            </div>
+
+            <div id="score-card">
+              <div class="score-item">
+                Punkty za słówko:
+                {{ wordLesson.wordPoint.pointsPerWord }}
+                <mat-icon class="mat-icon-star-color">star</mat-icon>
+              </div>
+
+              <div class="score-item">
+                Maksymalna ilość punktów:
+                {{ wordLesson.wordPoint.maxPoints }}
+                <mat-icon class="mat-icon-star-color">star</mat-icon>
+              </div>
+
+              <div class="score-item score-item-hint">
+                {{
+                  getIconForWordLesson(wordLesson.id) === "lock"
+                    ? "Twój bilet jest zablokowany. Odblokuj inną dostępną kartę zdobywając co najmniej 50%, aby go odzyskać."
+                    : ""
+                }}
+              </div>
+
+              <button
+                mat-raised-button
+                class="button-word-lesson-start button-standard background-white light-mode-text"
+                (click)="navigateToWordLessonDisplay(wordLesson.id)"
+                [disabled]="getIconForWordLesson(wordLesson.id) === 'lock'"
+                [ngClass]="{
+                  'my-disabled': getIconForWordLesson(wordLesson.id) === 'lock',
+                }"
+              >
+                {{
+                  getIconForWordLesson(wordLesson.id) === "lock"
+                    ? "POTRZEBUJESZ BILETU"
+                    : "START"
+                }}
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+    @for (story of storyLessons; track story.id) {
+      <div class="story-wrapper">
+        <div
+          class="story-preview-button"
+          [ngClass]="{
+            'light-mode-background dark-mode-text light-mode-border-black':
+              (themeService.theme$ | async),
+            'dark-mode-background dark-mode-text dark-mode-border-white': !(
+              themeService.theme$ | async
+            ),
+            'locked-light-background':
+              (themeService.theme$ | async) &&
+              profile.tickets === 0 &&
+              getIconForStory(story.id) === 'lock',
+            'locked-dark-background':
+              !(themeService.theme$ | async) &&
+              profile.tickets === 0 &&
+              getIconForStory(story.id) === 'lock',
+          }"
+          (click)="toggleStory(story.id)"
+        >
+          <div class="story-preview-button-type">Opowiadanie</div>
+          <div
+            class="story-preview-button-icon preview-button-icon background-white light-mode-text"
+          >
+            @if (getIconForStory(story.id) === "replay") {
+              <span> Odblokuj bilet za 50% </span>
+            } @else {
+              <mat-icon>{{ getIconForStory(story.id) }}</mat-icon>
+            }
+          </div>
+          <div class="story-preview-button-title">
+            {{ story.polishTitle }}
+          </div>
+
+          <div class="story-previev-button-level-and-size">
+            <div>
+              {{ showLanguageLevelShort(story.languageLevel) }} -
+              {{ showSize(story.storySize) }}
+            </div>
+          </div>
+
+          @if (story && story.storyPoint) {
+            <div class="score-item">
+              {{ story.userStories?.[0]?.bestResult ?? 0 }}
+              <mat-icon class="mat-icon-star-color">star</mat-icon>
+              / {{ story.storyPoint.maxPoints }}
+              <mat-icon class="mat-icon-star-color">star</mat-icon>
+            </div>
+          }
+          <div class="score-item score-percentage">
+            {{
+              roundToTwoDecimals(story.userStories?.[0]?.percentageScore ?? 0)
+            }}&nbsp;%
+          </div>
+        </div>
 
         @if (story.storyPoint && openedStoryId === story.id && profile) {
           <div
@@ -134,11 +260,11 @@
               'locked-light-background':
                 (themeService.theme$ | async) &&
                 profile.tickets === 0 &&
-                getIcon(story.id) === 'lock',
+                getIconForStory(story.id) === 'lock',
               'locked-dark-background':
                 !(themeService.theme$ | async) &&
                 profile.tickets === 0 &&
-                getIcon(story.id) === 'lock',
+                getIconForStory(story.id) === 'lock',
             }"
           >
             <div class="story-card-button-close">
@@ -175,8 +301,8 @@
 
               <div class="score-item score-item-hint">
                 {{
-                  getIcon(story.id) === "lock"
-                    ? "Twój bilet jest zablokowany. Spróbuj innego dostępnego quizu i zdobądź co najmniej 50%, aby go odzyskać."
+                  getIconForStory(story.id) === "lock"
+                    ? "Twój bilet jest zablokowany. Odblokuj inną dostępną kartę zdobywając co najmniej 50%, aby go odzyskać."
                     : ""
                 }}
               </div>
@@ -186,13 +312,15 @@
                 id="button-story-start"
                 class="button-standard background-white light-mode-text"
                 (click)="NavigateToTextDisplay(story.id)"
-                [disabled]="getIcon(story.id) === 'lock'"
+                [disabled]="getIconForStory(story.id) === 'lock'"
                 [ngClass]="{
-                  'my-disabled': getIcon(story.id) === 'lock',
+                  'my-disabled': getIconForStory(story.id) === 'lock',
                 }"
               >
                 {{
-                  getIcon(story.id) === "lock" ? "POTRZEBUJESZ BILETU" : "START"
+                  getIconForStory(story.id) === "lock"
+                    ? "POTRZEBUJESZ BILETU"
+                    : "START"
                 }}
               </button>
             </div>

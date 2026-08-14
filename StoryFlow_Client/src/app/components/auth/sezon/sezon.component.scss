@@ -56,6 +56,14 @@
 .story-card-description {
   padding: 10px;
   text-align: left;
+  font-weight: bold;
+}
+
+.story-card-title {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px 0 20px 0;
+  text-align: center;
 }
 
 .story-card-story-size {
@@ -143,6 +151,14 @@ button.story-card-button {
 }
 
 .story-preview-button-icon {
+  margin-bottom: 10px;
+}
+
+.vocabulary-preview-button-icon {
+  margin-bottom: 10px;
+}
+
+.preview-button-icon {
   display: flex;
   background-color: white;
   justify-content: center;
@@ -151,8 +167,11 @@ button.story-card-button {
   height: 50px;
   min-height: 50px;
   width: 100%;
-  margin-bottom: 10px;
   border-radius: 25px;
+}
+
+.vocabulary-image {
+  margin: 10px 0;
 }
 
 .score-item-hint {
@@ -168,7 +187,7 @@ button:disabled {
   padding-top: 10px;
 }
 
-.story-preview-button-category {
+.story-preview-button-type {
   padding-bottom: 10px;
 }
 
@@ -194,6 +213,11 @@ button:disabled {
 
 #button-story-start {
   font-weight: bold;
+}
+
+.button-word-lesson-start{
+  font-weight: bold;
+  margin-top: 30px;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {

@@ -41,19 +41,6 @@ export class StoryService {
     return this.http.get(this.apiUrl + 'story/season', { headers });
   }
 
-  getBySeason(id: number) {
-    const token: string | null = this.authService.getToken();
-
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-
-    return this.http.get<GetStoryViewDto[]>(
-      this.apiUrl + `story/season/${id}`,
-      { headers },
-    );
-  }
-
   getWelcomeStory(){
         return this.http.get<GetStoryViewDto>(
       this.apiUrl + `story/welcome`

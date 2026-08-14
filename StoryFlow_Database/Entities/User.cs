@@ -14,6 +14,7 @@ namespace StoryFlow_Database.Entities
         public ICollection<UserHobby> UserHobbies { get; set; } = new List<UserHobby>();
         public ICollection<UserSentence> UserSentences { get; set; } = new List<UserSentence>();
         public ICollection<UserStory> UserStories { get; set; } = new List<UserStory>();
+        public ICollection<UserWordLesson> UserWordLessons { get; set; } = new List<UserWordLesson>();
         public int Stars { get; set; } = 0;
         public int Tickets { get; set; } = 3;
         public int RoleId { get; set; }

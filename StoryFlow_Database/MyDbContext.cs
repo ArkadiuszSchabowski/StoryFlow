@@ -12,6 +12,7 @@ namespace StoryFlow_Database
         public DbSet<UserHobby> UserHobbies { get; set; }
         public DbSet<UserSentence> UserSentences { get; set; }
         public DbSet<UserStory> UserStories { get; set; }
+        public DbSet<UserWordLesson> UserWordLessons { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<Question> Questions { get; set; }
@@ -42,6 +43,10 @@ namespace StoryFlow_Database
                 .WithOne(us => us.User)
                 .HasForeignKey(us => us.UserId);
 
+            modelBuilder.Entity<User>().HasMany(u => u.UserWordLessons)
+                .WithOne(us => us.User)
+                .HasForeignKey(us => us.UserId);
+
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Role)
                 .WithMany(r => r.Users)
@@ -59,12 +64,20 @@ namespace StoryFlow_Database
                 .WithOne(us => us.Story)
                 .HasForeignKey(us => us.StoryId);
 
+            modelBuilder.Entity<WordLesson>().HasMany(w => w.UserWordLessons)
+                .WithOne(wl => wl.WordLesson)
+                .HasForeignKey(wl => wl.WordLessonId);
+
             modelBuilder.Entity<Hobby>().HasMany(h => h.UserHobbies)
                 .WithOne(uh => uh.Hobby)
                 .HasForeignKey(uh => uh.HobbyId);
 
             modelBuilder.Entity<UserStory>()
                 .HasIndex(us => new { us.UserId, us.StoryId })
+                .IsUnique();
+
+            modelBuilder.Entity<UserWordLesson>()
+                .HasIndex(us => new { us.UserId, us.WordLessonId })
                 .IsUnique();
 
             modelBuilder.Entity<Story>()

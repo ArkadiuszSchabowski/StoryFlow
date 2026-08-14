@@ -54,7 +54,7 @@ namespace StoryFlow.Services
             }
 
 
-            var season = _seasonRepository.GetBySeason(userId, seasonId);
+            StorySeason? season = _seasonRepository.GetBySeason(userId, seasonId);
 
             GetStorySeasonDto dto = _mapper.Map<GetStorySeasonDto>(season);
 
