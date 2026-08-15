@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using StoryFlow.Exceptions;
 using StoryFlow.Interfaces;
 using StoryFlow.Interfaces.Aggregates;
-using StoryFlow.Interfaces.Repositories;
 using StoryFlow_Database.Entities;
 using StoryFlow_Shared.Models;
 
@@ -88,7 +87,7 @@ namespace StoryFlow.Services
             return dto;
         }
 
-        public async Task SaveBestResult(int wordLessonId, string? userIdClaim, int userResult)
+        public async Task SaveBestResult(int wordLessonId, string? userIdClaim, AddWordResultDto dto)
         {
             if (!int.TryParse(userIdClaim, out var userId))
             {
@@ -131,7 +130,7 @@ namespace StoryFlow.Services
             int totalWords = wordLesson.Words.Count;
             int correctWords = wordLesson.Words.Count();
 
-            double percentageScore = (double)correctWords / totalWords * 100;
+            double percentageScore = (double)dto.CorrectAnswersCount / totalWords * 100;
 
             bool isFirstAttempt;
 
@@ -150,26 +149,26 @@ namespace StoryFlow.Services
                 {
                     UserId = userId,
                     WordLessonId = wordLessonId,
-                    BestResult = userResult,
+                    BestResult = dto.Result,
                     PercentageScore = percentageScore         
                 };
 
                 await _wordRepository.SaveBestResult(userWordLesson);
             }
 
-            if (isFirstAttempt && userResult >= 50)
+            if (isFirstAttempt && dto.Result >= 50)
             {
                 user.Tickets++;
             }
 
-            if (userResult >= 50 && userWordLesson.PercentageScore < 50)
+            if (dto.Result >= 50 && userWordLesson.PercentageScore < 50)
             {
                 user.Tickets++;
             }
 
-            if (userWordLesson!.BestResult < userResult)
+            if (userWordLesson!.BestResult < dto.Result)
             {
-                userWordLesson.BestResult = userResult;
+                userWordLesson.BestResult = dto.Result;
                 userWordLesson.PercentageScore = percentageScore;
                 await _userWordLessonRepository.Update(userWordLesson);
             }

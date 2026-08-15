@@ -232,7 +232,11 @@
               {{ showSize(story.storySize) }}
             </div>
           </div>
-
+          <div class="score-item score-percentage">
+            {{
+              roundToTwoDecimals(story.userStories?.[0]?.percentageScore ?? 0)
+            }}&nbsp;%
+          </div>
           @if (story && story.storyPoint) {
             <div class="score-item">
               {{ story.userStories?.[0]?.bestResult ?? 0 }}
@@ -241,11 +245,6 @@
               <mat-icon class="mat-icon-star-color">star</mat-icon>
             </div>
           }
-          <div class="score-item score-percentage">
-            {{
-              roundToTwoDecimals(story.userStories?.[0]?.percentageScore ?? 0)
-            }}&nbsp;%
-          </div>
         </div>
 
         @if (story.storyPoint && openedStoryId === story.id && profile) {
