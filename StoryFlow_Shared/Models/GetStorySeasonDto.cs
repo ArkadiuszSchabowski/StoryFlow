@@ -7,6 +7,7 @@
         public int SeasonNumber { get; set; }
         public bool IsVisibleForUser { get; set; }
         public List<GetStoryDto> Stories { get; set; } = new();
+        public List<GetWordLessonDto> WordLessons { get; set; } = new();
         public int? MaxPoints { get; set; }
         public int? PointsRequiredToUnlock { get; set; }
     }

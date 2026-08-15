@@ -1,0 +1,142 @@
+@if (!isLessonFinished) {
+  <div
+    id="word-lesson-container"
+    class="container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
+    @if (wordLesson && wordLesson.words.length > 0) {
+      <form (ngSubmit)="submit(wordLesson)">
+        <div class="word-item">
+          <div id="progress-bar">
+            <mat-progress-bar
+              color="accent"
+              [value]="quizProgress"
+            ></mat-progress-bar>
+          </div>
+          <span class="polish-word">{{
+            wordLesson.words[firstImage].polishWord
+          }}</span>
+          <img
+            class="word-image image-standard"
+            [src]="apiUrl + wordLesson.words[firstImage].imageUrl"
+            alt=""
+          />
+          <span class="polish-word">
+            {{ getSentenceParts(wordLesson.words[firstImage].hintSentence)[0] }}
+            <mat-form-field appearance="outline" class="inline-blank">
+              <input
+                autocomplete="off"
+                matInput
+                #answerInput
+                type="text"
+                name="userAnswer"
+                [(ngModel)]="userAnswer"
+                [disabled]="isWaitingAfterWrongAnswer"
+                [ngClass]="{
+                  'background-white light-mode-text':
+                    (themeService.theme$ | async),
+                  'background-white': !(themeService.theme$ | async),
+                }"
+              />
+            </mat-form-field>
+            {{ getSentenceParts(wordLesson.words[firstImage].hintSentence)[1] }}
+          </span>
+          @if (isCorrectAnswerShow) {
+            <div class="user-answer">Your answer: {{userAnswer}}</div>
+            <div class="correct-answer">Correct answer: {{ correctAnswer }}</div>
+          }
+          @if (!isCorrectAnswerShow) {
+            <div class="submit-button-container">
+              <button
+                mat-raised-button
+                class="button-app button-standard"
+                [disabled]="isWaitingAfterWrongAnswer"
+                [ngClass]="{
+                  'light-mode-background light-mode-text':
+                    (themeService.theme$ | async),
+                  'dark-mode-background dark-mode-text': !(
+                    themeService.theme$ | async
+                  ),
+                }"
+              >
+                Dalej
+              </button>
+            </div>
+          }
+        </div>
+      </form>
+    } @else if (wordLesson) {
+      <p>Brak słów w tej lekcji.</p>
+    }
+  </div>
+}
+
+@if (isLessonFinished) {
+  <div
+    id="finish-container"
+    class="container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
+    <div class="item">Gratulacje! Ukończyłeś poprawnie całą lekcję!</div>
+
+    @if (dto.result && wordLesson?.wordPoint) {
+      <div class="item">
+        Zdobyte punkty za odpowiedzi:
+        {{ dto.result }}&nbsp;<mat-icon class="mat-icon-star-color"
+          >star</mat-icon
+        >/ {{ wordLesson?.wordPoint?.maxPoints }}&nbsp;<mat-icon
+          class="mat-icon-star-color"
+          >star</mat-icon
+        >
+      </div>
+    }
+
+    <div class="item">
+      Wynik procentowy lekcji:
+      {{ percentageScore }}&nbsp;%
+    </div>
+
+    <div id="logo-result" class="image-standard"></div>
+
+    <div class="button-container">
+      <button
+        mat-raised-button
+        id="again-button"
+        class="button-app button-standard"
+        [ngClass]="{
+          'light-mode-background light-mode-text':
+            (themeService.theme$ | async),
+          'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
+        }"
+        (click)="resetState()"
+      >
+        Spróbuj ponownie
+      </button>
+      <button
+        mat-raised-button
+        id="back-button"
+        class="button-app button-standard"
+        [ngClass]="{
+          'light-mode-background light-mode-text':
+            (themeService.theme$ | async),
+          'dark-mode-background dark-mode-text': !(themeService.theme$ | async),
+        }"
+        (click)="navigateToTextSelection()"
+      >
+        Kolejne wyzwanie
+      </button>
+    </div>
+  </div>
+}

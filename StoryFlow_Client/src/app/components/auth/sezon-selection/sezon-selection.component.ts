@@ -5,7 +5,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { LottieComponent } from 'ngx-lottie';
-import { ToastrService } from 'ngx-toastr';
 import { LoaderService } from 'src/app/_services/loader.service';
 import { StoryService } from 'src/app/_services/story.service';
 import { ThemeService } from 'src/app/_services/theme.service';
@@ -24,7 +23,7 @@ import { GetUserDto } from 'src/app/models/get-user-dto';
     ReactiveFormsModule,
     MatButtonModule,
     LottieComponent,
-    MatIconModule
+    MatIconModule,
   ],
 })
 export class SezonSelectionComponent implements OnInit {
@@ -35,10 +34,9 @@ export class SezonSelectionComponent implements OnInit {
   constructor(
     private storyService: StoryService,
     private router: Router,
-    private toastr: ToastrService,
     private userService: UserService,
     public themeService: ThemeService,
-     public loaderService: LoaderService,
+    public loaderService: LoaderService,
   ) {}
 
   ngOnInit(): void {
@@ -56,12 +54,7 @@ export class SezonSelectionComponent implements OnInit {
   }
 
   goToSeason(id: number) {
-    this.storyService.getBySeason(id).subscribe({
-      next: () => {
-        this.router.navigateByUrl(`/sezon/${id}`);
-      },
-      error: (error) => this.toastr.error(error.error),
-    });
+    this.router.navigateByUrl(`/sezon/${id}`);
   }
 
   getSeasons() {

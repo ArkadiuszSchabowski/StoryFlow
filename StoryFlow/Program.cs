@@ -47,6 +47,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IQuizService, QuizService>();
 builder.Services.AddScoped<IAggregateUserValidator, AggregateUserValidator>();
 builder.Services.AddScoped<IAggregateUserRepository, AggregateUserRepository>();
+builder.Services.AddScoped<IAggregateWordRepository, WordRepository>();
 builder.Services.AddScoped<IRepository<User>, UserRepository>();
 builder.Services.AddScoped<IEntityValidator<User>, UserEntityValidator>();
 builder.Services.AddScoped<IGetAllRepository<User>, UserRepository>();
@@ -65,8 +66,12 @@ builder.Services.AddScoped<IUpdateStars, UserRepository>();
 builder.Services.AddScoped<IAnswerRepository, AnswerRepository>();
 builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 builder.Services.AddScoped<IBlogService, BlogService>();
+builder.Services.AddScoped<IWordService, WordService>();
 builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 builder.Services.AddScoped<IBlogValidator, BlogValidator>();
+builder.Services.AddScoped<ISeasonService, SeasonService>();
+builder.Services.AddScoped<ISeasonRepository, SeasonRepository>();
+builder.Services.AddScoped<IUserWordLessonRepository, UserWordLessonRepository>();
 
 builder.Services.AddScoped<HttpClient>();
 

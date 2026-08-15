@@ -212,52 +212,9 @@ namespace StoryFlow.Services
 
             return stories;
         }
-        public async Task<List<GetStoryDto>> GetBySeason(int seasonId, string? userIdClaim)
-        {
-            if (!int.TryParse(userIdClaim, out var userId))
-            {
-                throw new UnauthorizedException("Użytkownik nie ma uprawnień do wykonania tej operacji.");
-            }
-
-            User? user = await _userRepository.Get(userId);
-
-            if (user == null)
-            {
-                throw new NotFoundException("Nie znaleziono użytkownika.");
-            }
-
-            _serviceValidator.ValidateId(seasonId);
-
-            if (seasonId == 2)
-            {
-                if (user.Stars < 750)
-                {
-                    throw new BadRequestException("Nie masz wystarczającej ilości gwiazdek, by przejść do tego sezonu.");
-                }
-            }
-
-            if (seasonId == 3)
-            {
-                if (user.Stars < 1600)
-                {
-                    throw new BadRequestException("Nie masz wystarczającej ilości gwiazdek, by przejść do tego sezonu.");
-                }
-            }
-
-
-            IQueryable<Story> query = _storyRepository.GetBySeason(userId, seasonId);
-
-            List<Story>? stories = await query.ToListAsync();
-
-            List<GetStoryDto> dto = _mapper.Map<List<GetStoryDto>>(stories);
-
-            return dto;
-        }
-
 
         public async Task<GetStoryDto> Get(int storyId, string? userIdClaim)
         {
-            //TO DO - Sprawdzic czy user ma wymagana liczbe gwiazdek aby zobaczyc historie
             if (!int.TryParse(userIdClaim, out var userId))
             {
                 throw new UnauthorizedException("Użytkownik nie ma uprawnień do wykonania tej operacji.");
