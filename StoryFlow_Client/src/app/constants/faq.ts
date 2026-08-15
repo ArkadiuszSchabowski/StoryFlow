@@ -8,24 +8,22 @@ export const FAQ: FaqSection[] = [
       {
         question: 'Jakie funkcje oferuje StoryFlow?',
         answer: `Aplikacja StoryFlow z kotką Luną to nowoczesny sposób na naukę
-          angielskiego poprzez czytanie historii. Oferuje czytanie opowiadań
-          po angielsku z możliwością tłumaczenia każdego zdania w tekście.
-          Dzięki temu nie musisz odrywać się od historii i tracić skupienia,
-          by sprawdzić znaczenie nieznanego słowa czy zwrotu. Po przeczytaniu
-          historii możesz sprawdzić swoje umiejętności językowe w quizie
-          dopasowanym do poziomu trudności danej opowieści. To także wygodny
-          sposób na codzienną naukę angielskiego — kilka minut dziennie
-          z krótką historią wystarczy, by regularnie rozwijać język.`,
+          angielskiego. Pierwszą funkcją jest czytanie historii z możliwością
+          tłumaczenia każdego zdania oraz rozwiązywanie quizów sprawdzających
+          zrozumienie tekstu. Drugą funkcją są lekcje słówek powiązane
+          z historiami, dzięki którym utrwalasz nowe słownictwo w kontekście.
+          To wygodny sposób na codzienną naukę angielskiego — kilka minut
+          dziennie wystarczy, by regularnie rozwijać język.`,
       },
       {
         question: 'Jak zdobywać gwiazdki w StoryFlow?',
-        answer: `Gwiazdki otrzymujemy w momencie odpowiedzenia na wszystkie pytania
-          quizu po przeczytanej historii. Liczba zdobytych gwiazdek zależy od
-          punktacji uwarunkowanej poziomem trudności oraz długością historii —
-          im trudniejsza i dłuższa historia, tym więcej gwiazdek możesz zdobyć.`,
+        answer: `W przypadku historii gwiazdki otrzymujesz w momencie odpowiedzenia na
+          wszystkie pytania quizu po przeczytanej historii. W przypadku lekcji
+          słownictwa gwiazdki otrzymujesz od razu za każde dobrze
+          odpowiedziane słowo.`,
       },
       {
-        question: 'Jak liczone są gwiazdki?',
+        question: 'Jak liczone są gwiazdki w opowiadaniach?',
         answer: `Liczba gwiazdek zależy od dwóch czynników: poziomu trudności historii
           oraz jej długości. Za każdą poprawną odpowiedź w quizie otrzymujesz
           punkty zależne od poziomu — od 10 punktów na poziomie A1, przez 15 na
@@ -36,24 +34,36 @@ export const FAQ: FaqSection[] = [
           poziomie zaawansowania.`,
       },
       {
+        question: 'Jak liczone są gwiazdki w lekcjach słownictwa?',
+        answer: `Za każde poprawnie odgadnięte słowo otrzymujesz 10 punktów.`,
+      },
+      {
         question: 'Po co są bilety i jaka jest ich liczba?',
         answer: `Początkowo każdy zarejestrowany użytkownik StoryFlow otrzymuje
-          cztery bilety. Dzięki biletom możesz odblokowywać kolejne historie
-          do nauki angielskiego. Gdy zdecydujesz się rozpocząć historię, Twój
-          bilet blokuje się tymczasowo na czas jej trwania. Jeśli zdobędziesz
-          przynajmniej 50% wyniku w quizie po tej historii, bilet zostaje
-          odblokowany i możesz użyć go ponownie.`,
+          cztery bilety. Dzięki biletom możesz odblokowywać kolejne
+          opowiadania oraz lekcje słownictwa. Gdy zdecydujesz się rozpocząć
+          lekcję, Twój bilet zostaje zajęty na czas jej trwania. Jeśli
+          zdobędziesz przynajmniej 50% wyniku w quizie po historii lub
+          przynajmniej 50% w lekcji słownictwa, bilet zostaje zwolniony
+          i możesz użyć go ponownie.`,
       },
       {
         question: 'Mam zablokowane wszystkie bilety. Jak je odblokować?',
-        answer: `W takim przypadku wejdź w historię, która została już przez Ciebie
-          odkryta, i rozwiąż powiązany z nią quiz. Jeśli zdobędziesz
-          przynajmniej 50% poprawnych odpowiedzi, bilet zostanie odblokowany
-          i wróci do puli dostępnych biletów.`,
+        answer: `W takim przypadku wejdź w opowiadanie, które zostało już przez Ciebie
+          odkryte, i rozwiąż powiązany z nim quiz, lub w odkrytą przez Ciebie
+          lekcję słownictwa. Jeśli zdobędziesz przynajmniej 50% poprawnych
+          odpowiedzi, bilet zostanie odblokowany i wróci do puli dostępnych
+          biletów.`,
       },
       {
         question: 'Niektóre sezony są dla mnie zablokowane. Jak je odblokować?',
-        answer: `Aby odblokować kolejny sezon historii w StoryFlow, musisz zdobyć określoną liczbę gwiazdek w poprzednich sezonach. Kolejne sezony wprowadzają różne kategorie tematyczne, dzięki czemu poszerzasz słownictwo w wielu obszarach — czasem na podobnym poziomie trudności, a czasem historie stają się bardziej wymagające. Dzięki temu systematycznie rozwijasz znajomość języka angielskiego, krok po kroku.`,
+        answer: `Aby odblokować kolejny sezon historii w StoryFlow, musisz zdobyć
+          określoną liczbę gwiazdek w poprzednich sezonach. Kolejne sezony
+          wprowadzają różne kategorie tematyczne, dzięki czemu poszerzasz
+          słownictwo w wielu obszarach — czasem na podobnym poziomie
+          trudności, a czasem historie stają się bardziej wymagające. Dzięki
+          temu systematycznie rozwijasz znajomość języka angielskiego, krok
+          po kroku.`,
       },
     ],
   },
@@ -72,7 +82,7 @@ export const FAQ: FaqSection[] = [
       {
         question: 'Czy mogę wesprzeć StoryFlow?',
         answer: `<div class="coffee-container">
-        <div class=coffee-item>Tak! Jeśli podoba Ci się StoryFlow i chcesz pomóc mi go dalej rozwijać, możesz postawić mi wirtualną kawę. Dziękuję za wsparcie!</div>
+        <div class="coffee-item">Tak! Jeśli podoba Ci się StoryFlow i chcesz pomóc mi go dalej rozwijać, możesz postawić mi wirtualną kawę. Dziękuję za wsparcie!</div>
         <img
         id="coffee-logo-faq"
         class="coffee-image"
@@ -120,14 +130,14 @@ export const FAQ: FaqSection[] = [
         question:
           'Dlaczego strona czasem wolniej się uruchamia po dłuższej przerwie?',
         answer: `Aplikacja StoryFlow korzysta obecnie z darmowego planu bazy
-    danych. Tego typu darmowe usługi hostingowe "usypiają" serwer po
-    okresie bezczynności, dzięki czemu po dłuższej przerwie w
-    odwiedzinach strona może wczytywać się kilka-kilkanaście sekund
-    dłużej niż zwykle — to czas potrzebny na ponowne "wybudzenie"
-    bazy danych. Kolejne odwiedziny w krótkim czasie powinny być już
-    znacznie szybsze. Wraz z rosnącą liczbą użytkowników planujemy
-    przejść na płatny plan hostingu, co całkowicie wyeliminuje ten
-    problem.`,
+          danych. Tego typu darmowe usługi hostingowe "usypiają" serwer po
+          okresie bezczynności, dzięki czemu po dłuższej przerwie w
+          odwiedzinach strona może wczytywać się kilka-kilkanaście sekund
+          dłużej niż zwykle — to czas potrzebny na ponowne "wybudzenie"
+          bazy danych. Kolejne odwiedziny w krótkim czasie powinny być już
+          znacznie szybsze. Wraz z rosnącą liczbą użytkowników planujemy
+          przejść na płatny plan hostingu, co całkowicie wyeliminuje ten
+          problem.`,
       },
     ],
   },
