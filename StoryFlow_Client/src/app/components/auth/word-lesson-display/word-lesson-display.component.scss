@@ -17,13 +17,15 @@
 }
 
 .polish-word {
-  font-size: 20px;
+  font-size: 14px;
   font-weight: bold;
-  margin-top: 20px;
+  margin-top: 5px;
+  height: auto;
+  padding: 0 !important;
 }
 
 .word-image {
-  margin: 20px 0;
+  margin: 5px 0;
 }
 
 #logo-result {
@@ -35,8 +37,8 @@
 
 .word-image {
   display: flex;
-  width: 200px;
-  height: 200px;
+  width: 120px;
+  height: 120px;
 }
 
 .item {
@@ -100,6 +102,11 @@
     display: flex;
     width: 300px;
     height: 300px;
+    margin: 20px 0;
+  }
+  .polish-word {
+    font-size: 20px;
+    margin-top: 20px;
   }
 }
 
@@ -132,5 +139,10 @@
     display: flex;
     width: 300px;
     height: 300px;
+    margin: 20px 0;
+  }
+  .polish-word {
+    font-size: 20px;
+    margin-top: 20px;
   }
 }
