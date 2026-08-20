@@ -40,11 +40,15 @@
   width: 120px;
   height: 120px;
 }
-
+#finish-word-lesson-title{
+  margin-bottom: 10px;
+}
 .item {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  text-align: center;
   font-weight: bold;
   width: 100%;
   height: auto;

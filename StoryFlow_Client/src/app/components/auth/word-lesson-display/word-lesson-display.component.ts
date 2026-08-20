@@ -75,13 +75,15 @@ export class WordLessonDisplayComponent implements OnInit, AfterViewInit {
   }
 
   submit(wordLesson: GetWordLessonDto) {
+    window.scrollTo(0, 70);
     if (this.isWaitingAfterWrongAnswer) {
       return;
     }
 
-    const userAnswer = this.userAnswer.toLowerCase();
-    this.correctAnswer =
-      wordLesson.words[this.firstImage].englishWord!.toLowerCase();
+    const userAnswer = this.userAnswer.toLowerCase().trim();
+    this.correctAnswer = wordLesson.words[this.firstImage]
+      .englishWord!.toLowerCase()
+      .trim();
 
     if (userAnswer !== this.correctAnswer) {
       this.isCorrectAnswerShow = true;

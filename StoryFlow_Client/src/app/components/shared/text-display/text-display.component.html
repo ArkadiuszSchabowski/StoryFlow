@@ -12,7 +12,8 @@
   @if (
     (loaderService.loading$ | async) &&
     (authService.currentUserSource$ | async) &&
-    !isQuizFinishied && story
+    !isQuizFinishied &&
+    story
   ) {
     <div
       id="loader-container"
@@ -227,6 +228,7 @@
                     @for (answer of currentQuestion.answers; track answer.id) {
                       <div id="answer-button">
                         <button
+                          [disableRipple]="true"
                           mat-raised-button
                           [class.disabled]="answerSubmitted"
                           [class.correct]="answer.isCorrect && answerSubmitted"
@@ -313,11 +315,13 @@
         ),
       }"
     >
-      <div class="item">Gratulacje! Ukończyłeś quiz!</div>
+      <div id="finish-lesson-title" class="item">
+        Gratulacje! Ukończyłeś quiz!
+      </div>
 
       @if (quizResult && story) {
         <div class="item">
-          Zdobyte punkty za odpowiedzi:
+          Zdobyte punkty:
           {{
             quizResult.points -
               (story.storyPoint!.bonusPointsForStoryLength ?? 0)

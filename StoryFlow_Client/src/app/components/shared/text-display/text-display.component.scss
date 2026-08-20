@@ -161,9 +161,13 @@
 #loader-ticket-text {
   font-size: 20px;
 }
+#finish-lesson-title{
+  margin-bottom: 10px;
+}
 
 .item {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   font-weight: bold;
