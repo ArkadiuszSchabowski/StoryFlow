@@ -89,11 +89,11 @@
       ),
     }"
   >
-    <div class="item">Gratulacje! Ukończyłeś poprawnie całą lekcję!</div>
+    <div id="finish-word-lesson-title" class="item">Gratulacje! Ukończyłeś poprawnie całą lekcję!</div>
 
     @if (dto.result && wordLesson?.wordPoint) {
       <div class="item">
-        Zdobyte punkty za odpowiedzi:
+        Zdobyte punkty:
         {{ dto.result }}&nbsp;<mat-icon class="mat-icon-star-color"
           >star</mat-icon
         >/ {{ wordLesson?.wordPoint?.maxPoints }}&nbsp;<mat-icon
