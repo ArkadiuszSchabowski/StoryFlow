@@ -11,7 +11,7 @@
     }"
   >
     @if (wordLesson && wordLesson.words.length > 0) {
-      <form (ngSubmit)="submit(wordLesson)">
+      <form (ngSubmit)="submit(wordLesson)" id="form">
         <div class="word-item">
           <div id="progress-bar">
             <mat-progress-bar

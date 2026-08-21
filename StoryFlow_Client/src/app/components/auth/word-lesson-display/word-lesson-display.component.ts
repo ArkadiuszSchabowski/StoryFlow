@@ -75,7 +75,9 @@ export class WordLessonDisplayComponent implements OnInit, AfterViewInit {
   }
 
   submit(wordLesson: GetWordLessonDto) {
-    window.scrollTo(0, 65);
+    if (window.innerWidth < 768) {
+      window.scrollTo(0, 56);
+    }
     if (this.isWaitingAfterWrongAnswer) {
       return;
     }
@@ -157,7 +159,9 @@ export class WordLessonDisplayComponent implements OnInit, AfterViewInit {
   get(id: number) {
     this.wordLessonService.get(id).subscribe({
       next: (response) => {
-        window.scrollTo(0, 65);
+        if (window.innerWidth < 768) {
+          window.scrollTo(0, 56);
+        }
         this.wordLesson = response;
         this.totalWordsCount = response.words.length;
         this.focusInput();

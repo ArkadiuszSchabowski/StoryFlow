@@ -1,10 +1,46 @@
 @use "@angular/material" as mat;
 @use "src/styles" as theme;
 
-#main-container{
+#main-container {
   padding: 0;
   margin: 0;
 }
+
+#loader-story-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#loader-story-text {
+  font-size: 20px;
+  padding-top: 20px;
+}
+
+#loader-story-button {
+  margin-top: 10px;
+}
+
+#loader-story-logo {
+  display: flex;
+  width: 350px;
+  min-width: 350px;
+  height: 350px;
+  min-height: 350px;
+  background-image: url(../../../../assets/kitty/kitty3.webp);
+  margin-top: 20px;
+}
+
+#loader-quiz-finished-text {
+  font-size: 20px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  margin-bottom: 20px;
+}
+
+#loader-quiz-finished-container {
+  padding: 50px 20px 0 20px;
+}
+
 #quiz-container-wrapper,
 #text-display-subcontainer {
   display: flex;
@@ -76,6 +112,7 @@
 
 #quiz-container {
   display: flex;
+  justify-content: flex-start;
   width: 100%;
   height: auto;
 }
@@ -96,24 +133,11 @@
   padding: 20px 0;
 }
 
-#loader-text {
-  font-size: 20px;
-  padding-top: 20px;
-  padding-bottom: 30px;
-}
-
-#loader-container {
-  padding: 50px 20px 0 20px;
-}
-
 #logo-result {
   display: flex;
   height: 300px;
   width: 300px;
-}
-
-#loader-button {
-  margin-top: 10px;
+  background-image: url(../../../../assets/kitty/kitty2.webp);
 }
 
 .question-card {
@@ -136,32 +160,7 @@
   margin-top: 20px;
 }
 
-#loader-container {
-  padding: 50px 20px 0 20px;
-}
-
-#loader-text {
-  margin-bottom: 20px;
-}
-
-#logo-result {
-  background-image: url(../../../../assets/kitty/kitty2.webp);
-}
-
-#loader-ticket-logo {
-  display: flex;
-  width: 350px;
-  min-width: 350px;
-  height: 350px;
-  min-height: 350px;
-  background-image: url(../../../../assets/kitty/kitty3.webp);
-  margin-top: 20px;
-}
-
-#loader-ticket-text {
-  font-size: 20px;
-}
-#finish-lesson-title{
+#finish-lesson-title {
   margin-bottom: 10px;
 }
 
@@ -213,6 +212,9 @@
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
+  #loader-story-text {
+    padding: 20px 100px 0 100px;
+  }
   #text-display-container {
     display: flex;
     flex-direction: column;
@@ -249,7 +251,7 @@
     height: 350px;
     width: 350px;
   }
-  #loader-container {
+  #loader-quiz-finished-container {
     padding-left: 100px;
     padding-right: 100px;
   }
@@ -265,6 +267,9 @@
 }
 
 @media screen and (min-width: 1200px) {
+  #loader-story-text {
+    padding: 20px 250px 0 250px;
+  }
   #text-display-container {
     display: flex;
     flex-direction: column;
@@ -302,7 +307,7 @@
     height: 350px;
     width: 350px;
   }
-  #loader-container {
+  #loader-quiz-finished-container {
     padding-left: 150px;
     padding-right: 150px;
   }
