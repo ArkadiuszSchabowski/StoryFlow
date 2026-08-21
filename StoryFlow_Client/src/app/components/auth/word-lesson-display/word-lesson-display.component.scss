@@ -1,11 +1,18 @@
 #word-lesson-container {
   display: flex;
   justify-content: flex-start;
+  padding: 40px;
+}
+
+#form{
+  display: flex;
+  width: 100%;
+  height: 100%;
 }
 
 #progress-bar {
   display: flex;
-  width: 300px;
+  width: 100%;
   height: auto;
 }
 
@@ -14,6 +21,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .polish-word {
@@ -78,13 +87,6 @@
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
-  #word-lesson-container {
-    justify-content: center;
-  }
-  #progress-bar {
-    width: 400px;
-  }
-
   #logo-result {
     height: 350px;
     width: 350px;
@@ -115,13 +117,6 @@
 }
 
 @media screen and (min-width: 1200px) {
-  #word-lesson-container {
-    justify-content: center;
-  }
-  #progress-bar {
-    width: 500px;
-  }
-
   #logo-result {
     height: 350px;
     width: 350px;

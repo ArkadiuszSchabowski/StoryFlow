@@ -16,7 +16,7 @@
     story
   ) {
     <div
-      id="loader-container"
+      id="loader-story-container"
       class="container loader-ticket-container"
       [ngClass]="{
         'light-mode-background-primary light-mode-text':
@@ -26,15 +26,15 @@
         ),
       }"
     >
-      <div id="loader-ticket-text">
+      <div id="loader-story-text">
         Twój bilet jest teraz w użyciu. Odpowiedz na wszystkie pytania, aby
         otrzymać punkty za historię. Jeśli uzyskasz minimum 50% punktów to bilet
-        wróci do Ciebie!...
+        wróci do Ciebie!
       </div>
-      <div id="loader-ticket-logo" class="image-standard"></div>
+      <div id="loader-story-logo" class="image-standard"></div>
       <button
         mat-raised-button
-        id="loader-button"
+        id="loader-story-button"
         class="button-app button-standard"
         [ngClass]="{
           'light-mode-background light-mode-text':
@@ -286,7 +286,7 @@
 
   @if (isQuizFinishied && (loaderService.loading$ | async)) {
     <div
-      id="loader-container"
+      id="loader-quiz-finished-container"
       class="container"
       [ngClass]="{
         'light-mode-background-primary light-mode-text':
@@ -296,7 +296,7 @@
         ),
       }"
     >
-      <div id="loader-text">Chwileczkę, podliczamy punkty..</div>
+      <div id="loader-quiz-finished-text">Chwileczkę, podliczamy punkty..</div>
       <div class="loader-logo">
         <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>
       </div>
