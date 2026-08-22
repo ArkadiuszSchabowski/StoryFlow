@@ -35,12 +35,12 @@ namespace StoryFlow.Repositories
             return _context.Stories.Include(s => s.UserStories.Where(us => us.UserId == userId)).Include(s => s.Sentences).Include(s => s.Quiz!).Include(s => s.StoryPoint).Include(s => s.StorySeason).Where(s => s.StorySeasonId == seasonId).OrderBy(s => s.OrderInSeason).AsQueryable();
         }
 
-        public async Task<List<StorySeason>> GetStorySeasonsAsync()
+        public async Task<List<StorySeason>> GetStorySeasonsAsync(int userId)
         {
             return await _context.StorySeazons
                 .Include(s => s.Stories).ThenInclude(ss => ss.StoryPoint)
-                .Include(s => s.Stories).ThenInclude(s => s.UserStories)
-                .Include(s => s.WordLessons).ThenInclude(wl => wl.UserWordLessons)
+                .Include(s => s.Stories).ThenInclude(s => s.UserStories.Where(us => us.UserId == userId))
+                .Include(s => s.WordLessons).ThenInclude(wl => wl.UserWordLessons.Where(us => us.UserId == userId))
                 .ToListAsync();
         }
 
