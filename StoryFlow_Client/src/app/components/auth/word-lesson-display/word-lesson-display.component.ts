@@ -50,6 +50,7 @@ export class WordLessonDisplayComponent implements OnInit, AfterViewInit {
   correctAnswer = '';
   isWaitingAfterWrongAnswer = false;
   totalWordsCount = 0;
+  isWordLoader = true;
 
   constructor(
     public themeService: ThemeService,
@@ -64,6 +65,11 @@ export class WordLessonDisplayComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getStoryIdFromRoute();
+  }
+
+  hideLoader() {
+    this.isWordLoader = false;
+    this.resetState();
   }
 
   private focusInput(): void {

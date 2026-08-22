@@ -50,18 +50,31 @@
         >
       </div>
     </div>
+    @if (!seasonResponse) {
+      <div class="container"></div>
+    }
     @if (seasonResponse) {
       @if (seasonResponse.name) {
         <h1 id="h1-title">{{ seasonResponse.name }}</h1>
       }
-    }
 
-    @if (storyLessons.length === 0) {
-      <div id="no-story-information" class="container">
-        <div class="subtitle">
-          Nie masz wystarczającej ilości gwiazdek, by przejść do tego sezonu.
+      @if (storyLessons.length === 0) {
+        <div id="no-story-information" class="container">
+          @if (
+            profile && profile.stars && seasonResponse.pointsRequiredToUnlock
+          ) {
+            @if (
+              storyLessons.length === 0 &&
+              profile.stars < seasonResponse.pointsRequiredToUnlock
+            ) {
+              <div class="subtitle">
+                Nie masz wystarczającej ilości gwiazdek, by przejść do tego
+                sezonu.
+              </div>
+            }
+          }
         </div>
-      </div>
+      }
     }
 
     @for (wordLesson of wordLessons; track wordLesson.id) {

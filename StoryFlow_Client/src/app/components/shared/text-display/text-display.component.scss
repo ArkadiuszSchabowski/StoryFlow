@@ -9,11 +9,13 @@
 #loader-story-container {
   display: flex;
   justify-content: flex-start;
+  padding-top: 60px;
 }
 
 #loader-story-text {
   font-size: 20px;
   padding-top: 20px;
+  text-align: center;
 }
 
 #loader-story-button {
@@ -268,7 +270,7 @@
 
 @media screen and (min-width: 1200px) {
   #loader-story-text {
-    padding: 20px 250px 0 250px;
+    padding: 20px 100px 0 100px;
   }
   #text-display-container {
     display: flex;

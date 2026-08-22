@@ -27,9 +27,13 @@
       }"
     >
       <div id="loader-story-text">
-        Twój bilet jest teraz w użyciu. Odpowiedz na wszystkie pytania, aby
-        otrzymać punkty za historię. Jeśli uzyskasz minimum 50% punktów to bilet
-        wróci do Ciebie!
+        <div class="loader-story-text-item">
+          Twój bilet jest teraz w użyciu. Odpowiedz na wszystkie pytania, aby
+          otrzymać punkty za historię.
+        </div>
+        <div class="loader-story-text-item">
+          Jeśli uzyskasz minimum 50% punktów za lekcję to bilet wróci do Ciebie!
+        </div>
       </div>
       <div id="loader-story-logo" class="image-standard"></div>
       <button
@@ -248,7 +252,7 @@
                             ),
                           }"
                           (click)="
-                            selectedAnswers[currentQuestion.id] = answer.id
+                            onAnswerClick($event, currentQuestion.id, answer.id)
                           "
                         >
                           {{ answer.text }}

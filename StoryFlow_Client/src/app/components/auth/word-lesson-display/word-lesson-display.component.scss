@@ -1,7 +1,32 @@
 #word-lesson-container {
   display: flex;
   justify-content: flex-start;
-  padding: 40px;
+  padding-top: 40px;
+}
+
+#loader-word-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#loader-word-text {
+  font-size: 20px;
+  padding-top: 20px;
+  text-align: center;
+}
+
+#loader-word-button {
+  margin-top: 10px;
+}
+
+#loader-word-logo {
+  display: flex;
+  width: 350px;
+  min-width: 350px;
+  height: 350px;
+  min-height: 350px;
+  background-image: url(../../../../assets/kitty/kitty3.webp);
+  margin-top: 20px;
 }
 
 #form{
