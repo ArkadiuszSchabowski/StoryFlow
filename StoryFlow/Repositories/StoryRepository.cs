@@ -41,6 +41,7 @@ namespace StoryFlow.Repositories
                 .Include(s => s.Stories).ThenInclude(ss => ss.StoryPoint)
                 .Include(s => s.Stories).ThenInclude(s => s.UserStories.Where(us => us.UserId == userId))
                 .Include(s => s.WordLessons).ThenInclude(wl => wl.UserWordLessons.Where(us => us.UserId == userId))
+                .Include(s => s.WordLessons).ThenInclude(wl => wl.WordPoint)
                 .ToListAsync();
         }
 
