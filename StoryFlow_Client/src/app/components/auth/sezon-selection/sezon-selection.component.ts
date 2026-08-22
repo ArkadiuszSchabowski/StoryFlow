@@ -9,6 +9,7 @@ import { LoaderService } from 'src/app/_services/loader.service';
 import { StoryService } from 'src/app/_services/story.service';
 import { ThemeService } from 'src/app/_services/theme.service';
 import { UserService } from 'src/app/_services/user.service';
+import { GetStorySeasonDto } from 'src/app/models/get-story-season-dto';
 import { GetStoryViewDto } from 'src/app/models/get-story-view-dto';
 import { GetUserDto } from 'src/app/models/get-user-dto';
 
@@ -27,7 +28,7 @@ import { GetUserDto } from 'src/app/models/get-user-dto';
   ],
 })
 export class SezonSelectionComponent implements OnInit {
-  seasons: any;
+  seasons: GetStorySeasonDto[] = [];
   stories: GetStoryViewDto[] = [];
   profile: GetUserDto | undefined;
 
@@ -57,10 +58,29 @@ export class SezonSelectionComponent implements OnInit {
     this.router.navigateByUrl(`/sezon/${id}`);
   }
 
+  countUserResult(season: GetStorySeasonDto): number {
+    let storySum = 0;
+    season.stories.forEach((story) => {
+      story.userStories.forEach((us) => {
+        storySum += us.bestResult;
+      });
+    });
+
+    let wordLessonSum = 0;
+    season.wordLessons.forEach((wordLesson) => {
+      wordLesson.userWordLessons.forEach((uwl) => {
+        wordLessonSum += uwl.bestResult;
+      });
+    });
+
+    return storySum + wordLessonSum;
+  }
+
   getSeasons() {
     this.storyService.getSeasons().subscribe({
       next: (response) => {
         this.seasons = response;
+        
       },
       error: (error) => console.log(error),
     });

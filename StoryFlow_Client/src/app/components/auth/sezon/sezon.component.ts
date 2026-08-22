@@ -92,6 +92,24 @@ export class SezonComponent implements OnInit {
     });
   }
 
+  countUserResult(season: GetStorySeasonDto): number {
+    let storySum = 0;
+    season.stories.forEach((story) => {
+      story.userStories.forEach((us) => {
+        storySum += us.bestResult;
+      });
+    });
+
+    let wordLessonSum = 0;
+    season.wordLessons.forEach((wordLesson) => {
+      wordLesson.userWordLessons.forEach((uwl) => {
+        wordLessonSum += uwl.bestResult;
+      });
+    });
+
+    return storySum + wordLessonSum;
+  }
+
   getBySeason(seasonId: number) {
     this.seasonService.getBySeason(seasonId).subscribe({
       next: (response) => {
@@ -129,12 +147,10 @@ export class SezonComponent implements OnInit {
     });
   }
 
-    getIconForWordLesson(wordLessonId: number): string {
-
+  getIconForWordLesson(wordLessonId: number): string {
     const userWordLesson = this.wordLessons
       .flatMap((wl) => wl.userWordLessons ?? [])
       .find((uwl) => uwl.wordLessonId === wordLessonId);
-
 
     if (userWordLesson == null && this.profile?.tickets == 0) {
       return 'lock';
@@ -146,7 +162,10 @@ export class SezonComponent implements OnInit {
     if (userWordLesson?.percentageScore < 50) {
       return 'replay';
     }
-    if (userWordLesson?.percentageScore >= 50 && userWordLesson?.percentageScore < 100)
+    if (
+      userWordLesson?.percentageScore >= 50 &&
+      userWordLesson?.percentageScore < 100
+    )
       return 'thumb_up';
 
     if (userWordLesson?.percentageScore === 100) {

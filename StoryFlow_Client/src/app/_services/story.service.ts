@@ -9,6 +9,7 @@ import { GenerateStoryDto } from '../models/generate-story-dto';
 import { GeminiResponse } from '../models/gemini-response';
 import { AddStoryDto } from '../models/add-story-dto';
 import { AuthService } from './auth.service';
+import { GetStorySeasonDto } from '../models/get-story-season-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +39,7 @@ export class StoryService {
       Authorization: `Bearer ${token}`,
     };
 
-    return this.http.get(this.apiUrl + 'story/season', { headers });
+    return this.http.get<GetStorySeasonDto[]>(this.apiUrl + 'story/season', { headers });
   }
 
   getWelcomeStory(){

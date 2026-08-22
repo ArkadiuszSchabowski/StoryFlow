@@ -55,7 +55,15 @@
     }
     @if (seasonResponse) {
       @if (seasonResponse.name) {
-        <h1 id="h1-title">{{ seasonResponse.name }}</h1>
+        <div id="season-title-and-result">
+          <h1 id="h1-title">{{ seasonResponse.name }}</h1>
+          <div class="season-result">
+            {{ countUserResult(seasonResponse)
+            }}<mat-icon class="mat-icon-star-color">star</mat-icon
+            >&nbsp;/&nbsp;{{ seasonResponse.maxPoints
+            }}<mat-icon class="mat-icon-star-color">star</mat-icon>
+          </div>
+        </div>
       }
 
       @if (storyLessons.length === 0) {
