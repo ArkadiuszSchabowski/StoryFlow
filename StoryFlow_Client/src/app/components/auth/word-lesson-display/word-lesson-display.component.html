@@ -10,74 +10,122 @@
       ),
     }"
   >
-    @if (wordLesson && wordLesson.words.length > 0) {
-      <form (ngSubmit)="submit(wordLesson)" id="form">
-        <div class="word-item">
-          <div id="progress-bar">
-            <mat-progress-bar
-              color="accent"
-              [value]="quizProgress"
-            ></mat-progress-bar>
+    @if (isWordLoader) {
+      <div
+        id="loader-word-container"
+        class="container loader-ticket-container"
+        [ngClass]="{
+          'light-mode-background-primary light-mode-text':
+            (themeService.theme$ | async),
+          'dark-mode-background-primary dark-mode-text': !(
+            themeService.theme$ | async
+          ),
+        }"
+      >
+        <div id="loader-word-text">
+          <div class="loader-word-text-item">
+            Twój bilet jest teraz w użyciu. Uzupełnij brakujące słowa.
           </div>
-          <span class="polish-word">{{
-            wordLesson.words[firstImage].polishWord
-          }}</span>
-          <img
-            class="word-image image-standard"
-            [src]="apiUrl + wordLesson.words[firstImage].imageUrl"
-            alt=""
-          />
-          <span class="polish-word">
-            {{ getSentenceParts(wordLesson.words[firstImage].hintSentence)[0] }}
-            <mat-form-field appearance="outline" class="inline-blank">
-              <input
-                autocomplete="off"
-                matInput
-                #answerInput
-                type="text"
-                name="userAnswer"
-                [(ngModel)]="userAnswer"
-                [disabled]="isWaitingAfterWrongAnswer"
-                [ngClass]="{
-                  'background-white light-mode-text':
-                    (themeService.theme$ | async),
-                  'background-white': !(themeService.theme$ | async),
-                }"
-              />
-            </mat-form-field>
-            {{ getSentenceParts(wordLesson.words[firstImage].hintSentence)[1] }}
-          </span>
-          @if (isCorrectAnswerShow) {
-            <div class="user-answer">Your answer: {{userAnswer}}</div>
-            <div class="correct-answer">Correct answer: {{ correctAnswer }}</div>
-          }
-          @if (!isCorrectAnswerShow) {
-            <div class="submit-button-container">
-              <button
-                mat-raised-button
-                class="button-app button-standard"
-                [disabled]="isWaitingAfterWrongAnswer"
-                [ngClass]="{
-                  'light-mode-background light-mode-text':
-                    (themeService.theme$ | async),
-                  'dark-mode-background dark-mode-text': !(
-                    themeService.theme$ | async
-                  ),
-                }"
-              >
-                Dalej
-              </button>
-            </div>
-          }
+          <div class="loader-word-text-item">
+            Jeśli uzyskasz minimum 50% punktów za lekcję to bilet wróci do
+            Ciebie!
+          </div>
         </div>
-      </form>
-    } @else if (wordLesson) {
-      <p>Brak słów w tej lekcji.</p>
+        <div id="loader-word-logo" class="image-standard"></div>
+        <button
+          mat-raised-button
+          id="loader-word-button"
+          class="button-app button-standard"
+          [ngClass]="{
+            'light-mode-background light-mode-text':
+              (themeService.theme$ | async),
+            'dark-mode-background dark-mode-text': !(
+              themeService.theme$ | async
+            ),
+          }"
+          (click)="hideLoader()"
+        >
+          Dalej
+        </button>
+      </div>
+    }
+
+    @if (!isWordLoader) {
+      @if (wordLesson && wordLesson.words.length > 0) {
+        <form (ngSubmit)="submit(wordLesson)" id="form">
+          <div class="word-item">
+            <div id="progress-bar">
+              <mat-progress-bar
+                color="accent"
+                [value]="quizProgress"
+              ></mat-progress-bar>
+            </div>
+            <span class="polish-word">{{
+              wordLesson.words[firstImage].polishWord
+            }}</span>
+            <img
+              class="word-image image-standard"
+              [src]="apiUrl + wordLesson.words[firstImage].imageUrl"
+              alt=""
+            />
+            <span class="polish-word">
+              {{
+                getSentenceParts(wordLesson.words[firstImage].hintSentence)[0]
+              }}
+              <mat-form-field appearance="outline" class="inline-blank">
+                <input
+                  autocomplete="off"
+                  matInput
+                  #answerInput
+                  type="text"
+                  name="userAnswer"
+                  [(ngModel)]="userAnswer"
+                  [disabled]="isWaitingAfterWrongAnswer"
+                  [ngClass]="{
+                    'background-white light-mode-text':
+                      (themeService.theme$ | async),
+                    'background-white': !(themeService.theme$ | async),
+                  }"
+                />
+              </mat-form-field>
+              {{
+                getSentenceParts(wordLesson.words[firstImage].hintSentence)[1]
+              }}
+            </span>
+            @if (isCorrectAnswerShow) {
+              <div class="user-answer">Your answer: {{ userAnswer }}</div>
+              <div class="correct-answer">
+                Correct answer: {{ correctAnswer }}
+              </div>
+            }
+            @if (!isCorrectAnswerShow) {
+              <div class="submit-button-container">
+                <button
+                  mat-raised-button
+                  class="button-app button-standard"
+                  [disabled]="isWaitingAfterWrongAnswer"
+                  [ngClass]="{
+                    'light-mode-background light-mode-text':
+                      (themeService.theme$ | async),
+                    'dark-mode-background dark-mode-text': !(
+                      themeService.theme$ | async
+                    ),
+                  }"
+                >
+                  Dalej
+                </button>
+              </div>
+            }
+          </div>
+        </form>
+      } @else if (wordLesson) {
+        <p>Brak słów w tej lekcji.</p>
+      }
     }
   </div>
 }
 
-@if (isLessonFinished) {
+@if (isLessonFinished && !isWordLoader) {
   <div
     id="finish-container"
     class="container"
@@ -89,7 +137,9 @@
       ),
     }"
   >
-    <div id="finish-word-lesson-title" class="item">Gratulacje! Ukończyłeś poprawnie całą lekcję!</div>
+    <div id="finish-word-lesson-title" class="item">
+      Gratulacje! Ukończyłeś poprawnie całą lekcję!
+    </div>
 
     @if (dto.result && wordLesson?.wordPoint) {
       <div class="item">
