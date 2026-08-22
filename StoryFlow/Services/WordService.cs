@@ -156,12 +156,14 @@ namespace StoryFlow.Services
                 await _wordRepository.SaveBestResult(userWordLesson);
             }
 
-            if (isFirstAttempt && dto.Result >= 50)
+            if (isFirstAttempt)
             {
-                user.Tickets++;
+                if (dto.Result >= 50)
+                {
+                    user.Tickets++;
+                }
             }
-
-            if (dto.Result >= 50 && userWordLesson.PercentageScore < 50)
+            else if (dto.Result >= 50 && userWordLesson.BestResult < 50)
             {
                 user.Tickets++;
             }
