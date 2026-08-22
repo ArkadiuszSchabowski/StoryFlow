@@ -182,7 +182,8 @@ namespace StoryFlow.Services
 
             foreach (var season in seasonsVisibleForUser)
             {
-                season.MaxPoints = season.Stories.Sum(s => s.StoryPoint?.MaxPoints ?? 0);
+                season.MaxPoints = season.Stories.Sum(s => s.StoryPoint?.MaxPoints ?? 0) +
+                    season.WordLessons.Sum(wl => wl.WordPoint!.MaxPoints);
             }
 
             List<GetStorySeasonDto> dto = _mapper.Map<List<GetStorySeasonDto>>(seasonsVisibleForUser);
