@@ -59,7 +59,6 @@ export class TextDisplayComponent implements OnInit {
   answerSubmitted = false;
   isQuizFinishied = false;
   quizResult: QuizResult | null = null;
-  private lastClickedButton: HTMLElement | null = null;
 
   get currentQuestion() {
     return this.quiz?.questions[this.currentQuestionIndex];
@@ -102,27 +101,19 @@ export class TextDisplayComponent implements OnInit {
     });
   }
 
-  onAnswerClick(event: MouseEvent, questionId: number, answerId: number) {
-    this.selectedAnswers[questionId] = answerId;
-    this.lastClickedButton = event.currentTarget as HTMLElement;
-  }
-
-  checkAnswer() {
-    this.answerSubmitted = true;
-
-    const questionId = this.quiz!.questions[this.currentQuestionIndex].id;
-    const answerId = this.selectedAnswers[questionId];
-
-    if (this.lastClickedButton) {
-      const btn = this.lastClickedButton;
-      requestAnimationFrame(() => {
-        void btn.offsetHeight;
-        btn.style.transform = 'translateZ(0)';
-        requestAnimationFrame(() => {
-          btn.style.transform = '';
-        });
-      });
+  /**
+   * Obsługa kliknięcia w odpowiedź w quizie.
+   * Zwykły <button> (bez mat-raised-button) renderuje background-color
+   * natychmiast, bez pośrednich warstw MDC (ripple/state-layer), które
+   * potrafiły "zamrozić" wygląd przycisku do czasu kolejnej interakcji.
+   */
+  selectAnswer(answerId: number) {
+    if (this.answerSubmitted || !this.currentQuestion) {
+      return;
     }
+
+    this.selectedAnswers[this.currentQuestion.id] = answerId;
+    this.answerSubmitted = true;
   }
 
   showLoader() {

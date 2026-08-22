@@ -221,66 +221,60 @@
               ></mat-progress-bar>
               <h1 class="title">Quiz - {{ story.englishTitle }}</h1>
 
-              <form (ngSubmit)="checkAnswer()">
-                @if (currentQuestion) {
-                  <div class="question-card">
-                    <h3 class="question-text">
-                      {{ currentQuestionIndex + 1 }}.
-                      {{ currentQuestion.questionText }}
-                    </h3>
+              @if (currentQuestion) {
+                <div class="question-card">
+                  <h3 class="question-text">
+                    {{ currentQuestionIndex + 1 }}.
+                    {{ currentQuestion.questionText }}
+                  </h3>
 
-                    @for (answer of currentQuestion.answers; track answer.id) {
-                      <div id="answer-button">
-                        <button
-                          [disableRipple]="true"
-                          mat-raised-button
-                          [class.disabled]="answerSubmitted"
-                          [class.correct]="answer.isCorrect && answerSubmitted"
-                          [class.wrong]="
-                            selectedAnswers[currentQuestion.id] === answer.id &&
-                            !answer.isCorrect &&
-                            answerSubmitted
-                          "
-                          [disabled]="answerSubmitted"
-                          type="submit"
-                          class="button-app-quiz"
-                          [ngClass]="{
-                            'light-mode-background light-mode-text':
-                              (themeService.theme$ | async),
-                            'dark-mode-background dark-mode-text': !(
-                              themeService.theme$ | async
-                            ),
-                          }"
-                          (click)="
-                            onAnswerClick($event, currentQuestion.id, answer.id)
-                          "
-                        >
-                          {{ answer.text }}
-                        </button>
-                      </div>
-                    }
+                  @for (answer of currentQuestion.answers; track answer.id) {
+                    <div id="answer-button">
+                      <button
+                        type="button"
+                        [class.disabled]="answerSubmitted"
+                        [class.correct]="answer.isCorrect && answerSubmitted"
+                        [class.wrong]="
+                          selectedAnswers[currentQuestion.id] === answer.id &&
+                          !answer.isCorrect &&
+                          answerSubmitted
+                        "
+                        [disabled]="answerSubmitted"
+                        class="button-app-quiz plain-button"
+                        [ngClass]="{
+                          'light-mode-background light-mode-text':
+                            (themeService.theme$ | async),
+                          'dark-mode-background dark-mode-text': !(
+                            themeService.theme$ | async
+                          ),
+                        }"
+                        (click)="selectAnswer(answer.id)"
+                      >
+                        {{ answer.text }}
+                      </button>
+                    </div>
+                  }
 
-                    <button
-                      mat-raised-button
-                      [class.disabled]="!answerSubmitted"
-                      [disabled]="!answerSubmitted"
-                      class="button-app-reverse-color button-standard"
-                      [ngClass]="{
-                        'white-background':
-                          (themeService.theme$ | async) && answerSubmitted,
-                      }"
-                      id="next-button"
-                      (click)="showNextQuestion()"
-                    >
-                      {{
-                        currentQuestionIndex === quiz.questions.length - 1
-                          ? "Pokaż wynik"
-                          : "Dalej"
-                      }}
-                    </button>
-                  </div>
-                }
-              </form>
+                  <button
+                    mat-raised-button
+                    [class.disabled]="!answerSubmitted"
+                    [disabled]="!answerSubmitted"
+                    class="button-app-reverse-color button-standard"
+                    [ngClass]="{
+                      'white-background':
+                        (themeService.theme$ | async) && answerSubmitted,
+                    }"
+                    id="next-button"
+                    (click)="showNextQuestion()"
+                  >
+                    {{
+                      currentQuestionIndex === quiz.questions.length - 1
+                        ? "Pokaż wynik"
+                        : "Dalej"
+                    }}
+                  </button>
+                </div>
+              }
             </div>
           }
         </div>
