@@ -65,16 +65,28 @@
               ),
               'locked-light-background':
                 (themeService.theme$ | async) &&
-                profile.stars < season.pointsRequiredToUnlock,
+                profile.stars < season.pointsRequiredToUnlock!,
               'locked-dark-background':
                 !(themeService.theme$ | async) &&
-                profile.stars < season.pointsRequiredToUnlock,
+                profile.stars < season.pointsRequiredToUnlock!,
             }"
           >
             <div class="season-item">Sezon: {{ season.seasonNumber }}</div>
             <div class="season-item">{{ season.name }}</div>
 
-            @if (profile.stars > season.pointsRequiredToUnlock) {
+            @if (
+              season.pointsRequiredToUnlock &&
+              profile.stars >= season.pointsRequiredToUnlock
+            ) {
+              <div class="season-item-unlock">
+                Zdobyto: {{ countUserResult(season)
+                }}<mat-icon class="mat-icon-star-color">star</mat-icon
+                >&nbsp;/&nbsp;{{ season.maxPoints
+                }}<mat-icon class="mat-icon-star-color">star</mat-icon>
+              </div>
+            }
+
+            @if (profile.stars > season.pointsRequiredToUnlock!) {
               <button
                 mat-raised-button
                 id="submit-button"

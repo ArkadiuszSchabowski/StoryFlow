@@ -37,7 +37,11 @@ namespace StoryFlow.Repositories
 
         public async Task<List<StorySeason>> GetStorySeasonsAsync()
         {
-            return await _context.StorySeazons.Include(s => s.Stories).ThenInclude(ss => ss.StoryPoint).ToListAsync();
+            return await _context.StorySeazons
+                .Include(s => s.Stories).ThenInclude(ss => ss.StoryPoint)
+                .Include(s => s.Stories).ThenInclude(s => s.UserStories)
+                .Include(s => s.WordLessons).ThenInclude(wl => wl.UserWordLessons)
+                .ToListAsync();
         }
 
         public async Task Remove(Story story)
