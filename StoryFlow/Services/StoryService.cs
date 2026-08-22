@@ -174,7 +174,7 @@ namespace StoryFlow.Services
                 throw new NotFoundException("Nie znaleziono użytkownika.");
             }
 
-            List<StorySeason> seasons = await _storyRepository.GetStorySeasonsAsync();
+            List<StorySeason> seasons = await _storyRepository.GetStorySeasonsAsync(userId);
 
             List<StorySeason> seasonsVisibleForUser = seasons
                 .Where(s => s.IsVisibleForUser)

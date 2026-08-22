@@ -6,6 +6,6 @@ namespace StoryFlow.Interfaces.Repositories
     {
         IQueryable<Story> GetUserStories(int userId);
         IQueryable<Story> GetBySeason(int userId, int? seasonId);
-        Task<List<StorySeason>> GetStorySeasonsAsync();
+        Task<List<StorySeason>> GetStorySeasonsAsync(int userId);
     }
 }

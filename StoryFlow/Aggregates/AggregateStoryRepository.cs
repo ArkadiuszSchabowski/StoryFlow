@@ -66,9 +66,9 @@ namespace StoryFlow.Aggregates
             await _repository.Update(entity);
         }
 
-        public async Task<List<StorySeason>> GetStorySeasonsAsync()
+        public async Task<List<StorySeason>> GetStorySeasonsAsync(int userId)
         {
-            return await _storyRepository.GetStorySeasonsAsync();
+            return await _storyRepository.GetStorySeasonsAsync(userId);
         }
     }
 }
