@@ -232,6 +232,7 @@
                     <div id="answer-button">
                       <button
                         type="button"
+                        [disabled]="answerSubmitted"
                         [class.disabled]="answerSubmitted"
                         [class.correct]="answer.isCorrect && answerSubmitted"
                         [class.wrong]="
@@ -239,15 +240,7 @@
                           !answer.isCorrect &&
                           answerSubmitted
                         "
-                        [disabled]="answerSubmitted"
-                        class="button-app-quiz plain-button"
-                        [ngClass]="{
-                          'light-mode-background light-mode-text':
-                            (themeService.theme$ | async),
-                          'dark-mode-background dark-mode-text': !(
-                            themeService.theme$ | async
-                          ),
-                        }"
+                        class="button-app-quiz"
                         (click)="selectAnswer(answer.id)"
                       >
                         {{ answer.text }}
