@@ -13,5 +13,6 @@ namespace StoryFlow_Shared.Models
         public int? Stars { get; set; }
         public int Tickets { get; set; }
         public ICollection<GetHobbyDto> Hobbies { get; set; } = new List<GetHobbyDto>();
+        public GetUserPreferencesDto? UserPreferences { get; set; }
     }
 }

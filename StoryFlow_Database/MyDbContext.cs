@@ -24,6 +24,7 @@ namespace StoryFlow_Database
         public DbSet<Word> Words { get; set; }
         public DbSet<WordPoint> WordPoints { get; set; }
         public DbSet<BlogPostSection> BlogPostSections { get; set; }
+        public DbSet<UserPreferences> UserPreferences { get; set; }
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
         {
 
@@ -51,6 +52,11 @@ namespace StoryFlow_Database
                 .HasOne(u => u.Role)
                 .WithMany(r => r.Users)
                 .HasForeignKey(u => u.RoleId);
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.UserPreferences)
+                .WithOne(up => up.User)
+                .HasForeignKey<UserPreferences>(up => up.UserId);
 
             modelBuilder.Entity<StorySeason>().HasMany(ss => ss.Stories)
                 .WithOne(s => s.StorySeason)

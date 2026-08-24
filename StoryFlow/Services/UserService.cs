@@ -52,6 +52,7 @@ namespace StoryFlow.Services
             user.HashedPassword = hashedPassword;
 
             user.RoleId = 1;
+            user.UserPreferences = new();
 
             await _userRepository.Add(user);
         }

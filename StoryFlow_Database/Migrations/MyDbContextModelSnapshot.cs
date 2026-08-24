@@ -409,6 +409,28 @@ namespace StoryFlow_Database.Migrations
                     b.ToTable("UserHobbies");
                 });
 
+            modelBuilder.Entity("StoryFlow_Database.Entities.UserPreferences", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("isLightTheme")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("UserPreferences");
+                });
+
             modelBuilder.Entity("StoryFlow_Database.Entities.UserSentence", b =>
                 {
                     b.Property<int>("Id")
@@ -682,6 +704,17 @@ namespace StoryFlow_Database.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("StoryFlow_Database.Entities.UserPreferences", b =>
+                {
+                    b.HasOne("StoryFlow_Database.Entities.User", "User")
+                        .WithOne("UserPreferences")
+                        .HasForeignKey("StoryFlow_Database.Entities.UserPreferences", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("StoryFlow_Database.Entities.UserSentence", b =>
                 {
                     b.HasOne("StoryFlow_Database.Entities.Sentence", "Sentence")
@@ -821,6 +854,8 @@ namespace StoryFlow_Database.Migrations
             modelBuilder.Entity("StoryFlow_Database.Entities.User", b =>
                 {
                     b.Navigation("UserHobbies");
+
+                    b.Navigation("UserPreferences");
 
                     b.Navigation("UserSentences");
 

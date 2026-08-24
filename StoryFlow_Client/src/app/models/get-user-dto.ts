@@ -1,3 +1,5 @@
+import { GetUserPreferencesDto } from "./get-user-preferences-dto";
+
 export interface GetUserDto {
     id: number;
     email: string | null;
@@ -8,4 +10,5 @@ export interface GetUserDto {
     stars: number | null;
     tickets: number;
     hobbies: [];
+    userPreferences: GetUserPreferencesDto;
 }
