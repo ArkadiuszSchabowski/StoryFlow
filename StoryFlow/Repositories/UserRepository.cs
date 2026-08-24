@@ -26,6 +26,7 @@ namespace StoryFlow.Repositories
                 .Include(u => u.UserHobbies)
                 .Include(u => u.UserStories)
                 .Include(u => u.UserWordLessons)
+                .Include(u => u.UserPreferences).Where(u => u.Id == id)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 

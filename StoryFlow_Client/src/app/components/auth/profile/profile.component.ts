@@ -25,6 +25,7 @@ export class ProfileComponent {
   logout() {
     this.authService.logout();
     this.navbarService.unblockButtons();
+    this.themeService.themeSubject.next(false);
     this.toastr.success('Wylogowano pomyślnie.');
     this.router.navigateByUrl('');
   }

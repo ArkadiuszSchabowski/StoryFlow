@@ -258,7 +258,17 @@
 }
 
 @if (loaderService.loading$ | async) {
-  <div id="loader-container" class="container">
+  <div
+    id="loader-container"
+    class="container"
+    [ngClass]="{
+      'light-mode-background-primary light-mode-text':
+        (themeService.theme$ | async),
+      'dark-mode-background-primary dark-mode-text': !(
+        themeService.theme$ | async
+      ),
+    }"
+  >
     <div id="loader-text">Zaraz zaczynamy...</div>
     <div class="loader-logo">
       <ng-lottie [options]="loaderService.animationOptions"></ng-lottie>

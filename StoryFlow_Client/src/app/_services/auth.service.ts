@@ -1,6 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
+import { ThemeService } from './theme.service';
 
 @Injectable({
   providedIn: 'root',
